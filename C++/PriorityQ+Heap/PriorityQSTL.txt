@@ -1,0 +1,18 @@
+--------------Priority Queue in C++ Standard Template Library---------------------
+priority_queue<int> pq;                           //max heap
+priority_queue<int,vector<int>,greater<int>> pq;  //min heap
+---------initialise-->> give start and end iterators
+
+pq.empty()	Returns whether the queue is empty.
+
+pq.size() 	Returns the size of the queue.
+
+pq.top()	Returns a reference to the topmost element of the queue.
+
+pq.push() 	Adds the element ‘g’ at the end of the queue.
+
+pq.pop()	Deletes the first element of the queue.
+
+pq.swap()	Used to swap the contents of two queues of same type.
+
+pq.emplace()	Used to insert a new element into the priority queue container.

@@ -1,0 +1,35 @@
+//1,2,3,null,null,4,5
+
+
+
+//using string stream
+TreeNode* construct(string data) {
+    if(data.size()==0) return NULL;
+    stringstream s(data);
+    string str;
+    queue<TreeNode*> q;
+    getline(s,str,',');
+    TreeNode *root=new TreeNode(stoi(str));
+    q.push(root);
+    while(!q.empty()){
+        TreeNode* node=q.front();
+        q.pop();
+        getline(s,str,',');
+        if(str=="null"){
+            node->left=NULL;
+        }else{
+            TreeNode *leftNode=new TreeNode(stoi(str));
+            node->left=leftNode;
+            q.push(leftNode);
+        }
+        getline(s,str,',');
+        if(str=="null"){
+            node->right==NULL;
+        }else{
+            TreeNode *rightNode=new TreeNode(stoi(str));
+            node->right=rightNode;
+            q.push(rightNode);
+        }
+    }
+    return root;
+}

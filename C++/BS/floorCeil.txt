@@ -1,0 +1,33 @@
+int findFloor(vector<long long> &v, long long n, long long x) {
+
+    long long l=0,h=n-1;
+    int floor = -1;
+    while(l<=h){
+        int m=l+(h-l)/2;
+        if(v[m]==x) return floor=m;
+        else if(v[m]>x) h=m-1;
+        else{
+            floor=m;
+            l=m+1;
+        }
+    }
+    return floor;
+}
+
+
+int findCeil(vector<long long> &v, long long n, long long x) {
+
+    long long l=0,h=n-1;
+    int ceil = -1;
+    while(l<=h){
+        m=l+(h-l)/2;
+        if(v[m]==x) {ceil=m;break;}
+        else if(v[m]<x) l=m+1;
+        else{
+            ceil=m;
+            h=m-1;
+        }
+    }
+    return ceil;
+}
+

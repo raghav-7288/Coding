@@ -1,0 +1,53 @@
+//AntiClockwise
+{Left boundary excluding leaves}+{leaves}+
+{right boundary in reverse excluding root and leaves}
+
+bool isLeaf(TreeNode<int> *root){
+    if(!root->left && !root->right){
+        return true;
+    }
+    return false;
+}
+void leftBoundary(TreeNode<int> *root,vector<int> &ans){
+    TreeNode<int> *cur=root->left;
+    while(cur){
+        if(!isLeaf(cur)) ans.push_back(cur->data);
+        if(cur->left) cur=cur->left;
+        else cur=cur->right;
+    }
+}
+void leaves(TreeNode<int> *root,vector<int> &ans){
+    if(isLeaf(root)){
+        ans.push_back(root->data);
+        return;
+    }
+    if(root->left) leaves(root->left,ans);
+    if(root->right) leaves(root->right,ans);
+}
+void reverseRightBoundary(TreeNode<int> *root,vector<int> &ans){
+    TreeNode<int> *cur=root->right;
+    vector<int> temp;
+    while(cur){
+        if(!isLeaf(cur)) temp.push_back(cur->data);
+        if(cur->right) cur=cur->right;
+        else cur=cur->left;
+    }
+    reverse(temp.begin(),temp.end());
+    ans.insert(ans.end(),temp.begin(),temp.end());
+}
+vector<int> traverseBoundary(TreeNode<int> *root)
+{
+    if(!root) return {};
+    vector<int> ans;
+    if(!isLeaf(root)){
+        ans.push_back(root->data);
+    }
+    leftBoundary(root,ans);
+    leaves(root,ans);
+    reverseRightBoundary(root,ans);
+    return ans;
+}
+
+//Clockwise
+{right boundary excluding leaves}+{leaves in reverse}+
+{left boundary in reverse excluding root and leaves}

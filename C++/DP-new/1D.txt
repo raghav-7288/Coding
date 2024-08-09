@@ -1,0 +1,45 @@
+Climbing Stairs
+    int solve(int current,int n,vector<int> &dp){
+        if(current==n) return 1;
+        if(current>n) return 0;
+        if(dp[current]!=-1) return dp[current];
+        int one = solve(current+1,n,dp);
+        int two = solve(current+2,n,dp);
+        return dp[current]=one+two;
+    }
+    int climbStairs(int n) {
+        vector<int> dp(n+1,-1);
+        return solve(0,n,dp);
+    }
+
+Frog Jump(1,2 steps) Energy Loosing
+    int solve(int c,int n, vector<int> &height,vector<int> &dp){
+    if(c>=n-1) return 0;
+    if(dp[c]!=-1) return dp[c];
+    int one = abs(height[c]-height[c+1]) + solve(c+1,n,height,dp);
+    int two=INT_MAX;
+    if(c<n-2)
+    two = abs(height[c]-height[c+2]) + solve(c+2,n,height,dp);
+    return dp[c]=min(one,two);
+    }
+    int minimumEnergy(vector<int>& height, int n) {
+        vector<int> dp(n,-1);
+        return solve(0,n,height,dp);
+    }
+
+Frog Jump(1...k steps) Energy Loosing
+    int solve(int c,int k,int n,vector<int>& arr,vector<int> & dp){
+        if(c==n-1) return 0;
+        if(dp[c]!=-1) return dp[c];
+        int ans=INT_MAX;
+        for(int i=1;i<=k;i++){
+            if(c+i<n)
+                ans=min(ans,abs(arr[c]-arr[c+i])+solve(c+i,k,n,arr,dp));
+        }
+        return dp[c]=ans;
+    }
+    int minimizeCost(vector<int>& arr, int& k) {
+        int n=arr.size();
+        vector<int> dp(n,-1);
+        return solve(0,k,n,arr,dp);
+    }

@@ -1,0 +1,41 @@
+int timer = 1;
+void dfs(int node, int parent, int n, vector<int> adj[],vector<int> &vis, vector<int> &expStart, vector<int> &lowExpStart,vector<vector<int>> &bridges)
+{
+    vis[node] = 1;
+    expStart[node] = timer;
+    lowExpStart[node] = timer;
+    timer++;
+    for (auto x : adj[node])
+    {
+        if (x == parent)
+            continue;
+        if (!vis[x])
+        {
+            dfs(x, node, n, adj, vis, expStart, lowExpStart, bridges);
+            lowExpStart[node] = min(lowExpStart[node], lowExpStart[x]);
+            if (lowExpStart[x] > expStart[node])
+            {
+                bridges.push_back({x, node});
+            }
+        }
+        else
+        {
+            lowExpStart[node] = min(lowExpStart[node], lowExpStart[x]);
+        }
+    }
+}
+vector<vector<int>> findBridges(int n, vector<vector<int>> &edges)
+{
+    vector<int> adj[n];
+    for (auto x : edges)
+    {
+        adj[x[0]].push_back(x[1]);
+        adj[x[1]].push_back(x[0]);
+    }
+    vector<int> vis(n);
+    vector<int> expStart(n);
+    vector<int> lowExpStart(n);
+    vector<vector<int>> bridges;
+    dfs(0, -1, n, adj, vis, expStart, lowExpStart, bridges);
+    return bridges;
+}

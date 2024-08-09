@@ -1,0 +1,28 @@
+//O(n^2)
+int height(Node *root){
+    if(!root) return 0;
+    return 1+max(height(root->left),height(root->right));
+}
+bool isBalanced(Node *root)
+{
+    if(!root) return true;
+    if(abs(height(root->right)-height(root->left))>1) return false;
+    else{
+        return isBalanced(root->left) && isBalanced(root->right);
+    }
+}
+
+//O(n)->check while finding height if unbalanced
+int height(Node *root){
+    if(!root) return 0;
+    int hl=height(root->left);
+    int hr=height(root->right);
+    if(hl==-1 || hr==-1 || abs(hl-hr)>1) return -1;
+    return 1+max(hl,hr);
+}
+bool isBalanced(Node *root)
+{
+    if(!root) return true;
+    if(height(root)==-1)return false;
+    return true;
+}

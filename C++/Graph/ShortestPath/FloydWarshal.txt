@@ -1,0 +1,39 @@
+//adj-->> adjacency matrix for the graph with edge weights
+//V-->(0 to n-1)
+for(int via=0;via<n;via++){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            adj[i][j]=min(adj[i][j],adj[i][via]+adj[via][j]);
+        }
+    }
+}
+
+//cycle detection
+for(int i=0;i<n;i++){
+    if(adj[i][i]<0){
+        //cycle
+    }
+}
+
+//shortest btw src dest
+//V->n
+//E->m
+int floydWarshall(int n, int m, int src, int dest, vector<vector<int>> &edges){
+    vector<vector<int>> adj(n+1,vector<int>(n,1e9));
+    for(int i=0;i<n;i++){
+        adj[i][i]=0;
+    }
+    for(auto x:edges){
+        adj[x[0]][x[1]]=x[2];
+    }
+
+    for(int k=0;k<n;k++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(adj[i][k]!=1e9 && adj[k][j]!=1e9)
+                adj[i][j]=min(adj[i][j],adj[i][k]+adj[k][j]);
+            }
+        }
+    }
+    return adj[src][dest];
+}

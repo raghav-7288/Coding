@@ -1,0 +1,20 @@
+Better
+
+    vector<int> twoSum(vector<int>& nums, int target) {
+       map<int,int> mp;
+       for(int i=0;i<nums.size();i++){
+        if(mp.find(target-nums[i]) != mp.end()){
+            return {i,mp[target-nums[i]]};
+        }
+        mp[nums[i]]=i;
+       }
+       return {};
+    }
+
+
+Optimal
+
+    if only asked wether present or not
+        - sort and use slidiing window
+        i=0,j=n-1;
+        while(i<j){...}

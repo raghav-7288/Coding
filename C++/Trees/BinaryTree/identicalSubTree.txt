@@ -1,0 +1,33 @@
+//To store every Nodes mapped to its data 
+void findPos(map<int,vector<Node*>>  &mp,Node *root){
+    if(!root) return;
+    if(!root->left && !root->right) return;
+    mp[root->data].push_back(root);
+    findPos(mp,root->left);
+    findPos(mp,root->right);
+}
+// chack if 2 nodes have symm sub tree
+bool isSymm(Node *root1,Node *root2){
+    if(!root1 || !root2) return root1==root2;
+    if(root1->data != root2->data) return false;
+    return isSymm(root1->left,root2->left) && isSymm(root1->right,root2->right);
+}
+int dupSub(Node *root) {
+    map<int,vector<Node*>> mp;
+    findPos(mp,root);
+    int ans=0;
+    for(auto x:mp){
+        if(x.second.size()>1){
+            for(int i=0;i<x.second.size();i++){
+                for(int j=i+1;j<x.second.size();j++){
+                    if(isSymm(x.second[i],x.second[j])){
+                        ans++;
+                        break;
+                    }
+                }   
+            }
+        }     
+    }
+    if(!ans) return 0;
+    return 1;
+}

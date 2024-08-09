@@ -1,0 +1,54 @@
+int carry;
+ListNode* push(ListNode *head,int val){
+    ListNode *newNode=new ListNode(val);
+    if(!head){
+        head=newNode;
+    
+    }else{
+        ListNode *temp=head;
+        while(temp->next){
+            temp=temp->next;
+        }
+        temp->next=newNode;
+    }
+    return head;
+}
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    ListNode *t1=l1,*t2=l2;
+    ListNode *head=NULL;
+    while(t1 && t2){
+        int a=t1->val;
+        int b=t2->val;
+        int sum=a+b+carry;
+        carry=0;
+        if(sum>=10){
+            sum-=10;
+            carry=1;
+        }
+        head=push(head,sum); 
+        t1=t1->next;
+        t2=t2->next;
+    }
+    while(t1){
+        int sum=t1->val+carry;
+        carry=0;
+        if(sum>=10){
+            sum-=10;
+            carry=1;
+        }
+        head=push(head,sum); 
+        t1=t1->next;
+    }
+    while(t2){
+        int sum=t2->val+carry;
+        carry=0;
+        if(sum>=10){
+            sum-=10;
+            carry=1;
+        }
+        head=push(head,sum); 
+        t2=t2->next;  
+    }
+    if(carry) push(head,1);
+return head;
+}

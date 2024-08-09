@@ -1,0 +1,21 @@
+//Return the number of nodes where 
+//the value of the node is equal to the average of the values in its subtree.
+
+void solve(TreeNode* root,int &ans,map<TreeNode*,pair<int,int>> &mp){
+    if(!root){
+        mp[root]={0,0};
+        return;
+    }
+    solve(root->left,ans,mp);
+    solve(root->right,ans,mp);
+    int sum=mp[root->left].first + mp[root->right].first + root->val;
+    int count=1 + mp[root->left].second + mp[root->right].second;
+    if(sum/count == root->val) ans++;
+    mp[root]={sum,count};
+}
+int averageOfSubtree(TreeNode* root) {
+    int ans=0;
+    map<TreeNode*,pair<int,int>> mp;
+    solve(root,ans,mp);
+    return ans;
+}

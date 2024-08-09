@@ -1,0 +1,32 @@
+void findAllPaths(Node *root,vector<int> &path,vector<vector<int>> &allPaths){
+    if(!root) return;
+    if(!root->left && !root->right){
+        path.push_back(root->data);
+        allPaths.push_back(path);
+        path.pop_back();
+    }
+    path.push_back(root->data);
+    findAllPaths(root->left,path,allPaths);
+    findAllPaths(root->right,path,allPaths);
+    path.pop_back();
+}
+vector<vector<int>> Paths(Node* root)
+{
+    vector<vector<int>> allPaths;
+    vector<int> path;
+    findAllPaths(root,path,allPaths);
+    return allPaths;
+}
+
+//from root to given leaf
+bool hasPath(Node *root, vector<int>& arr, int x)
+{
+    if (!root) return false;
+    arr.push_back(root->data);    
+    if (root->data == x)    
+        return true;
+    if (hasPath(root->left, arr, x) || hasPath(root->right, arr, x))
+        return true;
+    arr.pop_back();
+    return false;            
+}

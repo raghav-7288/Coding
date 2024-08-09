@@ -1,0 +1,20 @@
+//count total nodes in CBT
+->find traversal and order.size()
+//OR
+
+int countNodes(TreeNode* root) {
+    if(!root) return 0;
+    int left=height(root,-1);
+    int right=height(root,1);
+    if(left==right) return (1<<left)-1;
+    return 1+countNodes(root->left)+countNodes(root->right);
+}
+int height(TreeNode* root,int dir){
+    int h=0;
+    while(root){
+        h++;
+        if(dir==-1) root=root->left;
+        else root=root->right;
+    }
+    return h;
+}

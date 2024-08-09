@@ -1,0 +1,87 @@
+--------------------------------------DFS----------------------------------------
+//add node to stack when its exploration ends
+void dfs(int node,vector<int> &vis,stack<int> &st,vector<int> adj[]){
+    vis[node]=1;
+    for(auto x:adj[node]){
+        if(!vis[x]){
+            dfs(x,vis,st,adj);
+        }
+    }
+    st.push(node);
+}
+vector<int> topoSort(int V, vector<int> adj[]) 
+{
+    vector<int> vis(V,0);
+    stack<int> st;
+    for(int i=0;i<V;i++){
+        if(!vis[i]){
+            dfs(i,vis,st,adj);
+        }
+    }
+    vector<int> ans;
+    while(!st.empty()){
+        ans.push_back(st.top());
+        st.pop();
+    }
+    return ans;
+}
+-------------------------------------KAHN(bfs)-------------------------------------
+vector<int> topoSort(int V, vector<int> adj[]) 
+{
+    vector<int> inDeg(V,0);
+    vector<int> ans;
+    queue<int> q;
+    for(int i=0;i<V;i++){
+        for(auto x:adj[i]){
+            inDeg[x]++;
+        }
+    }
+    for(int i=0;i<V;i++){
+        if(!inDeg[i]){
+            q.push(i);
+        }
+    }
+    while(!q.empty()){
+        int node=q.front();
+        ans.push_back(node);
+        q.pop();
+        for(auto x:adj[node]){
+            inDeg[x]--;
+            if(!inDeg[x]){
+                q.push(x);
+            }
+        }
+    }
+    return ans;
+}
+-----------------------------AllTopoSorts-------------------------------------
+void genAllTopo(int n, vector<int> adj[], vector<int> &indegree,
+                vector<int> &vis, vector<int> &currTopo,
+                vector<vector<int>> &allTopo)
+{
+    bool allVisited = true;
+    for (int i = 0; i < n; i++)
+    {
+        if (!indegree[i] && !vis[i])
+        {
+            vis[i] = 1;
+            currTopo.push_back(i);
+            for (auto x : adj[i])
+            {
+                indegree[x]--;
+            }
+            genAllTopo(n, adj, indegree, vis, currTopo, allTopo);
+            vis[i] = 0;
+            currTopo.pop_back();
+            for (auto x : adj[i])
+            {
+                indegree[x]++;
+            }
+            allVisited = false;
+        }
+    }
+    if (allVisited)
+    {
+        allTopo.push_back(currTopo);
+    }
+}

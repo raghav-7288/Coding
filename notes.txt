@@ -1,0 +1,1 @@
+1.Theorem (Fermat). Every prime of the form 4k +1 is the sum of two squares. A positive integer n is the sum of two squares if and only if all prime factors of the form 4k − 1 have an even exponent in the prime-factorization of n.

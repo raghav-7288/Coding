@@ -1,0 +1,30 @@
+//Convert tree to linked list
+//The right child pointer points to the next node in the list 
+//The left child pointer is always null.
+//The linked list should be in the same order as a pre-order traversal of the tree.
+
+//Recursion
+TreeNode* prev=NULL;
+void flatten(TreeNode* root) {
+    if(!root) return;
+    flatten(root->right);
+    flatten(root->left);
+    root->right=prev;
+    root->left=NULL;
+    prev=root;
+}
+
+//Iterative
+void flatten(TreeNode* root) {
+    if(!root) return;
+    stack<TreeNode*> st;
+    st.push(root);
+    while(!st.empty()){
+        TreeNode* curr=st.top();
+        st.pop();
+        if(curr->right) st.push(curr->right);
+        if(curr->left) st.push(curr->left);
+        if(!st.empty()) curr->right = st.top();
+        curr->left=NULL;
+    }
+}

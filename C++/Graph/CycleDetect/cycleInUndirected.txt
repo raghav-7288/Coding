@@ -1,0 +1,63 @@
+//DFS
+bool CycleCheckByDfs(vector<int> adj[],int vis[],int source,int parent){
+        vis[source]=1;
+        for(auto it : adj[source]){
+            if(!vis[it]){
+                if(CycleCheckByDfs(adj,vis,it,source)){
+                    return true;
+                }
+            }
+            else if(it!=parent){
+                return true;
+            }
+        }
+        return false;
+    }
+bool isCycle(int V, vector<int> adj[]) {
+    int vis[V]={0};
+    for(int i=0;i<V;i++){
+        if(!vis[i]){
+            if(CycleCheckByDfs(adj,vis,i,-1))
+                return true;
+        }
+    }
+    return false;
+}
+
+//BFS
+bool CycleCheckByBfs(int source,vector<int> adj[],int vis[]){
+    vis[source]=1;
+    queue<pair<int,int>> q;
+    q.push({source,-1});
+    while(!q.empty()){
+        int node=q.front().first;
+        int parent=q.front().second;
+        q.pop();
+        for(auto it : adj[node]){
+            if(!vis[it]){
+                vis[it]=1;
+                q.push({it,node});
+            }
+            else if(it!=parent){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+bool isCycle(int V, vector<int> adj[]) {
+    int vis[V]={0};
+    for(int i=0;i<V;i++){
+        if(!vis[i]){
+            if(CycleCheckByBfs(i,adj,vis)==true)
+                return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+

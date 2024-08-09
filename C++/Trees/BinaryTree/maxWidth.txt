@@ -1,0 +1,34 @@
+//give index to every node and find ->
+//width = max(index(lastNode) - index(firstNode) + 1) -> done for every level
+//lvl order traversal
+//    i
+    /   \
+2*i+1   2*i+2
+//indexing -> overflow more levels
+//->to avoid overflow assume every level start with index 0 and its childre -> 1,2
+
+int widthOfBinaryTree(TreeNode* root) {
+    queue<pair<TreeNode*,int>> q;
+    q.push({root,0});
+    int maxWidth=-1;
+    while(!q.empty()){
+        int size=q.size();
+        int minIndex=q.front().second;
+        int first,last;
+        for(int i=0;i<size;i++){
+            TreeNode *node=q.front().first;
+            int currIndex=q.front().second - minIndex; //to start index from 0
+            q.pop();
+            if(i==0){
+                first=currIndex;
+            }
+            if(i==size-1){
+                last=currIndex;
+            }
+            if(node->left) q.push({node->left,(long long)2*currIndex+1});
+            if(node->right) q.push({node->right,(long long)2*currIndex+2});
+        }
+        maxWidth=max(maxWidth,last-first+1);
+    }
+    return maxWidth;
+}

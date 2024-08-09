@@ -1,0 +1,18 @@
+-----------------------STL Functions for Heap Operations--------------------------
+-----in <algorithm.h>
+make_heap(): Converts given range to a heap.
+                make_heap(vec.begin(),vec.end());
+
+push_heap(): Arrange the heap after insertion at the end.
+                vec.push_back(x);
+                push_heap(vc.begin(), vc.end());
+
+pop_heap(): Moves the max element at the end for deletion.
+                pop_heap(vc.begin(), vc.end()); //put max at last
+                vec.pop_back();
+
+sort_heap(): Sort the elements of the max_heap to ascending order.
+
+is_heap(): Checks if the given range is max_heap.
+
+is_heap_until(): Returns the largest sub-range that is max_heap.

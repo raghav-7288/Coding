@@ -1,0 +1,49 @@
+//using curr queue size as indicator
+vector<vector<int>> levelOrder(TreeNode* root) {
+    if(!root) return {};
+    vector<vector<int>> all;
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()){
+        vector<int> lvl;    
+        int size=q.size();
+        for(int i=0;i<size;i++){
+            TreeNode *curr=q.front();
+            q.pop();
+            lvl.push_back(curr->val);
+            if(curr->left) q.push(curr->left);
+            if(curr->right) q.push(curr->right);
+        }
+        all.push_back(lvl);
+    }
+    return all;
+}
+
+//using null ptr as indicator
+vector<vector<int>> levelOrder(TreeNode* root) {
+    if(!root) return {};
+    vector<vector<int>> all;
+    queue<TreeNode*> q;
+    q.push(root);
+    q.push(NULL);
+    vector<int> l;
+    while(!q.empty()){
+        TreeNode *curr=q.front();
+        q.pop();
+        if(!curr){
+            all.push_back(l);
+            l.clear();
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }else{
+            l.push_back(curr->val);
+            if(curr->left)
+            q.push(curr->left);
+            if(curr->right)
+            q.push(curr->right);
+        }
+    }
+    return all;
+}
+

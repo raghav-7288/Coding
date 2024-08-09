@@ -1,0 +1,45 @@
+void merge(int arr[], int l, int m, int r) {
+
+    int LenLeftArr=m-l+1;
+    int LenRightArr=r-m;
+
+    int leftSubArr[LenLeftArr];
+    int rightSubArr[LenRightArr];
+    for (int i = 0; i < LenLeftArr; i++)
+        leftSubArr[i]=arr[l+i];
+    for (int j = 0; j < LenRightArr; j++)
+        rightSubArr[j]=arr[m+1+j];
+    
+    int IleftArr=0;
+    int IrightArr=0;
+    int ImergedArr=l;
+
+    while(IleftArr < LenLeftArr && IrightArr < LenRightArr){
+        if(leftSubArr[IleftArr] <= rightSubArr[IrightArr]){
+            arr[ImergedArr]=leftSubArr[IleftArr];
+            IleftArr++;
+        }
+        else{
+            arr[ImergedArr]=rightSubArr[IrightArr];
+            IrightArr++;
+        }
+        ImergedArr++;
+    }
+    while(IleftArr < LenLeftArr){
+        arr[ImergedArr]=leftSubArr[IleftArr];
+        IleftArr++;
+        ImergedArr++;
+    }
+    while(IrightArr < LenRightArr){
+        arr[ImergedArr]=rightSubArr[IrightArr];
+        IrightArr++;
+        ImergedArr++;
+    }
+}
+void mergeSort(int arr[], int l,int r) {
+    if(l>=r) return;
+    int m=(l+r)/2;
+    mergeSort(arr,l,m);
+    mergeSort(arr,m+1,r);
+    merge(arr,l,m,r);
+}

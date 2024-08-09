@@ -1,0 +1,29 @@
+------------------------------------------BFS------------------------------------
+vector<int> shortestPathInDAG(int n, int m, vector<vector<int>> &edges)
+{
+    vector<vector<pair<int,int>>> adj;
+    for(auto x:edges){
+        adj[x[0]].push_back({x[1],x[2]});
+    }
+    vector<int> dis(n,INT_MAX);
+    queue<int> q;
+    q.push(0);
+    dis[0]=0;
+    while(!q.empty()){
+        int node=q.front();
+        q.pop();
+        for(auto x:adj[node]){
+            if(dis[node]+x.second < dis[x.first]){
+                dis[x.first]=dis[node]+x.second;
+                q.push(x.first);
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(dis[i]==INT_MAX){
+            dis[i]=-1;
+        }
+    }
+    return dis;
+}
+

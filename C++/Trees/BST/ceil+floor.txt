@@ -1,0 +1,31 @@
+int findCeil(BinaryTreeNode<int> *node, int key){
+    int ceil=-1;
+    while(node){
+        if(node->data == key){
+            return ceil=node->data;
+        }
+        if(node->data < key){
+            node=node->right;
+        }else{
+            ceil=node->data;
+            node=node->left;
+        }
+    }
+    return ceil;
+}
+int findFloor(BinaryTreeNode<int> *node, int key)
+{
+	int floor=-1;
+	while(node){
+		if(node->data == key){
+			return floor=node->data;
+		}
+		if(node->data > key){
+			node=node->left;
+		}else{
+			floor=node->data;
+			node=node->right;
+		}
+	}
+	return floor;
+}

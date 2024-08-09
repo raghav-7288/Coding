@@ -1,0 +1,17 @@
+//Recursive
+TreeNode* searchBST(TreeNode* root, int val) {
+    if(!root) return NULL;
+    if(root->val==val) return root;
+    else if(root->val > val) return searchBST(root->left,val);
+    return searchBST(root->right,val);
+}
+//Iterative
+TreeNode* searchBST(TreeNode* root, int val) {
+    TreeNode* cur=root;
+    while(cur){
+        if(cur->val == val) return cur;
+        if(cur->val > val) cur=cur->left;
+        else cur=cur->right;
+    }
+    return NULL;
+}
