@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+// Or generate power set
 void genAllSubArr(int index, int n, vector<int> &a, vector<int> &currSubArr, vector<vector<int>> &allSubArr)
 {
     if (index == n)

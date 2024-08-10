@@ -21,3 +21,19 @@ ListNode* rotateRight(ListNode* head, int k) {
     }
     return head;
 }
+
+
+Node* rotateLeft(Node* head, int k) {
+    Node *end=head,*temp=head;
+    while(end->next)end=end->next;
+    for(int i=0;i<k;i++){
+        Node *t =new Node(temp->data);
+        end->next=t;
+        end=end->next;
+        Node *t1 = temp;
+        temp=temp->next;
+        free(t1);
+    }
+    head=temp;
+    return head;
+}
