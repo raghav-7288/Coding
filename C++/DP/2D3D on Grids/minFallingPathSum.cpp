@@ -4,6 +4,26 @@ start from row 0
 return min sum of ANY falling path
 (r, c)->(r + 1, c - 1)OR(r + 1, c)OR(r + 1, c + 1).
 */
+
+/*
+Tabulation
+for(int i=0;i<n;i++){
+    for(int j=0;j<m;j++){
+        if(i==0){ dp[i][j]=matrix[i][j];}
+        else{
+            int l=INT_MAX,ri=INT_MAX,d;
+            d=dp[i-1][j];
+            if(j>0) l=dp[i-1][j-1];
+            if(j<m-1) ri=dp[i-1][j+1];
+            dp[i][j]=matrix[i][j] + min(d,min(l,ri));
+        }
+    }
+}
+int ans=INT_MAX;
+for(int j=0;j<m;j++) ans=min(ans,dp[n-1][j]);
+return ans;
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 int solve(int r, int c, int m, int n, vector<vector<int>> &mat, vector<vector<int>> &dp)

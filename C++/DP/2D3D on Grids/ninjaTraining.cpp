@@ -15,6 +15,30 @@ return max merit
     5 100 11
     out-> 110
 */
+
+/*
+Tabulation
+
+    int maximumPoints(vector<vector<int>>& arr, int n) {
+        vector<vector<int>> dp(n,vector<int>(3,0));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<3;j++){
+                if(!i){
+                    dp[i][j]=arr[i][j];
+                }else{
+                    int a=INT_MIN;
+                    for(int k=0;k<3;k++){
+                        if(k!=j) a=max(a,dp[i-1][k]);
+                    }
+                    dp[i][j]=a+arr[i][j];
+                }
+            }
+        }
+        int ans=INT_MIN;
+        for(auto a:dp[n-1]) ans=max(ans,a);
+        return ans;
+    }
+*/
 #include <bits/stdc++.h>
 using namespace std;
 int solve(int day, int prev, int n, vector<vector<int>> &points, vector<vector<int>> &dp)
