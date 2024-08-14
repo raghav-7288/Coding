@@ -1,0 +1,38 @@
+int dp[101][101];
+int lcs_len;
+int lcs(string s, string t, int i, int j){
+    if(i==s.size() || j==t.size()) return 0;
+    if(dp[i][j]!=-1) return dp[i][j];
+    if(s[i]==t[j]) return dp[i][j] = 1+lcs(s,t,i+1,j+1);
+    return dp[i][j] = max(lcs(s,t,i+1,j),lcs(s,t,i,j+1));
+}
+void get_all_lcs(string s, string t, string cur, int p1, int p2, int cur_len, vector<string>& ans){
+    if(cur_len==lcs_len){
+        ans.push_back(cur);
+        return;
+    }
+    if(p1==s.size() || p2==t.size()) return;
+    for(char ch='a';ch<='z';ch++){
+        bool flag=false; /// f is a flag to tell that we have printed all the subsequences corresponding to current character
+        for(int i=p1;i<s.size();i++){
+            if(s[i]==ch){
+                for(int j=p2;j<t.size();j++){
+                    if(t[j]==ch && lcs(s,t,i,j)==lcs_len-cur_len){
+                        get_all_lcs(s,t,cur+ch,i+1,j+1,cur_len+1,ans);
+                        flag=true;
+                        break;
+                    }
+                }
+            }
+            if(flag) break;
+        }
+    }
+    
+}
+vector<string> all_longest_common_subsequences(string s, string t) {
+    memset(dp, -1, sizeof(dp));
+    vector<string> ans;
+    lcs_len = lcs(s,t,0,0);
+    get_all_lcs(s,t,"",0,0,0,ans);
+    return ans;
+}

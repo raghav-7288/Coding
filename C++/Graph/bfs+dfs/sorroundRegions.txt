@@ -1,0 +1,50 @@
+You are given an m x n matrix board containing letters 'X' and 'O', capture regions that are surrounded:
+
+Connect: A cell is connected to adjacent cells horizontally or vertically.
+Region: To form a region connect every 'O' cell.
+Surround: The region is surrounded with 'X' cells if you can connect the region with 'X' cells and none of the region cells are on the edge of the board.
+A surrounded region is captured by replacing all 'O's with 'X's in the input matrix board.
+
+
+
+//---->>> Apply bfs from all boundry zeros those all zeroes will not be a region rest all will be
+---------------------->Similar Ques --->>> No. of Enclaves (give all 1s not reachable from any boundry 1)
+
+
+
+void solve(vector<vector<char>>& board) {
+    int n=board.size();
+    int m=board[0].size();
+    vector<vector<int>> vis(n,vector<int>(m,0));
+    queue<pair<int,int>> q;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(board[i][j]=='O' && (i==0 || i==n-1 || j==0 || j==m-1)){
+                q.push({i,j});
+                vis[i][j]=1;
+            }
+        }
+    }
+    int cx[4]={-1,0,1,0};
+    int cy[4]={0,1,0,-1};
+    while(!q.empty()){
+        int r=q.front().first;
+        int c=q.front().second;
+        q.pop();
+        for(int i=0;i<4;i++){
+            int nr=r+cx[i];
+            int nc=c+cy[i];
+            if(nr>=0 && nr<n && nc>=0 && nc<m && !vis[nr][nc] && board[nr][nc]=='O'){
+                vis[nr][nc]=1;
+                q.push({nr,nc});
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(board[i][j]=='O' && !vis[i][j]){
+                board[i][j]='X';
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+----------Longest Common Substring---------------
+
+//Tabulation
+
+    int longestCommonSubstr(string str1, string str2) {
+        int n = str1.length(), m = str2.length(), ans=-1;
+        vector<vector<int>> dp(n+1,vector<int>(m+1));
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(str1[i-1]==str2[j-1]) dp[i][j]=1+dp[i-1][j-1];
+                else dp[i][j]=0;
+                ans=max(ans,dp[i][j]);
+            }
+        }
+        return ans;
+    }
+
+//Memoization
+
+    int res=0;
+    int solve(int i, int j, int n, int m, string str1, string str2, vector<vector<int>>& dp){
+        if(i>=n || j>=m) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        int ans=0;
+        if(str1[i]==str2[j]) ans=1+solve(i+1,j+1,n,m,str1,str2,dp);
+        solve(i+1,j,n,m,str1,str2,dp);
+        solve(i,j+1,n,m,str1,str2,dp);
+        res=max(ans,res);
+        return dp[i][j]=ans;
+    }
+    int longestCommonSubstr(string str1, string str2) {
+        int n = str1.length(), m = str2.length();
+        vector<vector<int>> dp(n,vector<int>(m,-1));
+        solve(0,0,n,m,str1,str2,dp);
+        return res;
+    }
+
+    // Backward approach like LCSubsequence
+
+        int solve(int n, int m, string str1, string str2, vector<vector<int>>& dp){
+            if(n<0 || m<0) return 0;
+            if(dp[n][m]!=-1) return dp[n][m];
+            int res=0;
+            if(str1[n]==str2[m]) res=1+solve(n-1,m-1,str1,str2,dp);
+            solve(n-1,m,str1,str2,dp);
+            solve(n,m-1,str1,str2,dp);
+            ans=max(ans,res);
+            return dp[n][m]=res;
+        }
+        int longestCommonSubstr(string str1, string str2) {
+            int n = str1.length(), m = str2.length();
+            vector<vector<int>> dp(n,vector<int>(m,-1));
+            solve(n-1,m-1,str1,str2,dp);
+            return ans;
+        }
