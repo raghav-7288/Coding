@@ -1,0 +1,34 @@
+A node is a terminal node if there are no outgoing edges. 
+A node is a safe node if every possible path starting from that node leads to a terminal node (or another safe node).
+Return an array containing all the safe nodes of the graph. 
+The answer should be sorted in ascending order.
+
+--->>>> give all nodes which are not part of any cycle
+
+
+    bool dfs(int n, vector<int> &vis, vector<int> &inCycle, vector<vector<int>>& graph, vector<int>& pathVis){
+        vis[n]=1;
+        pathVis[n]=1;
+        for(auto it:graph[n]){
+            if(!vis[it]){ if(dfs(it,vis,inCycle,graph,pathVis)) return true;}
+            else {if(pathVis[it]) return true;}
+        }
+        inCycle[n]=0; // when do pathVis=0 means this node not in cycle
+        pathVis[n]=0;
+        return false;
+    }
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int> vis(n),pathVis(n),inCycle(n,1);
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(i,vis,inCycle,graph,pathVis);
+            }
+        }
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            cout<<inCycle[i]<<endl;
+            if(!inCycle[i]) ans.push_back(i);
+        }
+        return ans;
+    }

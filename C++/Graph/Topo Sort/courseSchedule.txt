@@ -1,0 +1,51 @@
+//preRequisites are give
+//bool if complete all course or not
+
+    bool canFinish(int n, vector<vector<int>>& prerequisites) {
+        vector<int> inDeg(n);
+        vector<int> adj[n];
+        for(auto e:prerequisites){
+            adj[e[1]].push_back(e[0]);
+            inDeg[e[0]]++;
+        }
+        queue<int> q;
+        for(int i=0;i<n;i++) if(!inDeg[i]) q.push(i);
+        vector<int> ans;
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            ans.push_back(node);
+            for(auto it:adj[node]){
+                inDeg[it]--;
+                if(!inDeg[it]) q.push(it);
+            }
+        }
+        return ans.size()==n; ****************************
+    }
+
+---------------------------------------------------------------------------------------------------------------------------------
+//preRequisites are given
+//give order of courses if can compplete all otherwise {}
+
+    vector<int> findOrder(int n, vector<vector<int>>& prerequisites) {
+        vector<int> inDeg(n);
+        vector<int> adj[n];
+        for(auto e:prerequisites){
+            adj[e[1]].push_back(e[0]);
+            inDeg[e[0]]++;
+        }
+        queue<int> q;
+        for(int i=0;i<n;i++) if(!inDeg[i]) q.push(i);
+        vector<int> ans;
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            ans.push_back(node);
+            for(auto it:adj[node]){
+                inDeg[it]--;
+                if(!inDeg[it]) q.push(it);
+            }
+        }
+        if(ans.size()!=n) return {}; ****************************
+        return ans;
+    }

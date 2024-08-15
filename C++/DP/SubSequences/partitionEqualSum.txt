@@ -1,0 +1,21 @@
+Given an integer array nums, return true if you can partition the array 
+into two subsets such that the sum of the elements in both subsets is equal or false otherwise.
+
+// find subset with sum s/2
+
+bool solve(int i, int t, int n, vector<int>& nums, vector<vector<int>> &dp){
+    if(!t) return true;
+    if(i==n-1) return nums[i]==t;
+    if(dp[i][t]!=-1) return dp[i][t];
+    bool notPick=solve(i+1,t,n,nums,dp);
+    bool pick=false;
+    if(nums[i]<=t) pick=solve(i+1,t-nums[i],n,nums,dp);
+    return dp[i][t]=pick | notPick;
+}
+bool canPartition(vector<int>& nums) {
+    int n=nums.size();
+    int s=accumulate(nums.begin(),nums.end(),0);
+    if(s%2) return false;
+    vector<vector<int>> dp(n,vector<int>(s/2+1,-1));
+    return solve(0,s/2,n,nums,dp);
+}

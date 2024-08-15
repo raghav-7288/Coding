@@ -55,10 +55,7 @@ vector<int> topoSort(int V, vector<int> adj[])
     return ans;
 }
 -----------------------------AllTopoSorts-------------------------------------
-void genAllTopo(int n, vector<int> adj[], vector<int> &indegree,
-                vector<int> &vis, vector<int> &currTopo,
-                vector<vector<int>> &allTopo)
-{
+void genAllTopo(int n, vector<int> adj[], vector<int> &indegree, vector<int> &vis, vector<int> &currTopo, vector<vector<int>> &allTopo){
     bool allVisited = true;
     for (int i = 0; i < n; i++)
     {
@@ -82,6 +79,11 @@ void genAllTopo(int n, vector<int> adj[], vector<int> &indegree,
     }
     if (allVisited)
     {
+        if (currTopo.size() != n)
+        {
+            cout << "CYCLE EXIST";
+            return;
+        }
         allTopo.push_back(currTopo);
     }
 }

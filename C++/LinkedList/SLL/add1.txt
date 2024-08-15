@@ -1,0 +1,25 @@
+//Recursion
+
+    int solve(Node *n){
+        if(!n) return 1;
+        int c = solve(n->next);
+        if(c==1){
+            if(n->data==9){
+                n->data=0;
+                return 1;
+            }
+            else n->data=n->data+1;
+        }
+        return 0;
+    }
+    Node* addOne(Node* head) {
+        int c=solve(head);
+        if(c){
+            Node *temp =new Node(c);
+            temp->next=head;
+            head=temp;
+        }
+        return head;
+    }
+
+// or reverse the LL and do from node 1 

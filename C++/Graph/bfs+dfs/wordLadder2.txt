@@ -1,0 +1,121 @@
+Given two words, beginWord and endWord, and a dictionary wordList, 
+return all the shortest transformation sequences from beginWord to endWord, 
+or an empty list if no such sequence exists. Each sequence should be returned as a list of the words [beginWord, s1, s2, ..., sk].
+
+
+    vector<vector<string>> findLadders(string beg, string end, vector<string>& list) {
+        vector<vector<string>> ans;
+        unordered_set<string> st(list.begin(),list.end());
+        queue<vector<string>> q;
+        vector<string> used;
+        int lvl=1;
+        q.push({beg});
+        used.push_back(beg);
+        st.erase(beg);
+        int d=-1;
+        while(!q.empty()){
+            vector<string> cur = q.front();
+            string word=cur.back();
+            q.pop();
+
+            if(cur.size()>lvl){
+                lvl++;
+                for(auto w:used) st.erase(w);
+            }
+
+            if(word==end){
+                if(!ans.size()) ans.push_back(cur);
+                else if(cur.size()==ans[0].size()) ans.push_back(cur);
+            } 
+            for(int i=0;i<word.size();i++){
+                char init=word[i];
+                for(char c='a';c<='z';c++){
+                    word[i]=c;
+                    if(st.find(word)!=st.end()){
+                        cur.push_back(word);
+                        q.push(cur);
+                        cur.pop_back();
+                        used.push_back(word);
+                    }
+                    word[i]=init;
+                }
+            }
+        }
+        return ans;
+    }
+----------------------------------------------------------------------------------------------------------------------
+//better approach
+
+->create map of dis of all words till endWord from start word;
+->backTrack from endWord to startWord in the map
+eg.
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot","dot","dog","lot","log","cog"]
+map->
+    cog->5
+    log->4
+    dog->4
+    dot->3
+    lot->3
+    hot->2
+    hit->1
+Output
+    [["hit","hot","dot","dog","cog"],["hit","hot","lot","log","cog"]]
+
+
+    void dfs(string word, string beg, unordered_map<string,int>& mp, vector<string>& cur, vector<vector<string>>& ans){
+        if(word==beg){
+            reverse(cur.begin(),cur.end());
+            ans.push_back(cur);
+            reverse(cur.begin(),cur.end());
+            return;
+        }
+        int dis=mp[word];
+        for(int i=0;i<word.size();i++){
+            char init = word[i];
+            for(char z='a';z<='z';z++){
+                word[i]=z;
+                if(mp[word] && mp[word]==dis-1){
+                    cur.push_back(word);
+                    dfs(word,beg,mp,cur,ans);
+                    cur.pop_back();
+                }
+                word[i]=init;
+            }
+        }
+    }
+    vector<vector<string>> findLadders(string beg, string end, vector<string>& wordList) {
+        vector<vector<string>> ans;
+        unordered_map<string,int> mp;
+        queue<string> q;
+        unordered_set<string> st(wordList.begin(),wordList.end());
+        q.push(beg);
+        st.erase(beg);
+        mp[beg]=1;
+        while(!q.empty()){
+            string word=q.front();
+            int d=mp[word];
+            q.pop();
+            if(word==end) break;
+            for(int i=0;i<word.size();i++){
+                char init = word[i];
+                for(char ch='a';ch<='z';ch++){
+                    word[i]=ch;
+                    if(st.find(word)!=st.end()){
+                        q.push(word);
+                        st.erase(word);
+                        mp[word]=d+1;
+                    }
+                    word[i]=init;
+                }
+            }
+        }
+        for(auto m:mp)cout<<m.first<<"->"<<m.second<<endl;
+        if(mp.find(end)!=mp.end()){
+            vector<string> temp;
+            temp.push_back(end);
+            dfs(end,beg,mp,temp,ans);
+        }
+        return ans;
+    }
