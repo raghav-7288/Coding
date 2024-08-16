@@ -1,0 +1,38 @@
+Return the number of combinations that make up that amount.
+If that amount of money cannot be made up by any combination of the coins, return 0.
+
+    int solve(int ind,int t,vector<int>& coins, vector<vector<int>>& dp){
+        if(ind==0){
+            if(t%coins[ind]==0) return 1;
+            return 0;
+        }
+        if(dp[ind][t]!=-1) return dp[ind][t];
+        int np=solve(ind-1,t,coins,dp);
+        int p=0;
+        if(coins[ind]<=t) p=solve(ind,t-coins[ind],coins,dp);
+        return dp[ind][t]=p+np;
+    }
+    int change(int sum, vector<int>& coins) {
+        int n=coins.size();
+        vector<vector<int>> dp(n,vector<int>(sum+1,-1));
+        return solve(n-1,sum,coins,dp);
+    }
+
+//Tabulation
+
+    int change(int sum, vector<int>& coins) {
+        int n=coins.size();
+        vector<vector<int>> dp(n,vector<int>(sum+1,-1));
+        for(int t=0;t<=sum;t++){
+            if(t%coins[0]==0) dp[0][t]=1;
+            else dp[0][t]=0;
+        }
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=sum;j++){
+                int temp=0;
+                if(coins[i]<=j) temp=dp[i][j-coins[i]];
+                dp[i][j]=dp[i-1][j]+temp;
+            }
+        }
+        return dp[n-1][sum];
+    }

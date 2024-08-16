@@ -1,0 +1,65 @@
+Given a rod of length N inches and an array of prices, price[]. 
+price[i] denotes the value of a piece of length i. 
+Determine the maximum value obtainable by cutting up the rod and selling the pieces.
+
+//Recursion
+    int solve(int n, int prices[],vector<int>& dp){
+        if(!n) return 0;
+        if(dp[n]!=-1) return dp[n];
+        int ans=INT_MIN;
+        for(int i=1;i<=n;i++){
+            ans=max(ans,prices[i-1]+solve(n-i,prices,dp));
+        }
+        return dp[n]=ans;
+    }
+    int cutRod(int price[], int n) {
+        vector<int> dp(n+1,-1);
+        return solve(n,price,dp);
+    }
+
+//Pick/NotPick
+
+    int solve(int ind, int n, int len,int prices[], vector<vector<int>>& dp){
+        if(!len || ind>n) return 0;
+        if(dp[ind][len]!=-1) return dp[ind][len];
+        int nc = solve(ind+1,n,len,prices,dp);
+        int c=INT_MIN;
+        if(ind<=len) c = prices[ind-1] + solve(ind,n,len-ind,prices,dp);
+        return dp[ind][len]=max(c,nc);
+    }
+    int cutRod(int price[], int n) {
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        return solve(1,n,n,price,dp);
+    }
+
+    ------OR------
+
+    int solve(int ind, int len,int prices[], vector<vector<int>>& dp){
+        if(!ind) return (len * prices[0]); //can only make len cuts of length 1
+        if(dp[ind][len]!=-1) return dp[ind][len];
+        int nc = solve(ind-1,len,prices,dp);
+        int c=INT_MIN;
+        if((ind+1)<=len) c = prices[ind] + solve(ind,len-ind-1,prices,dp);
+        return dp[ind][len]=max(c,nc);
+    }
+    int cutRod(int price[], int n) {
+        vector<vector<int>> dp(n,vector<int>(n+1,-1));
+        return solve(n-1,n,price,dp);
+    }
+
+
+//Tabulation
+
+    int cutRod(int price[], int n) {
+        vector<vector<int>> dp(n,vector<int>(n+1,0));
+        for(int len=1;len<=n;len++) dp[0][len]=len*price[0];
+        for(int i=1;i<n;i++){
+            for(int l=0;l<=n;l++){
+            int nc = dp[i-1][l];
+            int c=INT_MIN;
+            if((i+1)<=l) c = price[i] + dp[i][l-i-1];
+            dp[i][l]=max(c,nc);
+            }
+        }
+        return dp[n-1][n];
+    }

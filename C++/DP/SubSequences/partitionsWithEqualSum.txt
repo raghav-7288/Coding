@@ -4,8 +4,13 @@ into two subsets such that the sum of the elements in both subsets is equal or f
 // find subset with sum s/2
 
 bool solve(int i, int t, int n, vector<int>& nums, vector<vector<int>> &dp){
-    if(!t) return true;
-    if(i==n-1) return nums[i]==t;
+    // can be used
+    // if(!t) return true;
+    // if(i==n-1) return nums[i]==t;
+    if(i==n){
+        if(!t) return 1;
+        return 0;
+    }
     if(dp[i][t]!=-1) return dp[i][t];
     bool notPick=solve(i+1,t,n,nums,dp);
     bool pick=false;
@@ -19,3 +24,20 @@ bool canPartition(vector<int>& nums) {
     vector<vector<int>> dp(n,vector<int>(s/2+1,-1));
     return solve(0,s/2,n,nums,dp);
 }
+
+//Tabulation
+-->> sum will be s/2
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n=arr.size();
+        vector<vector<int>> dp(n,vector<int>(sum+1,0));
+        for(int i=0;i<n;i++) dp[i][0]=1;
+        if(arr[0]<=sum) dp[0][arr[0]]=1;
+        for(int i=1;i<n;i++){
+            for(int j=1;j<=sum;j++){
+                int temp=0;
+                if(j-arr[i]>=0) temp=dp[i-1][j-arr[i]];
+                dp[i][j]=dp[i-1][j] || temp;
+            }
+        }
+        return dp[n-1][sum];
+    }

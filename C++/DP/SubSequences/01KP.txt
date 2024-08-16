@@ -1,0 +1,54 @@
+Given a set of N items, each with a weight and a value, represented by the array w and val respectively. 
+Also, a knapsack with weight limit W.
+The task is to fill the knapsack in such a way that we can get the maximum profit. Return the maximum profit.
+Note: Each item can be taken any number of times.
+
+//Recursion
+
+    int solve(int i,int W, int val[], int wt[],vector<vector<int>>& dp){
+        if(i<0 || W<=0) return 0;
+        if(dp[i][W]!=-1) return dp[i][W];
+        int np=solve(i-1,W,val,wt,dp);
+        int p=0;
+        if(wt[i] <= W) p = val[i] + solve(i,W-wt[i],val,wt,dp);
+        return dp[i][W]=max(p,np);
+    }
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        vector<vector<int>> dp(N,vector<int>(W+1,-1));
+        return solve(N-1,W,val,wt,dp);
+    }
+
+----------------------------------OR---------------------------------------
+
+    int solve(int i,int W, int val[], int wt[],vector<vector<int>>& dp){
+        if(!i) return val[i] * (W/wt[i]);
+        if(dp[i][W]!=-1) return dp[i][W];
+        int np=solve(i-1,W,val,wt,dp);
+        int p=0;
+        if(wt[i] <= W) p = val[i] + solve(i,W-wt[i],val,wt,dp);
+        return dp[i][W]=max(p,np);
+    }
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        vector<vector<int>> dp(N,vector<int>(W+1,-1));
+        return solve(N-1,W,val,wt,dp);
+    }
+
+
+// Tabulation
+
+    int knapSack(int N, int W, int val[], int wt[]){
+        vector<vector<int>> dp(N,vector<int>(W+1,0));
+        for(int j=0;j<=W;j++){
+            dp[0][j] = val[0] * (j/wt[0]);
+        }
+        for(int i=1;i<N;i++){
+            for(int j=0;j<=W;j++){
+                int np=dp[i-1][j],p=0;
+                if(wt[i] <= j) p=val[i]+dp[i][j-wt[i]];
+                dp[i][j]=max(p,np);
+            }
+        }
+        return dp[N-1][W];
+    }

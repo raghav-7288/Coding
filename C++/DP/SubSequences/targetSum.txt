@@ -1,0 +1,18 @@
+if nums = [2, 1], you can add a '+' before 2 and a '-' before 1 and concatenate them to build the expression "+2-1".
+Return the number of different expressions that you can build, which evaluates to target.
+
+    int solve(int i, int n, int t, vector<int>& nums,map<pair<int,int>,int>& mp){
+        if(i==n) return t==0;
+        if(mp.find({i,t})!=mp.end()) return mp[{i,t}];
+        int p = solve(i+1,n,t-nums[i],nums,mp);
+        int m = solve(i+1,n,t+nums[i],nums,mp);
+        return mp[{i,t}]=p+m;
+    }
+    int findTargetSumWays(vector<int>& nums, int t) {
+        int n=nums.size();
+        map<pair<int,int>,int> dp;
+        return solve(0,n,t,nums,dp);
+    }
+
+// Tabulation
+
