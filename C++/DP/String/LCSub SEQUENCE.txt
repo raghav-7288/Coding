@@ -1,0 +1,121 @@
+-----------------------------------------------------Recursion----------------------------------------------------------------
+
+int LCS(string s, int n, string t, int m, vector<vector<int>> &dp)
+{
+    if (!n || !m)
+    {
+        return dp[n][m] = 0;
+    }
+    if (dp[n][m] != -1)
+    {
+        return dp[n][m];
+    }
+    if (s[n - 1] == t[m - 1])
+    {
+        return dp[n][m] = (1 + LCS(s, n - 1, t, m - 1, dp));
+    }
+    else
+    {
+        return dp[n][m] = (max(LCS(s, n - 1, t, m, dp), LCS(s, n, t, m - 1, dp)));
+    }
+}
+
+-----------------------------------------------------For 3 strings-----------------------------------------------------------
+
+    int solve(string &a, string &b, string &c, int i, int j, int k, vector<vector<vector<int>>> &dp)
+    {
+        if (i >= a.length() || j >= b.length() || k >= c.length())
+            return 0;
+        if (dp[i][j][k] != -1)
+            return dp[i][j][k];
+        if (a[i] == b[j] && a[i] == c[k] && b[j] == c[k])
+            return 1 + solve(a, b, c, i + 1, j + 1, k + 1, dp);
+        return dp[i][j][k] = max(solve(a, b, c, i + 1, j, k, dp), max(solve(a, b, c, i, j + 1, k, dp), solve(a, b, c, i, j, k + 1, dp)));
+    }
+
+----------------------------------------------------------Tabulation----------------------------------------------------------
+
+    int n = s.length();
+    int m = t.length();
+    vector<vector<pair<int, char>>> dp(n + 1, vector<pair<int, char>>(m + 1, {0, 'n'}));
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            if (s[i - 1] == t[j - 1])
+            {
+                dp[i][j] = {1 + dp[i - 1][j - 1].first, 'd'};
+            }
+            else
+            {
+                dp[i][j].first = max(dp[i - 1][j].first, dp[i][j - 1].first);
+                if (dp[i - 1][j].first > dp[i][j - 1].first)
+                {
+                    dp[i][j].second = 'u';
+                }
+                else
+                {
+                    dp[i][j].second = 'l';
+                }
+            }
+        }
+    }
+
+-----------------------------------------------Print 1 LCSubsequence-------------------------------------------------------
+
+    int len = dp[n][m];
+    string ans(len, '0');
+    int i=n,j=m,index=len-1;
+    while(i>0 && j>0){
+        if(s[i-1]==t[j-1]){
+            ans[index--]=s[i-1];
+            i--;
+            j--;
+        }else{
+            if(dp[i-1][j] < dp[i][j-1]){
+                j--;
+            }else{
+                i--;
+            }
+        }
+    }
+
+-------------------------------------------------Print all LCSubsequences-------------------------------------------------------
+
+    int dp[101][101];
+    int lcs_len;
+    int lcs(string s, string t, int i, int j){
+        if(i==s.size() || j==t.size()) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(s[i]==t[j]) return dp[i][j] = 1+lcs(s,t,i+1,j+1);
+        return dp[i][j] = max(lcs(s,t,i+1,j),lcs(s,t,i,j+1));
+    }
+    void get_all_lcs(string s, string t, string cur, int p1, int p2, int cur_len, vector<string>& ans){
+        if(cur_len==lcs_len){
+            ans.push_back(cur);
+            return;
+        }
+        if(p1==s.size() || p2==t.size()) return;
+        for(char ch='a';ch<='z';ch++){
+            bool flag=false; /// f is a flag to tell that we have printed all the subsequences corresponding to current character
+            for(int i=p1;i<s.size();i++){
+                if(s[i]==ch){
+                    for(int j=p2;j<t.size();j++){
+                        if(t[j]==ch && lcs(s,t,i,j)==lcs_len-cur_len){
+                            get_all_lcs(s,t,cur+ch,i+1,j+1,cur_len+1,ans);
+                            flag=true;
+                            break;
+                        }
+                    }
+                }
+                if(flag) break;
+            }
+        }
+    }
+    vector<string> all_longest_common_subsequences(string s, string t) {
+        memset(dp, -1, sizeof(dp));
+        vector<string> ans;
+        lcs_len = lcs(s,t,0,0);
+        get_all_lcs(s,t,"",0,0,0,ans);
+        return ans;
+    }

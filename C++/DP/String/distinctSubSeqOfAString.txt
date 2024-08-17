@@ -1,6 +1,5 @@
-// Count All distinct Subsequences of a string
-#include <bits/stdc++.h>
-using namespace std;
+Count All distinct Subsequences of a string
+
 int distinctSubsequences(string s)
 {
     int n = s.size();
@@ -18,15 +17,4 @@ int distinctSubsequences(string s)
         mp[s[i - 1]] = i;
     }
     return dp[n];
-}
-int main()
-{
-#ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
-#endif
-    string s;
-    cin >> s;
-    cout << distinctSubsequences(s);
-    return 0;
 }

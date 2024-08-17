@@ -6,8 +6,7 @@ Each vowel 'i' may not be followed by another 'i'.
 Each vowel 'o' may only be followed by an 'i' or a 'u'.
 Each vowel 'u' may only be followed by an 'a'.
 */
-#include <bits/stdc++.h>
-using namespace std;
+
 int mod = 1e9 + 7;
 bool isOk(int prev, int curr)
 {
@@ -61,15 +60,4 @@ int countVowelPermutation(int n)
         ans = (ans + solve(j, n, dp)) % mod;
     }
     return ans;
-}
-int main()
-{
-#ifndef ONLINE_JUDGE
-    freopen("../../input.txt", "r", stdin);
-    freopen("../../output.txt", "w", stdout);
-#endif
-    int n;
-    cin >> n;
-    cout << countVowelPermutation(n);
-    return 0;
 }

@@ -1,0 +1,51 @@
+// Find length of longest pallindromic subsequence.
+---------------------------------------------------------Recursion----------------------------------------------------------
+    int solve(int i, int j, string s, vector<vector<int>>& dp){
+        if(i>j) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(s[i]==s[j]){
+            if(i==j) return 1+solve(i+1,j-1,s,dp);
+            return 2+solve(i+1,j-1,s,dp);
+        }
+        int inc = solve(i+1,j,s,dp);
+        int dec = solve(i,j-1,s,dp);
+        return dp[i][j]=max(inc,dec);
+    }
+    int longestPalindromeSubseq(string s) {
+        int n=s.length();
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        return solve(0,n-1,s,dp);
+    }
+
+----------------------------------------------------------Using LCS------------------------------------------------------------
+-> t=s.reverse -> then find their LCS
+
+    int lcs(int p1, int p2, string s, string t, vector<vector<int>>& dp){
+        if(p1<0 | p2<0) return 0;
+        if(dp[p1][p2]!=-1) return dp[p1][p2];
+        if(s[p1]==t[p2]) return 1+lcs(p1-1,p2-1,s,t,dp);
+        return dp[p1][p2]=max(lcs(p1-1,p2,s,t,dp), lcs(p1,p2-1,s,t,dp));
+    }
+    int longestPalindromeSubseq(string s) {
+        int n=s.length();
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        string t=s;
+        reverse(t.begin(),t.end());
+        return lcs(n-1,n-1,s,t,dp);
+    }
+
+---------------------------------------------------------Tabulation-------------------------------------------------------------
+
+    int longestPalindromeSubseq(string s) {
+        int n=s.length();
+        vector<vector<int>> dp(n+1,vector<int>(n+1));
+        string t=s;
+        reverse(t.begin(),t.end());
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                if(s[i-1]==t[j-1]) dp[i][j]=1+dp[i-1][j-1];
+                else dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+            }
+        }
+        return dp[n][n];
+    }
