@@ -1,0 +1,43 @@
+Given a sequence of matrices, find the most efficient way to multiply these matrices together. 
+The efficient way is the one that involves the least number of multiplications.
+The dimensions of the matrices are given in an array arr[] of size N (such that N = number of matrices + 1) 
+where the ith matrix has the dimensions (arr[i-1] x arr[i]).   
+
+    
+    int mcm(int i, int j, int arr[], vector<vector<int>>& dp){
+        if(i==j) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        int multiplications=INT_MAX;
+        for(int k=i;k<j;k++){
+            int firstPartition = mcm(i,k,arr,dp);
+            int secondPartition = mcm(k+1,j,arr,dp);
+            int currentMultiplications = arr[i-1]*arr[k]*arr[j];
+            multiplications=min(multiplications,firstPartition + secondPartition + currentMultiplications);
+        }
+        return dp[i][j]=multiplications;
+    }
+    int matrixMultiplication(int N, int arr[])
+    {
+        vector<vector<int>> dp(N,vector<int>(N,-1));
+        return mcm(1,N-1,arr,dp);
+    }
+
+//Tabulation
+
+    int matrixMultiplication(int N, int arr[])
+    {
+        vector<vector<int>> dp(N,vector<int>(N,0));
+        for(int i=1;i<N;i++){
+            dp[i][i]=0;
+        }
+        for(int i=N-1;i>=1;i--){
+            for(int j=i+1;j<N;j++){
+                int multiplications=INT_MAX;
+                for(int k=i;k<j;k++){
+                    multiplications=min(multiplications,dp[i][k] + dp[k+1][j] + arr[i-1]*arr[k]*arr[j]);
+                    dp[i][j]=multiplications;
+                }
+            }
+        }
+        return dp[1][N-1];
+    }
