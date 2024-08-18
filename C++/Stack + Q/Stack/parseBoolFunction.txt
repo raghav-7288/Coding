@@ -1,0 +1,51 @@
+A boolean expression is an expression that evaluates to either true or false. It can be in one of the following shapes:
+'t' that evaluates to true.
+'f' that evaluates to false.
+'!(subExpr)' that evaluates to the logical NOT of the inner expression subExpr.
+'&(subExpr1, subExpr2, ..., subExprn)' that evaluates to the logical AND of the inner expressions subExpr1, subExpr2, ..., subExprn where n >= 1.
+'|(subExpr1, subExpr2, ..., subExprn)' that evaluates to the logical OR of the inner expressions subExpr1, subExpr2, ..., subExprn where n >= 1.
+Given a string expression that represents a boolean expression, return the evaluation of that expression.  
+
+   
+    char evaluate(string s, char op){
+        int cf=0,ct=0;
+        for(auto c:s){
+            if(c==',') continue;
+            if(c=='f') cf++;
+            else ct++;
+        }
+        if(op=='!'){
+            if(cf==1) return 't';
+            else return 'f';
+        }else if(op=='&'){
+            if(cf>0) return 'f';
+            else return 't';
+        }else{
+            if(ct>0) return 't';
+            return 'f';
+        }
+        return '.';
+    }
+    bool parseBoolExpr(string s) {
+        int n=s.length(),i=0;
+        stack<char> st;
+        for(int i=0;i<n;i++){
+            if(s[i]!=')'){
+                st.push(s[i]);
+            }else{
+                int j=i-1;
+                string temp="";
+                while(st.top() != '('){
+                    char c = st.top();
+                    temp+=c;
+                    st.pop();
+                }
+                st.pop();
+                char op = st.top();
+                st.pop();
+                st.push(evaluate(temp,op));
+            }
+        }
+        if(st.top()=='f') return false;
+        return true;
+    }
