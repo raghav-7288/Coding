@@ -1,0 +1,46 @@
+Given a string s, partition s such that every 
+substring of the partition is a palindrome.
+Return the minimum cuts needed for a palindrome partitioning of s.
+
+
+    bool isPal(int i, int j, string s) {
+        while(i < j && s[i] == s[j]) {
+            i++;
+            j--;
+    }
+    return i >= j;
+    }   
+    int solve(int i, int n, string s, vector<int> &dp){
+        if(i>=n | isPal(i,n-1,s)) return 0;
+        if(dp[i]!=-1) return dp[i];
+        int cuts=INT_MAX;
+        for(int index=i;index<n;index++){
+            if(isPal(i,index,s)){
+                cuts=min(cuts,1+solve(index+1,n,s,dp));
+            }
+        }
+        return dp[i]=cuts;
+    }
+    int minCut(string s) {
+        int n=s.length();
+        vector<int> dp(n,-1);
+        return solve(0,n,s,dp);
+    }
+
+// Tabulation
+
+    int minCut(string s) {
+        int n=s.length();
+        vector<int> dp(n+1,0);
+        dp[n]=0;
+        for(int i=n-1;i>=0;i--){
+            int cuts=INT_MAX;
+            for(int j=i;j<n;j++){
+                if(isPal(i,j,s)){
+                    cuts=min(cuts,1+dp[j+1]);
+                }
+            }
+            dp[i]=cuts;
+        }
+        return dp[0]-1;
+    }

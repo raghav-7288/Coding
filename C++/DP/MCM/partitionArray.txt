@@ -1,0 +1,40 @@
+Given an integer array arr, partition the array into (contiguous) subarrays of length at most k.
+After partitioning, each subarray has their values changed to become the maximum value of that subarray.
+Return the largest sum of the given array after partitioning.
+Test cases are generated so that the answer fits in a 32-bit integer.
+
+
+    int solve(int i, int n, int k, vector<int>& arr,vector<int>& dp){
+        if(i>=n) return 0;
+        if(dp[i]!=-1) return dp[i];
+        int sum=INT_MIN;
+        int cur_max = INT_MIN;
+        for(int l=i;l<min(n,i+k);l++){
+            cur_max=max(cur_max,arr[l]);
+            sum=max(sum,cur_max*(l-i+1)+solve(l+1,n,k,arr,dp));
+        }
+        return dp[i]=sum;
+    }
+    int maxSumAfterPartitioning(vector<int>& arr, int k) {
+        int n=arr.size();
+        vector<int> dp(n+1,-1);
+        return solve(0,n,k,arr,dp);
+    }
+
+//Tabulation
+
+    int maxSumAfterPartitioning(vector<int>& arr, int k) {
+        int n=arr.size();
+        vector<int> dp(n+1,0);
+        dp[n]=0;
+        for(int i=n-1;i>=0;i--){
+            int sum=INT_MIN;
+            int cur_max = INT_MIN;
+            for(int l=i;l<min(n,i+k);l++){
+                cur_max=max(cur_max,arr[l]);
+                sum=max(sum,cur_max*(l-i+1)+dp[l+1]);
+            }
+            dp[i]=sum;
+        }
+        return dp[0];
+    }

@@ -1,0 +1,35 @@
+Given a set of distinct positive integers nums, 
+return the largest subset answer such that every pair (answer[i], answer[j]) of elements in this subset satisfies:
+answer[i] % answer[j] == 0, or
+answer[j] % answer[i] == 0
+
+-->> same as LIS 
+just change nums[j]<nums[i] to nums[i]%nums[j]==0
+
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        vector<int> dp(n,1),prev(n);
+        int lis_len=-1,last_index;
+        for(int i=0;i<n;i++){
+            prev[i]=i;
+            for(int j=0;j<i;j++){
+                if(nums[i]%nums[j]==0 && dp[i] < 1+dp[j]){
+                    dp[i]=1+dp[j];
+                    prev[i]=j;
+                }
+            }
+            if(dp[i]>lis_len){
+                lis_len = dp[i];
+                last_index = i;
+            }
+        }
+        vector<int> ans;
+        while(prev[last_index] != last_index){
+            ans.push_back(nums[last_index]);
+            last_index = prev[last_index];
+        }
+        ans.push_back(nums[last_index]);
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }

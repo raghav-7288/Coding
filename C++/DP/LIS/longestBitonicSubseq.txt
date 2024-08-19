@@ -1,0 +1,37 @@
+Given an array of positive integers. Find the maximum length of Bitonic subsequence. 
+A subsequence of array is called Bitonic if it is first strictly increasing, then strictly decreasing. 
+Return the maximum length of bitonic subsequence. 
+Note : A strictly increasing or a strictly decreasing sequence should not be considered as a bitonic sequence
+******************************************************************************************************************************************
+Intuition :
+This problem is a variation of standard Longest Increasing Subsequence (LIS) problem. 
+Let the input array be arr[] of length n. We need to construct two arrays lis[] and lds[] using Dynamic Programming solution of LIS problem.
+lis[i] stores the length of the Longest Increasing subsequence ending with arr[i]. 
+lds[i] stores the length of the longest Decreasing subsequence starting from arr[i].
+Finally, we need to return the max value of lis[i] + lds[i] – 1 where i is from 0 to n-1.
+******************************************************************************************************************************************
+
+
+    int LongestBitonicSequence(int n, vector<int> &nums) {
+        if(is_sorted(nums.begin(),nums.end())) return 0;
+        vector<int> dp1(n,1);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j] && dp1[i]<1+dp1[j]){
+                    dp1[i]=1+dp1[j];
+                }
+            }
+        }
+        vector<int> dp2(n,1);
+        
+        for (int i = n - 2; i >= 0; i--){
+            for (int j = n - 1; j > i; j--){
+                if (nums[i] > nums[j] and dp2[i] < dp2[j] + 1){
+                    dp2[i] = dp2[j] + 1;
+                }
+            }
+        }
+        int ans=0;
+        for(int i=0;i<n;i++) if(dp1[i]>1 && dp2[i]>1) ans=max(ans,dp1[i]+dp2[i]-1);
+        return ans;
+    }

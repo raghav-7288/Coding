@@ -1,0 +1,141 @@
+Given an integer array nums, return the length of the longest strictly increasing 
+subsequence.
+
+    int solve(int i, int pre, vector<int>& nums, vector<vector<int>>& dp){
+        if(i>=nums.size()) return 0;
+        if(dp[i][pre+1]!=-1) return dp[i][pre+1];
+        int notPick = solve(i+1,pre,nums,dp);
+        int pick=INT_MIN;
+        if(pre==-1 || nums[i] > nums[pre]) pick = 1+solve(i+1,i,nums,dp);
+        return dp[i][pre+1]=max(pick,notPick);
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>> dp(n,vector<int>(n+1,-1));
+        return solve(0,-1,nums,dp);
+    }
+
+
+//Tabulation
+
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        for(int i=n-1;i>=0;i--){
+            for(int pre=i-1;pre>=-1;pre--){
+                int notPick = dp[i+1][pre+1];
+                int pick=INT_MIN;
+                if(pre==-1 || nums[i] > nums[pre]) pick = 1+dp[i+1][i+1];
+                dp[i][pre+1]=max(pick,notPick);
+            }
+        }
+        return dp[0][0];
+    }
+
+//Optimised Tabulation
+
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> next(n+1), cur(n+1);
+        for(int i=n-1;i>=0;i--){
+            for(int pre=i-1;pre>=-1;pre--){
+                int notPick = next[pre+1];
+                int pick=INT_MIN;
+                if(pre==-1 || nums[i] > nums[pre]) pick = 1+next[i+1];
+                cur[pre+1]=max(pick,notPick);
+            }
+            next = cur;
+        }
+        return next[0];
+    }
+
+//Alternate way **************************************
+
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> dp(n,1);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[j]<nums[i]){
+                    dp[i]=max(dp[i],1+dp[j]);
+                }
+            }
+        }
+        int lis_len=0;
+        for(auto l:dp) lis_len=max(lis_len,l);
+        return lis_len;
+    }
+******************************************************
+
+//Printing the LIS
+
+    vector<int> printLIS(int n, vector<int>& nums) {
+        vector<int> dp(n,1),prev(n);
+        int lis_len=-1,last_index;
+        for(int i=0;i<n;i++){
+            prev[i]=i;
+            for(int j=0;j<i;j++){
+                if(nums[j]<nums[i] && dp[i] < 1+dp[j]){
+                    dp[i]=1+dp[j];
+                    prev[i]=j;
+                }
+            }
+            if(dp[i]>lis_len){
+                lis_len = dp[i];
+                last_index = i;
+            }
+        }
+        vector<int> ans;
+        
+        while(prev[last_index] != last_index){
+            ans.push_back(nums[last_index]);
+            last_index = prev[last_index];
+        }
+        ans.push_back(nums[last_index]);
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+
+********************************************binary search to find lis_len****************************************
+
+    int longestSubsequence(int n, int a[])
+    {
+       vector<int> ans;
+        for(int i=0;i<n;i++){
+            if(!ans.size() || ans.back()<a[i]) ans.push_back(a[i]);
+            else{
+                int pos = lower_bound(ans.begin(),ans.end(),a[i]) - ans.begin();
+                ans[pos]=a[i];
+            }
+        }
+        return ans.size();
+    }
+
+
+********************************************no. of LIS****************************************
+
+->create one count arrays if some j updates dp[i] copy its count else if some j is same as dp[i] add its count.
+
+    int findNumberOfLIS(vector<int>& nums) {
+        int n=nums.size(),lis_len=-1;
+        vector<int> dp(n,1), cnt(n,1);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[j]<nums[i]){
+                    if(dp[i]<dp[j]+1){
+                        dp[i]=1+dp[j];
+                        cnt[i]=cnt[j];
+                    }else if(dp[i]==dp[j]+1) cnt[i]+=cnt[j];
+                }
+            }
+            if(lis_len < dp[i]){
+                lis_len=dp[i];
+            }
+        }
+        int ans=0;
+        for(int i=0;i<n;i++){
+            if(dp[i]==lis_len) ans+=cnt[i];
+        }
+        return ans;
+    }
