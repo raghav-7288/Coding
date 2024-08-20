@@ -1,0 +1,21 @@
+-----------------Same as BuyNsell 3 but now u can have atmost k transactions---------------------
+You are given an integer array prices where prices[i] is the price of a given stock on the ith day.
+On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time.
+However, you can buy it then immediately sell it on the same day.
+Find and return the maximum profit you can achieve.
+(can buy and sell multiple time until i!=n but can have only 1 share at a time)
+-----------(can only have atmost k transactions)-------------------
+
+    int solve(int i, int n, int notr, int k, vector<int>& prices, vector<vector<int>>& dp){
+        if(i==n || notr==2*k) return 0;
+        if(dp[i][notr]!=-1) return dp[i][notr];
+        int profit;
+        if(notr%2==0) profit=max(-prices[i]+solve(i+1,n,notr+1,k,prices,dp), solve(i+1,n,notr,k,prices,dp));
+        else profit=max(prices[i]+solve(i+1,n,notr+1,k,prices,dp), solve(i+1,n,notr,k,prices,dp));
+        return dp[i][notr]=profit;
+    }
+    int maxProfit(int k, vector<int>& prices) {
+        int n=prices.size();
+        vector<vector<int>> dp(n,vector<int>(2*k,-1));
+        return solve(0,n,0,k,prices,dp);
+    }

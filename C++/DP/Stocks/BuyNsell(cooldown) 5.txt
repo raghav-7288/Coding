@@ -1,0 +1,19 @@
+Unlimites buys and sells
+cannot have multiple share at a time
+cannot buy immediately after sellinf (so make call by i+2 insted of i+1)
+
+
+
+    int solve(int i, int n, vector<int>& prices, int canBuy, vector<vector<int>>& dp){
+        if(i>=n) return 0;
+        if(dp[i][canBuy]!=-1) return dp[i][canBuy];
+        int profit;
+        if(canBuy) profit = max(-prices[i]+solve(i+1,n,prices,0,dp) , solve(i+1,n,prices,1,dp));
+        else profit = max(prices[i]+solve(i+2,n,prices,1,dp) , solve(i+1,n,prices,0,dp));
+        return dp[i][canBuy]=profit;
+    }
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        vector<vector<int>> dp(n,vector<int>(2,-1));
+        return solve(0,n,prices,1,dp);
+    }
