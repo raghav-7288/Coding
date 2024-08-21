@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
 class disjointSet
 {
 private:
@@ -96,26 +94,9 @@ int kruskal(vector<vector<int>> edges, int n)
         {
             mstWt += ew;
             ds.unionByRank(from, to);
+            // OR
+            ds.unionBySize(from, to);
         }
     }
     return mstWt;
-}
-int main()
-{
-#ifndef ONLINE_JUDGE
-    freopen("../../input.txt", "r", stdin);
-    freopen("../../output.txt", "w", stdout);
-#endif
-    int e, n;
-    cin >> e >> n;
-    vector<vector<int>> edges;
-    while (e--)
-    {
-        int from, to, wt;
-        cin >> from >> to >> wt;
-        edges.push_back({from, to, wt});
-    }
-    // cout << prims(edges, n, 0);
-    cout << kruskal(edges, n);
-    return 0;
 }

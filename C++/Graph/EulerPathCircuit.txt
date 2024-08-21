@@ -1,12 +1,14 @@
-//print 2->Euler Cycle(all has even degrees)
-//print 1->Euler path(only 2 vert has odd degrees)
-//0->otherwise
-int isEulerCircuit(int V, vector<int>adj[]){
+// print 2->Euler Cycle(all has even degrees)
+// print 1->Euler path(only 2 vert has odd degrees)
+// 0->otherwise
+int isEulerCircuit(int V, vector<int> adj[])
+{
     int t = 0;
-    for(int i = 0; i < V; ++i)
+    for (int i = 0; i < V; ++i)
     {
         int sz = adj[i].size();
-        if(sz&1) t++;
+        if (sz & 1)
+            t++;
     }
-    return (t==0)?(2):((t==2)?1:0);
+    return (t == 0) ? (2) : ((t == 2) ? 1 : 0);
 }
