@@ -1,0 +1,30 @@
+int timer=1;
+void dfs(int node, int parent, vector<int>& stepsToReach, vector<int>& canReachMin, vector<int>& vis, vector<int> adj[], vector<vector<int>>& bridges){
+    vis[node]=1;
+    stepsToReach[node]=timer;
+    canReachMin[node]=timer;
+    timer++;
+    for(auto it:adj[node]){
+        if(it == parent) continue;
+        if(!vis[it]){
+            dfs(it,node,stepsToReach,canReachMin,vis,adj,bridges);
+            canReachMin[node]=min(canReachMin[node], canReachMin[it]);
+            if(stepsToReach[node] < canReachMin[it]){
+                bridges.push_back({it,node});
+            }
+        }else{
+            canReachMin[node]=min(canReachMin[node], canReachMin[it]);
+        }
+    }
+}
+vector<vector<int>> findBridges(int n, vector<vector<int>>& edges) {
+    vector<int> adj[n];
+    for(auto e:edges){
+        adj[e[0]].push_back(e[1]);
+        adj[e[1]].push_back(e[0]);
+    }
+    vector<int> stepsToReach(n), canReachMin(n), vis(n);
+    vector<vector<int>> bridges;
+    dfs(0,-1,stepsToReach,canReachMin,vis,adj,bridges);
+    return bridges;
+}

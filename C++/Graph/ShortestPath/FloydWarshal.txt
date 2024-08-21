@@ -37,3 +37,22 @@ int floydWarshall(int n, int m, int src, int dest, vector<vector<int>> &edges){
     }
     return adj[src][dest];
 }
+
+**************************************************************************************************************************************************
+if adj mat is given with ew=-1 if no edge is there then all pair shortest path matrix :
+
+	void shortest_distance(vector<vector<int>>&adj){
+	    int n=adj.size();
+	    for(int k=0;k<n;k++){
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    if(adj[i][k]!=-1 && adj[k][j]!=-1){
+                        if(adj[i][j] == -1 || adj[i][k]+adj[k][j] <adj[i][j]){ // if no edge then replce without checking condition
+                            adj[i][j] = adj[i][k]+adj[k][j]; 
+                        }
+                    }
+                }
+            }
+        }
+	}
+**************************************************************************************************************************************************

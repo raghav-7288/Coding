@@ -1,0 +1,36 @@
+There are n cities connected by some number of flights. You are given an array flights where \
+flights[i] = [fromi, toi, pricei] indicates that there is a flight from city fromi to city toi with cost pricei.
+You are also given three integers src, dst, and k, return the cheapest price from src to dst with at most k stops. 
+If there is no such route, return -1.
+
+
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        vector<pair<int,int>> adj[n];
+        for(auto f:flights){
+            adj[f[0]].push_back({f[1],f[2]});
+        }
+        vector<int> price(n,INT_MAX);
+        // pq->{steps,price,city}
+        priority_queue<tuple<int,int,int>,vector<tuple<int,int,int>>,greater<tuple<int,int,int>>> pq;
+        pq.push({0,0,src});
+        price[src]=0;
+        while(!pq.empty()){
+            
+            auto[cur_k, cur_pri, cur_c] = pq.top();
+            pq.pop();
+            
+            if(cur_k>k) continue;
+
+            for(auto it:adj[cur_c]){
+                int next_c=it.first;
+                int pri=it.second;
+                if(price[next_c] > pri+cur_pri){
+                    price[next_c] = pri+cur_pri;
+                    pq.push(make_tuple(cur_k+1,price[next_c],next_c));
+                }
+            }
+        }
+        if(price[dst]==INT_MAX)
+        return -1;
+        return price[dst];
+    }

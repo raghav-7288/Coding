@@ -1,58 +1,29 @@
-int timer = 0;
-void dfs(int node, int parent, vector<int> adj[], vector<int> &vis, vector<int> &expStart, vector<int> &lowExpStart, vector<int> &isAP)
-{
-    vis[node] = 1;
-    expStart[node] = timer;
-    lowExpStart[node] = timer;
+int timer=1;
+void dfs(int node, int parent, vector<int>& str, vector<int>& crm, vector<int>& vis, vector<int>& isAp, vector<int> adj[]){
+    vis[node]=1;
+    str[node]=timer;
+    crm[node]=timer;
     timer++;
-    int child = 0;
-    for (auto x : adj[node])
-    {
-        if (x == parent)
-            continue;
-        if (!vis[x])
-        {
-            dfs(x, node, adj, vis, expStart, lowExpStart, isAP);
-            lowExpStart[node] = min(lowExpStart[node], lowExpStart[x]);
-            if (lowExpStart[x] >= expStart[node] && parent != -1)
-            {
-                isAP[node] = 1;
+    int noOfChilds=0;
+    for(auto it:adj[node]){
+        if(it == parent) continue;
+        if(!vis[it]){
+            dfs(it,node,str,crm,vis,isAp,adj);
+            crm[node]=min(crm[node],crm[it]);
+            if(str[node] <= crm[it] && parent != -1){
+                isAp[node]=1;
             }
-            child++;
-        }
-        else
-        {
-            lowExpStart[node] = min(lowExpStart[node], expStart[x]);
+            noOfChilds++;
+        }else{
+            crm[node]=min(crm[node],str[it]);
         }
     }
-    if (child > 1 && parent == -1)
-    {
-        isAP[node] = 1;
-    }
+    if(noOfChilds > 1 && parent==-1) isAp[node]=1;
 }
-vector<int> articulationPoints(int n, vector<int> adj[])
-{
-    vector<int> vis(n);
-    vector<int> expStart(n);
-    vector<int> lowExpStart(n);
-    vector<int> isAP(n);
-    vector<int> AP;
-    for (int i = 0; i < n; i++)
-    {
-        if (!vis[i])
-        {
-            dfs(i, -1, adj, vis, expStart, lowExpStart, isAP);
-        }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        if (isAP[i])
-        {
-            AP.push_back(i);
-        }
-    }
-    if (!AP.size()){
-        return {-1};
-    }
-    return AP;
+vector<int> articulationPoints(int V, vector<int>adj[]) {
+    vector<int> str(V), crm(V), vis(V), isAp(V), APs;
+    dfs(0,-1,str,crm,vis,isAp,adj);
+    for(int i=0;i<V;i++) if(isAp[i]) APs.push_back(i);
+    if(!APs.size()) return {-1};
+    return APs;
 }

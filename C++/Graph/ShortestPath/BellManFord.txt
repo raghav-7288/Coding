@@ -1,3 +1,6 @@
+-> if given undirected graph make it directed by adding 2 way edges
+    (1) ----5---- (2) make it (1) ----5---> (2), (1) <---5---- (2) and apply bellmonFord  
+
 vector<int> bellmonFord(int n,int src, vector<vector<int>> &edges) {
     vector<int> dis(n,1e9);
     dis[src]=0;

@@ -1,0 +1,45 @@
+Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. 
+If there is no clear path, return -1.
+A clear path in a binary matrix is a path from the top-left cell 
+(i.e., (0, 0)) to the bottom-right cell (i.e., (n - 1, n - 1)) such that:
+All the visited cells of the path are 0.
+All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).
+The length of a clear path is the number of visited cells of this path
+---->>>> every adj cell visit add dis of +1(constant) pq can be replaced by q <<<<-------
+
+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+        if(grid[0][0]) return -1;
+        int n=grid.size();
+        int m=grid[0].size();
+        int ans=INT_MAX;
+        map<pair<int,int>,int> dis;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                dis[{i,j}]=INT_MAX;
+            }
+        }
+        dis[{0,0}]=0;
+        // priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>> pq;
+        queue<pair<int,pair<int,int>>> pq;
+        pq.push({0,{0,0}});
+        while(!pq.empty()){
+            int d=pq.front().first;
+            int r=pq.front().second.first;
+            int c=pq.front().second.second;
+            pq.pop();
+            for(int i=-1;i<=1;i++){
+                for(int j=-1;j<=1;j++){
+                    int nr=r+i;
+                    int nc=c+j;
+                    if(nr>=0 && nr<n && nc>=0 && nc<m && !grid[nr][nc]){
+                        if(dis[{nr,nc}]>1+dis[{r,c}]){
+                            dis[{nr,nc}]=1+dis[{r,c}];
+                            pq.push({dis[{nr,nc}],{nr,nc}});
+                        }
+                    }
+                }
+            }
+        }
+        if(dis[{n-1,m-1}]!=INT_MAX) return dis[{n-1,m-1}]+1;
+        return -1;
+    }

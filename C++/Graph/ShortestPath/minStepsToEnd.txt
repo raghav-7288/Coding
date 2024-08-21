@@ -1,0 +1,28 @@
+Given start, end and an array arr of n numbers. 
+At each step, start is multiplied with any number in the array and then mod operation with 100000 is done to get the new start.
+Your task is to find the minimum steps in which end can be achieved starting from start.
+If it is not possible to reach end, then return -1.
+
+
+
+    int minimumMultiplications(vector<int>& arr, int start, int end) {
+        int mod=1e5;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        vector<int> dis(mod,1e9);
+        pq.push({0,start});
+        dis[start]=0;
+        while(!pq.empty()){
+            int steps=pq.top().first;
+            int num=pq.top().second;
+            pq.pop();
+            if(num==end) return steps;
+            for(auto a:arr){
+                int p=(a*num)%mod;
+                if(dis[p]>steps+1){
+                    dis[p]=steps+1;
+                    pq.push({steps+1,p});
+                }
+            }
+        }
+        return -1;
+    }
