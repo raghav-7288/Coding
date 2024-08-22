@@ -1,0 +1,43 @@
+Given a sorted dictionary of an alien language having N words and k starting alphabets of standard dictionary.
+Find the order of characters in the alien language.
+Input:  N = 5, K = 4, dict = {"baa","abcd","abca","cab","cad"}
+Output: 1
+Explanation: Here order of characters is 'b', 'd', 'a', 'c' Note that words are sorted and in the given language "baa" comes before "abcd", therefore 'b' is before 'a' in output.
+Similarly we can find other orders.
+
+
+    string findOrder(string dict[], int N, int K) {
+        vector<int> adj[K];
+        for(int i=0;i<N-1;i++){
+            string s=dict[i], t=dict[i+1];
+            int l=min(s.length(),t.length());
+            for(int j=0;j<l;j++){
+                if(s[j]!=t[j]){
+                    adj[s[j]-'a'].push_back(t[j]-'a');
+                    break;
+                }
+            }
+        }
+        vector<int> inDeg(K),ans;
+        for(int i=0;i<K;i++){
+            for(auto b:adj[i]){
+                inDeg[b]++;
+            }
+        }
+        queue<int> q;
+        for(int i=0;i<K;i++){
+            if(!inDeg[i]) q.push(i);
+        }
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            ans.push_back(node);
+            for(auto it:adj[node]){
+                inDeg[it]--;
+                if(!inDeg[it]) q.push(it);
+            }
+        }
+        string ts="";
+        for(auto a:ans) ts+=(a+'a');
+        return ts;
+    }

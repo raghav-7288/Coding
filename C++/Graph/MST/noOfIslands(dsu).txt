@@ -1,0 +1,41 @@
+You are given a n,m which means the row and column of the 2D matrix and an array of  size k denoting the number of operations.
+Matrix elements is 0 if there is water or 1 if there is land. 
+Originally, the 2D matrix is all 0 which means there is no land in the matrix. 
+The array has k operator(s) and each operator has two integer A[i][0], A[i][1]
+means that you can change the cell matrix[A[i][0]][A[i][1]] from sea to island. 
+Return how many island are there in the matrix after each operation.You need to return an array of size k.
+Note : An island means group of 1s such that they share a common side.
+
+
+
+    vector<int> numOfIslands(int n, int m, vector<vector<int>> &queries) {
+        vector<vector<int>> grid(n,vector<int>(m,0));
+    	vector<int> ans;
+    	int cur=0;
+    	DSU ds(n*m);
+    	int cx[4]={-1,0,1,0};
+    	int cy[4]={0,1,0,-1};
+    	for(auto q:queries){
+    		int r=q[0];		
+    		int c=q[1];
+    		if(grid[r][c]){
+    			ans.push_back(cur);
+    			continue;
+    		}
+    		grid[r][c]=1;
+    		cur++;
+    		for(int d=0;d<4;d++){
+    			int nr=r+cx[d];
+    			int nc=c+cy[d];
+    			if(nr>=0 && nr<n && nc>=0 && nc<m && grid[nr][nc]){
+    				int index=r*m+c, nindex=nr*m+nc;
+    				if(ds.fp(index)!=ds.fp(nindex)){
+    					ds.ubs(index,nindex);
+    					cur--;
+    				}
+    			}
+    		}
+    		ans.push_back(cur);
+    	}
+    	return ans;
+    }

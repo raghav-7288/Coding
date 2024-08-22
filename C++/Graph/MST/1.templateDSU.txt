@@ -1,0 +1,30 @@
+class DSU
+{
+    private:
+        vector<int> parent,size;
+    public:
+        DSU(int n){
+            parent.resize(n + 1);
+            size.resize(n + 1);
+            for (int i = 0; i <= n; i++){
+                parent[i] = i;
+                size[i] = 1;
+            }
+        }
+        int fp(int node){
+            if (parent[node] == node) return node;
+            return parent[node] = fp(parent[node]);
+        }
+        void ubs(int u, int v){
+            int ulp_u = fp(u), ulp_v = fp(v);
+            if (ulp_u == ulp_v) return;
+            if (size[ulp_u] > size[ulp_v]){
+                parent[ulp_v] = ulp_u;
+                size[ulp_u] += size[ulp_v];
+            }
+            else{
+                parent[ulp_u] = ulp_v;
+                size[ulp_v] += size[ulp_u];
+            }
+        }
+};
