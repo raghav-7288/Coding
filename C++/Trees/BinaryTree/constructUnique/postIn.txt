@@ -1,5 +1,4 @@
-TreeNode *build(vector<int> &post, int postStart, int postEnd,
-                vector<int> &in, int inStart, int inEnd, map<int, int> &inMap)
+TreeNode *build(vector<int> &post, int postStart, int postEnd, vector<int> &in, int inStart, int inEnd, map<int, int> &inMap)
 {
 
     if (postStart > postEnd || inStart > inEnd)
@@ -18,6 +17,7 @@ TreeNode *buildTree(vector<int> &in, vector<int> &post)
     {
         inMap[in[i]] = i;
     }
+
     TreeNode *root = build(post, 0, post.size() - 1, in, 0, in.size() - 1, inMap);
     return root;
 }

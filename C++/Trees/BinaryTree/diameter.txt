@@ -1,6 +1,6 @@
-//brute solution to find sum of height of left tree and height of right
-//tree then find max sum-->O(n^2)
-//OR can be done during finding height-->O(n)
+brute solution to find sum of height of left tree and height of right tree
+then find max sum-->O(n^2)
+OR can be done during finding height-->O(n)
 
 int diameter=-1;
 int height(TreeNode *root){

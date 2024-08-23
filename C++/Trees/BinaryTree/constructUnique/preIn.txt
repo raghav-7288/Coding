@@ -1,5 +1,4 @@
-TreeNode *build(vector<int> &pre, int preStart, int preEnd,
-                vector<int> &in, int inStart, int inEnd, map<int, int> &inMap)
+TreeNode *build(vector<int> &pre, int preStart, int preEnd, vector<int> &in, int inStart, int inEnd, map<int, int> &inMap)
 {
 
     if (preStart > preEnd || inStart > inEnd)
