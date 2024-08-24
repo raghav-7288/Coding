@@ -1,0 +1,13 @@
+    TreeNode* succ(TreeNode* root){
+        if(!root) return root;
+        root=root->right;
+        while(root && root->left) root=root->left;
+        return root;
+    }
+
+    TreeNode* pred(TreeNode* root){
+        if(!root) return root;
+        root=root->left;
+        while(root && root->right) root=root->right;
+        return root;
+    }

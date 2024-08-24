@@ -1,0 +1,32 @@
+    void inorder(TreeNode* root, int& cnt, int& ans, int k){
+        if(!root) return;
+        inorder(root->left,cnt,ans,k);
+        if(++cnt == k){
+            ans=root->val;
+            return;
+        }
+        inorder(root->right,cnt,ans,k);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        int cnt=0,ans;
+        inorder(root,cnt,ans,k);
+        return ans;
+    }
+
+
+*****************************************************************************************************************
+
+    void reverseInorder(TreeNode* root, int& cnt, int& ans, int k){
+        if(!root) return;
+        reverseInorder(root->right,cnt,ans,k);
+        if(++cnt == k){
+            ans=root->val;
+            return;
+        }
+        reverseInorder(root->left,cnt,ans,k);
+    }
+    int kthLargest(TreeNode* root, int k) {
+        int cnt=0,ans;
+        reverseInorder(root,cnt,ans,k);
+        return ans;
+    }

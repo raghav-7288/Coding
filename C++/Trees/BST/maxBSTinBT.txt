@@ -1,0 +1,26 @@
+Given a binary tree. Find the size of its largest subtree which is a Binary Search Tree.
+Note: Here Size equals the number of nodes in the subtree.
+
+
+// {size,{curMax,curMin}}
+pair<int,pair<int,int>> solve(Node* root){
+
+    if(!root) return {0,{INT_MIN,INT_MAX}};
+    if(!root->left && !root->right) return {1,{root->data,root->data}};
+    
+    pair<int,pair<int,int>> left = solve(root->left);
+    pair<int,pair<int,int>> right = solve(root->right);
+    
+    int leftSize = left.first, rightSize = right.first;
+    int leftMax = left.second.first, leftMin = left.second.second;
+    int rightMax = right.second.first, rightMin = right.second.second;
+    
+    if(root->data > leftMax && root->data < rightMin){
+        return {1+leftSize+rightSize,{max(rightMax,root->data),min(leftMin,root->data)}};
+    }
+    return {max(leftSize,rightSize),{INT_MAX,INT_MIN}};
+}
+int largestBst(Node *root)
+{
+    return solve(root).first;
+}

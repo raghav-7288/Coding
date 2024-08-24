@@ -1,0 +1,42 @@
+//Using BSTIterator
+
+
+class BSTiterator{
+    public:
+    stack<TreeNode*> st;
+    bool reverse;
+    BSTiterator(TreeNode* root, bool rev){
+        reverse = rev;
+        pushNodes(root);
+    }
+    int next(){
+        TreeNode* temp = st.top();
+        st.pop();
+        if(reverse) pushNodes(temp->left);
+        else pushNodes(temp->right);
+        return temp->val;
+    }
+    void pushNodes(TreeNode* node){
+        while(node){
+            st.push(node);
+            if(reverse) node=node->right;
+            else node=node->left;
+        }
+    }
+};
+class Solution {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        BSTiterator i1(root,false), i2(root,true);
+        int i=i1.next();
+        int j=i2.next();
+        // cout<<i<<","<<j<<endl;
+        while(i!=j){
+            if(i+j > k) j=i2.next();
+            else if(i+j < k) i=i1.next();
+            else return true;
+        // cout<<i<<","<<j<<endl;
+        }
+        return false;
+    }
+};

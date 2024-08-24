@@ -1,0 +1,36 @@
+
+    TreeNode* succ(TreeNode* root){
+        if(!root) return root;
+        root=root->right;
+        while(root && root->left) root=root->left;
+        return root;
+    }
+
+    TreeNode* pred(TreeNode* root){
+        if(!root) return root;
+        root=root->left;
+        while(root && root->right) root=root->right;
+        return root;
+    }
+    
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root) return root;
+        if(root->val > key) root->left = deleteNode(root->left,key);
+        else if(root->val < key) root->right = deleteNode(root->right,key);
+        else{
+            if(!root->left) return root->right;
+            if(!root->right) return root->left;
+            else{
+
+                // TreeNode* temp = succ(root);
+                // root->val = temp->val;
+                // root->right = deleteNode(root->right,temp->val);
+                
+                TreeNode* temp = pred(root);
+                root->val = temp->val;
+                root->left = deleteNode(root->left,temp->val);
+
+            }
+        }
+        return root;
+    }

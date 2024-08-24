@@ -1,33 +1,50 @@
-//To store every Nodes mapped to its data 
-void findPos(map<int,vector<Node*>>  &mp,Node *root){
-    if(!root) return;
-    if(!root->left && !root->right) return;
-    mp[root->data].push_back(root);
-    findPos(mp,root->left);
-    findPos(mp,root->right);
-}
-// chack if 2 nodes have symm sub tree
-bool isSymm(Node *root1,Node *root2){
-    if(!root1 || !root2) return root1==root2;
-    if(root1->data != root2->data) return false;
-    return isSymm(root1->left,root2->left) && isSymm(root1->right,root2->right);
-}
-int dupSub(Node *root) {
-    map<int,vector<Node*>> mp;
-    findPos(mp,root);
-    int ans=0;
-    for(auto x:mp){
-        if(x.second.size()>1){
-            for(int i=0;i<x.second.size();i++){
-                for(int j=i+1;j<x.second.size();j++){
-                    if(isSymm(x.second[i],x.second[j])){
-                        ans++;
-                        break;
-                    }
-                }   
-            }
-        }     
+Given the root of a binary tree, return all duplicate subtrees.
+For each kind of duplicate subtrees, you only need to return the root node of any one of them.
+Two trees are duplicate if they have the same structure with the same node values.
+    
+    
+    int solve(TreeNode* root, map<string,int>& stringId,map<int,int>& idCnt, vector<TreeNode*>& ans){
+        if(!root) return 0;
+        int left = solve(root->left, stringId, idCnt, ans);
+        int right = solve(root->right, stringId, idCnt, ans);
+        
+        string str=to_string(left) + to_string(root->val) + to_string(right);
+        
+        if(stringId.find(str) == stringId.end()){
+            stringId[str] = stringId.size()+1;
+        }
+
+        int id = stringId[str];
+        if(++idCnt[id] == 2){
+            ans.push_back(root);
+        }
+        return id;
     }
-    if(!ans) return 0;
-    return 1;
-}
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        map<string,int> stringId;
+        map<int,int> idCnt;
+        vector<TreeNode*> ans;
+        solve(root,stringId,idCnt,ans);
+        return ans;
+    }
+
+
+    ******************************************************* OR ********************************************************
+
+    string solve(TreeNode* root, map<string,int>& stringId, vector<TreeNode*>& ans){
+        if(!root) return "#";
+        string str = to_string(root->val) + " ";
+        str += solve(root->left, stringId, ans);
+        str += solve(root->right, stringId, ans);
+        stringId[str]++;
+        if(stringId[str]==2){
+            ans.push_back(root);
+        }
+        return str;
+    }
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        map<string,int> stringId;
+        vector<TreeNode*> ans;
+        solve(root,stringId,ans);
+        return ans;
+    }

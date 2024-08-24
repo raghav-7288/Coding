@@ -1,24 +1,20 @@
 string serialize(TreeNode* root) {
     if(!root) return "";
-    string lvl="";
+    string ans="";
     queue<TreeNode*> q;
     q.push(root);
     while(!q.empty()){
-        int size=q.size();
-        for(int i=0;i<size;i++){
-            TreeNode* node=q.front();
-            q.pop();
-            if(!node){
-                lvl+="null,";
-                continue;
-            }else{
-                lvl+=(to_string(node->val)+',');
-            }
-            q.push(node->left);
-            q.push(node->right);
+        TreeNode* cur=q.front();
+        q.pop();
+        if(!cur){
+            ans+= "null,";
+        }else{
+            ans+= to_string(cur->val)+",";
+            q.push(cur->left);
+            q.push(cur->right);
         }
     }
-    return lvl;
+    return ans;
 }
 TreeNode* deserialize(string data) {
     if(data.size()==0) return NULL;
