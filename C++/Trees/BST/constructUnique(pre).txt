@@ -8,7 +8,7 @@ TreeNode* solve(int is, int ie, vector<int>& in, int ps, int pe, vector<int>& pr
     return root;
 }
 
-TreeNode* bstFromPreorder(vector<int>& preorder) {
+TreeNode* bstFromPreorder(vector<int>& preorder) { //TODO video
     int n=preorder.size();
     vector<int> inorder(preorder);
     sort(inorder.begin(),inorder.end());

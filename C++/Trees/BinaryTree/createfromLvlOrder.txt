@@ -1,8 +1,6 @@
 //1,2,3,null,null,4,5
-
-
-
 //using string stream
+
 TreeNode* construct(string data) {
     if(data.size()==0) return NULL;
     stringstream s(data);

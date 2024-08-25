@@ -3,7 +3,7 @@ Note: Here Size equals the number of nodes in the subtree.
 
 
 // {size,{curMax,curMin}}
-pair<int,pair<int,int>> solve(Node* root){
+pair<int,pair<int,int>> solve(Node* root){//TODO
 
     if(!root) return {0,{INT_MIN,INT_MAX}};
     if(!root->left && !root->right) return {1,{root->data,root->data}};

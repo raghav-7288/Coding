@@ -1,9 +1,10 @@
 Given a set of N items, each with a weight and a value, represented by the array w and val respectively. 
 Also, a knapsack with weight limit W.
 The task is to fill the knapsack in such a way that we can get the maximum profit. Return the maximum profit.
-Note: Each item can be taken any number of times.
+
 
 //Recursion
+Note: Each item can be taken ONCE.
 
     int solve(int i,int W, int val[], int wt[],vector<vector<int>>& dp){
         if(i<0 || W<=0) return 0;
@@ -19,7 +20,8 @@ Note: Each item can be taken any number of times.
         return solve(N-1,W,val,wt,dp);
     }
 
-----------------------------------OR---------------------------------------
+----------------------------------IF INFINITE SUPPLY OF EACH ITEM---------------------------------------
+Note: Each item can be taken any number of times.
 
     int solve(int i,int W, int val[], int wt[],vector<vector<int>>& dp){
         if(!i) return val[i] * (W/wt[i]);

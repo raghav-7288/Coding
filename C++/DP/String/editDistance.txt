@@ -7,7 +7,7 @@ Replace a character
 
     int solve(int i, int j, string s, string t, vector<vector<int>>& dp){
         if(i<0) return j+1; //insert remaining
-        if(j<0) return i+1; //insert remaining
+        if(j<0) return i+1; //delete remaining
         if(dp[i][j]!=-1) return dp[i][j];
         if(s[i]==t[j]) return solve(i-1,j-1,s,t,dp);
         int replace = solve(i-1,j-1,s,t,dp);

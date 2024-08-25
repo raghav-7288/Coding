@@ -37,12 +37,10 @@ Notice that the distance of a path connecting cities i and j is equal to the sum
 
                 int minN=1e9, maxC=-1;
                 for(auto m:mp){
-                    cout<<m.first<<"->"<<m.second<<endl;
                     minN=min(minN,m.second);
                     if(m.second==minN){
                         maxC=max(maxC,m.first);
                     }
                 }
-                cout<<minN;
                 return maxC;
             }   

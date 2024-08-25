@@ -19,7 +19,7 @@ bool solve(Node* root,map<Node*,int> &mp)
 
 OR
 
-bool isSumTree(Node* root)
+bool isSumTree(Node* root)//TODO
 {
     if(!root) return true;
     if(!root->left && !root->right) return true;

@@ -25,7 +25,7 @@ without changing the order of the other characters to make it equal to wordB.
         else return false; 
     }
     int longestStrChain(vector<string>& words) {
-        sort(words.begin(),words.end(),[](string s, string t){return s.length()<=t.length();});
+        sort(words.begin(),words.end(),[](string s, string t){return s.length() < t.length();});
         int n=words.size();
         vector<int> dp(n,1);
         int lis_len=-1;
