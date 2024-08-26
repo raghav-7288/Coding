@@ -1,0 +1,9 @@
+
+
+    // to right rotate
+    // d = n - d;
+    d %= n;
+    // reverse(a,b) range-> [a,b)
+    reverse(a, a + d);
+    reverse(a + d, a + n);
+    reverse(a, a + n);

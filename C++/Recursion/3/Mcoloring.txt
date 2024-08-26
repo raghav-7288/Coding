@@ -1,0 +1,33 @@
+Check if graph is m colorable
+
+
+    bool isSafe(int node, int c, vector<int> adj[], vector<int>& color){
+        for(auto it: adj[node]){
+            if(c==color[it]) return false;
+        }
+        return true;
+    }
+    bool solve(int node, int n, int m, vector<int> adj[], vector<int>& color){
+        if(node==n) return true;
+        for(int c=1;c<=m;c++){
+            if(isSafe(node,c,adj,color)){
+                color[node]=c;
+                if(solve(node+1,n,m,adj,color)) return true;
+                color[node]=0;
+            }
+        }
+        return false;
+    }
+    bool graphColoring(bool graph[101][101], int m, int n) {
+        vector<int> adj[n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(graph[i][j]){
+                    adj[i].push_back(j);
+                    adj[j].push_back(i);
+                }
+            }
+        }
+        vector<int> color(n);
+        return solve(0,n,m,adj,color);
+    }

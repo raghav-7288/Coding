@@ -1,0 +1,39 @@
+// Count All distinct Subsequences of a string
+
+    void solve(string s, string &str, set<string> &SET, int index)
+    {
+        if (index == s.length())
+        {
+            SET.insert(str);
+            cout << "\"" << str << "\"" << endl;
+            return;
+        }
+        str.push_back(s[index]);
+        solve(s, str, SET, index + 1);
+        str.pop_back();
+        solve(s, str, SET, index + 1);
+    }
+    int distinctSubsequences(string s)
+    {
+        set<string> SET;
+        string str = "";
+        solve(s, str, SET, 0);
+        return SET.size();
+    }
+
+---------------------------------------------------------OR--------------------------------------------
+
+    int distinctSubsequences(string s){
+        map<char,int> mp;
+        int n=s.length();
+        vector<int> dp(n+1);
+        dp[0]=1;
+        for(int i=1;i<=n;i++){
+            dp[i]=2*dp[i-1];
+            if(mp[s[i-1]]){
+                dp[i]-=dp[mp[s[i-1]]-1];
+            }
+            mp[s[i-1]]=i;
+        }
+        return dp[n];
+    }

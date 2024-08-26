@@ -1,0 +1,36 @@
+Given an array arr of size n of non-negative integers and an integer sum, 
+the task is to count all subsets of the given array with a sum equal to a given sum.
+Note: Answer can be very large, so, output answer modulo 109+7.
+
+
+    int solve(int i, int n, int arr[], int s){
+        if(i==n){
+            if(!s) return 1;
+            return 0;
+        }
+        int pick=0;
+        if(s >= arr[i]){
+            pick = solve(i+1,n,arr,s-arr[i]);
+        }
+        int not_pick = solve(i+1,n,arr,s);
+        return pick + not_pick;
+    }
+    int perfectSum(int arr[], int n, int s){
+        return solve(0,n,arr,s);
+    }
+
+
+----------- check if subSet sum == k exists ------------------- 
+
+    bool solve(int n, int k, vector<int> &a){
+        if(!n){
+            if(!k) return true;
+            return false;
+        }
+        if(solve(n-1,k-a[n-1],a)) return true;
+        if(solve(n-1,k,a)) return true;
+        return false;
+    }
+    bool isSubsetPresent(int n, int k, vector<int> &a){
+        return solve(n,k,a);
+    }

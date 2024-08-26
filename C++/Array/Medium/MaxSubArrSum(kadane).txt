@@ -1,0 +1,16 @@
+//max sum of a subarray
+int kadane(int n, vector<int> v)
+{
+    int sum = 0;
+    int maxS = INT_MIN;
+    for (int i = 0; i < n; i++)
+    {
+        sum += v[i];
+        maxS = max(sum, maxS);
+        if (sum < 0)
+        {
+            sum = 0;
+        }
+    }
+    return maxS;
+}

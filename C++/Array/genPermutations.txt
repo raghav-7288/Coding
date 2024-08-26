@@ -1,0 +1,35 @@
+void Permute(vector<int> &a, vector<vector<int>> &allPerm, vector<int> &currPerm, vector<int> &picked)
+{
+    if (currPerm.size() == a.size())
+    {
+        allPerm.push_back(currPerm);
+        return;
+    }
+    for (int i = 0; i < a.size(); i++)
+    {
+        if (!picked[i])
+        {
+            picked[i] = 1;
+            currPerm.push_back(a[i]);
+            Permute(a, allPerm, currPerm, picked);
+            currPerm.pop_back();
+            picked[i] = 0;
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+
+void Permute(vector<int> &a, int index, int n, vector<vector<int>> &allPerm)
+{
+  if (index == n - 1)
+  {
+    allPerm.push_back(a);
+    return;
+  }
+  for (int i = index; i < n; i++)
+  {
+    swap(a[index], a[i]);
+    Permute(a, index + 1, n, allPerm);
+    swap(a[index], a[i]);
+  }
+}

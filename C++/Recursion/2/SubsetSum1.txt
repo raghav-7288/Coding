@@ -1,0 +1,16 @@
+Given a list arr of n integers, return sums of all subsets in it. Output sums can be printed in any order.
+
+
+    void solve(int n, vector<int>& nums, vector<int>& ans, int s){
+        if(!n){
+            ans.push_back(s);
+            return;
+        }
+        solve(n-1,nums,ans,s+nums[n-1]);
+        solve(n-1,nums,ans,s);
+    }
+    vector<int> subsetSums(vector<int> arr, int n) {
+        vector<int> ans;
+        solve(n,arr,ans,0);
+        return ans;
+    }

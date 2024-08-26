@@ -1,0 +1,33 @@
+
+    // backward approach
+    void solve(int n, vector<int> &arr, int sum, int index, vector<vector<int>> &res, vector<int> &ans)
+    {
+        if (index == n)
+        {
+            if (sum == 0)
+            {
+                res.push_back(ans);
+            }
+            return;
+        }
+        ans.push_back(arr[index]);
+        solve(n, arr, sum - arr[index], index + 1, res, ans);
+        ans.pop_back();
+        solve(n, arr, sum, index + 1, res, ans);
+    }
+    // forward approach
+    void solve2(int n, vector<int> &arr, int currSum, int index, vector<vector<int>> &res, vector<int> &ans, int target)
+    {
+        if (index == n)
+        {
+            if (currSum == target)
+            {
+                res.push_back(ans);
+            }
+            return;
+        }
+        ans.push_back(arr[index]);
+        solve2(n, arr, currSum + arr[index], index + 1, res, ans, target);
+        ans.pop_back();
+        solve2(n, arr, currSum, index + 1, res, ans, target);
+    }

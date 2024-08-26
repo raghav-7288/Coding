@@ -1,0 +1,12 @@
+A digit string is good if the digits (0-indexed) at even indices are even and the digits at odd indices are prime (2, 3, 5, or 7).
+A digit string is a string consisting of digits 0 through 9 that may contain leading zeros.
+
+    int mod=1e9+7;
+    long long p(long long x, long long n){
+        if(!n) return 1;
+        if(n&1) return x*p(x,n-1) % mod;
+        else return p((x*x) % mod , n/2) % mod;
+    }
+    int countGoodNumbers(long long n) {
+        return (p(5,n/2 + n%2) * p(4,n/2))%mod;
+    }
