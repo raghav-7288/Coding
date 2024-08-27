@@ -1,0 +1,2 @@
+next_permutation(vec.begin(),vec.end());
+    change vec to its next permutation

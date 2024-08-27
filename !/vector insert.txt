@@ -1,0 +1,2 @@
+eg -> ans.insert(ans.end(),n,x);
+insert x at the end of ans n times

@@ -1,0 +1,26 @@
+You are given two integers m and n, which represent the dimensions of a matrix.
+You are also given the head of a linked list of integers.
+Generate an m x n matrix that contains the integers in the linked list presented in spiral order (clockwise), 
+starting from the top-left of the matrix. If there are remaining empty spaces, fill them with -1.
+Return the generated matrix.
+
+
+    vector<vector<int>> spiralMatrix(int n, int m, ListNode* head) {
+       vector<vector<int>> ans(n,vector<int>(m,-1));
+       int t=0,b=n-1,l=0,r=m-1;
+       while(t<=b && l<=r){
+        for(int i=l;i<=r;i++) {ans[t][i]=head->val;head=head->next;if(!head) return ans;}
+        t++;
+        for(int i=t;i<=b;i++) {ans[i][r]=head->val;head=head->next;if(!head) return ans;}
+        r--;
+        if(t<=b){
+            for(int i=r;i>=l;i--) {ans[b][i]=head->val;head=head->next;if(!head) return ans;}
+            b--;
+        }
+        if(l<=r){
+            for(int i=b;i>=t;i--) {ans[i][l]=head->val;head=head->next;if(!head) return ans;}
+            l++;
+        }
+       }
+       return ans;
+    }

@@ -1,0 +1,21 @@
+Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+
+
+    int longestConsecutive(vector<int>& nums) {
+        //1. can sort and find
+        //optimal;
+        unordered_set<int> st;
+        int ans=0;
+        for(auto n:nums) st.insert(n);
+        for(auto s:st){
+            if(st.find(s-1)==st.end()){
+                int cur=s, cnt=1;
+                while(st.find(s+1)!=st.end()){
+                    cnt++;
+                    s++;
+                }
+                ans=max(ans,cnt);
+            }
+        }
+        return ans;
+    }

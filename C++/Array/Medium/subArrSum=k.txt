@@ -1,4 +1,4 @@
-//TODO
+//TODO watch video
 ---------------------------------------------best for arrays with only positives >0 --------------------------------------------
 int longestSubarrayWithSumK(vector<int> a, long long k)
 {
@@ -25,7 +25,7 @@ int longestSubarrayWithSumK(vector<int> a, long long k)
     }
 }
 
------------------------------------------------generate all subarraay with sum=k------------------------------------------------------
+-----------------------------------------------generate all subarraay with sum=k(all types of elements)------------------------------------------------------
 vector<vector<int>> subarraysWithSumK(vector<int> a, long long k)
 {
     vector<vector<int>> all;
@@ -84,6 +84,21 @@ int lenOfLongSubarr(int A[],  int N, int K)
             if(mp.find(s)==mp.end()){
                 mp[s]=1;
             }else mp[s]++;
+        }
+        return ans;
+    }
+
+//similar
+
+    int subarraySum(vector<int>& nums, int k) {
+        map<int,int> mp;
+        int s=0;
+        mp[0]=1;
+        int ans=0;
+        for(int i=0;i<nums.size();i++){
+            s+=nums[i];
+            ans+=mp[s-k];
+            mp[s]++;
         }
         return ans;
     }

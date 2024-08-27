@@ -1,0 +1,30 @@
+
+
+string infixToPostfix(string s) {
+        string pf="";
+        map<char,int> mp;
+        stack<char> st;
+        mp['^']=3;mp['*']=2;mp['/']=2;mp['+']=1;mp['-']=1;
+        for(auto c:s){
+            if(isalnum(c)) pf+=c;
+            else if(c=='^' || c=='*' || c=='/' || c=='+' || c=='-'){
+                while(!st.empty() && mp[st.top()] >= mp[c]){
+                    pf+=st.top();
+                    st.pop();
+                }
+                st.push(c);
+            }else if(c=='(') st.push(c);
+            else{
+                while(!st.empty() && st.top()!='('){
+                    pf+=st.top();
+                    st.pop();
+                }
+                st.pop();
+            }
+        }
+        while(!st.empty()){
+            pf+=st.top();
+            st.pop();
+        }
+        return pf;
+    }

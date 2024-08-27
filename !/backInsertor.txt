@@ -1,0 +1,13 @@
+#include <vector>
+#include <algorithm>  // for std::copy
+#include <iterator>   // for std::back_inserter
+
+int main() {
+    std::vector<int> m = {1, 2, 3, 4, 5};
+    std::vector<int> v;
+
+    std::copy(m.begin(), m.end(), std::back_inserter(v));
+
+    // Now v contains {1, 2, 3, 4, 5}
+    return 0;
+}
