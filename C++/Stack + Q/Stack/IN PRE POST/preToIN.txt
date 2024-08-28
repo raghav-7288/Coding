@@ -1,0 +1,43 @@
+->start from back and do same as post To Infix
+
+
+    string preToInfix(string pre_exp) {
+        stack<string> st;
+        for(int i=pre_exp.length()-1;i>=0;i--){
+            if(isalpha(pre_exp[i])) st.push(string(1,pre_exp[i]));
+            else{
+                string b=st.top();
+                st.pop();
+                string a=st.top();
+                st.pop();
+                st.push('('+a+pre_exp[i]+b+')');
+            }
+        }
+        string inFix=st.top();
+        reverse(inFix.begin(),inFix.end());
+        for(auto& c:inFix){
+            if(c=='(') c=')';
+            else if(c==')') c='('; ------------------------>>>>>>>>>>>>>>>>>> do at last
+        }
+        return inFix;
+    }
+
+
+----------------------------------------------------OR-------------------------------------------------------------
+top->a first
+thn b
+
+    string preToInfix(string pre_exp) {
+        stack<string> st;
+        for(int i=pre_exp.length()-1;i>=0;i--){
+            if(isalpha(pre_exp[i])) st.push(string(1,pre_exp[i]));
+            else{
+                string a=st.top();
+                st.pop();
+                string b=st.top();
+                st.pop();
+                st.push('('+a+pre_exp[i]+b+')');
+            }
+        }
+        return st.top();
+    }

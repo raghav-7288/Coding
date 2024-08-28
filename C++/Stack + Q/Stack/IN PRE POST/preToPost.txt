@@ -1,0 +1,15 @@
+
+    string preToPost(string pre_exp) {
+        stack<string> st;
+        for(int i=pre_exp.length()-1;i>=0;i--){ ---------------------------->> start from last
+            if(isalpha(pre_exp[i])) st.push(string(1,pre_exp[i]));
+            else{
+                string a=st.top(); ----------------------------------------->> to avoid reversing
+                st.pop();
+                string b=st.top();
+                st.pop();
+                st.push(a+b+pre_exp[i]);
+            }
+        }
+        return st.top();
+    }

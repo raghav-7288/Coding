@@ -1,6 +1,7 @@
 
 
 infix --> (1)reverse --> (2)find postfix --> (3)reverse postfix = prefix 
+        (->) and )->( or during the traversal consider them as opposite
 
 string infixToPrefix(string s) {
         reverse(s.begin(),s.end());-------------------------------------------------->1
@@ -16,9 +17,9 @@ string infixToPrefix(string s) {
                     st.pop();
                 }
                 st.push(c);
-            }else if(c=='(') st.push(c);
+            }else if(c==')') st.push(c);
             else{
-                while(!st.empty() && st.top()!='('){
+                while(!st.empty() && st.top()!=')'){
                     pf+=st.top();
                     st.pop();
                 }

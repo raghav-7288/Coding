@@ -1,0 +1,14 @@
+    string postToInfix(string exp) {
+        stack<string> st;
+        for(auto c:exp){
+            if(isalpha(c)) st.push(string(1,c));
+            else{
+                string b=st.top();
+                st.pop();
+                string a=st.top();
+                st.pop();
+                st.push('('+a+c+b+')');
+            }
+        }
+        return st.top();
+    }

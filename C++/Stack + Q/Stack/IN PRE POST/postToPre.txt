@@ -1,0 +1,15 @@
+
+    string postToPre(string post_exp) {
+        stack<string> st;
+        for(auto c:post_exp){
+            if(isalpha(c)) st.push(string(1,c));
+            else{
+                string b=st.top();
+                st.pop();
+                string a=st.top();
+                st.pop();
+                st.push(c+a+b);
+            }
+        }
+        return st.top();
+    }
