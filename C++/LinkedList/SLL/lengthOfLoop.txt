@@ -1,0 +1,20 @@
+
+    int countNodesinLoop(struct Node *head) {
+        if(!head) return 0;
+        Node *f=head,*s=head;
+        bool flag=false;
+        while(f->next && f->next->next){
+            flag=true;
+            f=f->next->next;
+            s=s->next;
+            if(f==s) break;
+        }
+        if(!flag || f!=s) return 0;
+        int ans=1;
+        f=f->next;
+        while(f!=s){
+            ans++;
+            f=f->next;
+        }
+        return ans;
+    }

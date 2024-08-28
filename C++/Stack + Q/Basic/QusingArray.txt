@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
 struct Queue
 {
     int front, rear, capacity;
@@ -62,21 +60,3 @@ struct Queue
         return;
     }
 };
-int main(void)
-{
-    Queue q(4);
-    q.queueDisplay();
-    q.queueEnqueue(20);
-    q.queueEnqueue(30);
-    q.queueEnqueue(40);
-    q.queueEnqueue(50);
-    q.queueDisplay();
-    q.queueEnqueue(60);
-    q.queueDisplay();
-    q.queueDequeue();
-    q.queueDequeue();
-    printf("\n\nafter two node deletion\n\n");
-    q.queueDisplay();
-    q.queueFront();
-    return 0;
-}
