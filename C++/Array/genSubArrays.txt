@@ -11,10 +11,9 @@ void genAllSubArr(int index, int n, vector<int> &a, vector<int> &currSubArr, vec
     genAllSubArr(index + 1, n, a, currSubArr, allSubArr);
 }
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                                                                                                                                                                  void
-                                                                                                                                                                  genSubArrys(int n, vector<int> a)
+void genSubArrys(int n, vector<int> a)
 {
     for (int i = 0; i < n; i++)
     {

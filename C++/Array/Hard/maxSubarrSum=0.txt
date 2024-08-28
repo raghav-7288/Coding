@@ -1,0 +1,16 @@
+Given an array having both positive and negative integers.
+The task is to compute the length of the largest subarray with sum 0.
+
+
+    int maxLen(vector<int>& arr, int n) {
+        map<int,int> mp;
+        int s=0;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            s+=arr[i];
+            if(!s) ans=max(ans,i+1);
+            if(mp.find(s)!=mp.end()) ans=max(ans,i-mp[s]);
+            else mp[s]=i;
+        }
+        return ans;
+    }

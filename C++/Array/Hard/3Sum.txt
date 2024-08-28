@@ -1,0 +1,48 @@
+//Better
+
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n=nums.size();
+        set<vector<int>> st;
+        for(int i=0;i<n;i++){
+            unordered_set<int> s;
+            for(int j=i+1;j<n;j++){
+                if(s.find(-(nums[i]+nums[j])) != s.end()){
+                    vector<int> temp={nums[i],nums[j],-nums[i]-nums[j]};
+                    sort(temp.begin(),temp.end());
+                    st.insert(temp);
+                }
+                s.insert(nums[j]);
+            }
+        }
+        vector<vector<int>> ans(st.begin(),st.end());
+        return ans;
+    }
+
+
+//Optimal
+
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        //-1 -1 0 1
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        for(int i=0;i<n-1;i++){
+            if(i && nums[i]==nums[i-1]) continue;
+            int j=i+1,k=n-1;
+            while(j<k){
+                int sum = nums[i]+nums[j]+nums[k]; 
+                if(!sum){
+                    ans.push_back({nums[i],nums[j],nums[k]});
+                    j++;
+                    while(nums[j]==nums[j-1] && j<k) j++;
+                    k--;
+                    while(nums[k]==nums[k+1] && j<k) k--;
+                }else if(sum<0){
+                    j++;
+                }else{
+                    k--;
+                }
+            }
+        }
+        return ans;
+    }

@@ -1,3 +1,6 @@
+count > floor(n/2)  -->> moors voting algo
+
+
 int findMajority(int arr[], int n)
 {
     int i, candidate = -1, votes = 0;

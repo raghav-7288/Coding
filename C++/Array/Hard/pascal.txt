@@ -1,30 +1,33 @@
-vector<int> genRow(int n)
-{
-    vector<int> res;
-    res.push_back(1);
-    int ans = 1;
-    for (int i = 1; i < n; i++)
-    {
-        res.push_back(ans = (ans * (n - i) / i));
+    vector<int> genRow(int n){
+        vector<int> row={1};
+        int e=1;
+        for(int i=1;i<=n;i++){
+            row.push_back(e=e*(n-i+1)/i);
+        }
+        return row;
     }
-    return res;
-}
-
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-
-                                                                                                                                                                                                            vector<vector<int>>
-                                                                                                                                                                                                                pt;
-vector<int> row;
-pt.push_back({1});
-pt.push_back({1, 1});
-for (int i = 2; i < n; i++)
-{
-    row.push_back(1);
-    for (int j = 1; j < i; j++)
-    {
-        row.push_back(pt[i - 1][j] + pt[i - 1][j - 1]);
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> pt;
+        pt.push_back({1});
+        if(numRows==1) return pt;
+        for(int i=1;i<numRows;i++){
+            pt.push_back(genRow(i));
+        }
+        return pt;
+    }  
+----------------------------------------------------------------OR------------------------------------------------------------------------
+    vector<vector<int>> generate(int n) {
+        vector<vector<int>> pt={{1}};
+        if(n==1) return pt;
+        pt.push_back({1,1});
+        if(n==2) return pt;
+        for(int i=2;i<n;i++){
+            vector<int>temp={1};
+            for(int j=1;j<i;j++){
+                temp.push_back(pt[i-1][j-1]+pt[i-1][j]);
+            }
+            temp.push_back(1);
+            pt.push_back(temp);
+        }
+        return pt;
     }
-    row.push_back(1);
-    pt.push_back(row);
-    row.clear();
-}
