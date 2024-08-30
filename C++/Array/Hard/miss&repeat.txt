@@ -1,0 +1,58 @@
+Given an unsorted array arr of size n of positive integers. 
+One number 'A' from set {1, 2,....,N} is missing and one number 'B' occurs twice in array. Find these two numbers.
+
+1-Brute
+2->Hashing
+3->O(n), O(n)
+    rep, mis
+    
+    S=accumulate(.....);
+    Sn = n(n+1)/2;
+    
+    Sn - S = ....
+    mis - rep = ....        ---------------(1)
+
+    S2n-> n(n+1)(2n+1)/6
+    S2 = sum of squares of all elements
+
+    S2n - Sn = .....
+    rep^2 - mis^2 = ....
+    rep + mis = ....    -------------------(2)
+
+    solve 2 eq.
+
+4-> XOR
+
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        int x=0;
+        for(int i=0;i<n;i++){
+            x^=arr[i];
+            x^=(i+1);
+        }
+        // find rightmost set bit of x
+        int num = x & ~(x-1); // = 1<<b
+        // devide elements of arr and 1-n based on b th bit 0 or 1;
+        vector<int> zero, one;
+        for(int i=0;i<n;i++){
+            if(i+1 & num) one.push_back(i+1);
+            else zero.push_back(i+1);
+            
+            if(arr[i] & num) one.push_back(arr[i]);
+            else zero.push_back(arr[i]);
+        }
+        //xor of two vectors to find mis and rep
+        int x1=0, x2=0;
+        for(int i=0;i<one.size();i++){
+            x1^=one[i];
+        }
+        for(int i=0;i<zero.size();i++){
+            x2^=zero[i];
+        }
+        // x1 x2 are answers find what is what
+        bool f=false;
+        for(auto n:arr){
+            if(n==x1) {f=true;break;}
+        }
+        if(f) return {x1,x2};
+        return {x2,x1};
+    }

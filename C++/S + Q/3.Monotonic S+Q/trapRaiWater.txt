@@ -1,0 +1,70 @@
+    vector<int> prevGreater(vector<int> nums){
+        int n=nums.size();
+        vector<int> pge(n,-1);
+        stack<int> st;
+        for(int i=0;i<n;i++){
+            while(!st.empty() && nums[st.top()] <= nums[i]) st.pop();
+            if(!st.empty()) pge[i]=st.top();
+            if(st.empty() || nums[st.top()] < nums[i]) st.push(i);
+        }
+        return pge;
+    }
+    vector<int> nextGreater(vector<int> nums){
+        int n=nums.size();
+        vector<int> nge(n,-1);
+        stack<int> st;
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && nums[st.top()] <= nums[i]) st.pop();
+            if(!st.empty()) nge[i]=st.top();
+            if(st.empty() || nums[st.top()] < nums[i]) st.push(i);
+        }
+        return nge;
+    }
+    int trap(vector<int>& height) {
+        vector<int> pgi=prevGreater(height);
+        vector<int> ngi=nextGreater(height);
+        int ans=0, n=height.size();
+        for(int i=0;i<n;i++){
+            if(pgi[i]==-1 || ngi[i]==-1) continue;
+            cout<<height[pgi[i]]<<" "<<height[ngi[i]]<<endl;
+            int total_h = min(height[pgi[i]], height[ngi[i]]);
+            ans += (total_h - height[i]);
+        }
+        return ans;
+    }
+
+
+---------------------------------------------------------without stack-------------------------------------------------------------------
+
+    int trap(vector<int>& height) {
+        int n=height.size();
+        vector<int> pme(n), nme(n);
+        pme[0]=height[0];nme[n-1]=height[n-1];
+        for(int i=1;i<n;i++) pme[i]=max(pme[i-1],height[i]);
+        for(int i=n-2;i>=0;i--) nme[i]=max(nme[i+1],height[i]);
+        int ans=0;
+        for(int i=0;i<n;i++) ans += min(pme[i],nme[i]) - height[i];
+        return ans;
+    }
+
+
+---------------------------------------------------------two pointer-------------------------------------------------------------------
+
+    int trap(vector<int>& height) {
+        int n=height.size(),l=0,r=n-1;
+        int leftMax=0,rightMax=0,total=0;
+        while(l<r){
+            if(height[l] <= height[r]){
+                if(leftMax >= height[l]){
+                    total += leftMax-height[l];
+                }else leftMax = height[l];
+                l++;
+            }else{
+                if(rightMax >= height[r]){
+                    total += rightMax-height[r];
+                }else rightMax = height[r];
+                r--;
+            }
+        }
+        return total;
+    }

@@ -1,0 +1,29 @@
+void insertInStack(int val, stack<int> &st)
+{
+    if (st.empty())
+    {
+        st.push(val);
+    }
+    else
+    {
+        if (st.top() < val)
+        {
+            st.push(val);
+        }
+        else
+        {
+            int top = st.top();
+            st.pop();
+            insertInStack(val, st);
+            st.push(top);
+        }
+    }
+}
+void sortStack(stack<int> &st)
+{
+    if (st.empty()) return;
+    int top = st.top();
+    st.pop();
+    sortStack(st);
+    insertInStack(top, st);
+}

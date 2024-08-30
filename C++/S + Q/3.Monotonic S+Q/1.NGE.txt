@@ -1,0 +1,44 @@
+--------------------------------------------------------NGE 1------------------------------------------------------------------------
+Given an array arr[ ] of n elements, the task is to find the next greater element for each element of the array in 
+order of their appearance in the array
+
+
+    vector<long long> nextLargerElement(vector<long long> arr, int n){
+        stack<long long> st;
+        vector<long long> nge(n);
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && st.top() <= arr[i]){
+                st.pop();
+            }
+            if(st.empty()) nge[i]=-1;
+            else nge[i]=st.top();
+            st.push(arr[i]);
+        }
+        return nge;
+    }
+
+
+--------------------------------------------------------NGE 2------------------------------------------------------------------------
+Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]), 
+return the next greater number for every element in nums.
+
+
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> nge(n);
+        stack<int> st;
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && st.top() <= nums[i]) st.pop();
+            st.push(nums[i]);
+        }
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && st.top() <= nums[i]) st.pop();
+            if(st.empty()) nge[i] = -1;
+            else nge[i]=st.top();
+            st.push(nums[i]);
+        }
+        return nge;
+    }
+
+--------------------------------------------------------NGE 3//TODO------------------------------------------------------------------------
+--------------------------------------------------------NGE 4//TODO------------------------------------------------------------------------
