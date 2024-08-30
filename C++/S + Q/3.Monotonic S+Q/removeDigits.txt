@@ -1,0 +1,21 @@
+Given string num representing a non-negative integer num, and an integer k,
+return the smallest possible integer after removing k digits from num.
+
+
+    string removeKdigits(string num, int k) {
+        if(num.length()==k) return "0";
+        string str;
+        for(int i=0;i<num.length();i++){
+            if(!str.length()) str.push_back(num[i]);
+            else{
+                while(str.length() && (str.back()-48) > (num[i]-48) && k > 0){
+                    str.pop_back();
+                    k--;
+                }
+                str.push_back(num[i]);
+            }
+        }
+        str.erase(0, str.find_first_not_of('0'));
+        if(k >= str.length()) return "0";
+        return str.substr(0,str.length()-k);
+    }

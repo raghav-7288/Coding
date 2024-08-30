@@ -1,0 +1,42 @@
+The n-queens puzzle is the problem of placing n queens on a (n×n) chessboard such that no two queens can attack each other.
+Given an integer n, find all distinct solutions to the n-queens puzzle. 
+Each solution contains distinct board configurations of the n-queens placement, 
+where the solutions are a permutation of [1,2,3..n] in increasing order, 
+here the number in the ith place denotes that the ith-column queen is placed in the row with that number. 
+
+
+
+    bool isSafe(int row, int col, vector<vector<int>> &board){
+        int r=row, c=col;
+        //left colums;
+        while(c>=0) if(board[r][c--]) return false;
+        //upperDiag
+        r=row;c=col;
+        while(r>=0 && c>=0) if(board[r--][c--]) return false;
+        //lowerDiag
+        r=row;c=col;
+        while(r<board.size() && c>=0) if(board[r++][c--]) return false;
+        return true;
+    }
+    void solve(int col, int n, vector<int>& temp, vector<vector<int>>& result, vector<vector<int>>& board){
+        if(col == n){
+            result.push_back(temp);
+            return;
+        }
+        for(int i=0;i<n;i++){
+            if(isSafe(i, col, board)){
+                board[i][col]=1;
+                temp.push_back(i+1);
+                solve(col+1,n,temp,result,board);
+                board[i][col]=0;
+                temp.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> nQueen(int n) {
+        vector<vector<int>> board(n,vector<int>(n));
+        vector<vector<int>> result;
+        vector<int> temp;
+        solve(0,n,temp,result,board);
+        return result;
+    }

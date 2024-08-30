@@ -1,7 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
-void solve(int col, int n, vector<string> &board, vector<vector<string>> &ans,
-           vector<int> &leftRow, vector<int> &lowerDiag, vector<int> &upperDiag)
+//TODO
+void solve(int col, int n, vector<string> &board, vector<vector<string>> &ans, vector<int> &leftRow, vector<int> &lowerDiag, vector<int> &upperDiag)
 {
     if (col == n)
     {
@@ -38,28 +36,8 @@ vector<vector<string>> solveNQueens(int n, vector<vector<string>> &ans)
     solve(0, n, board, ans, leftRow, lowerDiag, upperDiag);
     return ans;
 }
-int main()
-{
-#ifndef ONLINE_JUDGE
-    freopen("../../input.txt", "r", stdin);
-    freopen("../../output.txt", "w", stdout);
-#endif
-    int n;
-    cin >> n;
-    // for (int i = 1; i <= n; i++)
-    // {
+vector<vector<int>> nQueen(int n) {
     vector<vector<string>> allPossBoards;
     solveNQueens(n, allPossBoards);
-    //     cout << allPossBoards.size() << endl;
-    // }
-    for (auto boards : allPossBoards)
-    {
-        for (auto x : boards)
-        {
-            cout << x << endl;
-        }
-        cout << endl;
-    }
-
-    return 0;
+    return allPossBoards;
 }

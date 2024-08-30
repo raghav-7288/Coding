@@ -1,0 +1,47 @@
+You are given an integer array nums. The range of a subarray of nums is the difference between the largest and smallest element in the subarray.
+
+Return the sum of all subarray ranges of nums.
+// aproach -> for index i find psi and nsi and for all subarrays btw psi and nsi i will be minimum.
+-> all those subarrays will contribute that element.
+
+-> for index i find pgi and ngi and for all subarrays btw pgi and ngi i will be maximum.
+-> all those subarrays will contribute that element.
+
+// To avoid dublicate subarray in psi or in nsi take prev smaller or equal element  OR next smaller or equal element 
+
+    long long subArrayRanges(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> psi(n,-1), pgi(n,-1), nsi(n,n), ngi(n,n);
+        stack<int> st;
+        for(int i=0;i<n;i++){
+            while(!st.empty() && nums[st.top()] > nums[i]) st.pop();
+            if(!st.empty()) psi[i]=st.top();
+            st.push(i);
+        }
+        while(!st.empty()) st.pop();
+        for(int i=0;i<n;i++){
+            while(!st.empty() && nums[st.top()] < nums[i]) st.pop();
+            if(!st.empty()) pgi[i]=st.top();
+            st.push(i);
+        }
+        while(!st.empty()) st.pop();
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && nums[st.top()] >= nums[i]) st.pop();
+            if(!st.empty()) nsi[i]=st.top();
+            st.push(i);
+        }
+        while(!st.empty()) st.pop();
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && nums[st.top()] <= nums[i]) st.pop();
+            if(!st.empty()) ngi[i]=st.top();
+            st.push(i);
+        }
+        long long ans=0;
+        for(int i=0;i<n;i++){
+            long long l1 = i-psi[i], l2 = i-pgi[i], r1 =  nsi[i]-i, r2 = ngi[i]-i;
+            ans += (nums[i]*l2*r2 - nums[i]*l1*r1);
+                                                    --------------------------------------> nums[i] will be maximum for l2*r2 subarrays
+                                                    --------------------------------------> nums[i] will be minimum for l1*r1 subarrays
+        }
+        return ans;
+    }

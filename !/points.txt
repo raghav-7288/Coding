@@ -1,2 +1,7 @@
 next_permutation(vec.begin(),vec.end());
     change vec to its next permutation
+------------------------------------------------------
+//remove leading zeroes
+int pos = str.find_first_not_of('0');
+str.erase(0, pos);
+

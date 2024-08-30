@@ -1,0 +1,50 @@
+We are given an array asteroids of integers representing asteroids in a row.
+For each asteroid, the absolute value represents its size, and the sign represents its direction 
+(positive meaning right, negative meaning left). Each asteroid moves at the same speed.
+Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. 
+If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
+
+
+//stack -> need to reverse at the end;
+    vector<int> asteroidCollision(vector<int>& ast) {
+        int n=ast.size();
+        stack<int> st;
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            if(ast[i]>0) st.push(ast[i]);
+            else{
+                while(!st.empty() && st.top() < abs(ast[i])) st.pop();
+                if(st.empty()){
+                    ans.push_back(ast[i]);
+                }else if(st.top() == abs(ast[i])){
+                    st.pop();
+                }
+            }
+        }
+        int k=ans.size();
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin()+k,ans.end());
+        return ans;
+    }
+
+
+vector -> no need to reverse
+    vector<int> asteroidCollision(vector<int>& ast) {
+        int n=ast.size();
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            if(ast[i] > 0) ans.push_back(ast[i]);
+            else{
+                if(!ans.size() || ans.back() < 0) ans.push_back(ast[i]);
+                else{
+                    while(ans.size() && ans.back() < abs(ast[i]) && ans.back() > 0) ans.pop_back();
+                    if(!ans.size() || ans.back() < 0) ans.push_back(ast[i]);
+                    else if(ans.back() == abs(ast[i])) ans.pop_back();
+                }
+            }
+        }
+        return ans;
+    }
