@@ -1,0 +1,28 @@
+At a lemonade stand, each lemonade costs $5. 
+Customers are standing in a queue to buy from you and order one at a time (in the order specified by bills). 
+Each customer will only buy one lemonade and pay with either a $5, $10, or $20 bill. 
+You must provide the correct change to each customer so that the net transaction is that the customer pays $5.
+
+
+    bool lemonadeChange(vector<int>& bills) {
+        int n=bills.size();
+        map<int,int> mp;
+        for(int i=0;i<n;i++){
+            if(bills[i]==10){
+                if(mp[5]){
+                    mp[5]--;
+                    mp[10]++;
+                }else return false;
+            }else if(bills[i]==20){
+                if(mp[5] && mp[10]){
+                    mp[5]--;
+                    mp[10]--;
+                    mp[20]++;
+                }else if(mp[5]>2){
+                    mp[5]-=3;
+                    mp[20]++;
+                }else return false;
+            }else mp[5]++;
+        }
+        return true;
+    }

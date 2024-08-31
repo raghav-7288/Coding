@@ -1,5 +1,5 @@
-//Return the number of nodes where 
-//the value of the node is equal to the average of the values in its subtree.
+//Return the number of nodes where the value of the node is equal to the average of the values in its subtree.
+//TODO can be done without map
 
 void solve(TreeNode* root,int &ans,map<TreeNode*,pair<int,int>> &mp){
     if(!root){

@@ -13,6 +13,8 @@ int findCeil(BinaryTreeNode<int> *node, int key){
     }
     return ceil;
 }
+
+
 int findFloor(BinaryTreeNode<int> *node, int key)
 {
 	int floor=-1;
