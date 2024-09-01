@@ -58,3 +58,8 @@ count of set bits till N
 //pos(rightmost pos is 1) of first set bit-->>
     log(n & ~(n-1)) + 1
 
+// XOR of 1 -> n
+    if(n%4==0) return n;
+    if(n%4==1) return 1;
+    if(n%4==2) return n+1;
+    if(n%4==3) return 0;

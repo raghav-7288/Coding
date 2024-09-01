@@ -1,0 +1,18 @@
+    bool check(vector<int>& nums) {
+        int last = 0;
+        int count = 0;
+        for(auto x : nums)
+        {
+            if(x >= last)
+                last = x;
+            else{
+                count++;
+                last = x;
+            }
+        }
+        if(count == 0 || (count == 1 && nums[0] >= nums[nums.size() - 1]))
+            return true;
+        return false;
+    }
+    //TODO
+    

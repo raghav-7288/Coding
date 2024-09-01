@@ -3,6 +3,7 @@
 // Bucket Sort
 // Shell sort
 // Manacher's Algorithm
+// deque
 // havel hakimi
 // https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/#practice
 // https://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property-set-2/#

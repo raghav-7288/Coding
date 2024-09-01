@@ -1,0 +1,36 @@
+//list instead of deque
+    Inserting or deleting elements in a std::deque invalidates all iterators, references, and pointers 
+    to the elements that come after the insertion or deletion point. This makes the use of 
+    std::deque's iterators in the unordered_map problematic because the iterators stored in the map may become 
+    invalid after any modification to the deque.
+
+class LRUCache {
+public:
+    list<pair<int,int>> dq;
+    int cap;
+    unordered_map<int,list<pair<int,int>>::iterator> mp;
+    LRUCache(int capacity) {
+        cap=capacity;
+    }    
+    int get(int key) {
+        if(mp.find(key) == mp.end()) return -1;
+        auto it = mp[key];
+        int val=it->second;
+        dq.erase(it);
+        dq.push_front({key, val});
+        mp[key]=dq.begin();
+        return val;
+    }
+    void put(int key, int value) {
+        if(mp.find(key) == mp.end()){
+            if(dq.size() == cap){
+                mp.erase(dq.back().first);
+                dq.pop_back();
+            }
+        }else{
+            dq.erase(mp[key]);
+        }
+        dq.push_front({key,value});
+        mp[key] = dq.begin();
+    }
+};
