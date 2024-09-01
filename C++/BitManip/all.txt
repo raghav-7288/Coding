@@ -1,0 +1,180 @@
+--------------------------------------------------------__builtin_funtions_----------------------------------------------------------------
+Number of leading zeroes: __builtin_clz(x)
+Number of trailing zeroes : __builtin_ctz(x)
+Number of 1-bits (Hamming Weight) : __builtin_popcount(x)
+Check the parity of a number : __builtin_parity(x) -->> (odd no. of 1's ? 1 : 0)
+Pos of rightmost set bit = __builtin_ffs(16)
+
+---------------------------------------------------------------------------------------------------------------------------------------
+    -n = 2's(n) = 1's(n) + 1 = ~n + 1
+toggle the k-th bit -> n ^ (1 << k)
+set all trailing zeros -> n ^ (n - 1)
+
+unset rightmost set bit rest same -> n & (n - 1)
+set rightmost unset bit -> n | (n + 1)
+
+unset all except rightmost set bit -> n & -n
+pos of rightmost set bit = log2(n & -n) + 1
+
+set the rightmost unset bit else all 0 -> (~n) & (n + 1)
+pos of rightmost unset bit = log2((~n) & (n + 1)) + 1
+
+
+------------------------------------------------check k th bit set/unset-------------------------------------------------------
+    1. (n & (1<<(k-1))) != 0 --> true if bit is set
+    2. (n>>(k-1) & 1) != 0 -> true if bit is set
+
+-----------------------------------------------------count set bits-------------------------------------------------------
+    1.theta(total bits)-> right shifting and checking lsb
+    2.Brian Kernighan's Algorithm
+        (subtract 1 from a no. then all unset bits after the last set bit becomoes set and last set bit gets unset)
+        ->theta(total set bits)
+        int countSetBits(int n){
+            int res=0;
+            while(n){
+                n=n&(n-1);
+                res++;
+            }
+            return res;
+        }
+    3.constant time + preprocessing
+        int table[256];//storing no. of set bits in all 255 nos
+        table[0]=0;
+        for(int i=1;i<256;i++){
+            table[i]=(i&1) + table[i/2];
+        }
+        int res=0;
+        res+=table[n & 0xff];
+        n=n>>8;
+        res+=table[n & 0xff];
+        n=n>>8;
+        res+=table[n & 0xff];
+        n=n>>8;
+        res+=table[n & 0xff];
+        return res;
+
+-------------------------------------------------------pow(2,k)==(1<<k)--------------------------------------------------------
+
+-------------------------------------------------------check if pow of 2----------------------------------------------------------
+    (n & (n-1)) == 0  -> true if pow of 2
+
+-----------------------------------------------------------XOR-------------------------------------------------------------------
+
+    x ^ 0 = x
+    x ^ x = 0
+    0 ^ 1 = 1
+    0 ^ 0 = 1 ^ 1 = 0 
+
+-------------------------------------------------------upr case to lower case-------------------------------------------------------
+    char | ' ' //or with 32(set 5th bit)
+
+----------------------------------------------------------lower to upr---------------------------------------------------------
+    char & '_' //and with ~32(unset 5th bit)
+
+-------------------------------------------------------count of set bits till N-------------------------------------------------------
+
+    int d=2,sum=0;
+    while(N){
+        sum += ((N+1)/d)*(d/2) + max((N%d)-d/2 , 0);
+        d*=2;
+    }
+
+-----------------------------------------------pos of rightmost set bit---------------------------------------------------------
+    log(n & ~(n-1)) + 1
+
+-----------------------------------------------------XOR of 1 to n ---------------------------------------------------------
+    xor_1_to_n(n)
+    {
+        if(n%4==0) return n;
+        if(n%4==1) return 1;
+        if(n%4==2) return n+1;
+        if(n%4==3) return 0;
+    }
+
+----------------------------------------------------xor from L to R-------------------------------------------------------------------
+
+    return xor_1_to_n(r) ^ xor_1_to_n(l-1)
+
+-------------------------------Count of numbers (x) smaller than or equal to n such that n+x = n^x-----------------------------------------------------------
+    count = pow(2, count of zero bits)            
+
+---------------------------------------------------------binary to integer--------------------------------------------------------------------
+int main()
+{
+    int number = 0b011;
+    cout << number;
+    return 0;
+}
+-------------------------------------------------------------------swap two numbers:-----------------------------------------------------------
+a ^= b;
+b ^= a; 
+a ^= b;
+
+--------------------------------------------------------------set all bit----------------------------------------------------------------
+    {
+        n |= n >> 1;
+        n |= n >> 2;
+        n |= n >> 4;
+        n |= n >> 8;
+        n |= n >> 16;
+    }
+
+----------------------------------------------check if only first and last bits are set--------------------------------------------------
+    all powers of 2 + 1
+
+-------------------------------------------------------Extract k bits from position p--------------------------------------------------
+
+    (n >> p) & ((1 << k) - 1)
+
+------------------------------------------------------Rotate left by k positions------------------------------------------------------
+    (n << k) | (n >> (32 - k))
+
+------------------------------------------------------Rotate right by k positions:------------------------------------------------------
+    (n >> k) | (n << (32 - k))
+
+------------------------------------------------------Clearing All Bits from LSB to i-th Bit------------------------------------------------------
+    n & ~((1 << (i + 1)) - 1)
+
+------------------------------------------------------Clearing All Bits from MSB to i-th Bit------------------------------------------------------
+    n & ((1 << (i + 1)) - 1)
+
+-----------------------------------------------division-------------------------------------------------------------------------------
+    while (n >= d)  // O(log n)
+    {
+        int cnt = 0;
+        while (n >= (d << (cnt + 1)))  // O(log n)
+        {
+            cnt++;
+        }
+        ans += (1 << cnt);  // Add the power of two to the result
+        n -= (d << cnt);    // Subtract the corresponding multiple of d from n
+    }
+
+    Explanation:
+        Outer while(n >= d) Loop: This loop continues as long as the dividend n is greater than or equal to the divisor d. 
+        This loop runs in O(log n) time because with each iteration, n is reduced significantly.
+        
+        Inner while(n >= (d << (cnt + 1))) Loop: This loop finds the maximum value of cnt such that 
+        d * 2^cnt is less than or equal to n. 
+        The bitwise shift d << (cnt + 1) is equivalent to multiplying d by 2^(cnt + 1). 
+        This loop also runs in O(log n) time.
+        
+        ans += (1 << cnt) Statement: Adds 2^cnt to the quotient ans, which accumulates the result of the division.
+        
+        n -= (d << cnt) Statement: Subtracts the corresponding value d * 2^cnt from n, 
+        reducing the dividend by the largest possible chunk.
+
+---------------------------------------------generate all subsets------------------------------------------------------------
+    for (int i = 0; i < (1 << n); i++)
+    {
+        for (int b = 0; b < n; b++)
+        {
+            if (i & 1 << b)
+            {
+                subSet.push_back(a[b]);
+            }
+        }
+        allSubSets.push_back(subSet);
+        subSet.clear();
+    }
+
