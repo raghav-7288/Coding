@@ -37,9 +37,6 @@ bool isCyclic(int V, vector<int> adj[])
   return false;
 }
 --------------------------------------BFS----------------------------------------
-//MultipleMethods
-
--->using vis check if que empty but not vis all
 -->if num of vertices in topo sort != n then cycle exist
 
 int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
