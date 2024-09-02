@@ -6,7 +6,6 @@ wordA is a predecessor of wordB if and only if we can insert exactly one letter 
 without changing the order of the other characters to make it equal to wordB.
 
 
-->was giving runtime
 
     bool compare(string& s1, string& s2){
         if(s1.size() != s2.size() + 1) return false;

@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
 class Heap
 {
 private:
@@ -38,7 +36,7 @@ public:
     {
         return 2 * i + 2;
     }
-    int getMin()
+    int getMax()
     {
         return arr[0];
     }
@@ -54,7 +52,7 @@ public:
         arr[index] = val;
         while (index > 0)
         {
-            if (arr[index] < arr[parent(index)])
+            if (arr[index] > arr[parent(index)])
             {
                 swap(arr[index], arr[parent(index)]);
             }
@@ -74,25 +72,25 @@ public:
             }
             if (lChild(index) < size && rChild(index) >= size)
             {
-                if (arr[index] > arr[lChild(index)])
+                if (arr[index] < arr[lChild(index)])
                 {
                     swap(arr[index], arr[lChild(index)]);
                 }
                 break;
             }
-            if (arr[index] > min(arr[lChild(index)], arr[rChild(index)]))
+            if (arr[index] < max(arr[lChild(index)], arr[rChild(index)]))
             {
-                int smaller;
-                if (arr[lChild(index)] < arr[rChild(index)])
+                int larger;
+                if (arr[lChild(index)] > arr[rChild(index)])
                 {
-                    smaller = lChild(index);
+                    larger = lChild(index);
                 }
                 else
                 {
-                    smaller = rChild(index);
+                    larger = rChild(index);
                 }
-                swap(arr[index], arr[smaller]);
-                index = smaller;
+                swap(arr[index], arr[larger]);
+                index = larger;
             }
             else
             {
@@ -113,25 +111,25 @@ public:
             }
             if (lChild(index) < size && rChild(index) >= size)
             {
-                if (arr[index] > arr[lChild(index)])
+                if (arr[index] < arr[lChild(index)])
                 {
                     swap(arr[index], arr[lChild(index)]);
                 }
                 break;
             }
-            if (arr[index] > min(arr[lChild(index)], arr[rChild(index)]))
+            if (arr[index] < max(arr[lChild(index)], arr[rChild(index)]))
             {
-                int smaller;
-                if (arr[lChild(index)] < arr[rChild(index)])
+                int larger;
+                if (arr[lChild(index)] > arr[rChild(index)])
                 {
-                    smaller = lChild(index);
+                    larger = lChild(index);
                 }
                 else
                 {
-                    smaller = rChild(index);
+                    larger = rChild(index);
                 }
-                swap(arr[index], arr[smaller]);
-                index = smaller;
+                swap(arr[index], arr[larger]);
+                index = larger;
             }
             else
             {
@@ -151,25 +149,25 @@ public:
             }
             if (lChild(index) < size && rChild(index) >= size)
             {
-                if (arr[index] > arr[lChild(index)])
+                if (arr[index] < arr[lChild(index)])
                 {
                     swap(arr[index], arr[lChild(index)]);
                 }
                 break;
             }
-            if (arr[index] > min(arr[lChild(index)], arr[rChild(index)]))
+            if (arr[index] < max(arr[lChild(index)], arr[rChild(index)]))
             {
-                int smaller;
-                if (arr[lChild(index)] < arr[rChild(index)])
+                int larger;
+                if (arr[lChild(index)] > arr[rChild(index)])
                 {
-                    smaller = lChild(index);
+                    larger = lChild(index);
                 }
                 else
                 {
-                    smaller = rChild(index);
+                    larger = rChild(index);
                 }
-                swap(arr[index], arr[smaller]);
-                index = smaller;
+                swap(arr[index], arr[larger]);
+                index = larger;
             }
             else
             {
@@ -177,7 +175,7 @@ public:
             }
         }
     }
-    int extractMin()
+    int extractMax()
     {
         int val = arr[0];
         size--;
@@ -187,45 +185,19 @@ public:
     }
     void heapify(int pos)
     {
-        int smaller = pos;
-        if (lChild(pos) < size && arr[pos] > arr[lChild(pos)])
+        int larger = pos;
+        if (lChild(pos) < size && arr[pos] < arr[lChild(pos)])
         {
-            smaller = lChild(pos);
+            larger = lChild(pos);
         }
-        if (rChild(pos) < size && arr[smaller] > arr[rChild(pos)])
+        if (rChild(pos) < size && arr[larger] < arr[rChild(pos)])
         {
-            smaller = rChild(pos);
+            larger = rChild(pos);
         }
-        if (smaller != pos)
+        if (larger != pos)
         {
-            swap(arr[pos], arr[smaller]);
-            heapify(smaller);
+            swap(arr[pos], arr[larger]);
+            heapify(larger);
         }
     }
 };
-int main()
-{
-#ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
-#endif
-
-    Heap h(10);
-    h.insert(5);
-    h.insert(2);
-    h.insert(4);
-    h.insert(3);
-    h.insert(1);
-    h.insert(6);
-    h.insert(7);
-    // h._delete();
-    cout << "min is -> " << h.extractMin() << endl;
-    // h._delete(2);
-    // h.changeKey(0, 8);
-    h.print();
-
-    // cout << endl;
-    // cout << h.getSize();
-
-    return 0;
-}

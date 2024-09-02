@@ -1,0 +1,11 @@
+    bool isMaxHeap(int arr[], int n)
+    {
+        int i=0;
+        while(i<n/2){
+            int lc=2*i+1, rc=2*i+2;
+            if(lc < n && arr[lc] > arr[i]) return false;
+            if(rc < n && arr[rc] > arr[i]) return false;
+            i++;
+        }
+        return true;
+    }

@@ -38,7 +38,7 @@ Note: Each item can be taken any number of times.
     }
 
 
-// Tabulation
+// Tabulation for INFINITE SUPPLY
 
     int knapSack(int N, int W, int val[], int wt[]){
         vector<vector<int>> dp(N,vector<int>(W+1,0));

@@ -10,7 +10,7 @@ Note :
 ‘^’ will represent the operator XOR.
 
 
-long long solve(int i, int j, int isTrue, string& exp, vector<vector<vector<long long>>>& dp){
+long long solve(int i, int j, int isTrue, string& exp, vector<vector<vector<long long>>>& dp){//TODO
     if(i>j) return 0;
     if(i==j){
         if(isTrue) return exp[i]=='T';

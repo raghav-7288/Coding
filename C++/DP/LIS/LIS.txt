@@ -50,7 +50,7 @@ subsequence.
         return next[0];
     }
 
-//Alternate way **************************************
+//Alternate way **************************************//TODO video
 
     int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();

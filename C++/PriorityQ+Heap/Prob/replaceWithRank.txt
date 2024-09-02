@@ -1,0 +1,13 @@
+    vector<int> replaceWithRank(vector<int> &arr, int N){
+        priority_queue<int,vector<int>,greater<int>> pq;
+        int r=0,p=-1;
+        for(auto a:arr) pq.push(a);
+        map<int,int> mp;
+        while(!pq.empty()){
+            if(p!=pq.top()) r++;
+            mp[p=pq.top()] = r;
+            pq.pop();
+        }
+        for(auto& a:arr) a=mp[a];
+        return arr;
+    }

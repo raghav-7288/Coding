@@ -1,0 +1,27 @@
+You are given an array of CPU tasks, each represented by letters A to Z, and a cooling time, n. 
+Each cycle or interval allows the completion of one task. Tasks can be completed in any order, 
+but there's a constraint: identical tasks must be separated by at least n intervals due to cooling time.
+​Return the minimum number of intervals required to complete all tasks.
+
+
+    int leastInterval(vector<char>& tasks, int n) {
+        priority_queue<int> pq;
+        queue<pair<int,int>> q;
+        map<char,int> mp;
+        for(auto t:tasks) mp[t]++;
+        for(auto m:mp) pq.push(m.second);
+        int t=0;
+        while(!pq.empty() || !q.empty()){
+            t++;
+            if(!pq.empty()){
+                int f = pq.top();
+                pq.pop();
+                if(f-1) q.push({f-1,t+n});
+            }
+            if(!q.empty() && q.front().second == t){
+                pq.push(q.front().first);
+                q.pop();
+            }
+        }
+        return t;
+    }
