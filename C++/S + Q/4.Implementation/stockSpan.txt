@@ -20,14 +20,13 @@ int next(int price) Returns the span of the stock's price given that today's pri
     public:
         stack<int> st;
         vector<int> vec;
-        StockSpanner() {
-        }
+        StockSpanner() {}
+
         int next(int price) {
             vec.push_back(price);
             while(!st.empty() && vec[st.top()] <= vec.back()) st.pop();
             int ans=vec.size();
-            if(st.empty()) ans = vec.size();
-            else ans = vec.size()-st.top()-1;
+            if(!st.empty()) ans -= st.top()-1;
             st.push(vec.size()-1);
             return ans;
         }

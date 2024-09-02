@@ -1,7 +1,7 @@
 //list instead of deque
-    Inserting or deleting elements in a std::deque invalidates all iterators, references, and pointers 
+    Inserting or deleting elements in a deque invalidates all iterators, references, and pointers 
     to the elements that come after the insertion or deletion point. This makes the use of 
-    std::deque's iterators in the unordered_map problematic because the iterators stored in the map may become 
+    deque's iterators in the unordered_map problematic because the iterators stored in the map may become 
     invalid after any modification to the deque.
 
 class LRUCache {

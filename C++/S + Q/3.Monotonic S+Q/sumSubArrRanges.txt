@@ -1,11 +1,12 @@
-You are given an integer array nums. The range of a subarray of nums is the difference between the largest and smallest element in the subarray.
+You are given an integer array nums. The range of a subarray of nums is the difference between the 
+largest and smallest element in the subarray.
 
 Return the sum of all subarray ranges of nums.
 // aproach -> for index i find psi and nsi and for all subarrays btw psi and nsi i will be minimum.
--> all those subarrays will contribute that element.
+-> all those subarrays will contribute that element (-).
 
 -> for index i find pgi and ngi and for all subarrays btw pgi and ngi i will be maximum.
--> all those subarrays will contribute that element.
+-> all those subarrays will contribute that element (+).
 
 // To avoid dublicate subarray in psi or in nsi take prev smaller or equal element  OR next smaller or equal element 
 

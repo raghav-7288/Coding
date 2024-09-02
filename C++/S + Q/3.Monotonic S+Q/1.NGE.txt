@@ -5,13 +5,12 @@ order of their appearance in the array
 
     vector<long long> nextLargerElement(vector<long long> arr, int n){
         stack<long long> st;
-        vector<long long> nge(n);
+        vector<long long> nge(n, -1);
         for(int i=n-1;i>=0;i--){
             while(!st.empty() && st.top() <= arr[i]){
                 st.pop();
             }
-            if(st.empty()) nge[i]=-1;
-            else nge[i]=st.top();
+            if(!st.empty()) nge[i]=st.top();
             st.push(arr[i]);
         }
         return nge;
@@ -25,7 +24,7 @@ return the next greater number for every element in nums.
 
     vector<int> nextGreaterElements(vector<int>& nums) {
         int n=nums.size();
-        vector<int> nge(n);
+        vector<int> nge(n, -1);
         stack<int> st;
         for(int i=n-1;i>=0;i--){
             while(!st.empty() && st.top() <= nums[i]) st.pop();
@@ -33,8 +32,7 @@ return the next greater number for every element in nums.
         }
         for(int i=n-1;i>=0;i--){
             while(!st.empty() && st.top() <= nums[i]) st.pop();
-            if(st.empty()) nge[i] = -1;
-            else nge[i]=st.top();
+            if(!st.empty()) nge[i]=st.top();
             st.push(nums[i]);
         }
         return nge;

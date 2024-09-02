@@ -1,0 +1,29 @@
+
+
+    int findInsertPosition(vector<int>& nums, int target) {
+        int l=0,r=nums.size()-1;
+        
+        // int f=-1;
+        // while(l<=r){
+        //     int m=r+(l-r)/2;
+        //     if(nums[m]==target) return m;
+        //     else if(nums[m] > target) r=m-1;
+        //     else{
+        //         l=m+1;
+        //         f=m;
+        //     }
+        // }
+        // return f+1;
+
+        int c=nums.size();
+        while(l<=r){
+            int m=r+(l-r)/2;
+            if(nums[m]==target) return m;
+            else if(nums[m] < target) l=m+1;
+            else{
+                r=m-1;
+                c=m;
+            }
+        }
+        return c;
+    }

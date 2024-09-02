@@ -26,7 +26,6 @@
         int ans=0, n=height.size();
         for(int i=0;i<n;i++){
             if(pgi[i]==-1 || ngi[i]==-1) continue;
-            cout<<height[pgi[i]]<<" "<<height[ngi[i]]<<endl;
             int total_h = min(height[pgi[i]], height[ngi[i]]);
             ans += (total_h - height[i]);
         }

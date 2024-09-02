@@ -20,7 +20,7 @@
 
 -----------------------------------------------------single pass-------------------------------------------------------------------------
 
-    int largestRectangleArea(vector<int>& h) {
+      int largestRectangleArea(vector<int>& h) {
         int n=h.size();
         stack<int> st;
         int ans=0;
@@ -28,18 +28,18 @@
             while(!st.empty() && (i==n || h[st.top()] >= h[i])){
                 int cur = st.top();
                 st.pop();
-                int nse = i;
-                int pse = st.empty() ? -1 : st.top();
-                ans = max(ans, h[cur] * (nse - pse - 1));
+                int nsi = i;
+                int psi = st.empty() ? -1 : st.top();
+                ans = max(ans, h[cur] * (nsi - psi - 1));
             }
             st.push(i);
         }
         while(!st.empty()){
             int cur = st.top();
             st.pop();
-            int nse = n;
-            int pse = st.empty() ? -1 : st.top();
-            ans = max(ans, h[cur] * (nse - pse - 1));
+            int nsi = n;
+            int psi = st.empty() ? -1 : st.top();
+            ans = max(ans, h[cur] * (nsi - psi - 1));
         }
         return ans;
     }
