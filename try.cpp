@@ -7,17 +7,13 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    priority_queue<pair<pair<int, int>, int>> pq;
-    pq.push({{1, 5}, 2});
-    pq.push({{3, 4}, 1});
-    pq.push({{2, 3}, 5});
-    pq.push({{4, 2}, 3});
-    pq.push({{5, 1}, 4});
-    while (!pq.empty())
-    {
-        cout << pq.top().first.first << " " << pq.top().first.second << " " << pq.top().second << endl;
-        pq.pop();
-    }
-
+    unordered_set<int> st;
+    st.insert(1);
+    st.insert(4);
+    st.insert(2);
+    st.insert(5);
+    st.insert(3);
+    for (auto it : st)
+        cout << it;
     return 0;
 }
