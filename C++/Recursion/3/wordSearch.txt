@@ -4,8 +4,10 @@ horizontally or vertically neighboring. The same letter cell may not be used mor
 
 
     bool solve(int r, int c, int p ,int n, int m ,int l, vector<vector<char>>& board, string word){
+        
         if(p==l) return true;
         if(!(r>=0 && r<n && c>=0 && c<m)) return false;
+        
         int cx[4]={-1,0,1,0};
         int cy[4]={0,1,0,-1};
         bool ans = false;

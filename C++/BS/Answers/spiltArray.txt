@@ -1,0 +1,18 @@
+Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any subarray is minimized.
+Return the minimized largest sum of the split.
+
+
+
+    int splitArray(vector<int>& arr, int k) {
+        int l=*max_element(arr.begin(),arr.end()), h=accumulate(arr.begin(),arr.end(),0);
+        while(l<=h){
+            int m=(h+l)/2,s=0,ca=1;
+            for(auto a:arr){
+                if(s+a <= m) s+=a;
+                else {ca++;s=a;};
+            }
+            if(ca <= k) h=m-1;
+            else l=m+1;
+        }
+        return l;
+    }
