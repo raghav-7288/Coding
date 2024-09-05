@@ -1,0 +1,15 @@
+Given a string s, sort it in decreasing order based on the frequency of the characters. 
+The frequency of a character is the number of times it appears in the string.
+Return the sorted string. If there are multiple answers, return any of them.
+
+
+    string frequencySort(string s) {
+        map<char,int> mp;
+        for(auto c:s) mp[c]++;
+        multimap<int,char> mmp;
+        for(auto m:mp) mmp.insert({m.second,m.first});
+        string ans="";
+        for(auto m:mmp) ans.insert(ans.end(),m.first,m.second);
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }

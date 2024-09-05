@@ -1,0 +1,20 @@
+All substring with no. of distincts <= k
+
+    int atmostKdistinct(string s, int k){
+        int ans=0, j=0, curDis=0, freq[26]={0};
+        for(int i=0;i<s.length();i++){
+            if(!freq[s[i]-97]) curDis++;
+            freq[s[i]-97]++;
+            while(j<=i && curDis > k){
+                freq[s[j]-97]--;
+                if(!freq[s[j]-97]) curDis--;
+                j++;
+            }
+            if(j<=i) ans+=(i-j+1);
+        }
+        return ans;
+    }
+
+****************************************************************************************************************************************
+
+Exactly k distincts == Atmost k distincts - Atmost k-1 distincts 

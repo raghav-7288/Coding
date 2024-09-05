@@ -1,0 +1,22 @@
+find max length palindromic substring
+
+aproach-> from every index expand left and right boundaries if s[l]==s[r]
+check for both odd length and even length palindrome
+Expand Around Center
+
+    string solve(string s, int i, int j){
+        while(i>=0 && j<s.length() && s[i] == s[j]){
+            i--;j++;
+        }
+        return s.substr(i+1,j-i-1);
+    }
+    string longestPalindrome(string str) {
+        string ans="";
+        for(int i=0;i<str.length();i++){
+            string s = solve(str,i,i);
+            string t = solve(str,i,i+1);
+            if(ans.length() < s.length()) ans=s;
+            if(ans.length() < t.length()) ans=t;
+        }
+        return ans;
+    }

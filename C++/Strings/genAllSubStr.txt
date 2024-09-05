@@ -1,0 +1,14 @@
+
+    vector<string> generateSubstrings(string s, vector<string> &subStrs)
+    {
+        if (s.empty())
+        {
+            return {};
+        }
+        for (int i = 0; i < s.length(); i++)
+        {
+            subStrs.push_back(s.substr(0, i + 1));
+        }
+        generateSubstrings(s.substr(1), subStrs);
+        return subStrs;
+    }

@@ -7,7 +7,7 @@ We have to find the smallest possible value of d. Find the answer exactly to 2 d
     double findSmallestMaxDist(vector<int> &stations, int k) {
         double n=stations.size(),l=0,h=-1;
         for(int i=1;i<n;i++) h=max(h,(double)(stations[i]-stations[i-1]));
-        while(l+1e-9<=h){
+        while(l+1e-6<=h){
             double m=(l+h)/2.0,cs=0;
             for(int i=1;i<n;i++){
                 int cnt = (stations[i]-stations[i-1])/m;

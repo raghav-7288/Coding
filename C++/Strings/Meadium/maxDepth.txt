@@ -1,0 +1,11 @@
+Given a valid parentheses string s, return the nesting depth of s. The nesting depth is the maximum number of nested parentheses.
+
+    int maxDepth(string s) {
+        int ans=0,cnt=0;
+        for(auto c:s){
+            if(c=='(') cnt++;
+            else if(c==')') cnt--;
+            ans=max(ans,cnt);
+        }
+        return ans;
+    }

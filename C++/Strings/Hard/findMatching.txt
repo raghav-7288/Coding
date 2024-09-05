@@ -1,0 +1,25 @@
+Given two strings text and pattern, find the first index where pattern exactly matches with any substring of text. 
+Return -1 if pattern doesn't exist as a substring in text.
+
+
+
+    int findMatching(string str, string pat) {
+        int n=str.length(), p=pat.length(), ans=-1, i=0, j=0;
+        bool flag=true;
+        while(i<n){
+            if(str[i] == pat[j]){
+                if(ans==-1) ans=i;
+                j++;
+                i++;
+                flag=false;
+                if(j==p) return ans;
+            }else{
+                if(!flag) i=ans+1;
+                if(flag) i++;
+                flag=true;
+                j=0;
+                ans=-1;
+            }
+        }
+        return -1;
+    }

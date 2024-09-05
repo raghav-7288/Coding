@@ -1,0 +1,15 @@
+  void per(string mess, int start, int end)
+  {
+    if (start == end-1)
+    {
+      // st.insert(mess);
+      cout << mess << endl;
+      return;
+    }
+    for (int i = start; i < end; i++)
+    {
+      swap(mess[start], mess[i]);
+      per(mess, start + 1, end);
+      swap(mess[start], mess[i]);
+    }
+  }

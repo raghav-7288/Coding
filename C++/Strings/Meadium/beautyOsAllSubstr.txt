@@ -1,0 +1,22 @@
+The beauty of a string is the difference in frequencies between the most frequent and least frequent characters.
+For example, the beauty of "abaacc" is 3 - 1 = 2.
+
+
+    int beautySum(string s) {
+        int n=s.length(), ans=0;
+        for(int i=0;i<n;i++){
+            int freq[26]={0};
+            for(int j=i;j<n;j++){
+                freq[s[j]-97]++;
+                int mini=501,maxi=-1;
+                for(int k=0;k<26;k++){
+                    if(freq[k]){
+                        mini=min(mini,freq[k]);
+                        maxi=max(maxi,freq[k]);
+                    }
+                }
+                ans+=maxi-mini;
+            }
+        }
+        return ans;
+    }   
