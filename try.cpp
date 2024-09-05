@@ -1,19 +1,21 @@
+
 #include <bits/stdc++.h>
 using namespace std;
-
 int main()
 {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    unordered_set<int> st;
-    st.insert(1);
-    st.insert(4);
-    st.insert(2);
-    st.insert(5);
-    st.insert(3);
-    for (auto it : st)
-        cout << it;
+
+    std::vector<int> m = {1, 2, 3, 4, 5};
+    std::vector<int> v;
+
+    std::copy(m.begin(), m.end(), std::back_inserter(v));
+    for (auto a : v)
+        cout << a << " ";
+
+    // Now v contains {1, 2, 3, 4, 5}
+
     return 0;
 }
