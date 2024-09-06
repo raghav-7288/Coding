@@ -1,0 +1,26 @@
+
+
+    vector<int> findPeakGrid(vector<vector<int>>& mat) {
+        int rows=mat.size();
+        int cols=mat[0].size();
+        int l=0,h=cols-1;
+        while(l<=h){
+            int m=(l+h)/2;
+            int maxe=-1,maxi;
+            for(int i=0;i<rows;i++){
+                if(mat[i][m] > maxe){
+                    maxe=mat[i][m];
+                    maxi=i;
+                }
+            }
+            bool isPeek = true;
+            if(m-1 >= 0){
+                if(mat[maxi][m-1] > maxe) {h=m-1;isPeek=false;}
+            }
+            if(m+1 < cols){
+                if(mat[maxi][m+1] > maxe) {l=m+1;isPeek=false;}
+            }
+            if(isPeek) return {maxi,m};
+        }
+        return {};
+    }

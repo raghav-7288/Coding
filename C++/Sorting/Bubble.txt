@@ -1,21 +1,15 @@
-    void bubbleSort(int a[], int n)
-    {
-        for (int i = 0; i < n - 1; i++)
-        {
-            int swapped = 0;
-            for (int j = 0; j < n - i - 1; j++)
-            {
-                if (a[j] > a[j + 1])
-                {
-                    swapped = 1;
-                    swap(a[j + 1], a[j]);
-                }
+    
+    void bubbleSort(int a[], int n) {
+        for(int i=0;i<n;i++){
+            bool swapped=false;
+            for(int j=0;j<n-i-1;j++){
+                if(a[j]>a[j+1]) {swap(a[j],a[j+1]);swapped=true;}
             }
-            if (!swapped)
-                break;
+            if(!swapped) return;
         }
     }
 -------------------------------------------------------------------------------------------------------------------------------------
+    
     void bubbleSortrecursive(int arr[], int n)
     {
         if (n == 1)

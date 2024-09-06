@@ -1,21 +1,26 @@
-void selectionSort(vector<int>&arr) {
-    int n=arr.size();
-    for(int i=0;i<n-1;i++){
-        int min_index=i;
-        for(int j=i+1;j<n;j++){
-            if(arr[j]<arr[min_index])
-            min_index=j;
-        }
-        if(min_index!=i);
-        swap(arr[i],arr[min_index]);
+
+
+    void selectionSort(int a[], int n)
+    {
+       for(int i=0;i<n;i++){
+           int mini=i;
+           for(int j=i+1;j<n;j++){
+               if(a[j]<a[mini]){
+                   mini=j;
+               }
+           }
+           swap(a[i],a[mini]);
+       }
     }
-}
-void recurSelectionSort(int a[], int n, int index = 0)
-{
-    if (index == n)
-       return;
-    int k = minIndex(a, index, n-1);
-    if (k != index)
-       swap(a[k], a[index]);
-    recurSelectionSort(a, n, index + 1);
-}
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+    void recurSelectionSort(int a[], int n, int index = 0)
+    {
+        if (index == n)
+        return;
+        int k = minIndex(a, index, n-1);
+        if (k != index)
+        swap(a[k], a[index]);
+        recurSelectionSort(a, n, index + 1);
+    }
