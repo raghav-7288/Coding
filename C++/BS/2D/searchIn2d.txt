@@ -1,0 +1,17 @@
+    bool bs(vector<int>& a, int t){
+        int l=0,h=a.size()-1;
+        while(l<=h){
+            int m=(l+h)/2;
+            if(a[m]==t) return true;
+            if(a[m]>t) h=m-1;
+            else l=m+1;
+        }
+        return false;
+    }
+    bool searchMatrix(vector<vector<int>>& matrix, int t) {
+        int n=matrix.size(), m=matrix[0].size();
+        for(int i=0;i<n;i++){
+            if(t>=matrix[i][0] && t<=matrix[i][m-1]) return bs(matrix[i],t);
+        }
+        return false;
+    }

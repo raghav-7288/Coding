@@ -1,0 +1,29 @@
+You are given an array of integers nums and the head of a linked list. 
+Return the head of the modified linked list after removing all nodes from the linked list that have a 
+value that exists in nums.
+
+
+
+    ListNode* modifiedList(vector<int>& nums, ListNode* head) {
+        if(!head) return NULL;
+        map<int,int> mp;
+        for(auto n:nums) mp[n]++;
+        ListNode* temp1=NULL, *temp2=head;
+        while(temp2){
+            if(mp[temp2->val]){
+                if(!temp1){
+                    temp2=temp2->next;
+                    delete(head);
+                    head=temp2;
+                }else{
+                    temp1->next=temp2->next;
+                    delete(temp2);
+                    temp2=temp1->next;
+                }
+            }else{
+                temp1=temp2;
+                temp2=temp2->next;
+            }
+        }
+        return head;
+    }
