@@ -2,8 +2,8 @@
 
     int solve(Node *n){
         if(!n) return 1;
-        int c = solve(n->next);
-        if(c==1){
+        int carry = solve(n->next);
+        if(carry){
             if(n->data==9){
                 n->data=0;
                 return 1;
@@ -13,9 +13,9 @@
         return 0;
     }
     Node* addOne(Node* head) {
-        int c=solve(head);
-        if(c){
-            Node *temp =new Node(c);
+        int carry=solve(head);
+        if(carry){
+            Node *temp =new Node(carry);
             temp->next=head;
             head=temp;
         }

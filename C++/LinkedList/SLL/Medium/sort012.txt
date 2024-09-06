@@ -1,0 +1,27 @@
+
+    Node* segregate(Node* head) {
+        Node *zero=head, *zeroHead=head;
+        Node *one=head, *oneHead=head;
+        Node *two=head, *twoHead=head;
+        while(zero && zero->data!=0) zero=zero->next; zeroHead=zero;
+        while(one && one->data!=1) one=one->next; oneHead=one;
+        while(two && two->data!=2) two=two->next; twoHead=two;
+        Node* temp=head;
+        while(temp){
+            if(temp->data == 0 && temp != zero){
+                zero->next=temp;zero=zero->next;
+            }else if(temp->data == 1 && temp != one){
+                one->next=temp;one=one->next;
+            }else if(temp->data == 2 && temp != two){
+                two->next=temp;two=two->next;
+            }
+            temp=temp->next;
+        }
+        if(zeroHead) zero->next = (oneHead != nullptr) ? oneHead : twoHead;
+        if(oneHead) one->next = twoHead;
+        if(twoHead) two->next = nullptr;
+        if(zeroHead) head = zeroHead;
+        else if(oneHead) head = oneHead;
+        else head = twoHead;
+        return head; 
+    }

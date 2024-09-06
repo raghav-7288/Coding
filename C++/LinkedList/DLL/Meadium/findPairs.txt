@@ -1,0 +1,19 @@
+Given a sorted doubly linked list of positive distinct elements, the task is to find pairs in a doubly-linked 
+list whose sum is equal to given value target.
+
+    vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
+    {
+        vector<pair<int,int>> ans;
+        if(!head) return ans;
+        Node *i=head, *j=head;
+        while(j->next) j=j->next;
+        while(i!=j && i->prev!=j){
+            int sum=i->data+j->data;
+            if(sum==target){
+                ans.push_back({i->data,j->data});
+                i=i->next;j=j->prev;
+            }else if(sum>target)j=j->prev;
+            else i=i->next;
+        }
+        return ans;
+    }

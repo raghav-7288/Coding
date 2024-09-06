@@ -1,0 +1,23 @@
+Given head.Modify LL such that all nodes with odd value in start followed by all nodes with even value
+
+    ListNode* oddEvenList(ListNode* head) {
+        if(!head || !head->next) return head;
+        ListNode *temp=head, *oddHead=head, *eveHead=head;
+        while(eveHead && eveHead->val%2==1) eveHead=eveHead->next;
+        while(oddHead && oddHead->val%2==0) oddHead=oddHead->next;
+        if(!eveHead || !oddHead) return head;
+        ListNode *odd=oddHead, *eve=eveHead;
+        while(temp){
+            if((temp->val & 1) && odd!=temp){
+                odd->next=temp;
+                odd=odd->next;
+            }else if((temp->val%2==0) && eve!=temp){
+                eve->next=temp;
+                eve=eve->next;
+            }
+            temp=temp->next;
+        }
+        odd->next=eveHead;
+        eve->next=NULL;
+        return oddHead;
+    }
