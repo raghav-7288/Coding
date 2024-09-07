@@ -1,0 +1,11 @@
+Shortest Job First
+
+    long long solve(vector<int>& bt) {
+        sort(bt.begin(),bt.end());
+        int n=bt.size();
+        vector<int> prefixSum(n);
+        for(int i=1;i<n;i++){
+            prefixSum[i] = prefixSum[i-1] + bt[i-1]; 
+        }
+        return accumulate(prefixSum.begin(),prefixSum.end(),0)/n;
+    }  

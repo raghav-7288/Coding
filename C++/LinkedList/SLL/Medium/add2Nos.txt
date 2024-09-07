@@ -23,3 +23,5 @@
         if(val) newHead = push(newHead,val);
         return newHead;
     }
+
+//TODO try with recursion

@@ -1,0 +1,36 @@
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(!head || !head->next) return head;
+        ListNode *temp1=head, *temp2=head;
+        int len=0;
+        while(temp1){len++;temp1=temp1->next;}
+        k%=len;
+        if(!k) return head;
+        temp1=head;
+        while(k--) temp1=temp1->next;
+        while(temp1->next) {temp2=temp2->next;temp1=temp1->next;}
+        temp1->next=head;
+        head=temp2->next;
+        temp2->next=NULL;
+        return head;
+    }
+
+
+    ListNode* rotateLeft(ListNode* head, int k) {
+        if(!head || !head->next) return head;
+        ListNode *temp1=head, *temp2=head;
+        int len=0;
+        while(temp1){len++;temp1=temp1->next;}
+        k%=len;
+        k=len-k;
+        if(!k || k==len) return head;
+        temp1=head;
+        while(k--) temp1=temp1->next;
+        while(temp1->next) {temp2=temp2->next;temp1=temp1->next;}
+        temp1->next=head;
+        head=temp2->next;
+        temp2->next=NULL;
+        return head;
+    }
+
+
+
