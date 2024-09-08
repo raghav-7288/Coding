@@ -1,0 +1,65 @@
+You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi] 
+represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. 
+You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
+Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and intervals
+still does not have any overlapping intervals (merge overlapping intervals if necessary).
+Return intervals after the insertion.
+
+
+
+vector<vector<int>> insert(vector<vector<int>>& I, vector<int>& NI) {
+        int n=I.size();
+        if(!n) return {NI};
+        //OR
+        // bool inserted=false;
+        // for(int i=0;i<n;i++){
+        //     if(I[i][0] > NI[0]){
+        //         I.insert(I.begin()+i,NI);
+        //         inserted=true;
+        //         break;
+        //     }
+        // }
+        // if(!inserted) I.push_back(NI);
+
+        I.push_back(NI);
+        sort(I.begin(),I.end(),[](vector<int>& i1, vector<int>& i2){return i1[0]<i2[0];});
+
+        vector<vector<int>> newI;
+        for(int i=0;i<=n;i++){
+            if(!newI.size()) newI.push_back(I[i]);
+            else{
+                int ps=newI.back()[0];
+                int pe=newI.back()[1];
+                int cs=I[i][0];
+                int ce=I[i][1];
+                if(pe < cs) newI.push_back(I[i]);
+                else{
+                    newI.pop_back();
+                    newI.push_back({min(ps,cs),max(pe,ce)});
+                }
+            }
+        }
+        return newI;
+    }
+
+
+--------------------------------------------------------------without sorting----------------------------------------------------
+
+vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector<vector<int>> merged;
+        int i = 0;
+        while (i < intervals.size() && intervals[i][1] < newInterval[0]) {
+            merged.push_back(intervals[i]);
+            i++;
+        }
+        while (i < intervals.size() && intervals[i][0] <= newInterval[1]) {
+            newInterval = {min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1])};
+            i++;
+        }
+        merged.push_back(newInterval);
+        while (i < intervals.size()) {
+            merged.push_back(intervals[i]);
+            i++;
+        }
+        return merged;
+    }

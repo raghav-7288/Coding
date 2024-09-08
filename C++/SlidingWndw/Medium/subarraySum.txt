@@ -1,0 +1,20 @@
+Given a binary array nums and an integer goal, return the number of non-empty subarrays with a sum goal.
+
+-> exactly goal = atmost Goal - atmost Goal-1
+
+    int atmostGoal(vector<int>& nums, int goal){
+        if(goal<0) return 0;
+        int i=0,j=0,cnt=0,sum=0;
+        while(j<nums.size()){
+            sum+=nums[j];
+            while(sum>goal){
+                sum-=nums[i++];
+            }
+            cnt+=(j-i+1);
+            j++;
+        }
+        return cnt;
+    }
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        return atmostGoal(nums,goal) - atmostGoal(nums,goal-1);
+    }

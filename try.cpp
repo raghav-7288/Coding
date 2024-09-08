@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 int main()
@@ -7,15 +6,13 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-
-    std::vector<int> m = {1, 2, 3, 4, 5};
-    std::vector<int> v;
-
-    std::copy(m.begin(), m.end(), std::back_inserter(v));
-    for (auto a : v)
-        cout << a << " ";
-
-    // Now v contains {1, 2, 3, 4, 5}
+    unordered_set<int> st;
+    st.insert(2);
+    st.insert(1);
+    st.insert(4);
+    st.insert(3);
+    for (auto a : st)
+        cout << a;
 
     return 0;
 }

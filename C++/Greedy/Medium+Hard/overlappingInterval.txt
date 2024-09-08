@@ -1,0 +1,16 @@
+Given an array of intervals intervals where intervals[i] = [starti, endi], 
+return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+
+
+
+    int eraseOverlapIntervals(vector<vector<int>>& I) {
+        int n=I.size();
+        sort(I.begin(),I.end(),[](vector<int>& i1, vector<int>& i2){return i1[1]<i2[1];});
+        int independant=1,p=0;
+        for(int i=1;i<n;i++){
+            if(I[i][0] >= I[p][1]){
+                p=i;independant++;
+            }
+        }
+        return n-independant;
+    }

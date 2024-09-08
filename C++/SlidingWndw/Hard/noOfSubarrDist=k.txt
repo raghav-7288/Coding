@@ -1,0 +1,22 @@
+Given an integer array nums and an integer k, return the number of good subarrays of nums.
+A good array is an array where the number of different integers in that array is exactly k.
+
+
+-> ask for count perform atmost
+    int atmost(vector<int>& nums,int k){
+        map<int,int> mp;
+        int i=0,j=0,ans=0;
+        while(j<nums.size()){
+            mp[nums[j]]++;
+            while(mp.size() > k){
+                if(!--mp[nums[i]]) mp.erase(nums[i]);
+                i++;
+            }
+            ans += j-i+1;
+            j++;
+        }
+        return ans;
+    }
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
+        return atmost(nums,k) - atmost(nums,k-1);
+    }
