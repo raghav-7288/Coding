@@ -1,0 +1,66 @@
+Given a Linked List, where every node represents a sub-linked-list and contains two pointers:
+(i) a next pointer to the next node,
+(ii) a bottom pointer to a linked list where this node is head.
+Each of the sub-linked lists is in sorted order.
+Flatten the Link List so all the nodes appear in a single level while maintaining the sorted order.
+
+Note: The flattened list will be printed using the bottom pointer instead of the next pointer. 
+
+
+----------------------------------------------------------Iterative--------------------------------------------------------------------
+
+   Node *merge(Node* head1, Node* head2){
+        if(!head1) return head2;
+        if(!head2) return head1;
+        if(head1->data > head2->data) return merge(head2,head1);
+        Node *cur=head1, *temp1=head1->bottom, *temp2=head2;
+        while(temp1 && temp2){
+            if(temp1->data <= temp2->data){
+                cur->bottom=temp1;
+                temp1=temp1->bottom;
+            }else{
+                cur->bottom=temp2;
+                temp2=temp2->bottom;
+            }
+            cur=cur->bottom;
+        }
+        cur->bottom = !temp1 ? temp2 : temp1;
+        return head1;
+    }
+    Node *flatten(Node *head) {
+        if(!head || !head->next) return head;
+        int i=0;
+        Node *temp1=head, *temp2=head->next;
+        while(temp2){
+            temp1=merge(temp1,temp2);
+            temp2=temp2->next;
+        }
+        return temp1;
+    }
+
+
+
+
+-----------------------------------------------------------Recursive--------------------------------------------------------------------
+
+    Node *merge(Node* head1, Node* head2) {
+        if(!head1) return head2;
+        if(!head2) return head1;
+        Node *result;
+        if(head1->data <= head2->data){
+            result = head1;
+            result->bottom = merge(head1->bottom, head2);
+        }else{
+            result = head2;
+            result->bottom = merge(head1, head2->bottom);
+        }
+        return result;
+    }
+    Node *flatten(Node *root) {
+        if(!root || !root->next){
+            return root;
+        }
+        root->next = flatten(root->next);
+        root = merge(root, root->next);
+        return root;
+    }

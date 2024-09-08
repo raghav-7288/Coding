@@ -1,0 +1,35 @@
+    ListNode *merge(ListNode* head1, ListNode* head2){
+        if(!head1) return head2;
+        if(!head2) return head1;
+        if(head1->val > head2->val) return merge(head2,head1);
+        ListNode *cur=head1, *temp1=head1->next, *temp2=head2;
+        while(temp1 && temp2){
+            if(temp1->val <= temp2->val){
+                cur->next=temp1;
+                temp1=temp1->next;
+            }else{
+                cur->next=temp2;
+                temp2=temp2->next;
+            }
+            cur=cur->next;
+        }
+        cur->next = !temp1 ? temp2 : temp1;
+        return head1;
+    }
+    ListNode* sortList(ListNode* head) {
+        if(!head || !head->next) return head;
+        int len=0;
+        ListNode *s=head, *f=head;
+        while(f->next){
+            f=f->next;
+            if(f->next){
+                f=f->next;
+                s=s->next;
+            }
+        }
+        ListNode *temp=s->next;
+        s->next=NULL;
+        head=sortList(head);
+        temp=sortList(temp);
+        return merge(head,temp);
+    }
