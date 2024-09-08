@@ -1,0 +1,25 @@
+Given two strings s and t of lengths m and n respectively, return the minimum window substring
+of s such that every character in t (including duplicates) is included in the window. 
+If there is no such substring, return the empty string "".
+The testcases will be generated such that the answer is unique.
+
+
+
+    string minWindow(string s, string t) {
+        map<char,int> mp;
+        for(auto c:t) mp[c]++;
+        int i=0,j=0,minLen=1e6,start=-1,cnt=0;
+        while(j<s.length()){
+            if(mp[s[j]]-- > 0) cnt++;
+            while(cnt==t.length()){
+                if(minLen > j-i+1){
+                    minLen = j-i+1;
+                    start = i;
+                }
+                if(++mp[s[i++]] > 0) cnt--;
+            }
+            j++;
+        }
+        if(start==-1) return "";
+        return s.substr(start,minLen);
+    }

@@ -1,0 +1,32 @@
+Given a string num that contains only digits and an integer target, 
+return all possibilities to insert the binary operators '+', '-', and/or '*' between the digits of 
+num so that the resultant expression evaluates to the target value.
+Note that operands in the returned expressions should not contain leading zeros.
+
+
+
+
+    void solve(int i, long result, long prev, int t,const string& exp, string& nums, vector<string>& ans){
+        if(i==nums.length()){
+            if(result==t) ans.push_back(exp);
+            return;
+        }
+        string cur;
+        long num=0;
+        for(int j=i;j<nums.length();j++){
+            if(j>i && nums[i]=='0') return;
+            cur += nums[j];
+            num = num*10 + (nums[j]-48);
+            if(!i) solve(j+1,num,num,t,exp+cur,nums,ans);
+            else{
+                solve(j+1, result+num, num, t, exp+'+'+cur, nums, ans);
+                solve(j+1, result-num, -num, t, exp+'-'+cur, nums, ans);
+                solve(j+1, result-prev+prev*num, prev*num, t, exp+'*'+cur, nums, ans);
+            }
+        }
+    }
+    vector<string> addOperators(string num, int t) {
+        vector<string> ans;
+        solve(0,0,0,t,"",num,ans);
+        return ans;
+    }

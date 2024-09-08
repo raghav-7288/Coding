@@ -1,0 +1,28 @@
+Given strings str1 and str2 containing lowercase English letters, find the minimum (contiguous) substring w of str1, 
+so that str2 is a subsequence of w. If there is no such window in str1 that covers all characters in str2, return the 
+empty string. If there are multiple such minimum-length windows, return the one with the left-most starting index.
+
+
+    bool isSubsequence(string s, string t){
+        int i=0,j=0;
+        while(i<s.length() && j<t.length()){
+            if(s[i]==t[j]) j++;
+            i++;
+        }
+        return j==t.length();
+    }
+    string minWindow(string& s, string& t) {
+        int i=0,j=0,start=-1,minLen=INT_MAX;
+        while(j<s.length()){
+            while(isSubsequence(s.substr(i,j-i+1),t) && i<s.length()){
+                if(minLen > j-i+1){
+                    minLen=j-i+1;
+                    start=i;
+                }
+                i++;
+            }
+            j++;
+        }
+        if(start==-1) return "";
+        return s.substr(start,minLen);
+    }   
