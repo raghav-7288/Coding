@@ -1,0 +1,52 @@
+class LFUCache {
+    int capacity;
+    int minFreq;
+    std::unordered_map<int, std::list<std::pair<int, int>>> freqList; // {freq -> list of {key, value}}
+    std::unordered_map<int, std::pair<int, std::list<std::pair<int, int>>::iterator>> pos; // {key -> {freq, iterator in freqList[freq]}}
+
+public:
+    LFUCache(int capacity) {
+        this->capacity = capacity;
+        minFreq = 0;
+    }
+
+    int get(int key) {
+        if (pos.find(key) == pos.end()) return -1;
+        int val = pos[key].second->second;
+        int freq = pos[key].first;
+        freqList[freq].erase(pos[key].second);
+        if (freqList[freq].empty()) {
+            freqList.erase(freq);
+            if (minFreq == freq) minFreq++;
+        }
+        freqList[freq + 1].push_front({key, val});
+        pos[key] = {freq + 1, freqList[freq + 1].begin()};
+        return val;
+    }
+
+    void put(int key, int value) {
+        if (capacity == 0) return;
+        if (pos.find(key) != pos.end()) {
+            int freq = pos[key].first;
+            freqList[freq].erase(pos[key].second);
+            if (freqList[freq].empty()) {
+                freqList.erase(freq);
+                if (minFreq == freq) minFreq++;
+            }
+            freqList[freq + 1].push_front({key, value});
+            pos[key] = {freq + 1, freqList[freq + 1].begin()};
+        } else {
+            if (pos.size() == capacity) {
+                int keyToRemove = freqList[minFreq].back().first;
+                freqList[minFreq].pop_back();
+                pos.erase(keyToRemove);
+                if (freqList[minFreq].empty()) {
+                    freqList.erase(minFreq);
+                }
+            }
+            freqList[1].push_front({key, value});
+            pos[key] = {1, freqList[1].begin()};
+            minFreq = 1;
+        }
+    }
+};

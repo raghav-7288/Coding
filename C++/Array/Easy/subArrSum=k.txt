@@ -1,4 +1,3 @@
-//TODO
 ---------------------------------------------best for arrays with only positives >0 --------------------------------------------
 int longestSubarrayWithSumK(vector<int> a, long long k)
 {
@@ -8,20 +7,15 @@ int longestSubarrayWithSumK(vector<int> a, long long k)
     int len = 0;
     while (r < n)
     {
-        while (l <= r && s > k)
-         {
+        s += a[r];
+        while (l <= r && s > k){
             s -= a[l];
             l++;
         }
-        if (s == k)
-        {
+        if (s == k){
             l = max(l, r - l + 1);
         }
         r++;
-        if (r < n)
-        {
-            s += a[r];
-        }
     }
 }
 

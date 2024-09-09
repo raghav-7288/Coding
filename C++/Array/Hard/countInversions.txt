@@ -1,7 +1,3 @@
-    
-    
-    
-    
     long long int merge(vector<long long>& arr, int l, int m, int h){
         vector<long long> temp;
         int i = l, j=m+1, cnt=0;

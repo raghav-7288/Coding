@@ -17,3 +17,10 @@ int isEulerCircuit(int V, vector<int> adj[])
     }
     return (t == 0) ? (2) : ((t == 2) ? 1 : 0);
 }
+
+
+//TODO  directed graph has eulerian circuit only if in degree and out degree of every vertex is same, 
+    and all non-zero degree vertices form a single strongly connected component.
+
+    OR if in degree and out degree of every vertex is same then components are already strongly connected just check
+        how many no. of components if ==1 return true
