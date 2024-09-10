@@ -1,0 +1,58 @@
+Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, 
+or -1 if needle is not part of haystack.
+
+//using kmp
+
+    int kmp(string text, string pat){
+        int n=text.length(), m=pat.length();
+        vector<int> lps(m);
+        int i=1,len=0;
+        while(i<m){
+            if(pat[i]==pat[len]){
+                lps[i++]=++len;
+            }else{
+                if(len) len=lps[len-1];
+                else lps[i++]=0;
+            }
+        }
+        int j=0;i=0;
+        while(i<n){
+            if(text[i]==pat[j]){
+                i++;j++;
+            }
+            if(j==m){
+                return i-j;
+            }else if(i<n && pat[j]!=text[i]){
+                if(j) j=lps[j-1];
+                else i++;
+            }
+        }
+        return -1;
+    }
+    int strStr(string t, string p) {
+        return kmp(t,p);
+    }
+
+//using z
+
+    int zSearch(string text, string pat){
+        string concat=pat+'&'+text;
+        int n=concat.length();
+        vector<int> Z(n);
+        for(int i=1;i<n;i++){
+            int j=0,k=i;
+            while(k<n){
+                if(concat[j]==concat[k]){
+                    j++;k++;
+                }else break;
+            }
+            Z[i]=k-i;
+        }
+        for(int i=1;i<n;i++){
+            if(Z[i]==pat.length()) return i-pat.length()-1;
+        }
+        return -1;
+    }
+    int strStr(string haystack, string needle) {
+        return zSearch(haystack, needle);
+    }

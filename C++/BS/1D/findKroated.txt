@@ -1,4 +1,4 @@
-
+sorted array is rotated k times find k.
 
     int findKRotation(vector<int> &nums) {
         int l=0,r=nums.size()-1;

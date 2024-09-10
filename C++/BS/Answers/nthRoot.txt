@@ -1,5 +1,4 @@
 int NthRoot(int n, int m) {
-    //Use Binary search on the answer space:
     int low = 1, high = m;
     while (low <= high) {
         int mid = (low + high) / 2;

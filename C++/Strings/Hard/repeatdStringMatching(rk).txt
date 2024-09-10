@@ -1,0 +1,41 @@
+Given two strings a and b, return the minimum number of times you should repeat string a so that string b is a substring of it. 
+If it is impossible for b​​​​​​ to be a substring of a after repeating it, return -1.
+
+//using rabin karp
+
+    int rabinKarp(string text, string pat){
+        int n=text.size();
+        int m=pat.size();
+        int base=256,prime=101;
+        long long patHash=0, curHash=0;
+        long long power=1;
+        for(int i=0;i<m-1;i++) power=(power*base)%prime;
+        for(int i=0;i<m;i++){
+            patHash=(patHash*base+pat[i])%prime;
+            curHash=(curHash*base+text[i%n])%prime;
+        }
+        int repeated=1;
+        for(int i=0;i<2*n+m;i++){
+            if(curHash == patHash){
+                bool match=true;
+                int wraps=0;
+                for(int j=0;j<m;j++){
+                    if(text[(i+j)%n] != pat[j]){
+                        match=false;
+                        break;
+                    }
+                    if((i+j)%n==0 && j!=0) wraps++;
+                }
+                if(match) return repeated+wraps;
+            }
+            curHash=(curHash-text[i%n]*power)%prime;
+            curHash=(curHash*base+text[(i+m)%n])%prime;
+            if(curHash<0) curHash+=prime;
+            if ((i+1)%n==0) repeated++;
+            if (repeated>(m/n+2)) return -1;
+        }
+        return -1;
+    }
+    int repeatedStringMatch(string a, string b) {
+        return rabinKarp(a,b);
+    }
