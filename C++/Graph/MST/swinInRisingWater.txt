@@ -1,0 +1,75 @@
+You are given an n x n integer matrix grid where each value grid[i][j] represents the elevation at that point (i, j).
+The rain starts to fall. At time t, the depth of the water everywhere is t. You can swim from a square to another 
+4-directionally adjacent square if and only if the elevation of both squares individually are at most t. 
+You can swim infinite distances in zero time. Of course, you must stay within the boundaries of the grid during your swim.
+Return the least time until you can reach the bottom right square (n - 1, n - 1) if you start at the top left square (0, 0).
+
+
+The key insight is that as we "flood" the grid by increasing time (or elevation), 
+we union cells that are connected and have elevations ≤ t. When the top-left and bottom-right cells are connected, 
+we know the least time to swim from start to finish.
+
+    int swimInWater(vector<vector<int>>& grid) {
+        int n=grid.size();
+        int cx[4]={-1,0,1,0};
+        int cy[4]={0,1,0,-1};
+        DSU ds(n*n);
+        vector<pair<int,pair<int,int>>> cells;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                cells.push_back({grid[i][j],{i,j}});
+            }
+        }
+        sort(cells.begin(),cells.end());
+        for(auto x:cells){
+            int elevation = x.first;
+            int r=x.second.first;
+            int c=x.second.second;
+            for(int i=0;i<4;i++){
+                int nr=r+cx[i];
+                int nc=c+cy[i];
+                if(nr>=0 && nr<n && nc>=0 && nc<n && grid[nr][nc] <= elevation){
+                    ds.ubs(r*n+c,nr*n+nc);
+                }
+            }
+            if(ds.fp(0)==ds.fp((n-1)*n+n-1)) return elevation;
+        }
+        return -1;
+    }
+
+
+---------------------------------------Binary search--------------------------------------------
+
+    bool canReach(int e, vector<vector<int>>& grid){
+        if(grid[0][0] > e) return false;
+        int n=grid.size();
+        vector<vector<int>> vis(n,vector<int>(n));
+        queue<pair<int,int>> q;
+        q.push({0,0});
+        vis[0][0]=1;
+        int cx[4]={-1,0,1,0};
+        int cy[4]={0,1,0,-1};
+        while(!q.empty()){
+            int r=q.front().first, c=q.front().second;
+            if(r==n-1 && c==n-1) return true;
+            q.pop();
+            for(int i=0;i<4;i++){
+                int nr=r+cx[i], nc=c+cy[i];
+                if(nr>=0 && nr<n && nc>=0 && nc<n && !vis[nr][nc] && grid[nr][nc]<=e){
+                    q.push({nr,nc});
+                    vis[nr][nc]=1;
+                }
+            }
+        }
+        return false;
+    }
+    int swimInWater(vector<vector<int>>& grid) {
+        int l=0,h=2500;
+        while(l<=h){
+            int m=(h+l)/2;
+            if(canReach(m,grid)){
+                h=m-1;
+            }else l=m+1;
+        }
+        return l;
+    }
