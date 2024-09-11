@@ -10,7 +10,7 @@ Pos of rightmost set bit = __builtin_ffs(16)
 toggle the k-th bit -> n ^ (1 << k)
 set all trailing zeros -> n ^ (n - 1)
 
-unset rightmost set bit rest same -> n & (n - 1)
+unset rightmost set bit rest same -> n & (n - 1) -> can be used to check no. of set bits
 set rightmost unset bit -> n | (n + 1)
 
 unset all except rightmost set bit -> n & -n
@@ -64,6 +64,13 @@ pos of rightmost unset bit = log2((~n) & (n + 1)) + 1
     x ^ x = 0
     0 ^ 1 = 1
     0 ^ 0 = 1 ^ 1 = 0 
+
+-----------------------------------------------------min bit flip to convert-------------------------------------------------------------
+    int minBitFlips(int start, int goal) {
+        int x=start^goal,c=0;
+        while(x){x&=(x-1);c++;}
+        return c;
+    }
 
 -------------------------------------------------------upr case to lower case-------------------------------------------------------
     char | ' ' //or with 32(set 5th bit)
@@ -177,4 +184,3 @@ a ^= b;
         allSubSets.push_back(subSet);
         subSet.clear();
     }
-

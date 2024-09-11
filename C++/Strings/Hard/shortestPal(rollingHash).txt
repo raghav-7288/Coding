@@ -1,0 +1,27 @@
+You are given a string s. You can convert s to a 
+palindrome by adding characters in front of it.
+Return the shortest palindrome you can find by performing this transformation.
+
+
+
+We try to simulate the hash for the reverse of s without explicitly reversing the string. 
+To achieve this, we can accumulate the hash value for each character in reverse order by:
+Taking the character's value (s[i] - 'a' + 1) and multiplying it by base_pow, 
+where base_pow is the power of BASE representing the positional multiplier for the reverse hash. 
+base_pow starts as 1 (representing the first character from the end) and is multiplied by BASE with each iteration.
+
+
+    string shortestPalindrome(string s) {
+        int base=256, prime=1e9+7, n=s.length();
+        long long preHash=0, sufHash=0, basePow=1;
+        int max_len=0;
+        for(int i=0;i<n;i++){
+            preHash=(preHash*base+s[i])%prime;
+            sufHash=(sufHash+s[i]*basePow)%prime; //suffix hashof reverse of s without reversing
+            basePow=(basePow*base)%prime;
+            if(preHash==sufHash) max_len=max(max_len,i+1);
+        }
+        string temp=s.substr(max_len);
+        reverse(temp.begin(),temp.end());
+        return temp+s;
+    }
