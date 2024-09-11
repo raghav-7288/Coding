@@ -1,0 +1,26 @@
+Alice has some number of cards and she wants to rearrange the cards into groups so that each group is of size groupSize, 
+and consists of groupSize consecutive cards.
+Given an integer array hand where hand[i] is the value written on the ith card and an integer groupSize, return true 
+if she can rearrange the cards, or false otherwise.
+
+
+    bool isNStraightHand(vector<int>& hand, int gs) {
+        if(hand.size() % gs) return false;
+        map<int,int> mp;
+        for(auto h:hand) mp[h]++;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        for(auto m:mp) pq.push({m.first,m.second});
+        while(!pq.empty()){
+            while(!pq.empty() && !mp[pq.top().first]) pq.pop();
+            if(pq.empty()) break;
+            int cur = pq.top().first;
+            int f = pq.top().second;
+            pq.pop();
+            if(f-1) pq.push({cur,f-1});
+            for(int i=0;i<gs;i++){
+                if(!mp[cur+i]) return false;
+                mp[cur+i]--;
+            }
+        }
+        return true;
+    }

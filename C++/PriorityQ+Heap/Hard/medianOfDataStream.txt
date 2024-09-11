@@ -8,7 +8,6 @@
         void addNum(int num) {
             if(max.empty() || max.top() >= num) max.push(num);
             else min.push(num);
-
             if(max.size() > min.size() + 1){
                 min.push(max.top());
                 max.pop();
