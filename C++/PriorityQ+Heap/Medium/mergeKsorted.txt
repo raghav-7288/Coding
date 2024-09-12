@@ -8,5 +8,3 @@ Given k sorted arrays arranged in the form of a matrix of size k * k. The task i
         while(!pq.empty()) {ans.push_back(pq.top());pq.pop();}
         return ans;
     }
-
-//TODO using merge sort

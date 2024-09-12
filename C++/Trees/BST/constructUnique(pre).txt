@@ -8,7 +8,7 @@ TreeNode* solve(int is, int ie, vector<int>& in, int ps, int pe, vector<int>& pr
     return root;
 }
 
-TreeNode* bstFromPreorder(vector<int>& preorder) { //TODO video
+TreeNode* bstFromPreorder(vector<int>& preorder) {
     int n=preorder.size();
     vector<int> inorder(preorder);
     sort(inorder.begin(),inorder.end());
@@ -19,3 +19,17 @@ TreeNode* bstFromPreorder(vector<int>& preorder) { //TODO video
     TreeNode* root = solve(0,n-1,inorder,0,n-1,preorder,mp);
     return root; 
 }
+
+
+************************************************************better******************************************************************
+    TreeNode* construct(int& i, vector<int>& preorder, int ub){
+        if(i==preorder.size() || preorder[i] > ub) return NULL;
+        TreeNode* root = new TreeNode(preorder[i++]);
+        root->left = construct(i,preorder,root->val); 
+        root->right = construct(i,preorder,ub); 
+        return root;
+    }
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int i=0;
+        return construct(i,preorder,INT_MAX);
+    }

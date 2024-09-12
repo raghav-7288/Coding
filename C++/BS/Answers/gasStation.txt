@@ -19,4 +19,3 @@ We have to find the smallest possible value of d. Find the answer exactly to 2 d
         }
         return h;
     }
-    //TODO video

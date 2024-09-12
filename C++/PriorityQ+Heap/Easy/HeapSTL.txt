@@ -16,5 +16,3 @@ sort_heap(): Sort the elements of the max_heap to ascending order.
 is_heap(): Checks if the given range is max_heap.
 
 is_heap_until(): Returns the largest sub-range that is max_heap.
-
-//TODO try

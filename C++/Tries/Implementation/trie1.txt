@@ -1,0 +1,107 @@
+struct Node{
+    Node* links[26];
+    bool flag=false;
+};
+class Trie {
+public:
+    Node *root;
+    Trie() {
+        root = new Node();
+    }
+    void insert(string w) {
+        Node *node=root;
+        for(int i=0;i<w.length();i++){
+            if(!node->links[w[i]-'a']){
+                node->links[w[i]-'a']=new Node();
+            }
+            node=node->links[w[i]-'a'];
+        }
+        node->flag=true;
+    }    
+    bool search(string w) {
+        Node *node=root;
+        for(int i=0;i<w.length();i++){
+            if(!node->links[w[i]-'a']) return false;
+            node=node->links[w[i]-'a'];
+        }
+        return node->flag;
+    }
+    bool startsWith(string prefix) {
+        Node *node=root;
+        for(int i=0;i<prefix.length();i++){
+            if(!node->links[prefix[i]-'a']) return false;
+            node=node->links[prefix[i]-'a'];
+        }
+        return true;
+    }
+};
+
+*************************************************************************************************************************************************
+
+
+struct Node
+{
+    Node *links[26];
+    bool flag = false;
+    bool containsKey(char c){
+        return (links[c - 'a'] != NULL);
+    }
+    void put(char c, Node *node){
+        links[c - 'a'] = node;
+    }
+    Node *getLink(char c){
+        return links[c - 'a'];
+    }
+    void setEnd(){
+        flag = true;
+    }
+    bool isEnd(){
+        return flag;
+    }
+};
+class Trie
+{
+private:
+    Node *root;
+
+public:
+    Trie(){
+        root = new Node();
+    }
+    void insert(string word){
+        Node *node = root;
+        for (int i = 0; i < word.length(); i++)
+        {
+            if (!node->containsKey(word[i]))
+            {
+                node->put(word[i], new Node());
+            }
+            node = node->getLink(word[i]);
+        }
+        node->setEnd();
+    }
+    bool search(string word){
+        Node *node = root;
+        for (int i = 0; i < word.length(); i++)
+        {
+            if (!node->containsKey(word[i]))
+            {
+                return false;
+            }
+            node = node->getLink(word[i]);
+        }
+        return node->isEnd();
+    }
+    bool startsWith(string prefix){
+        Node *node = root;
+        for (int i = 0; i < prefix.length(); i++)
+        {
+            if (!node->containsKey(prefix[i]))
+            {
+                return false;
+            }
+            node = node->getLink(prefix[i]);
+        }
+        return true;
+    }
+};
