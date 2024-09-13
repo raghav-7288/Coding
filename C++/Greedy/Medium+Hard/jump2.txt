@@ -6,35 +6,6 @@ i + j < n
 Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].
 
 
-
-    int jump(vector<int>& nums) {
-        int start=0,end=0,max_end=0,j=0;
-        while(end<nums.size()-1){
-            for(int i=start;i<=end;i++){
-                max_end=max(max_end,i+nums[i]);
-            }
-            start=end+1;
-            end=max_end;
-            j++;
-        }   
-        return j;
-    }
---------------------------------------------------------------------------------------------
-
-    int jump(vector<int>& nums) {
-        int n=nums.size();
-        vector<int> dp(n,1e9);
-        dp[0]=0;
-        for(int i=0;i<n;i++){
-            for(int j=1;j<=nums[i] && i+j<n;j++){
-                dp[i+j]=min(dp[i+j],dp[i]+1);
-            }
-        }
-        return dp.back();
-    }
-
-----------------------------------------------BEST--------------------------------------------
-
     int minJumps(vector<int>& arr) {
         int cur=0,maxi=0,j=0;
         for(int i=0;i<arr.size()-1;i++){

@@ -1,0 +1,57 @@
+A string is called a complete string if every prefix of this string is also present in the array ‘A’. 
+Ninja is challenged to find the longest complete string in the array ‘A’.If there are multiple strings 
+with the same length, return the lexicographically smallest one and if no string exists, return "None".
+
+
+    #include <bits/stdc++.h>
+    struct Node{
+        Node* links[26];
+        bool isEnd=false;
+    };
+    class trie{
+        public: 
+        Node* root;
+        trie(){root= new Node();}
+        void insert(string w){
+            Node* node=root;
+            for(int i=0;i<w.length();i++){
+                if(!node->links[w[i]-'a']){
+                    node->links[w[i]-'a']=new Node();
+                }
+                node=node->links[w[i]-'a'];
+            }        
+            node->isEnd=true;
+        }
+        bool search(string w){
+            Node* node=root;
+            for(int i=0;i<w.length();i++){
+                if(!node->links[w[i]-'a']) return false;
+                node=node->links[w[i]-'a'];
+            }        
+            return node->isEnd;
+        }
+    };
+    string completeString(int n, vector<string> &a){
+        trie t;
+        int max_len = 0;
+        string ans = "";
+        for(auto w:a) t.insert(w);
+        for(auto w:a){
+            bool ok=true;
+            for(int i=0;i<w.length();i++){
+                if(!t.search(w.substr(0,i+1))){
+                    ok=false;
+                    break;
+                }
+            }
+            if(ok){
+                if(max_len < w.length()){
+                    max_len=w.length();
+                    ans=w;
+                }else if(max_len == w.length() && ans > w){
+                    ans=w;
+                }
+            }
+        }
+        return ans==""?"None":ans;
+    }

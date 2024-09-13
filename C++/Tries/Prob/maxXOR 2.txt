@@ -1,0 +1,59 @@
+You are given an array nums consisting of non-negative integers. You are also given a queries array, where 
+queries[i] = [xi, mi].
+The answer to the ith query is the maximum bitwise XOR value of xi and any element of nums that does not exceed mi. 
+In other words, the answer is max(nums[j] XOR xi) for all j such that nums[j] <= mi. 
+If all elements in nums are larger than mi, then the answer is -1.
+Return an integer array answer where answer.length == queries.length and answer[i] is the answer to the ith query
+
+
+
+
+    struct Node{
+        Node* link[2];
+    };
+    class Trie{
+        public:
+        Node* root;
+        Trie(){
+            root=new Node();
+        }
+        void insert(int n){
+            Node *node=root;
+            for(int i=32;i>0;i--){
+                int bit = (n & 1<<(i-1)) != 0;
+                if(!node->link[bit]){
+                    node->link[bit]=new Node();
+                }
+                node = node->link[bit];
+            }
+        }
+        int search(int n){
+            Node *node=root;
+            int ans=0;
+            for(int i=32;i>0;i--){
+                int bit = (n & 1<<(i-1)) != 0;
+                if(node->link[!bit]){
+                    ans = ans | 1<<(i-1);
+                    node=node->link[!bit];
+                }else node=node->link[bit];
+            }
+            return ans;
+        }
+    };
+
+    vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
+        int q=queries.size();
+        vector<int> ans(q,-1);
+        Trie t;
+        int i=0;
+        for(auto& q:queries) q.push_back(i++);
+        sort(nums.begin(),nums.end());
+        sort(queries.begin(),queries.end(),[](vector<int>& q1, vector<int>& q2){return q1[1]<q2[1];});
+        i=0;
+        for(auto q:queries){
+            while(i<nums.size() && nums[i]<=q[1]) t.insert(nums[i++]);
+            int val=-1;
+            if(i) ans[q[2]]=t.search(q[0]);
+        }
+        return ans;
+    }

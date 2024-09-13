@@ -1,7 +1,7 @@
 Given a string s containing only three types of characters: '(', ')' and '*', return true if s is valid.
 '*' -> "(" or ")" or ""
 
-
+//TODO video
     bool checkValidString(string s) {
         int mini=0,maxi=0;
         for(auto c:s){

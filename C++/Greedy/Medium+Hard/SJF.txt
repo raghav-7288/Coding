@@ -1,4 +1,4 @@
-Shortest Job First
+Give average waiting time
 
     long long solve(vector<int>& bt) {
         sort(bt.begin(),bt.end());
