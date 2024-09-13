@@ -1,4 +1,4 @@
-    void deleteNode(ListNode* node) {
+    void deleteNode(ListNode* node) { // pointer on node to delete
         ListNode *temp=node->next;
         swap(node->val,temp->val);
         node->next=temp->next;
@@ -6,4 +6,10 @@
 
 ----------------------------------------------------------
 
-    //TODO other method
+    void deleteNode(ListNode* head, int pos) {
+        if(pos==1) return head->next;
+        ListNode* temp=head; pos-=2;
+        while(pos>0) {temp=temp->head;pos--;}
+        temp->next=temp->next->next;
+        return head;
+    }

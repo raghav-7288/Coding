@@ -24,4 +24,3 @@ train and arrival of another train. In such cases, we need different platforms.
         return maxi;
     }
 
-//TODO using meetings logic

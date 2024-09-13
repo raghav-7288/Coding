@@ -24,4 +24,47 @@
         return newHead;
     }
 
-//TODO try with recursion
+******************************************************************recursion********************************************************************
+
+    int length(ListNode* head){
+        int len=0;
+        ListNode* temp=head;
+        while(temp){
+            len++;
+            temp=temp->next;
+        }
+        return len;
+    }
+    ListNode* add(ListNode* h1, ListNode* t1, ListNode* h2, ListNode* t2, int carry){
+        if(!t1){
+            if(!carry) return NULL;
+            if(t2){
+                t2->val = t2-> val + carry;
+                carry =  t2->val / 10;
+                t2->val = t2->val % 10;
+                ListNode* temp = t2;
+                while(temp->next && carry){
+                    temp = temp-> next;
+                    temp->val = temp->val + carry;
+                    carry =  temp->val / 10;
+                    temp->val = temp->val % 10;
+                }
+                if(carry) temp->next = new ListNode(carry);
+            }else{
+                t2=h2;
+                while(t2->next) t2=t2->next;
+                t2->next = new ListNode(carry);
+            }
+            return NULL;
+        }
+        t2->val = t2->val + t1->val + carry;
+        int c =  t2->val / 10;
+        t2->val = t2->val % 10;
+        add(h1,t1->next,h2,t2->next,c);
+        return h2;
+    }
+    ListNode* addTwoNumbers(ListNode* h1, ListNode* h2){
+        ListNode *t1=h1, *t2=h2;
+        if(length(h1) <= length(h2)) return add(h1,t1,h2,t2,0);
+        return add(h2,t2,h1,t1,0);
+    }
