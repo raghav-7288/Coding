@@ -4,13 +4,14 @@ array if you can flip at most k 0's.
 
 
     int longestOnes(vector<int>& nums, int k) {
-        int cnt_zero=0,j,i;
-        for(i=0,j=0;j<nums.size();j++){
+        int cnt_zero=0,j=0,i=0;
+        while(j<nums.size()){
             if(!nums[j]) cnt_zero++;
             if(cnt_zero > k){
                 if(!nums[i]) cnt_zero--;
                 i++;
             }
+            j++;
         }
         return j-i;
     }

@@ -1,4 +1,4 @@
---------------------------------------DFS----------------------------------------
+--------------------------------------DFS(only when no cycle)---------------------------------------
 //add node to stack when its exploration ends
 void dfs(int node,vector<int> &vis,stack<int> &st,vector<int> adj[]){
     vis[node]=1;

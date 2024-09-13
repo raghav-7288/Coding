@@ -16,52 +16,46 @@ int kadane(int n, vector<int> v)
 }
 
 
-// IF ASKED TO RETURN THE SUBARRAY WITH MAX SUM //TODO
+*********************************************PRINT THE SUBARRAY WITH MAX SUM*********************************************************
 
-int maxSubArray(vector<int>& nums) {
-        int ans = 0;
-        int res = 0;
-        int left = -1, right = -1;
-        int max_left = -1, max_right = -1;
-        for(int i = 0; i<nums.size(); i++)
-        {
-            ans = ans + nums[i];
-            if(ans >= 0){
-                if(left == -1)  
-                {
-                    left = i;
-                    right = i;
+    int maxSubArray(vector<int>& nums) {
+        int n=nums.size();
+        int s=0,ans=INT_MIN;
+        int left=-1, max_left, right=-1, max_right;
+        for(int i=0;i<n;i++){
+            s+=nums[i];
+            if(s>=0){
+                if(left==-1){
+                    left=i;right=i;
                 }
-                if(res <= ans)
-                {
-                    max_left = left;
-                    max_right = i;
-                    res = ans;
+                if(ans < s){
+                    ans=s;
+                    max_left=left;
+                    max_right=i;
                 }
             }
-            else 
-                right++;
-            if(ans < 0){
-                ans = 0;
-                left = -1;
-                right = -1;
+            if(s<0){
+                left=-1;
+                right=-1;
+                s=0;
             }
         }
+        if(!ans) {int M=*max_element(nums.begin(),nums.end());cout<<M;return M;}
+        for(int i=max_left;i<=max_right;i++) cout<<nums[i]<<" ";
+        return ans;
+    }
 
-        if(res == 0)
-        {
-            res = INT_MIN;
-            for(int i = 0; i<nums.size(); i++)
-            {
-                res = max(res, nums[i]);
-            }
-            cout << res << endl;
+
+********************************************Return the maximum sum of a subarray of size K************************************************************************************************
+
+
+    long maximumSumSubarray(int K, vector<int> &a , int N){
+        long i=0,j=0,s=0,ans=0;
+        while(j<N){
+            s+=a[j];
+            if(j-i+1 > K) s-=a[i++];
+            ans=max(ans,s);
+            j++;
         }
-        else
-        {
-            for(int i = max_left; i<= max_right; i++)
-                cout << nums[i] << " ";
-        }
-        cout << endl;
-        return res;
+        return ans;
     }

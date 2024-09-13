@@ -18,9 +18,17 @@ int isEulerCircuit(int V, vector<int> adj[])
     return (t == 0) ? (2) : ((t == 2) ? 1 : 0);
 }
 
+***********************************************************************************************************************************
+Eulerian circuit in directed graphs: a directed graph has an Eulerian circuit if and only if the following conditions are met:
 
-//TODO  directed graph has eulerian circuit only if in degree and out degree of every vertex is same, 
-    and all non-zero degree vertices form a single strongly connected component.
+1.All vertices have equal in-degree and out-degree.
+2. all non zero degree vertices are strongly connected -> The graph is strongly connected 
+(or, more generally, has a single strongly connected component).
 
-    OR if in degree and out degree of every vertex is same then components are already strongly connected just check
-        how many no. of components if ==1 return true
+    If the graph has one component and equal in-degree and out-degree at every vertex, 
+    the conditions are sufficient to imply that the graph is strongly connected.
+
+Conclusion:
+If the graph is given to have a single component and equal in-degree and out-degree for every vertex, 
+then the graph must be strongly connected.
+***********************************************************************************************************

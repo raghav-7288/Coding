@@ -33,4 +33,26 @@ The answer should be sorted in ascending order.
         return ans;
     }
 
---->> using topo sort (reverse graph then find topo) //TODO
+----------------------------------------------------------using topo sort-------------------------------------------------------------
+
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int> adj[n], topo, inDeg(n), ans;
+        queue<int> q;
+        for(int i=0;i<n;i++){
+            for(auto a:graph[i]){
+                adj[a].push_back(i);
+                inDeg[i]++;
+            }
+        }
+        for(int i=0;i<n;i++) if(!inDeg[i]) {q.push(i);ans.push_back(i);}
+        while(!q.empty()){
+            int n=q.front();q.pop();
+            for(auto it:adj[n]){
+                inDeg[it]--;
+                if(!inDeg[it]) {q.push(it);ans.push_back(it);}
+            }
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }

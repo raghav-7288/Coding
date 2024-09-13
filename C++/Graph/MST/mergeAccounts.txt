@@ -19,7 +19,6 @@ We could return these lists in any order, for example the answer [['Mary', 'mary
 ['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
 
 
-//TODO video
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         int n=accounts.size();
         DSU ds(n);

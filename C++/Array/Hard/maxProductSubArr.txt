@@ -14,4 +14,15 @@ Given an integer array nums, find a subarray that has the largest product, and r
         return ans;
     }
 
---------------------------------------using Kadens--------------------------------//TODO
+*******************************************************Kadens******************************************************************
+
+    int maxProduct(vector<int>& nums) {
+        int maxi=nums[0],mini=nums[0],result=nums[0];
+        for(int i=1;i<nums.size();i++){
+            int temp=max({nums[i],mini*nums[i],maxi*nums[i]});
+            mini=min({nums[i],mini*nums[i],maxi*nums[i]});
+            maxi=temp;
+            result=max(result,maxi);
+        }
+        return result;
+    }
