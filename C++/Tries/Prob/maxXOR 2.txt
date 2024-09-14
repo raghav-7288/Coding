@@ -8,6 +8,8 @@ Return an integer array answer where answer.length == queries.length and answer[
 
 
 
+-------------------------------------------------------------------------------------------------------------------------------------
+
     struct Node{
         Node* link[2];
     };

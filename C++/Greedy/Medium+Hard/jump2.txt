@@ -18,3 +18,18 @@ Return the minimum number of jumps to reach nums[n - 1]. The test cases are gene
         }
         return j;
     }
+
+-------------------------------------------------------------------OR------------------------------------------------------------------- 
+
+    int jump(vector<int>& nums) {
+        int start=0,end=0,max_end=0,j=0;
+        while(end<nums.size()-1){
+            for(int i=start;i<=end;i++){
+                max_end=max(max_end,i+nums[i]);
+            }
+            start=end+1;
+            end=max_end;
+            j++;
+        }
+        return j;
+    }

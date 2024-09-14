@@ -1,4 +1,5 @@
-//TODO
+TODO
+// Greedy videos
 // LIS videos
 // BS videos
 // SW videos 
@@ -8,8 +9,10 @@
 // Manacher's Algorithm
 // deque
 // havel hakimi
+// AVL Tree
+// Segment Tree
 // https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/#practice
-// https://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property-set-2/#
+// https://www.geeksforgeeks.org/problems/transform-to-sum-tree--170645/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // string stream + getline
 // KMP(Knuth Morris Pratt) algo -> https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/
 // bfs/dfs->clrs
@@ -35,11 +38,10 @@
 // 959 - Union Find - Optimized
 // 1278
 // weekly contest 167 remaining 3 ques
-// AVL Tree
-// Segment Tree
 // https://www.geeksforgeeks.org/problems/maximum-difference-1587115620/1 (monotonic stack)
 // huffman coding
 // 2699. Modify Graph Edge Weights
+
 // z->https://www.geeksforgeeks.org/problems/search-pattern-z-algorithm--141631/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // kmp->https://www.geeksforgeeks.org/problems/search-pattern0205/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // rabin karp->https://www.geeksforgeeks.org/problems/search-pattern-rabin-karp-algorithm--141631/1
