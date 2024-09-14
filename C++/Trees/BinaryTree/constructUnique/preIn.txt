@@ -1,8 +1,7 @@
 TreeNode *build(vector<int> &pre, int preStart, int preEnd, vector<int> &in, int inStart, int inEnd, map<int, int> &inMap)
 {
 
-    if (preStart > preEnd || inStart > inEnd)
-        return NULL;
+    if (preStart > preEnd || inStart > inEnd) return NULL;
     TreeNode *root = new TreeNode(pre[preStart]);
     int inRoot = inMap[root->val];
     int numsLeft = inRoot - inStart;

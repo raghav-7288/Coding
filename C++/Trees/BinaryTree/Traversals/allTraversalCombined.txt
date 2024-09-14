@@ -33,10 +33,11 @@ vector<vector<int>> getTreeTraversal(TreeNode *root)
     return all;
 }
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+
 void allTraversals(TreeNode *root, vector<vector<int>> &all)
 {
-    if (!root)
-        return;
+    if (!root) return;
     all[1].push_back(root->data); // preorder
     allTraversals(root->left, all);
     all[0].push_back(root->data); // inorder

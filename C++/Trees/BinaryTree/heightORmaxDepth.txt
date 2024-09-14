@@ -1,4 +1,6 @@
-int height(Node *root){
-    if(!root) retun 0;
-    return 1+max(height(root->left),height(root->right));
-}
+
+
+    int height(Node *root){
+        if(!root) retun 0;
+        return 1+max(height(root->left),height(root->right));
+    }

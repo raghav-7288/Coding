@@ -1,92 +1,88 @@
-vector<int> preorderTraversal(TreeNode* root) {
-    if(!root){
-        return {};
-    }
-    vector<int> ans;
-    stack<TreeNode*> s;
-    s.push(root);
-    while(!s.empty()){
-        root=s.top();
-        s.pop();
-        ans.push_back(root->val);
-
-        if(root->right)
-        s.push(root->right);
-        
-        if(root->left)
-        s.push(root->left);
-    }
-    return ans;
-}
-
-vector<int> inorderTraversal(TreeNode* root) {
-    if(!root){
-        return {};
-    }
-    TreeNode *temp=root;
-    stack<TreeNode*> s;
-    vector<int> ans;
-    while(true){
-        if(temp){
-            s.push(temp);
-            temp=temp->left;
-        }else{
-            if(s.empty()) break;
-            temp=s.top();
+    vector<int> preorderTraversal(TreeNode* root) {
+        if(!root) return {};
+        vector<int> ans;
+        stack<TreeNode*> s;
+        s.push(root);
+        while(!s.empty()){
+            root=s.top();
             s.pop();
-            ans.push_back(temp->val);
-            temp=temp->right;
+            ans.push_back(root->val);
+
+            if(root->right)
+            s.push(root->right);
+            
+            if(root->left)
+            s.push(root->left);
         }
+        return ans;
     }
-    return ans;
-}
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        if(!root) return {};
+        TreeNode *temp=root;
+        stack<TreeNode*> s;
+        vector<int> ans;
+        while(true){
+            if(temp){
+                s.push(temp);
+                temp=temp->left;
+            }else{
+                if(s.empty()) break;
+                temp=s.top();
+                s.pop();
+                ans.push_back(temp->val);
+                temp=temp->right;
+            }
+        }
+        return ans;
+    }
 
 //postOrder using 2 stacks
-vector<int> postorderTraversal(TreeNode* root) {
-    if(!root) return {};
-    stack<TreeNode*> st1;
-    stack<TreeNode*> st2;
-    vector<int> postOrder;
-    st1.push(root);
-    while(!st1.empty()){
-        TreeNode *curr=st1.top();
-        st1.pop();
-        st2.push(curr);
-        if(curr->left) st1.push(curr->left);
-        if(curr->right) st1.push(curr->right);
+    vector<int> postorderTraversal(TreeNode* root) {
+        if(!root) return {};
+        stack<TreeNode*> st1, st2;
+        vector<int> postOrder;
+        st1.push(root);
+        while(!st1.empty()){
+            TreeNode *curr=st1.top();
+            st1.pop();
+            st2.push(curr);
+            if(curr->left) st1.push(curr->left);
+            if(curr->right) st1.push(curr->right);
+        }
+        while(!st2.empty()){
+            TreeNode* curr=st2.top();
+            postOrder.push_back(curr->val);
+            st2.pop();
+        }
+        return postOrder;
     }
-    while(!st2.empty()){
-        TreeNode* curr=st2.top();
-        postOrder.push_back(curr->val);
-        st2.pop();
-    }
-    return postOrder;
-}
+    
 //postOrder using 1 stack
-vector<int> postorderTraversal(TreeNode* root) {
-    if(!root) return {};
-    stack<TreeNode*> st;
-    vector<int> postOrder;
-    TreeNode *curr=root;
-    while(curr || !st.empty()){
-        if(curr){
-            st.push(curr);
-            curr=curr->left;
-        }else{
-            TreeNode *temp=st.top()->right;
-            if(!temp){
-                temp=st.top();
-                st.pop();
-                postOrder.push_back(temp->val);
-                while(!st.empty() && temp==st.top()->right){
+    vector<int> postorderTraversal(TreeNode* root) {
+        if(!root) return {};
+        stack<TreeNode*> st;
+        vector<int> postOrder;
+        TreeNode *curr=root;
+        while(curr || !st.empty()){
+            if(curr){
+                st.push(curr);
+                curr=curr->left;
+            }else{
+                TreeNode *temp=st.top()->right;
+                if(!temp){
                     temp=st.top();
                     st.pop();
                     postOrder.push_back(temp->val);
+                    while(!st.empty() && temp==st.top()->right){
+                        temp=st.top();
+                        st.pop();
+                        postOrder.push_back(temp->val);
+                    }
+                }else{
+                    curr=temp;
                 }
-            }else{
-                curr=temp;
             }
         }
+        return postOrder;
     }
-    return postOrder;
-}

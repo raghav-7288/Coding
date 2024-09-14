@@ -37,9 +37,7 @@ Two trees are duplicate if they have the same structure with the same node value
         str += solve(root->left, stringId, ans);
         str += solve(root->right, stringId, ans);
         stringId[str]++;
-        if(stringId[str]==2){
-            ans.push_back(root);
-        }
+        if(stringId[str]==2) ans.push_back(root);
         return str;
     }
     vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {

@@ -12,7 +12,7 @@ of the tree were swapped by mistake. Recover the tree without changing its struc
         inorder(r->right,f,s,p);
     }
     void recoverTree(TreeNode* root) {
-        TreeNode *f=NULL,*s=NULL,*p=new TreeNode(INT_MIN);
+        TreeNode *f=NULL,*s=NULL,*p=NULL;
         inorder(root,f,s,p);
         if(f && s) swap(f->val,s->val);
     }

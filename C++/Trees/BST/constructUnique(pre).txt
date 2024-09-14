@@ -22,6 +22,7 @@ TreeNode* bstFromPreorder(vector<int>& preorder) {
 
 
 ************************************************************better******************************************************************
+    
     TreeNode* construct(int& i, vector<int>& preorder, int ub){
         if(i==preorder.size() || preorder[i] > ub) return NULL;
         TreeNode* root = new TreeNode(preorder[i++]);
