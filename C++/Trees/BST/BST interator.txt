@@ -10,36 +10,25 @@ the first call to next() will return the smallest element in the BST.
 You may assume that next() calls will always be valid. That is, there will be at least a next number in the in-order traversal when next() is called.
 
 
-//TODO
-class BSTIterator {
-    public:
+    class BSTIterator{
+        public:
         stack<TreeNode*> st;
-        TreeNode *temp;
-        BSTIterator(TreeNode* root) {
-            temp=root;
-            st.push(temp);
-            while(temp->left){
-                temp=temp->left;
-                st.push(temp);
-            }
+        BSTIterator(TreeNode* root){
+            pushNodes(root);
         }
-        
-        int next() {
-            temp = st.top();
-            int val = st.top()->val;
+        int next(){
+            TreeNode* temp = st.top();
             st.pop();
-            if(temp->right){
-                st.push(temp->right);
-                temp=temp->right;
-                while(temp->left){
-                    temp=temp->left;
-                    st.push(temp);
-                }
-            }
-            return val;
+            pushNodes(temp->right);
+            return temp->val;
         }
-        
-        bool hasNext() {
+        bool hasNext(){
             return !st.empty();
         }
-};
+        void pushNodes(TreeNode* node){
+            while(node){
+                st.push(node);
+                node=node->left;
+            }
+        }
+    };

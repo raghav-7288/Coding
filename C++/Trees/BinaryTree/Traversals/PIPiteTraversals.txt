@@ -62,7 +62,7 @@ vector<int> postorderTraversal(TreeNode* root) {
     }
     return postOrder;
 }
-//postOrder using 1 stack //TODO video
+//postOrder using 1 stack
 vector<int> postorderTraversal(TreeNode* root) {
     if(!root) return {};
     stack<TreeNode*> st;

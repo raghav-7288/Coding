@@ -1,3 +1,30 @@
+    TreeNode *pred(TreeNode* node){
+        node=node->left;
+        while(node && node->right) node=node->right;
+        return node;        
+    }
+    TreeNode* del(TreeNode* node) {
+        if(!node->right) return node->left;
+        if(!node->left) return node->right;
+        TreeNode *pre = pred(node);
+        pre->right=node->right;
+        return node->left;
+    }
+    TreeNode* deleteNode(TreeNode* root, int k) {
+        if(!root) return NULL;
+        if(root->val == k) return del(root);
+        if(root->val > k){
+            if(root->left && root->left->val == k) root->left = del(root->left);
+            else deleteNode(root->left,k);
+        }else{
+            if(root->right && root->right->val == k) root->right = del(root->right);
+            else deleteNode(root->right,k);
+        }
+        return root;
+    }
+
+
+-----------------------------------------replacing with inorder pred or suc--------------------------------------------------------------------
 
     TreeNode* succ(TreeNode* root){
         if(!root) return root;
@@ -34,4 +61,3 @@
         }
         return root;
     }
-    //TODO delete same node

@@ -1,46 +1,41 @@
-//change binary tree such that it follows children sum property
-//node->val = node->left->val + node->right->val
-//can increment(only) any node any no. of times
-
 //check if tree has CSP
-bool isParentSum(Node *root){
-    if(!root) return true;
-    if(root->left || root->right){ //if non leaf node
-        int sum=0;
-        if(root->left) sum += root->left->data;    
-        if(root->right) sum += root->right->data;
-        if(root->data != sum) return false;
-    }
-    return isParentSum(root->left) && isParentSum(root->right);
-}
+//node->val = node->left->val + node->right->val
 
-//convert tree such that it holds CSP
-void convertTree(Node* root) //TODO
-{
-    if (root == NULL)
-        return;
-    int childSum = 0;
-    if (root->left)
-        childSum += root->left->data;
-    if (root->right)
-        childSum += root->right->data;
-    if (childSum >= root->data)
-        root->data = childSum;
-    else {
-        if (root->left)
-            root->left->data = root->data;
-        if (root->right)
-            root->right->data = root->data;
+    bool isParentSum(Node *root){
+        if(!root) return true;
+        if(root->left || root->right){ //if non leaf node
+            int sum=0;
+            if(root->left) sum += root->left->data;    
+            if(root->right) sum += root->right->data;
+            if(root->data != sum) return false;
+        }
+        return isParentSum(root->left) && isParentSum(root->right);
     }
-    convertTree(root->left);
-    convertTree(root->right);
-    int totalSumToChangeParent = 0;
-    if (root->left)
-        totalSumToChangeParent
-            += root->left->data;
-    if (root->right)
-        totalSumToChangeParent
-            += root->right->data;
-    if (root->left || root->right)
-        root->data = totalSumToChangeParent;
-}
+
+
+************************************************************************************************************************************************
+
+
+//change binary tree such that it follows children sum property
+//can increment(only) any node any no. of times
+//node->val = node->left->val + node->right->val
+
+
+    void convertTree(Node* root)
+    {
+        if (!root) return;
+        int childSum = 0;
+        if (root->left) childSum += root->left->data;
+        if (root->right) childSum += root->right->data;
+        if (childSum >= root->data) root->data = childSum;
+        else {
+            if (root->left) root->left->data = root->data;
+            if (root->right) root->right->data = root->data;
+        }
+        convertTree(root->left);
+        convertTree(root->right);
+        int totalSumToChangeParent = 0;
+        if (root->left) totalSumToChangeParent += root->left->data;
+        if (root->right) totalSumToChangeParent += root->right->data;
+        if (root->left || root->right) root->data = totalSumToChangeParent;
+    }

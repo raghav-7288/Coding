@@ -1,0 +1,17 @@
+Consider a non-empty subarray from nums that has the maximum possible bitwise AND. Return the length of the longest such subarray.
+
+// the bitwise AND of two different numbers will always be strictly less than the maximum of those two numbers.
+-> give the max length of subarray of max element;
+
+    int longestSubarray(vector<int>& nums) {
+        int maxi=*max_element(nums.begin(),nums.end()),i=0,j=0,len=1;
+        while(j<nums.size()){
+            if(nums[j] == maxi){
+                i=j;
+                while(j<nums.size() && nums[j] == maxi) j++;
+                len=max(len,j-i);
+            }
+            else j++;
+        }
+        return len;
+    }

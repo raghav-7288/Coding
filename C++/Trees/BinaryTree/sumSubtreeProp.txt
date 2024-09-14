@@ -1,3 +1,26 @@
+Given a Binary Tree. Check for the Sum Tree for every node except the leaf node. 
+Return true if it is a Sum Tree otherwise, return false.
+A SumTree is a Binary Tree where the value of a node is equal to the sum of the nodes present in its 
+left subtree and right subtree. An empty tree is also a Sum Tree as the sum of an empty tree can be considered to be 0. 
+A leaf node is also considered a Sum Tree.
+
+
+-----------------------------------------------------------best------------------------------------------------------------------
+    pair<bool,int> solve(Node* root){
+        if(!root) return {true,0};
+        if(!root->left && !root->right) return {true,root->data};
+        pair<bool,int> left = solve(root->left);
+        pair<bool,int> right = solve(root->right);
+        bool res = left.first && right.first;
+        if(!res) return {false,0};
+        int sum = left.second + right.second;
+        if(root->data == sum) return {true,sum+root->data};
+        return {false,0};
+    }
+    bool isSumTree(Node* root) {
+        return solve(root).first;
+    }
+-------------------------------------------------------without modifying root data + map----------------------------------------------------------------
 bool solve(Node* root,map<Node*,int> &mp)
 {
     if(!root) return true;
@@ -16,10 +39,8 @@ bool solve(Node* root,map<Node*,int> &mp)
     map<Node*,int> mp;
     return solve(root,mp);
 }
-
-OR
-
-bool isSumTree(Node* root)//TODO try without map
+----------------------------------------------------modifying root data + map----------------------------------------------------------------
+bool isSumTree(Node* root)
 {
     if(!root) return true;
     if(!root->left && !root->right) return true;
