@@ -12,7 +12,6 @@ or an empty list if no such sequence exists. Each sequence should be returned as
         q.push({beg});
         used.push_back(beg);
         st.erase(beg);
-        int d=-1;
         while(!q.empty()){
             vector<string> cur = q.front();
             string word=cur.back();
@@ -44,7 +43,7 @@ or an empty list if no such sequence exists. Each sequence should be returned as
         return ans;
     }
 ----------------------------------------------------------------------------------------------------------------------
-//better approach
+//better approach //TODO
 
 ->create map of dis of all words till endWord from start word;
 ->backTrack from endWord to startWord in the map
@@ -111,7 +110,6 @@ Output
                 }
             }
         }
-        // for(auto m:mp)cout<<m.first<<"->"<<m.second<<endl;
         if(mp.find(end)!=mp.end()){
             vector<string> temp;
             temp.push_back(end);

@@ -1,28 +1,28 @@
 int timer=1;
-void dfs(int node, int parent, vector<int>& str, vector<int>& crm, vector<int>& vis, vector<int>& isAp, vector<int> adj[]){
+void dfs(int node, int parent, vector<int>& stepsToReach, vector<int>& canReachMin, vector<int>& vis, vector<int>& isAp, vector<int> adj[]){
     vis[node]=1;
-    str[node]=timer;
-    crm[node]=timer;
+    stepsToReach[node]=timer;
+    canReachMin[node]=timer;
     timer++;
     int noOfChilds=0;
     for(auto it:adj[node]){
         if(it == parent) continue;
         if(!vis[it]){
-            dfs(it,node,str,crm,vis,isAp,adj);
-            crm[node]=min(crm[node],crm[it]);
-            if(str[node] <= crm[it] && parent != -1){
+            dfs(it,node,stepsToReach,canReachMin,vis,isAp,adj);
+            canReachMin[node]=min(canReachMin[node],canReachMin[it]);
+            if(stepsToReach[node] <= canReachMin[it] && parent != -1){
                 isAp[node]=1;
             }
             noOfChilds++;
         }else{
-            crm[node]=min(crm[node],str[it]);
+            canReachMin[node]=min(canReachMin[node],stepsToReach[it]);
         }
     }
     if(noOfChilds > 1 && parent==-1) isAp[node]=1;
 }
 vector<int> articulationPoints(int V, vector<int>adj[]) {
-    vector<int> str(V), crm(V), vis(V), isAp(V), APs;
-    dfs(0,-1,str,crm,vis,isAp,adj);
+    vector<int> stepsToReach(V), canReachMin(V), vis(V), isAp(V), APs;
+    dfs(0,-1,stepsToReach,canReachMin,vis,isAp,adj);
     for(int i=0;i<V;i++) if(isAp[i]) APs.push_back(i);
     if(!APs.size()) return {-1};
     return APs;

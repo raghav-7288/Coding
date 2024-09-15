@@ -1,21 +1,14 @@
---------------------------------------DFS----------------------------------------
+--------------------------------------DFS---------------------------------------- //TODO format
 bool dfs(int source, vector<int> adj[], vector<int> &vis, vector<int> &pathVis)
 {
   vis[source] = 1;
   pathVis[source] = 1;
   for (auto it : adj[source])
   {
-    if (!vis[it])
-    {
-      if (dfs(it, adj, vis, pathVis))
-      {
-        return true;
-      }
+    if (!vis[it]){
+      if(dfs(it, adj, vis, pathVis)) return true;
     }
-    else if (pathVis[it])
-    {
-      return true;
-    }
+    else if(pathVis[it]) return true;
   }
   pathVis[source] = 0;
   return false;
@@ -26,12 +19,9 @@ bool isCyclic(int V, vector<int> adj[])
   vector<int> pathVis(V, 0);
   for (int i = 0; i < V; i++)
   {
-    if (!vis[i])
+    if(!vis[i])
     {
-      if (dfs(i, adj, vis, pathVis))
-      {
-        return true;
-      }
+      (dfs(i, adj, vis, pathVis)) return true;
     }
   }
   return false;

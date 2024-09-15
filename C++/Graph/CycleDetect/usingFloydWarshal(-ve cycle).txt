@@ -1,17 +1,17 @@
+adj-->> adjacency matrix for the graph with edge weights
 
-//adj-->> adjacency matrix for the graph with edge weights
-//V-->(0 to n-1)
-for(int via=0;via<n;via++){
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            adj[i][j]=min(adj[i][j],adj[i][via]+adj[via][j]);
+
+    for(int via=0;via<n;via++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                adj[i][j]=min(adj[i][j],adj[i][via]+adj[via][j]);
+            }
         }
     }
-}
 
 //cycle detection
-for(int i=0;i<n;i++){
-    if(adj[i][i]<0){
-        //cycle
+    for(int i=0;i<n;i++){
+        if(adj[i][i]<0){
+            //cycle
+        }
     }
-}

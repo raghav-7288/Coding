@@ -20,7 +20,7 @@ vector<int> bellmonFord(int n,int src, vector<vector<int>> &edges) {
         int from=x[0];
         int to=x[1];
         int ew=x[2];
-        if(dis[from]!=1e8 && dis[from]+ew < dis[to]){
+        if(dis[from]!=1e9 && dis[from]+ew < dis[to]){
             //if at nth iteration dis arr changes then negative cycle
             return {-1};
         }

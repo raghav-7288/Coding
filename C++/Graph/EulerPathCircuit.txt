@@ -31,4 +31,4 @@ Eulerian circuit in directed graphs: a directed graph has an Eulerian circuit if
 Conclusion:
 If the graph is given to have a single component and equal in-degree and out-degree for every vertex, 
 then the graph must be strongly connected.
-***********************************************************************************************************
+************************************************************************************************************************************
