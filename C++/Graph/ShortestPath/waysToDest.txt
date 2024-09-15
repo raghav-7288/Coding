@@ -7,7 +7,6 @@ means that there is a road between intersections ui and vi that takes timei minu
 You want to know in how many ways you can travel from intersection 0 to intersection n - 1 in the shortest amount of time.
 
 
-//TODO
     int countPaths(int n, vector<vector<int>>& roads) {
         vector<pair<int,int>> adj[n];
         for(auto r:roads){

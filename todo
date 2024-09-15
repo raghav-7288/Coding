@@ -1,5 +1,4 @@
 TODO
-// Greedy videos
 // LIS videos
 // BS videos
 // SW videos 
@@ -10,28 +9,25 @@ TODO
 // deque
 // havel hakimi
 // AVL Tree
+// Red Black Tree
 // Segment Tree
 // https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/#practice
 // https://www.geeksforgeeks.org/problems/transform-to-sum-tree--170645/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // string stream + getline
-// KMP(Knuth Morris Pratt) algo -> https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/
 // bfs/dfs->clrs
 // fenwick trees
-// fibonacci heap
 // https://www.geeksforgeeks.org/problems/k-sum-paths/1
 // https://leetcode.com/problems/diagonal-traverse-ii/description/?envType=daily-question&envId=2023-11-22
-// 1235. Maximum Profit in Job Scheduling
 // 1026. Maximum Difference Between Node and Ancestor
 // eucledian cycle
 // hamiltonian cycle
 // 201. Bitwise AND of Numbers Range
 // 1609. Even Odd Tree
-// Rabin Karp Algo https://www.geeksforgeeks.org/problems/search-pattern-rabin-karp-algorithm--141631/1
-// 57. Insert Interval
 // 2997. Minimum Number of Operations to Make Array XOR Equal to K
 // 260. Single Number III
 // 633. Sum of Square Numbers
 // 1382. Balance a Binary Search Tree
+// 1574. Shortest Subarray to be Removed to Make Array Sorted
 // 1579. Remove Max Number of Edges to Keep Graph Fully Traversable
 // 2045. Second Minimum Time to Reach Destination
 // gcd
