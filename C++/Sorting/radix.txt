@@ -1,0 +1,19 @@
+It is an efficient sorting algorithm for integers or strings with fixed-size keys. 
+
+    void countSort(vector<int>& nums, int exp){
+        vector<int> cnt(10), ans(nums.size());
+        for(auto n:nums) cnt[(n/exp)%10]++;
+        for(int i=1;i<10;i++) cnt[i] += cnt[i-1];
+        for(int i=nums.size()-1;i>=0;i--){
+            ans[cnt[(nums[i]/exp)%10]-1] = nums[i];
+            cnt[(nums[i]/exp)%10]--;
+        }
+        nums=ans;
+    }
+    vector<int> radixSort(vector<int>& nums) {
+        int maxi = *max_element(nums.begin(),nums.end()), exp;
+        for(exp=1;maxi/exp > 0;exp*=10){
+            countSort(nums,exp);
+        }
+        return nums;
+    }

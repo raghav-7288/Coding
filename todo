@@ -1,26 +1,18 @@
 TODO
-// LIS videos
 // BS videos
 // SW videos 
-// Radix Sort
-// Bucket Sort
-// Shell sort
 // Manacher's Algorithm
 // deque
 // havel hakimi
 // AVL Tree
 // Red Black Tree
 // Segment Tree
-// https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/#practice
-// https://www.geeksforgeeks.org/problems/transform-to-sum-tree--170645/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
-// string stream + getline
-// bfs/dfs->clrs
-// fenwick trees
-// https://www.geeksforgeeks.org/problems/k-sum-paths/1
-// https://leetcode.com/problems/diagonal-traverse-ii/description/?envType=daily-question&envId=2023-11-22
-// 1026. Maximum Difference Between Node and Ancestor
 // eucledian cycle
 // hamiltonian cycle
+// string stream + getline
+// fenwick trees
+
+// 1026. Maximum Difference Between Node and Ancestor
 // 201. Bitwise AND of Numbers Range
 // 1609. Even Odd Tree
 // 2997. Minimum Number of Operations to Make Array XOR Equal to K
@@ -34,10 +26,13 @@ TODO
 // 959 - Union Find - Optimized
 // 1278
 // weekly contest 167 remaining 3 ques
-// https://www.geeksforgeeks.org/problems/maximum-difference-1587115620/1 (monotonic stack)
-// huffman coding
 // 2699. Modify Graph Edge Weights
 
+// https://www.geeksforgeeks.org/problems/maximum-difference-1587115620/1 (monotonic stack)
+// https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/#practice
+// https://www.geeksforgeeks.org/problems/transform-to-sum-tree--170645/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+// https://www.geeksforgeeks.org/problems/k-sum-paths/1
+// https://leetcode.com/problems/diagonal-traverse-ii/description/?envType=daily-question&envId=2023-11-22
 // z->https://www.geeksforgeeks.org/problems/search-pattern-z-algorithm--141631/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // kmp->https://www.geeksforgeeks.org/problems/search-pattern0205/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // rabin karp->https://www.geeksforgeeks.org/problems/search-pattern-rabin-karp-algorithm--141631/1

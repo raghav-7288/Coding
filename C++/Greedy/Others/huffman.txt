@@ -1,0 +1,67 @@
+
+There are mainly two major parts in Huffman Coding
+    Build a Huffman Tree from input characters.
+    Traverse the Huffman Tree and assign codes to characters.
+
+    struct Node
+    {
+        char data;
+        int freq;
+        Node *left, *right;
+        Node(char val, int f)
+        {
+            left = NULL;
+            right = NULL;
+            data = val;
+            freq = f;
+        }
+    };
+    struct compare
+    {
+        bool operator()(Node *l, Node *r)
+        {
+            return (l->freq > r->freq);
+        }
+    };
+    void printHuffman(Node *top, string code)
+    {
+        if (!top)
+            return;
+        if (top->data != '#')
+        {
+            cout << top->data << " : " << code << endl;
+        }
+        printHuffman(top->left, code + "0");
+        printHuffman(top->right, code + "1");
+    }
+    void huffman(map<char, int> &freq)
+    {
+        priority_queue<Node *, vector<Node *>, compare> minHeap;
+        for (auto m : freq)
+        {
+            minHeap.push(new Node(m.first, m.second));
+        }
+        while (minHeap.size() != 1)
+        {
+            Node *left = minHeap.top();
+            minHeap.pop();
+            Node *right = minHeap.top();
+            minHeap.pop();
+            Node *top = new Node('#', left->freq + right->freq);
+            top->left = left;
+            top->right = right;
+            minHeap.push(top);
+        }
+        printHuffman(minHeap.top(), "");
+    }
+    
+---------------------------------
+    map<char, int> freq;
+    freq['a'] = 5;
+    freq['b'] = 9;
+    freq['c'] = 12;
+    freq['d'] = 13;
+    freq['e'] = 16;
+    freq['f'] = 45;
+    huffman(freq);
+---------------------------------
