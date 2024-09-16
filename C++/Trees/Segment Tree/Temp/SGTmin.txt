@@ -1,0 +1,60 @@
+
+
+    class SGTmin
+    {
+    public:
+        vector<int> segTree;
+        SGTmin(int n)
+        {
+            segTree.resize(4 * n);
+        }
+
+        void build(int index, int low, int high, vector<int> &a)
+        {
+            if (low == high)
+            {
+                segTree[index] = a[low];
+                return;
+            }
+            int mid = (low + high) / 2;
+            build(2 * index + 1, low, mid, a);
+            build(2 * index + 2, mid + 1, high, a);
+            segTree[index] = min(segTree[2 * index + 1], segTree[2 * index + 2]);
+        }
+        void update(int index, int low, int high, int p, int v)
+        {
+            if (low == high)
+            {
+                segTree[index] = v;
+                return;
+            }
+            int mid = (low + high) / 2;
+            if (p <= mid)
+            {
+                update(2 * index + 1, low, mid, p, v);
+            }
+            else
+            {
+                update(2 * index + 2, mid + 1, high, p, v);
+            }
+            segTree[index] = min(segTree[2 * index + 1], segTree[2 * index + 2]);
+        }
+        int query(int index, int low, int high, int left, int right)
+        {
+            if (right < low || high < left)
+            {
+                return INT_MAX;
+            }
+            else if (left <= low && high <= right)
+            {
+                return segTree[index];
+            }
+            else
+            {
+                int mid = (low + high) / 2;
+                int leftRange = query(2 * index + 1, low, mid, left, right);
+                int rightRange = query(2 * index + 2, mid + 1, high, left, right);
+                return min(leftRange, rightRange);
+            }
+        }
+    };
