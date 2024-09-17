@@ -2,7 +2,6 @@ Given an integer array nums, return true if you can partition the array
 into two subsets such that the sum of the elements in both subsets is equal or false otherwise.
 
 // find subset with sum s/2
-
 bool solve(int i, int t, int n, vector<int>& nums, vector<vector<int>> &dp){
     // can be used
     // if(!t) return true;
@@ -25,8 +24,7 @@ bool canPartition(vector<int>& nums) {
     return solve(0,s/2,n,nums,dp);
 }
 
-//Tabulation
--->> sum will be s/2
+---------------------------------------------------------------Tabulation------------------------------------------------------------------------------------------
     bool isSubsetSum(vector<int>arr, int sum){
         int n=arr.size();
         vector<vector<int>> dp(n,vector<int>(sum+1,0));

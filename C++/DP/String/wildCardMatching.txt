@@ -23,7 +23,7 @@ The matching should cover the entire input string (not partial).
         return solve(n,m,p,s,dp);
     }
 
-//Tabulation
+------------------------------------------------------------Tabulation----------------------------------------------------------------------------
 
     bool isMatch(string s, string p) {
         int n=p.size();
@@ -47,7 +47,7 @@ The matching should cover the entire input string (not partial).
         return dp[n][m];
     }
 
-//Optimization
+---------------------------------------------------------------Optimization-------------------------------------------------------------
      
     bool isMatch(string s, string p) {
         int n=p.size();

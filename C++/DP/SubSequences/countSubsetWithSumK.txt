@@ -1,8 +1,6 @@
 Given an array arr of size n of non-negative integers and an integer sum, 
 the task is to count all subsets of the given array with a sum equal to a given sum.
 
-//Recursion
-
 	int mod=1e9+7;
 	int solve(int i, int t, int n, int arr[], vector<vector<int>>& dp){
 	    if(i==n){
@@ -21,9 +19,7 @@ the task is to count all subsets of the given array with a sum equal to a given 
         return solve(0,t,n,arr,dp);
 	}
 
-
-
-//Tabulation
+----------------------------------------------------------------Tabulation-------------------------------------------------------------------
 
 	int perfectSum(int arr[], int n, int sum)
 	{

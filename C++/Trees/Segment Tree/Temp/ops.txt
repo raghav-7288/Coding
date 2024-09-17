@@ -1,0 +1,4 @@
+Addition/Subtraction
+Maximum/Minimum
+GCD/LCM
+AND/OR/XOR

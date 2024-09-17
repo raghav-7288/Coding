@@ -1,6 +1,5 @@
-----------Longest Common Substring---------------
-
-//Tabulation
+--------------------------------------------------Longest Common Substring-----------------------------------------------------------------
+----------------------------------------------------------Tabulation----------------------------------------------------------------------
 
     int longestCommonSubstr(string str1, string str2) {
         int n = str1.length(), m = str2.length(), ans=-1;
@@ -15,7 +14,26 @@
         return ans;
     }
 
-//Memoization
+-------------------------------------------------Backward approach like LCSubsequence------------------------------------------------------------
+
+    int solve(int n, int m, string str1, string str2, vector<vector<int>>& dp){
+        if(n<0 || m<0) return 0;
+        if(dp[n][m]!=-1) return dp[n][m];
+        int res=0;
+        if(str1[n]==str2[m]) res=1+solve(n-1,m-1,str1,str2,dp);
+        solve(n-1,m,str1,str2,dp);
+        solve(n,m-1,str1,str2,dp);
+        ans=max(ans,res);
+        return dp[n][m]=res;
+    }
+    int longestCommonSubstr(string str1, string str2) {
+        int n = str1.length(), m = str2.length();
+        vector<vector<int>> dp(n,vector<int>(m,-1));
+        solve(n-1,m-1,str1,str2,dp);
+        return ans;
+    }
+
+-------------------------------------------------------------Memoization----------------------------------------------------------------------
 
     int res=0;
     int solve(int i, int j, int n, int m, string str1, string str2, vector<vector<int>>& dp){
@@ -33,23 +51,4 @@
         vector<vector<int>> dp(n,vector<int>(m,-1));
         solve(0,0,n,m,str1,str2,dp);
         return res;
-    }
-
-// Backward approach like LCSubsequence
-
-    int solve(int n, int m, string str1, string str2, vector<vector<int>>& dp){
-        if(n<0 || m<0) return 0;
-        if(dp[n][m]!=-1) return dp[n][m];
-        int res=0;
-        if(str1[n]==str2[m]) res=1+solve(n-1,m-1,str1,str2,dp);
-        solve(n-1,m,str1,str2,dp);
-        solve(n,m-1,str1,str2,dp);
-        ans=max(ans,res);
-        return dp[n][m]=res;
-    }
-    int longestCommonSubstr(string str1, string str2) {
-        int n = str1.length(), m = str2.length();
-        vector<vector<int>> dp(n,vector<int>(m,-1));
-        solve(n-1,m-1,str1,str2,dp);
-        return ans;
     }

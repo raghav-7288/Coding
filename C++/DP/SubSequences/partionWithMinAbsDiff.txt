@@ -2,7 +2,7 @@ You are given an integer array nums of 2 * n integers. You need to partition num
 to minimize the absolute difference of the sums of the arrays. To partition nums, put each element of nums into 
 one of the two arrays. Return the minimum possible absolute difference.
 
---------- totSum >>>> cant make dp of such large value-----------------
+--------------------------------------------- totSum >>>> cant make dp of such large value--------------------------------------------
     int minimumDifference(vector<int>& arr) {
         int totSum = accumulate(arr.begin(),arr.end(),0), n=arr.size();
         vector<vector<bool>> dp(n, vector<bool>(totSum + 1, false));
@@ -28,7 +28,7 @@ one of the two arrays. Return the minimum possible absolute difference.
         return mini;
     }
 
---------------------------------------------------better way - Meet in Middle -----------------------------------------------------
+--------------------------------------------------better way - Meet in Middle//TODO-----------------------------------------------------
 
     int minimumDifference(vector<int>& nums) {
         int N=nums.size(), res=0, sum = accumulate(nums.begin(),nums.end(),0), n = N/2;

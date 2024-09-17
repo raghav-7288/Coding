@@ -1,20 +1,20 @@
 Count All distinct Subsequences of a string
 
-int distinctSubsequences(string s)
-{
-    int n = s.size();
-    int mod = 1e9 + 7;
-    unordered_map<char, int> mp;
-    vector<int> dp(n + 1);
-    dp[0] = 1;
-    for (int i = 1; i <= n; i++)
+    int distinctSubsequences(string s)
     {
-        dp[i] = (2 * dp[i - 1]) % mod;
-        if (mp[s[i - 1]])
+        int n = s.size();
+        int mod = 1e9 + 7;
+        unordered_map<char, int> mp;
+        vector<int> dp(n + 1);
+        dp[0] = 1;
+        for (int i = 1; i <= n; i++)
         {
-            dp[i] = (dp[i] - dp[mp[s[i - 1]] - 1] + mod) % mod;
+            dp[i] = (2 * dp[i - 1]) % mod;
+            if (mp.find(s[i-1])!=mp.end())
+            {
+                dp[i] = (dp[i] - dp[mp[s[i - 1]]] + mod) % mod;
+            }
+            mp[s[i - 1]] = i-1;
         }
-        mp[s[i - 1]] = i;
+        return dp[n];
     }
-    return dp[n];
-}

@@ -2,7 +2,8 @@ Given a rod of length N inches and an array of prices, price[].
 price[i] denotes the value of a piece of length i. 
 Determine the maximum value obtainable by cutting up the rod and selling the pieces.
 
-//Recursion
+-------------------------------------------------------------Recursion------------------------------------------------------------------------
+    
     int solve(int n, int prices[],vector<int>& dp){
         if(!n) return 0;
         if(dp[n]!=-1) return dp[n];
@@ -17,7 +18,7 @@ Determine the maximum value obtainable by cutting up the rod and selling the pie
         return solve(n,price,dp);
     }
 
-//Pick/NotPick
+------------------------------------------------------------Cut/NotCut---------------------------------------------------------------
 
     int solve(int ind, int n, int len,int prices[], vector<vector<int>>& dp){
         if(!len || ind>n) return 0;
@@ -32,7 +33,7 @@ Determine the maximum value obtainable by cutting up the rod and selling the pie
         return solve(1,n,n,price,dp);
     }
 
-    ------OR------
+-----------------------------------------------------------------OR------------------------------------------------------------------------------
 
     int solve(int ind, int len,int prices[], vector<vector<int>>& dp){
         if(!ind) return (len * prices[0]); //can only make len cuts of length 1
@@ -47,8 +48,7 @@ Determine the maximum value obtainable by cutting up the rod and selling the pie
         return solve(n-1,n,price,dp);
     }
 
-
-//Tabulation
+---------------------------------------------------------------Tabulation---------------------------------------------------------------
 
     int cutRod(int price[], int n) {
         vector<vector<int>> dp(n,vector<int>(n+1,0));

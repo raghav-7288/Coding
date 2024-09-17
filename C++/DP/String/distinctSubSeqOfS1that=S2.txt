@@ -14,7 +14,7 @@ Given two strings s and t, return the number of distinct subsequences of s which
     }
 
 
-//Tabulation
+--------------------------------------------------------------Tabulation--------------------------------------------------------------
 
     int numDistinct(string s, string t) {
         int n=s.length(),m=t.length();
@@ -27,12 +27,12 @@ Given two strings s and t, return the number of distinct subsequences of s which
             for(int j=1;j<=m;j++){
                 if(s[i-1]==t[j-1]) dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
                 else dp[i][j]=dp[i-1][j];
-                }
+            }
         }
         return (int)dp[n][m];
     }
 
-//Optimised Tabulation
+--------------------------------------------------------Optimised Tabulation--------------------------------------------------------------
 
     int numDistinct(string s, string t) {
         int n=s.length(),m=t.length();
@@ -48,9 +48,9 @@ Given two strings s and t, return the number of distinct subsequences of s which
         return (int)cur[m];
     }
 
-##################################################### 1D Tabulation ################################################################33
+-----------------------------------------------------------1D Tabulation--------------------------------------------------------------
 
-    int numDistinct(string s, string t) {
+    int numDistinct(string s, string t) {//TODO
         int n=s.length(),m=t.length();
         vector<double> dp(m+1,0);
         dp[0]=1;

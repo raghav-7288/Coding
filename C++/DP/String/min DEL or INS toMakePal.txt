@@ -1,6 +1,6 @@
 
 MinInsertions or minDeletions to make string palindrom -> both same
--> Keep the longest palindromic subsequence intact and add the remaining things in reverse order.
+-> Keep the longest palindromic subsequence intact and add the remaining things in reverse order or delete them
 -> ans = n - len( longest palindromic subsequence )
 
 
