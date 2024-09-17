@@ -1,0 +1,55 @@
+Given a string s, partition s such that every 
+substring of the partition is a palindrome.
+Return the minimum cuts needed for a palindrome partitioning of s.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+    bool isPal(int i, int j, string &s) { -> pass by reg to avoid MLE
+        while (i < j) {
+            if (s[i] != s[j]) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+    int solve(int i, int n, string &str, vector<int> &dp) {
+        if (i == n || isPal(i,n,str)) return 0;
+        if (dp[i] != -1) return dp[i];
+        int minCost = INT_MAX;
+        for (int j = i; j < n; j++) {
+            if (isPal(i, j, str)) {
+                minCost = min(minCost, 1 + solve(j + 1, n, str, dp));
+            }
+        }
+        return dp[i] = minCost;
+    }
+    int minCut(string str) {
+        int n = str.size();
+        vector<int> dp(n, -1);
+        return solve(0, n-1, str, dp);
+    }
+
+--------------------------------------------------------------Tabulation-----------------------------------------------------------------------
+
+    bool isPal(int i, int j, string &s) {
+        while (i < j) {
+            if (s[i] != s[j]) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+    int minCut(string s) {
+        int n=s.length();
+        vector<int> dp(n+1,0);
+        dp[n]=0;
+        for(int i=n-1;i>=0;i--){
+            int cuts=INT_MAX;
+            for(int j=i;j<n;j++){
+                if(isPal(i,j,s)){
+                    cuts=min(cuts,1+dp[j+1]);
+                }
+            }
+            dp[i]=cuts;
+        }
+        return dp[0]-1;
+    }

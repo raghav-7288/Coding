@@ -1,6 +1,5 @@
-Unlimites buys and sells
-The transaction fee is only charged once for each stock purchase and sale.
-->whenever sellinf deduct the fee from profit.
+Unlimites buys and sells the transaction fee is only charged once for each stock purchase and sale.
+->whenever selling deduct the fee from profit.
 
 
     int solve(int i, int n, int fee, vector<int>& prices, int canBuy, vector<vector<int>>& dp){

@@ -4,8 +4,6 @@ However, you can buy it then immediately sell it on the same day.
 Find and return the maximum profit you can achieve.
 (can buy and sell multiple time until i!=n but can have only 1 share at a time)
 
-
-
     int solve(int i, int n, vector<int>& prices, int canBuy, vector<vector<int>>& dp){
         if(i==n) return 0;
         if(dp[i][canBuy]!=-1) return dp[i][canBuy];
@@ -20,7 +18,7 @@ Find and return the maximum profit you can achieve.
         return solve(0,n,prices,1,dp);
     }
 
-//Tabulation
+-------------------------------------------------------------Tabulation-------------------------------------------------------------
 
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
@@ -37,8 +35,7 @@ Find and return the maximum profit you can achieve.
         return dp[0][1];
     }
 
-
-//Optimized Tabulation
+---------------------------------------------------------Optimized Tabulation-------------------------------------------------------------
 
     int maxProfit(vector<int>& prices) {
         int n=prices.size();

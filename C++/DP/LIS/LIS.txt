@@ -1,6 +1,7 @@
 Given an integer array nums, return the length of the longest strictly increasing subsequence.
 
 *********************************************************************************************************************************************
+    
     int solve(int i, int pre, vector<int>& nums, vector<vector<int>>& dp){
         if(i>=nums.size()) return 0;
         if(dp[i][pre+1]!=-1) return dp[i][pre+1];
@@ -107,7 +108,6 @@ Given an integer array nums, return the length of the longest strictly increasin
     }
 
 ************************************************************No. of LIS*****************************************************************************
-
 ->create one count arrays if some j updates dp[i] copy its count else if some j is same as dp[i] add its count.
 
     int findNumberOfLIS(vector<int>& nums) {

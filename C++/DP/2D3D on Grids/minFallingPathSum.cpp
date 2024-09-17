@@ -15,7 +15,7 @@ for(int i=0;i<n;i++){
             d=dp[i-1][j];
             if(j>0) l=dp[i-1][j-1];
             if(j<m-1) ri=dp[i-1][j+1];
-            dp[i][j]=matrix[i][j] + min(d,min(l,ri));
+            dp[i][j]=matrix[i][j] + min({l,d,ri});
         }
     }
 }
@@ -33,13 +33,12 @@ int solve(int r, int c, int m, int n, vector<vector<int>> &mat, vector<vector<in
     if (dp[r][c] != -1)
         return dp[r][c];
     int left = INT_MAX, right = INT_MAX, down = INT_MAX;
-    int val = mat[r][c];
     if (c > 0)
         left = solve(r + 1, c - 1, m, n, mat, dp);
     down = solve(r + 1, c, m, n, mat, dp);
     if (c < n - 1)
         right = solve(r + 1, c + 1, m, n, mat, dp);
-    return dp[r][c] = val + min(down, min(left, right));
+    return dp[r][c] = mat[r][c] + min(down, min(left, right));
 }
 int minFallingPathSum(vector<vector<int>> &mat)
 {

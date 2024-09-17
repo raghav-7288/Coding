@@ -22,15 +22,13 @@ Both robots should reach the bottom row in grid.
         int ans=INT_MIN;
         for(int d1=-1;d1<=1;d1++){
             for(int d2=-1;d2<=1;d2++){
-                int val;
                 int nc1=c1+d1;
                 int nc2=c2+d2;
                 if(c1==c2){
-                    val=grid[r][c1]+pick(r+1,nc1,nc2,n,m,grid,dp);
+                    ans=max(ans,grid[r][c1]+pick(r+1,nc1,nc2,n,m,grid,dp));
                 }else{
-                    val=grid[r][c1]+grid[r][c2]+pick(r+1,nc1,nc2,n,m,grid,dp);
+                    ans=max(ans,grid[r][c1]+grid[r][c2]+pick(r+1,nc1,nc2,n,m,grid,dp));
                 }
-            ans=max(ans,val);
             }
         }
         return dp[r][c1][c2]=ans;

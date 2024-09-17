@@ -29,7 +29,7 @@ Return the minimum total cost of the cuts.
         return solve(1,c,cuts,dp);
     }
 
-//Tabulation
+---------------------------------------------------------Tabulation--------------------------------------------------------------------------
 
     int minCost(int n, vector<int>& cuts) {
         int c=cuts.size();

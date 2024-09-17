@@ -33,24 +33,6 @@ return dp[0][0];
 */
 #include <bits/stdc++.h>
 using namespace std;
-/*
-Triangular grid->
-int solve(int r, int c, vector<vector<int>> &tri, vector<vector<int>> &dp)
-{
-    if (r == tri.size())
-        return 0;
-    if (dp[r][c] != -1)
-        return dp[r][c];
-    int one = tri[r][c] + solve(r + 1, c, tri, dp);
-    int two = tri[r][c] + solve(r + 1, c + 1, tri, dp);
-    return dp[r][c] = min(one, two);
-}
-int minimumTotal(vector<vector<int>> &tri)
-{
-    vector<vector<int>> dp(tri.size(), vector<int>(tri.size(), -1));
-    return solve(0, 0, tri, dp);
-}
-*/
 int solve(int r, int c, int m, int n, vector<vector<int>> &dp, vector<vector<int>> &grid)
 {
     if (r == m - 1 && c == n - 1)
@@ -70,13 +52,4 @@ int minPathSum(vector<vector<int>> &grid)
     int n = grid[0].size();
     vector<vector<int>> dp(m, vector<int>(n, -1));
     return solve(0, 0, m, n, dp, grid);
-}
-int main()
-{
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
-
-    return 0;
 }
