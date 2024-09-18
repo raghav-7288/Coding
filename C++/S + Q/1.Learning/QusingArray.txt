@@ -6,7 +6,7 @@ struct Queue
     {
         front = rear = 0;
         capacity = c;
-        queue = new int;
+        queue = new int[c];
     }
     ~Queue() { delete[] queue; }
     void queueEnqueue(int data)
