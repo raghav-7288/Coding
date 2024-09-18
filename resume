@@ -73,7 +73,7 @@
   \includegraphics[height=2.5cm]{iitmLogo.png}
 \end{minipage}
 
-\vspace{-4mm}
+\vspace{-6mm}
 \section{Education}
 
 \begin{cvcolumns}
@@ -112,7 +112,7 @@
 \cventry
 {}
 {Gallery Search : Advanced Result Generation}
-{SDE Intern, Samsung Research Institute-Bangalore}
+{SDE Intern, Samsung Research Institute, Bangalore}
 {June 2024 - July 2024}{}{}
 \cvlistitem {Implemented various clustering algorithms, Worked on techniques to evaluate and score the performance of a translation model, Utilized knowledge distillation to compress machine learning models.}
 \vspace{1mm}
@@ -134,10 +134,10 @@
 {Trip - A Complete Tourism Solution}
 {International Symposium on Information and Communication Techonology}
 {April 2022}{}{}
-\cvlistitem {Published an article titled 'Trip - A Comprehensive Tourism Solution,' detailing the project's structure and methodology.}
+\cvlistitem {Published an article titled 'Trip-A Comprehensive Tourism Solution' detailing the project's structure and methodology.}
 \vspace{-4mm}
 
-\section{Projects}
+\section{Key Projects}
 % \cventry
 % {M.Tech. Project, IIT Madras}
 % {Guide: Ass. Prof. Dr. Ayon Chakraborty}
@@ -152,16 +152,12 @@
 
 \cventry
 {M.Tech. Project, IIT Madras}
-{Guide: Asst. Prof. Dr. Ayon Chakraborty}
-{Hardware-Accelerated Inference on Real-Time UAV Imagery}
+{Guide: Prof. Dr. Ayon Chakraborty}
+{Hardware-Accelerated Inference on Real-Time UAV Imagery *}
 {June 2024 - Present}{}{}
-\cvlistitem {Comparing inference times of a deep neural network (DNN) model on TPU, GPU, and CPU.}
-\cvlistitem {Ongoing evaluation of performance metrics to determine the most efficient hardware for UAV-based imagery tasks.}
-\cvlistitem {Optimization of DNN models is planned to enhance real-time applications such as surveillance, intrusion detection, and object recognition.}
-\cvlistitem {Future work includes implementing an optimized TensorFlow Lite (TFLite) model on TPU for improved real-time performance.}
-\vspace{1mm}
-
-
+\cvlistitem {Evaluating performance metrics and comparing inference times of a deep neural network (DNN) model across TPU, GPU, CPU and Raspberry Pi to identify the most efficient hardware platform for enabling onboard inferencing.}
+\cvlistitem {Future work includes optimizing DNN models to enhance real-time capabilities for applications such as surveillance, intrusion detection, and object recognition.}
+\cvlistitem {An upcoming goal is to implement an optimized TensorFlow Lite (TFLite) model on TPU for improved real-time performance.}
 
 \cventry
 {}
@@ -169,32 +165,6 @@
 {Custom Big Integer Library for Arithmetic Operations in C++}
 {August 2023}{}{}
 \cvlistitem {Designed and implemented a comprehensive custom big integer library in C++.}
-\cvlistitem {Implemented robust error handling mechanism to address scenarios such as division by zero.}
-\vspace{1mm}
-
-\cventry
-{}
-{Instructor: Prof. Mitesh Khapra}
-{CS6910: Deep Learning}
-{Jan-April 2024}{}{}
-
-\cvlistitem{\textbf{Feed Forward Neural Network From Scratch}\\-Constructed a deep neural network from the ground up, incorporating back-propagation and implemented optimizers.\\-Employed this architecture on the MNIST fashion dataset to classify apparel into distinct categories.}
-
-% \cvlistitem{\textbf{Multiclass Image Classification using CNNs}\\-Explored different hyperparameters, initializations, and data augmentation techniques while building CNN.\\-Applied guided backpropagation to visualize the part of the image that excites certain neurons of a layer.}
-
-\cvlistitem{\textbf{Transliteration System}\\-Implemented a Seq2Seq model using different recurrent cells such as RNN, LSTM, and GRU on Aksharantar dataset.\\-Improved the performance of vanilla models by integrating an attention mechanism, resulting in a 4\% boost.}
-
-\cventry
-{}
-{Instructor: Prof. Rupesh Nasre}
-{CS6023: GPU Programming}
-{Jan-April 2024}{}{}
-\cvlistitem{\textbf{Parallel Convolution Filter}\\Implemented a parallel convolution filter using CUDA and achieved significant speedup over serial implementation.}
-
-% \cvlistitem{\textbf{BFS Graph Traversal in Parallel}\\Developed a parallel BFS algorithm using GPU programming and enhanced graph traversal speed for large datasets.}
-
-\cvlistitem{\textbf{Tank Battle Simulation Project}\\Created a real-time tank battle simulation leveraging GPU capabilities.}
-
 
 % \cventry
 % {}
@@ -203,62 +173,51 @@
 % {Jan 2022}{}{}
 % \cvlistitem {Complete Itinerary Planner: E-commerce, Hotel Booking, Travel Booking, and Food Services Modules with React, Node.js, MongoDB, and JavaScript.}
 % \cvlistitem {Created an all-in-one itinerary planner using Node.js, MongoDB, and JavaScript, featuring e-commerce, hotel booking, travel booking, and food services modules, providing users with a seamless and convenient travel planning experience.}
-\vspace{1mm}
+% \vspace{1mm}
 
 \cventry
 {}
 {Prof. Abha Kiran Rajput}
 {Time Table Generator}
-{2021}{}{}
+{2022}{}{}
 \cvlistitem {Developed a Java based project that automates the time table generation process for educational institutions.}
 \cvlistitem {This user-friendly application optimizes scheduling by assigning subjects, teachers, and resources to appropriate time slots while considering constraints.}
-\vspace{-4mm}
 
+\vspace{-4mm}
+\section{Course Projects}
+\cventry
+{}
+{Instructor: Prof. Mitesh Khapra}
+{CS6910: Deep Learning}
+{Jan-April 2024}{}{}
+\cvlistitem{\textbf{Feed Forward Neural Network From Scratch}\\-Constructed a deep neural network from the ground up, incorporating back-propagation and implemented optimizers.\\-Employed this architecture on the MNIST fashion dataset to classify apparel into distinct categories.}
+% \cvlistitem{\textbf{Multiclass Image Classification using CNNs}\\-Explored different hyperparameters, initializations, and data augmentation techniques while building CNN.\\-Applied guided backpropagation to visualize the part of the image that excites certain neurons of a layer.}
+\cvlistitem{\textbf{Transliteration System}\\-Implemented a Seq2Seq model using different recurrent cells such as RNN, LSTM, and GRU on Aksharantar dataset.\\-Improved the performance of vanilla models by integrating an attention mechanism, resulting in a 4\% boost.}
+
+\cventry
+{}
+{Instructor: Prof. Rupesh Nasre}
+{CS6023: GPU Programming}
+{Jan-April 2024}{}{}
+\cvlistitem{\textbf{Parallel Convolution Filter}\\Implemented a parallel convolution filter using CUDA and achieved significant speedup over serial implementation.}
+% \cvlistitem{\textbf{BFS Graph Traversal in Parallel}\\Developed a parallel BFS algorithm using GPU programming and enhanced graph traversal speed for large datasets.}
+\cvlistitem{\textbf{Tank Battle Simulation Project}\\Created a real-time tank battle simulation leveraging GPU capabilities.}
+
+\cventry
+{}
+{Instructor: Prof. Shefali Agarwal}
+{CS1702: Computer Architecture And Organisation}
+{2021}{}{}
+\cvlistitem{\textbf{Cache and Memory Hierarchy Simulator}\\Developed a flexible simulator to analyze cache and memory hierarchy performance using the SPEC-2000 benchmark. Implemented and compared L1, L2, and victim cache configurations with adjustable size, associativity, and block size.}
+
+\vspace{-4mm}
 \section{Course Work}
 \cvlistitem{\textbf{Key Courses in M.Tech July 2023-May 2025} : Advanced Data Structures and Algorithms, Advanced Programming Lab, GPU Programming, Deep Learning, Linear Algebra and Random Processes, Digital System and Testable Design.}
 \cvlistitem{\textbf{Key Courses in B.Tech June 2018-July 2022} : Operating Systems, Computer Organisation and Architecture, Computer Networks, Database Management System, OOPs using C++, Data Structures and Algorithms.}
 
-
-% \section{Undergraduate Course Work}
-% \cvlistitem{\textbf{Theory}: Advanced Data Structures and Algorithms}
-% \cvlistitem{\textbf{Programming}: Advanced Programming Lab, GPU Programming}
-% \cvlistitem{\textbf{Intelligent Systems}: Deep Learning}
-% \cvlistitem{\textbf{Networks}: Security In Cyber Physical Systems}
-% \cvlistitem{\textbf{Mathematics}: Linear Algebra and Random Processes}
-% \cvlistitem{\textbf{Others}: Digital System and Testable Design}
-
-
-
-% \vspace{-4mm}
-% \section{Course Projects}
-
-% \cventry
-% {}
-% {Instructor: Prof. Mitesh Khapra}
-% {CS6910: Deep Learning}
-% {Jan-April 2024}{}{}
-
-% \cvlistitem{\textbf{Feed Forward Neural Network From Scratch}\\-Constructed a deep neural network from the ground up, incorporating back-propagation and implemented optimizers.\\-Employed this architecture on the MNIST fashion dataset to classify apparel into distinct categories.}
-
-% \cvlistitem{\textbf{Multiclass Image Classification using CNNs}\\-Explored different hyperparameters, initializations, and data augmentation techniques while building CNN.\\-Applied guided backpropagation to visualize the part of the image that excites certain neurons of a layer.}
-
-% \cvlistitem{\textbf{Transliteration System}\\-Implemented a Seq2Seq model using different recurrent cells such as RNN, LSTM, and GRU on Aksharantar dataset.\\-Improved the performance of vanilla models by integrating an attention mechanism, resulting in a 4\% boost.}
-
-% \cventry
-% {}
-% {Instructor: Prof. Rupesh Nasre}
-% {CS6023: GPU Programming}
-% {Jan-April 2024}{}{}
-% \cvlistitem{\textbf{Parallel Convolution Filter}\\Implemented a parallel convolution filter using CUDA and achieved significant speedup over serial implementation.}
-
-% \cvlistitem{\textbf{BFS Graph Traversal in Parallel}\\Developed a parallel BFS algorithm using GPU programming and enhanced graph traversal speed for large datasets.}
-
-% \cvlistitem{\textbf{Tank Battle Simulation Project}\\Created a real-time tank battle simulation leveraging GPU capabilities.}
-
 \vspace{-4mm}
-
 \section{Technical Skills} 
-\cvlistitem{\textbf{Programming Language}: C, C++, Python, CUDA}
+\cvlistitem{\textbf{Programming Language}: C++, C, Python, CUDA}
 % \cvlistitem{\textbf{Web Technologies}: HTML, React, Node.js}
 \cvlistitem{\textbf{Database}: MySQL, MongoDB}
 \cvlistitem{\textbf{Tools and Platforms}: Google Colab, Visual Studio Code, Git, Wandb, Replit, MsExcel, Android Studio}
@@ -270,90 +229,15 @@
 \cvlistitem {\textbf{Ranked 25} In CSE department of Sharda University with a Score of 770/1000 conducted by Coding Ninjas.}
 
 \vspace{-4mm}
-
 \section{Positions of Responsibility }
+\cvlistitem {\textbf{Teaching assistant}: CS1100 - C Programming (July 2023-July 2024) and CS6600 - Computer Architecture (Jul-Nov 2024) at IIT Madras.}  
+\cvlistitem {\textbf{Class Representative} for M.Tech CSE (Batch of 2023) at IIT Madras and B.Tech CSE (Batch of 2018) at Sharda University.}
 
-\cvlistitem {\textbf{Teaching assistant}: CS1100 - C Programming at IIT Madras (July 2023-July 2024).}
-\cvlistitem {\textbf{Teaching assistant}: CS6600 - Computer Architecture at IIT Madras (Jul-Nov 2024).}
-\cvlistitem {\textbf{Class Representative} for M.Tech CSE (Batch of 2023) at IIT Madras.}
-\cvlistitem {\textbf{Class Representative} for B.Tech CSE (Batch of 2018) at Sharda University.}
 \vspace{-4mm}
-
 \section{Extra Curricular Activities}
 \cvlistitem {Selected for a 3 days \textbf{Python Workshop} organised by \textbf{IIT Roorkee}.}
 \cvlistitem {Secured \textbf{First Position} in IBM Ice Day organised by \textbf{IBM} at Sharda University.}
 \cvlistitem {Participated in a \textbf{Hackathon} organised by Shobhit Institute.}
 \cvlistitem {Participated in \textbf{National Project Competition Innovation Budge} with the project titled “Voice Controlled Mailing System” made using Python, OpenCV.}
 
-
-
-
-%\section {}
-%\cvlistitem{\textsuperscript{1} \scriptsize{\url{https://www.hackerrank.com/Nalini_Deswal}}}
-
-%----------------------------------------------------------------------------------------------------------------------------
-%----------------------------------------------------------------------------------------------------------------------------
 \end{document}
-
-
-%% end of file `template.tex'.
-
-
-% ### 1. Clustering Algorithms (K-Means)
-% **K-Means Clustering** is an unsupervised learning algorithm used to partition a dataset into \( k \) distinct, non-overlapping subsets (clusters). The algorithm works by:
-% - Initializing \( k \) centroids (one for each cluster).
-% - Assigning each data point to the nearest centroid.
-% - Recalculating the centroids as the mean of all data points assigned to each centroid.
-% - Repeating the assignment and centroid update steps until convergence.
-
-% **Key Points to Mention:**
-% - It’s useful for finding patterns and grouping similar data points.
-% - The number of clusters \( k \) needs to be specified beforehand.
-% - K-Means can be sensitive to the initial placement of centroids and may converge to local minima.
-
-% ### 2. BERT Classifier
-% **BERT (Bidirectional Encoder Representations from Transformers)** is a pre-trained transformer model used for various NLP tasks. A BERT classifier leverages BERT’s contextual embeddings to classify text into different categories. The process involves:
-% - Fine-tuning BERT on a labeled dataset specific to the classification task.
-% - Using BERT’s attention mechanisms to understand context and meaning in text.
-
-% **Key Points to Mention:**
-% - BERT provides rich, contextualized embeddings that significantly improve performance on NLP tasks.
-% - It’s pre-trained on a large corpus and fine-tuned on specific tasks, making it highly effective for classification.
-
-% ### 3. Evaluating and Scoring Translation Models (BLEU Score)
-% **BLEU (Bilingual Evaluation Understudy) Score** is a metric for evaluating the quality of text that has been translated by a machine. It compares n-grams (contiguous sequences of \( n \) words) in the machine-generated translations to those in reference translations. The key steps include:
-% - Computing the precision of n-grams.
-% - Using a brevity penalty to account for translation length.
-
-% **Key Points to Mention:**
-% - BLEU Score helps in assessing how closely machine translations match human reference translations.
-% - It’s widely used but has limitations, such as not capturing semantic meaning and context well.
-
-
-% Comet Evaluation Metric
-% Comet is a recent evaluation metric designed for assessing the quality of text generated by machine translation and other natural language generation tasks. Unlike traditional metrics like BLEU, which rely on n-gram matching, Comet aims to provide a more nuanced evaluation by considering the contextual and semantic quality of translations.
-
-% Key Features of Comet:
-
-% Contextual Understanding: Comet leverages neural network models to understand the context and semantics of the text, aiming to evaluate how well the generated text aligns with human judgment.
-% Pre-trained Models: It uses pre-trained models to assess the quality of translations. These models are trained to predict the quality of translations based on human judgments collected through crowdsourcing or expert assessments.
-% Flexibility: Comet can be applied to various language generation tasks beyond translation, including summarization and text generation.
-% Key Points to Mention:
-
-% Human Alignment: Comet is designed to better align with human judgments of translation quality compared to traditional metrics like BLEU.
-% Semantic Evaluation: It focuses on the semantic and contextual accuracy of translations rather than just surface-level n-gram matches.
-% Modern Approach: Comet is part of a newer generation of evaluation metrics that leverage deep learning and natural language understanding.
-% Use Case:
-
-% Enhanced Evaluation: It is used when a more sophisticated evaluation of translation quality is needed, particularly in cases where traditional metrics may fall short in capturing nuanced semantic aspects.
-
-% ### 4. Knowledge Distillation
-% **Knowledge Distillation** is a technique used to compress a large, complex model (the teacher) into a smaller, more efficient model (the student) while retaining its performance. The process involves:
-% - Training the student model to mimic the output probabilities of the teacher model.
-% - The student model learns to generalize better by leveraging the teacher’s knowledge.
-
-% **Key Points to Mention:**
-% - It’s used to reduce the size and computational requirements of models while maintaining their accuracy.
-% - Useful for deploying models in resource-constrained environments.
-
-% Feel free to expand on any of these points based on the specifics of your experience and the depth of your understanding. Good luck with your interview!

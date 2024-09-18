@@ -5,7 +5,7 @@ Find out the state of the asteroids after all collisions. If two asteroids meet,
 If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
 
 
-//stack -> need to reverse at the end;
+---------------------------------------stack -> need to reverse at the end------------------------------------------------
     vector<int> asteroidCollision(vector<int>& ast) {
         int n=ast.size();
         stack<int> st;
@@ -31,7 +31,7 @@ If both are the same size, both will explode. Two asteroids moving in the same d
     }
 
 
-vector -> no need to reverse
+-------------------------------------------vector -> no need to reverse------------------------------------------------
     vector<int> asteroidCollision(vector<int>& ast) {
         int n=ast.size();
         vector<int> ans;

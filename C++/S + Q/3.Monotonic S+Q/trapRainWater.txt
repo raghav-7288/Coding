@@ -1,3 +1,4 @@
+    
     vector<int> prevGreater(vector<int> nums){
         int n=nums.size();
         vector<int> pge(n,-1);
@@ -32,7 +33,6 @@
         return ans;
     }
 
-
 ---------------------------------------------------------without stack-------------------------------------------------------------------
 
     int trap(vector<int>& height) {
@@ -45,7 +45,6 @@
         for(int i=0;i<n;i++) ans += min(pme[i],nme[i]) - height[i];
         return ans;
     }
-
 
 ---------------------------------------------------------two pointer-------------------------------------------------------------------
 
