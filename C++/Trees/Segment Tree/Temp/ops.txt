@@ -1,4 +1,4 @@
-Addition/Subtraction
+Subtraction
 Maximum/Minimum
 GCD/LCM
 AND/OR/XOR
