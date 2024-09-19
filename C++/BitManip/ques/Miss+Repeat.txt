@@ -1,0 +1,22 @@
+
+    vector<int> findTwoElement(vector<int> arr) {
+        int x=0, n=arr.size(), a=0, b=0;
+        for(int i=0;i<n;i++){
+            x^=arr[i];
+            x^=(i+1);
+        }
+        x = x & ~(x-1);
+        for(int i=0;i<n;i++){
+            if(i+1 & x) a^=(i+1);
+            else b^=(i+1);
+            
+            if(arr[i] & x) a^=arr[i];
+            else b^=arr[i];
+        }
+        bool f=false;
+        for(auto n:arr){
+            if(n==a) {f=true;break;}
+        }
+        if(f) return {a,b};
+        return {b,a};
+    }

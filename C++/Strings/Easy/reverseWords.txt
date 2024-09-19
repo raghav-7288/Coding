@@ -5,15 +5,9 @@ Return a string of the words in reverse order concatenated by a single space.
     string reverseWords(string s) {
         stringstream str(s);
         stack<string> st;
-        string w;
+        string w,ans="";
         while (str >> w) {
-            st.push(w);
+            ans = " " + w + ans;
         }
-        s="";
-        while(!st.empty()){
-            s+=st.top();
-            st.pop();
-            if(!st.empty())s+=" ";
-        }
-        return s;
+        return ans.substr(1);
     }

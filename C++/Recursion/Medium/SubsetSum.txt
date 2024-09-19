@@ -1,5 +1,5 @@
 
-    // backward approach
+--------------------------------------------------------------backward approach--------------------------------------------------------------------
     void solve(int n, vector<int> &arr, int sum, int index, vector<vector<int>> &res, vector<int> &ans)
     {
         if (index == n)
@@ -15,7 +15,8 @@
         ans.pop_back();
         solve(n, arr, sum, index + 1, res, ans);
     }
-    // forward approach
+    
+---------------------------------------------------------------forward approach--------------------------------------------------------------------
     void solve2(int n, vector<int> &arr, int currSum, int index, vector<vector<int>> &res, vector<int> &ans, int target)
     {
         if (index == n)

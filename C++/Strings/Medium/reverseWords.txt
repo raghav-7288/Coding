@@ -1,0 +1,11 @@
+
+
+    string reverseWords(string str) {
+        stringstream s(str);
+        string ans="";
+        string w;
+        while(getline(s,w,'.')){
+            ans = '.' + w + ans;
+        }
+        return ans.substr(1);
+    } 

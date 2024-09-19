@@ -1,10 +1,8 @@
-Given a string s, partition s such that every 
-substring of the partition is a 
-palindrome. 
+Given a string s, partition s such that every substring of the partition is a palindrome. 
 Return all possible palindrome partitioning of s.
 
 
-    bool isPal(string s){
+    bool isPal(string& s){
         int i=0,j=s.length()-1;
         while(i<=j){
             if(s[i++]!=s[j--]) return false;

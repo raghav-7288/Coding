@@ -1,0 +1,15 @@
+
+
+    vector<long long int> twoOddNum(long long int Arr[], long long int N)  
+    {
+        long long int x=0;
+        for(int i=0;i<N;i++) x^=Arr[i];
+        x = x & ~(x-1);
+        long long int a=0,b=0;
+        for(int i=0;i<N;i++){
+            if(Arr[i] & x) a^=Arr[i];
+            else b^=Arr[i];
+        }
+        if(b>a) return {b,a};
+        return {a,b};
+    }

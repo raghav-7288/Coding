@@ -1,0 +1,45 @@
+Generate all valid paranthesisations of length n
+  
+    void validParen(int n, int len, vector<string> &res, string &str, int countO, int countC)
+    {
+        if (len == n)
+        {
+            res.push_back(str);
+            return;
+        }
+        if (countO < n / 2)
+        {
+            str.push_back('(');
+            validParen(n, len + 1, res, str, countO + 1, countC);
+            str.pop_back();
+        }
+        if (countC < countO)
+        {
+            str.push_back(')');
+            validParen(n, len + 1, res, str, countO, countC + 1);
+            str.pop_back();
+        }
+    }
+
+-------------------------------------------------------------------OR---------------------------------------------------------------------------------------------
+
+    void solve(int cnt,string &s,vector<string> &res,int n){
+        if(s.length()==2*n){
+            if(!cnt) res.push_back(s);
+            return;
+        }
+        s.push_back('(');
+        solve(cnt+1,s,res,n);
+        s.pop_back();
+        if(cnt>0){
+            s.push_back(')');
+            solve(cnt-1,s,res,n);
+            s.pop_back();
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        string s="";
+        solve(0,s,res,n);
+        return res;
+    }

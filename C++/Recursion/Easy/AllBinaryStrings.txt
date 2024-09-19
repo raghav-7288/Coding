@@ -1,5 +1,4 @@
-//All strings
-/*
+
     void solve(int n, string& str, vector<string>& res){
         if(str.length()==n){
             res.push_back(str);
@@ -18,12 +17,9 @@
         solve(n,str,res);
         return res;
     }
-*/
-// -----------------------------------------------------------------------------------------------
-// Generate all binary strings of length n
-// Having no consecutive 1
-#include <bits/stdc++.h>
-using namespace std;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Generate all binary strings of length n having no consecutive 1
 
     void solve(int n, int len, vector<vector<int>> &res, vector<int> &ans, int curr)
     {

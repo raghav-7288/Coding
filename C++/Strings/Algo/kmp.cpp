@@ -16,7 +16,8 @@ place to make sure that the whole substring is not considered.
 3.When we see a mismatch
     1.We know that characters pat[0..j-1] match with txt[i-j…i-1] (Note that j starts with 0 and increments it only when there is a match).
     2.We also know (from the above definition) that lps[j-1] is the count of characters of pat[0…j-1] that are both proper prefix and suffix.
-    3.From the above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that these characters will anyway match.
+    3.From the above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that
+    these characters will anyway match.
 
                             void kmp(string text, string pat, vector<int>& matches){
                                 int n=text.length(), m=pat.length();
@@ -102,7 +103,7 @@ void KMPSearch(const string &text, const string &pattern, vector<int> &matches)
         {
             // Do not match lps[0..lps[j-1]] characters,
             // they will match anyway
-            if (j != 0)
+            if (j)
                 j = lps[j - 1];
             else
                 i = i + 1;

@@ -6,19 +6,18 @@ Check the parity of a number : __builtin_parity(x) -->> (odd no. of 1's ? 1 : 0)
 Pos of rightmost set bit = __builtin_ffs(16)
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-    -n = 2's(n) = 1's(n) + 1 = ~n + 1
+-n = 2's(n) = 1's(n) + 1 = ~n + 1
 toggle the k-th bit -> n ^ (1 << k)
 set all trailing zeros -> n ^ (n - 1)
 
 unset rightmost set bit rest same -> n & (n - 1) -> can be used to check no. of set bits
 set rightmost unset bit -> n | (n + 1)
 
-unset all except rightmost set bit -> n & -n
+unset all except rightmost set bit -> n & ~(n-1)
 pos of rightmost set bit = log2(n & -n) + 1
 
 set the rightmost unset bit else all 0 -> (~n) & (n + 1)
 pos of rightmost unset bit = log2((~n) & (n + 1)) + 1
-
 
 ------------------------------------------------check i th bit or set/unset ith-------------------------------------------------------
 
@@ -85,7 +84,7 @@ pos of rightmost unset bit = log2((~n) & (n + 1)) + 1
     int countSetBits(int N)
     {
         int d=2,sum=0;
-        while(d/2<=N+1){
+        while(d/2 <= N+1){
             sum += ((N+1) / d) * (d / 2) + max(((N + 1) % d) - d / 2, 0);
             d*=2;
         }
@@ -151,42 +150,10 @@ a ^= b;
 ------------------------------------------------------Clearing All Bits from MSB to i-th Bit------------------------------------------------------
     n & ((1 << (i + 1)) - 1)
 
------------------------------------------------division-------------------------------------------------------------------------------
-    while (n >= d)  // O(log n)
-    {
-        int cnt = 0;
-        while (n >= (d << (cnt + 1)))  // O(log n)
-        {
-            cnt++;
-        }
-        ans += (1 << cnt);  // Add the power of two to the result
-        n -= (d << cnt);    // Subtract the corresponding multiple of d from n
-    }
+----------------------------------------------------------min bit flips to convert----------------------------------------------------------------------------------------------------------
 
-    Explanation:
-        Outer while(n >= d) Loop: This loop continues as long as the dividend n is greater than or equal to the divisor d. 
-        This loop runs in O(log n) time because with each iteration, n is reduced significantly.
-        
-        Inner while(n >= (d << (cnt + 1))) Loop: This loop finds the maximum value of cnt such that 
-        d * 2^cnt is less than or equal to n. 
-        The bitwise shift d << (cnt + 1) is equivalent to multiplying d by 2^(cnt + 1). 
-        This loop also runs in O(log n) time.
-        
-        ans += (1 << cnt) Statement: Adds 2^cnt to the quotient ans, which accumulates the result of the division.
-        
-        n -= (d << cnt) Statement: Subtracts the corresponding value d * 2^cnt from n, 
-        reducing the dividend by the largest possible chunk.
-
----------------------------------------------generate all subsets------------------------------------------------------------
-    for (int i = 0; i < (1 << n); i++)
-    {
-        for (int b = 0; b < n; b++)
-        {
-            if (i & 1 << b)
-            {
-                subSet.push_back(a[b]);
-            }
-        }
-        allSubSets.push_back(subSet);
-        subSet.clear();
+    int minBitFlips(int start, int goal) {
+        int x=start^goal,c=0;
+        while(x){x&=(x-1);c++;}
+        return c;
     }

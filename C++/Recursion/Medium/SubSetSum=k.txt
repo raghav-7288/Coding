@@ -1,5 +1,5 @@
 Given an array arr of size n of non-negative integers and an integer sum, 
-the task is to count all subsets of the given array with a sum equal to a given sum.
+the task is to {count all subsets} of the given array with a sum equal to a given sum.
 Note: Answer can be very large, so, output answer modulo 109+7.
 
 
@@ -20,7 +20,7 @@ Note: Answer can be very large, so, output answer modulo 109+7.
     }
 
 
------------ check if subSet sum == k exists ------------------- 
+------------------------------------------------------- check if subSet sum == k exists -------------------------------------------------------------------
 
     bool solve(int n, int k, vector<int> &a){
         if(!n){

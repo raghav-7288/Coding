@@ -1,4 +1,4 @@
-find max length palindromic substring
+Find max length palindromic substring
 
 aproach-> from every index expand left and right boundaries if s[l]==s[r]
 check for both odd length and even length palindrome

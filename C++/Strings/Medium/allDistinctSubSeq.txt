@@ -1,4 +1,4 @@
-// Count All distinct Subsequences of a string
+Count All distinct Subsequences of a string
 
     int distinctSubsequences(string s)
     {

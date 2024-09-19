@@ -2,9 +2,7 @@
 
     void solve(int i,int cs,int n,vector<int>&candidates,int t,vector<int> &temp,vector<vector<int>> &ans){
         if(i==n){
-            if(cs==t){
-                ans.push_back(temp);
-            }
+            if(cs==t) ans.push_back(temp);
             return;
         }
         if(cs+candidates[i] <= t){
@@ -20,7 +18,7 @@
         solve(0,0,candidates.size(),candidates,target,temp,ans);
         return ans;
     }
--------------------------------------------when array has dublicates--------------------------------------------------------
+----------------------------------------------------when array has dublicates-----------------------------------------------------------------------
 //Can pick one element one time
 
     void solve(int cs,int ind, int n, int t,vector<int>& candidates,vector<int>& temp,vector<vector<int>>& ans){
@@ -46,22 +44,22 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 // pick k elements btw 1 and 9 to make sum n
 
-void solve(int num, int cs, int rem, int n,vector<int>& temp,vector<vector<int>>& ans){
-    if(!rem){
-        if(cs==n){
-            ans.push_back(temp);
+    void solve(int num, int cs, int rem, int n,vector<int>& temp,vector<vector<int>>& ans){
+        if(!rem){
+            if(cs==n){
+                ans.push_back(temp);
+            }
+            return;
         }
-        return;
+        if(num>9 || cs>n) return;
+        temp.push_back(num);
+        solve(num+1,cs+num,rem-1,n,temp,ans);
+        temp.pop_back();
+        solve(num+1,cs,rem,n,temp,ans);
     }
-    if(num>9 || cs>n) return;
-    temp.push_back(num);
-    solve(num+1,cs+num,rem-1,n,temp,ans);
-    temp.pop_back();
-    solve(num+1,cs,rem,n,temp,ans);
-}
-vector<vector<int>> combinationSum3(int k, int n) {
-    vector<vector<int>> ans;
-    vector<int> temp;
-    solve(1,0,k,n,temp,ans);
-    return ans;
-}
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>> ans;
+        vector<int> temp;
+        solve(1,0,k,n,temp,ans);
+        return ans;
+    }
