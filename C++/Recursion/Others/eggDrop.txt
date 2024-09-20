@@ -1,0 +1,70 @@
+You are given k identical eggs and you have access to a building with n floors labeled from 1 to n.
+You know that there exists a floor f where 0 <= f <= n such that any egg dropped at a floor higher than f will break, 
+and any egg dropped at or below floor f will not break.
+
+K ==> Number of Eggs 
+N ==> Number of floors 
+eggDrop(K, N) ==> Minimum number of trials needed to find the critical floor in worst case.
+eggDrop(K, N) = 1 + min{max(eggDrop(K – 1, F – 1), eggDrop(K , N - F)), where F is in {1, 2, …, N}}
+
+------------------------------------------------------------Recursion--------------------------------------------------------------------------------
+
+    int solve(int k, int n, vector<vector<int>>& dp){
+        if(n==1 || n==0 || k==1) return n;
+        if(dp[k][n]!=-1) return dp[k][n];
+        int ans=INT_MAX;
+        for(int f=1;f<=n;f++){
+            int b = solve(k-1,f-1,dp);
+            int nb = solve(k,n-f,dp);
+            ans=min(ans,1+max(b,nb));
+        }
+        return dp[k][n]=ans;
+    }
+    int superEggDrop(int k, int n){
+        vector<vector<int>> dp(k+1,vector<int>(n+1,-1));
+        return solve(k,n,dp);
+    }
+
+------------------------------------------------------------Tabulation--------------------------------------------------------------------------------
+
+    int superEggDrop(int k, int n) {
+        vector<vector<int>> dp(k+1,vector<int>(n+1));
+        for(int j=1;j<=n;j++) dp[1][j]=j;
+        for(int i=1;i<=k;i++){
+            dp[i][0]=0;
+            dp[i][1]=1;
+        }
+        for(int i=2;i<=k;i++){
+            for(int j=2;j<=n;j++){
+                int ans=INT_MAX;
+                for(int f=1;f<=j;f++){
+                    ans=min(ans,1+max(dp[i-1][f-1],dp[i][j-f]));
+                }
+                dp[i][j]=ans;
+            }
+        }
+        return dp[k][n];
+    }
+
+------------------------------------------------------------Optimised--------------------------------------------------------------------
+
+dp[x][m] means that, given x eggs and m moves,
+what is the maximum number of floors that can be checked
+
+The DP equation is: dp[x][m] = 1 + dp[x-1][m-1] + dp[x][m-1],
+which means we take 1 move to a floor.
+If egg breaks, then we can check dp[x – 1][m – 1] floors.
+If egg doesn’t break, then we can check dp[x – 1][m] floors.
+
+
+    int superEggDrop(int k, int n) {
+        vector<vector<int>> dp(k+1,vector<int>(n+1));
+        int m=0;
+        while(dp[k][m] < n){
+            m++;
+            for(int e=1;e<=k;e++){
+                dp[e][m] = 1 + dp[e-1][m-1] + dp[e][m-1];
+            }
+        }
+        return m;
+    }

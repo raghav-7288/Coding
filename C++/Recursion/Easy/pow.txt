@@ -1,18 +1,11 @@
-
-
-    class Solution {//TODO
-    public:
-        double myPow(double x, int n) {
-            if(!n) return 1;
-            if(n>0){
-                double a=myPow(x,n/2);
-                if(n&1) return x*a*a;
-                return a*a;
-            }else{
-                n=abs(n);
-                double a=myPow(x,n/2);
-                if(n&1) return 1/(x*a*a);
-                return 1/(a*a);
-            }
+   
+    double myPow(double x, int n) {
+        if(!n) return 1;
+        if(n>0){
+            if(n&1) return x*myPow(x,n-1);
+            return myPow(x*x,n/2);
         }
-    };
+        n=abs(n);
+        if(n&1) return 1/(x*myPow(x,n-1));
+        return 1/(myPow(x*x,n/2));
+    }

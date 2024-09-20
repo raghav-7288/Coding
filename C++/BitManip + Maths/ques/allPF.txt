@@ -1,0 +1,32 @@
+Given a number N. Find its unique prime factors in increasing order.
+
+	vector<int>AllPrimeFactors(int N) {
+	    vector<int> pf;
+	    for(int i=2;i<=sqrt(N);i++){
+	        if(!(N%i)) pf.push_back(i);
+	        while(!(N%i)) N/=i;
+	    }
+	    if(N!=1) pf.push_back(N);
+	    return pf;
+	}
+
+--------------------------------------------------------using Sieve of Eratosthenes-----------------------------------------------------------------
+
+    vector<int> findPrimeFactors(int n) {
+        vector<int> isPrime(n+1,1), ans;
+        for(int i=2;i*i<=n;i++){
+            if(isPrime[i]){
+                for(int j=i*i;j<=n;j+=i){
+                    isPrime[j]=0;
+                }
+            }
+        }
+        for(int i=2;i*i<=n;i++){
+            while(!(n%i) && isPrime[i]){
+                ans.push_back(i);
+                n/=i;
+            }
+        }
+        if(n!=1) ans.push_back(n);
+        return ans;
+    }
