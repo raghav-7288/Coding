@@ -1,0 +1,233 @@
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\geometry{left=0.8cm,right=0.8cm,top=0.8cm,bottom=0.8cm,columnsep=.3cm}
+\usepackage{paracol}
+\usepackage{fontawesome}
+\usepackage{multicol}
+\usepackage{enumitem}
+\setlength{\columnsep}{0.5cm}
+\setlist[itemize]{itemsep=0.02mm, parsep=2pt, topsep=2pt}
+\ifxetexorluatex
+  \setmainfont{Lato}
+\else
+  \usepackage[default]{lato}
+\fi
+\definecolor{VividPurple}{HTML}{023e7d}   %023e7d   8f0d0d
+\definecolor{SlateGrey}{HTML}{000000}
+\definecolor{LightGrey}{HTML}{333333}
+\definecolor{black}{HTML}{000000}
+\definecolor{light}{HTML}{333333}
+\colorlet{tagline}{VividPurple}
+\colorlet{heading}{VividPurple}
+\colorlet{headingrule}{VividPurple}
+\colorlet{accent}{VividPurple}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{light}
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent  % Removes indentation at the start of the line
+\hfill
+\begin{minipage}{.3\textwidth}
+  \raggedleft  % Aligns content to the right
+  \includegraphics[height=2.0cm]{iitmLogo.png}  % Resize the logo
+\end{minipage}
+\vspace{-15mm}  % Further reduce the space above the name
+\name{Raghav Gupta | \textmd{\textcolor{black}{CS23M053}}}
+\vspace{-7mm}
+\tagline{Indian Institute of Technology Madras}
+\personalinfo{
+  \textbf{Registration Number: PR/33/CS/25/053} \hspace{5mm}
+  % \email{graghav3110@gmail.com} \hspace{4mm}
+  \href{https://github.com/raghav-7288}{GitHub}\faIcon{github} \hspace{3mm}
+  \href{https://www.linkedin.com/in/raghav-gupta-34a219197/}{LinkedIn}\faIcon{linkedin}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makecvheader
+\AtBeginEnvironment{itemize}{\small}
+\columnratio{0.48}
+\vspace{-0.4cm}
+\begin{paracol}{2}
+\vspace{0.035cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% education %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{Education}}
+\vspace{-3mm}
+\cveventd{Indian Institute of Technology Madras \hspace{-0.6cm}}{M.Tech - Computer Science Engineering}{CGPA: 8.43/10}{2023 - Present}
+\vspace{-0.5cm}
+\divider\\ \vspace{-0.3cm}
+\cveventd{Sharda University \hspace{-0.6cm}}{B.Tech - Computer Science Engineering}{CGPA: 9.02/10}{2018 - 2022}
+\vspace{-0.5cm}
+\divider\\ \vspace{-0.3cm}
+\cveventd{St. Xavier Sr. Sec School, Delhi}{XII, CBSE}{Percentage: 87.60\%}{2018}
+\vspace{-0.5cm}
+\divider \vspace{-0.3cm}
+\cveventd{St. Xavier Sr. Sec School, Delhi}{X, CBSE}{CGPA: 9.20/10}{2016}
+\vspace{-0.5cm}
+% \divider\\ \vspace{-0.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% education %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% work ex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{WORK EXPERIENCE}}
+\vspace{-0.3cm}
+
+\cvevent{}{SDE Intern, Samsung Research Institute}{June '24 - Jul '24}{Bangalore}
+\vspace{-0.1cm}
+\textbf{Project: Gallery Search: Advanced Result Generation}
+\begin{itemize}[noitemsep]
+\item Implemented various clustering algorithms to enhance data grouping.
+\item Employed various techniques to evaluate and score the performance of a translation model.
+\item Utilized knowledge distillation to compress machine learning models for efficient performance.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\ 
+\vspace{-0.4cm}
+
+\cvevent{}{Verzeo}{June '21 - Jul '21}{Bangalore}
+\vspace{-0.3cm}
+\begin{itemize}[noitemsep]
+\item Gained hands-on experience in web development technologies such as HTML, CSS, and JavaScript.
+\item Completed minor web development projects, including creating personalized websites.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\ \vspace{-0.45cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% work ex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% publication %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{PUBLICATION}}
+\vspace{-0.3cm}
+\cvevent{}{Trip - A Complete Tourism Solution \emph{(ISICT-2022)}}{April '22}{Greater Noida}
+\vspace{-0.3cm}
+\begin{itemize}[noitemsep]
+\item Published an article titled 'Trip-A Comprehensive Tourism Solution' detailing the project's structure and methodology.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\ \vspace{-0.45cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% publication %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% projects %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{Key Projects} }
+\vspace{-0.3cm}
+
+\cvevent{}{Hardware Accelerated Inference on Real-Time UAV \\ Imagery \emph{(M.Tech Project)}\hfill \textit{\small{Aug '24 - Present}}}{}{}
+{\vspace{-0.28cm} \small \textit{Guide: Prof. Dr. Ayon Chakraborty (CSE, IIT Madras)}}
+\begin{itemize}[noitemsep]
+    \item Evaluated \textbf{performance metrics} and compared \textbf{inference time} of deep neural network (DNN) models across various hardware platforms, including \textbf{TPU}, \textbf{CPU}, \textbf{Raspberry Pi}, and small-sized \textbf{GPU}.
+    \item Utilized a \textbf{TensorFlow-based framework} to optimize and convert models into \textbf{TensorFlow Lite (TFLite)} format for efficient inferencing on TPU.
+    \item Focused on optimizing models for \textbf{real-time applications} such as \textbf{UAV surveillance}, \textbf{intrusion detection}, and \textbf{object recognition}, enhancing overall system performance.
+    \item Planned to implement an optimized \textbf{TensorFlow Lite (TFLite)} model on \textbf{TPU} for improved \textbf{real-time inference capabilities}.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\\vspace{-0.35cm}
+
+\cvevent{}{Custom Big Integer Library in C++\hfill\textit{\small{August '23}}}{}{}
+\vspace{-0.30cm} 
+\begin{itemize}[noitemsep]
+\item Designed and implemented a comprehensive custom \textbf{Big Integer Library} in \textbf{C++}.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\\vspace{-0.35cm}
+
+\cvevent{}{Time Table Generator\hfill\textit{\small{March '22 - April '22}}}{}{}
+{\vspace{-0.28cm} \small \textit{Guide: Prof. Abha Kiran Rajput (CSE, Sharda University)}}
+\begin{itemize}[noitemsep]
+\item Developed a \textbf{Java} based project that automates the \textbf{time table generation process} for educational institutions.
+\item This user-friendly application optimizes \textbf{scheduling} by assigning \textbf{subjects}, \textbf{teachers}, and \textbf{resources} to appropriate time slots while considering constraints.
+\end{itemize}
+
+\vspace{-0.4cm}
+\divider\\\vspace{-0.35cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% projects %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\switchcolumn
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% course projects %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{Course Projects} }
+\vspace{-0.3cm}
+
+\cvevent{}{CS6910: Deep Learning\hfill\textit{\small{Jan '24 - April '24}}}{}{}
+{\vspace{-0.28cm} \small \textit{Instructor: Prof. Mitesh Khapra}}
+\begin{itemize}[noitemsep]
+\item \textbf{Feed Forward Neural Network From Scratch}: Constructed a deep neural network from the ground up, incorporating \textbf{back-propagation} and implemented \textbf{optimizers}.
+\item \textbf{Transliteration System}: Implemented a \textbf{Seq2Seq} model using different recurrent cells such as \textbf{RNN}, \textbf{LSTM}, and \textbf{GRU} on the \textbf{Aksharantar} dataset.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\\vspace{-0.35cm}
+
+\cvevent{}{CS6023: GPU Programming\hfill\textit{\small{Jan '24 - April '24}}}{}{}
+{\vspace{-0.28cm} \small \textit{Instructor: Prof. Rupesh Nasre}}
+\begin{itemize}[noitemsep]
+\item \textbf{Parallel Convolution Filter}: Implemented a parallel convolution filter using \textbf{CUDA} and achieved significant speedup over serial implementation.
+\item \textbf{Tank Battle Simulation Project}: Created a real-time \textbf{tank battle simulation} leveraging \textbf{GPU} capabilities.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\\vspace{-0.35cm}
+
+\cvevent{}{CS1702: Computer Architecture And Organization\hfill\textit{\small{March '21}}}{}{}
+{\vspace{-0.28cm} \small \textit{Instructor: Prof. Shefali Agarwal}}
+\begin{itemize}[noitemsep]
+\item \textbf{Cache and Memory Hierarchy Simulator}: Developed a flexible simulator to analyze \textbf{cache and memory hierarchy performance} using the \textbf{SPEC-2000 benchmark}. Implemented and compared \textbf{L1}, \textbf{L2}, and \textbf{victim cache} configurations with adjustable size, associativity, and block size.
+\end{itemize}
+\vspace{-0.4cm}
+\divider\\\vspace{-0.35cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% course projects %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% course work %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{Course Work}}
+\vspace{-0.15cm}
+\cvlistitem{\textbf{Key Courses in M.Tech (July 2023 - May 2025)}: Advanced Data Structures and Algorithms, Advanced Programming Lab, GPU Programming, Deep Learning, Linear Algebra and Random Processes, Digital System and Testable Design.}
+
+\vspace{-0.1cm}\\\divider\vspace{-0.5cm}
+
+\cvlistitem{\textbf{\\Key Courses in B.Tech (June 2018 - July 2022)}: Operating Systems, Computer Organisation and Architecture, Computer Networks, Database Management System, OOPs using C++, Data Structures and Algorithms.}
+
+\vspace{-0.1cm}\\\divider\vspace{-0.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% course work %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% skills %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{Skills}}
+\vspace{-0.2cm}
+{\textbf{Programming: }\small{C++, C, Python, Cuda}} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.27cm}
+{\textbf{Database: }\small{MySQL, MongoDB}} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.27cm}
+{\textbf{Tools and Platforms: }\small{Google Colab, Visual Studio Code, Git, Wandb, Replit, MsExcel, Android Studio}} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.4cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% skills %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Achievements %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{ACHIEVEMENTS}}
+\vspace{-0.2cm}
+{\textbf{GATE 2022} - Secured \textbf{All India Rank 213} among 78,000+ candidates.} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.27cm}
+{\textbf{ICPC 2021} - Cleared International Collegiate Programming Contest Round 1} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.27cm}
+{\textbf{Ranked 25} In CSE department of Sharda University with a Score of 770/1000 conducted by Coding Ninjas.} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.4cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Achievements %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% POR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \cvsection{\Large{POSITION OF RESPONSIBILITY}}
+% \vspace{-0.2cm}
+% {\textbf{Class Representative} for M.Tech CSE (Batch of 2023) at IIT Madras and B.Tech CSE (Batch of 2018) at Sharda University.} \\\vspace{-0.27cm}
+% \divider\\\vspace{-0.27cm}
+% {\textbf{Teaching assistant}: CS1100 - C Programming (July 2023-July 2024) and CS6600 - Computer Architecture (Jul-Nov 2024) at IIT Madras.} \\\vspace{-0.27cm}
+% \divider\\\vspace{-0.4cm}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% POR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EXTRA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{\Large{EXTRA CURRICULAR ACTIVITIES}}
+\vspace{-0.2cm}
+{Selected for a 3 days \textbf{Python Workshop} organised by \textbf{IIT Roorkee}.} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.27cm}
+{Secured \textbf{First Position} in IBM Ice Day organised by \textbf{IBM} at Sharda University.} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.27cm}
+{Participated in a \textbf{Hackathon} organised by Shobhit Institute.} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.27cm}
+{Participated in \textbf{National Project Competition Innovation Budge} with the project titled “Voice Controlled Mailing System” made using Python, OpenCV.} \\\vspace{-0.27cm}
+\divider\\\vspace{-0.4cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EXTRA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{paracol}
+\end{document}

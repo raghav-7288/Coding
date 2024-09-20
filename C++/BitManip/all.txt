@@ -10,16 +10,16 @@ Pos of rightmost set bit = __builtin_ffs(16)
 toggle the k-th bit -> n ^ (1 << k)
 set all trailing zeros -> n ^ (n - 1)
 
-unset rightmost set bit rest same -> n & (n - 1) -> can be used to check no. of set bits
-set rightmost unset bit -> n | (n + 1)
+clear rightmost set bit rest same -> n & (n - 1) -> can be used to check no. of set bits
+set rightmost clear bit -> n | (n + 1)
 
-unset all except rightmost set bit -> n & ~(n-1)
+clear all except rightmost set bit -> n & ~(n-1)
 pos of rightmost set bit = log2(n & -n) + 1
 
-set the rightmost unset bit else all 0 -> (~n) & (n + 1)
-pos of rightmost unset bit = log2((~n) & (n + 1)) + 1
+set the rightmost clear bit else all 0 -> (~n) & (n + 1)
+pos of rightmost clear bit = log2((~n) & (n + 1)) + 1
 
-------------------------------------------------check i th bit or set/unset ith-------------------------------------------------------
+------------------------------------------------check i th bit or set/clear ith-------------------------------------------------------
 
     ith = (num & 1<<(i-1)) != 0;
     setIth = num | 1<<(i-1);
@@ -28,7 +28,7 @@ pos of rightmost unset bit = log2((~n) & (n + 1)) + 1
 -----------------------------------------------------count set bits-------------------------------------------------------
     1.theta(total bits)-> right shifting and checking lsb
     2.Brian Kernighan's Algorithm
-        (subtract 1 from a no. then all unset bits after the last set bit becomoes set and last set bit gets unset)
+        (subtract 1 from a no. then all clear bits after the last set bit becomoes set and last set bit gets clear)
         ->theta(total set bits)
         int countSetBits(int n){
             int res=0;
@@ -77,7 +77,7 @@ pos of rightmost unset bit = log2((~n) & (n + 1)) + 1
     char | ' ' //or with 32(set 5th bit)
 
 ----------------------------------------------------------lower to upr---------------------------------------------------------
-    char & '_' //and with ~32(unset 5th bit)
+    char & '_' //and with ~32(clear 5th bit)
 
 -------------------------------------------------------count of set bits till N-------------------------------------------------------
 

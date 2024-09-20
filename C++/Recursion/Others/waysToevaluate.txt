@@ -1,0 +1,28 @@
+Given a string expression of numbers and operators, return all possible results from computing all the different 
+possible ways to group numbers and operators. You may return the answer in any order.
+
+
+    vector<int> solve(int i, int j, string& exp){
+        if(i==j) return {exp[i]-48};
+        if(i+1==j && (exp[i]>='0' && exp[i]<='9') && (exp[j]>='0' && exp[j]<='9')){
+            return {(exp[i]-48)*10+(exp[j]-48)};
+        }
+        int num=0;
+        vector<int> ans;
+        for(int k=i+1;k<j;k++){
+            if(exp[k]>='0' && exp[k]<='9') continue;
+            vector<int> left = solve(i,k-1,exp);
+            vector<int> right = solve(k+1,j,exp);
+            for(auto l:left){
+                for(auto r:right){
+                    if(exp[k]=='*') ans.push_back(l*r);
+                    else if(exp[k]=='+') ans.push_back(l+r);
+                    else ans.push_back(l-r);
+                }
+            }
+        }
+        return ans;
+    }
+    vector<int> diffWaysToCompute(string exp) {
+        return solve(0,exp.length()-1,exp);
+    }
