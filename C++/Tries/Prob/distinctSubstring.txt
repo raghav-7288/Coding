@@ -1,7 +1,6 @@
 Given a string 'S', you are supposed to return the number of distinct substrings(including empty substring) 
 of the given string.
 
-    #include "bits/stdc++.h"
     struct Node{
         Node* links[26];
         bool flag=false;
@@ -15,12 +14,12 @@ of the given string.
         int insert(string w) {
             Node *node=root;
             int cnt=0;
-            for(int i=0;i<w.length();i++){
-                if(!node->links[w[i]-'a']){
+            for(auto c:w){
+                if(!node->links[c-'a']){
                     cnt++;
-                    node->links[w[i]-'a']=new Node();
+                    node->links[c-'a']=new Node();
                 }
-                node=node->links[w[i]-'a'];
+                node=node->links[c-'a'];
             }
             node->flag=true;
             return cnt;

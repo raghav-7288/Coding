@@ -6,10 +6,6 @@ If all elements in nums are larger than mi, then the answer is -1.
 Return an integer array answer where answer.length == queries.length and answer[i] is the answer to the ith query
 
 
-
-
--------------------------------------------------------------------------------------------------------------------------------------
-
     struct Node{
         Node* link[2];
     };
@@ -42,20 +38,23 @@ Return an integer array answer where answer.length == queries.length and answer[
             return ans;
         }
     };
-
-    vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
-        int q=queries.size();
-        vector<int> ans(q,-1);
-        Trie t;
-        int i=0;
-        for(auto& q:queries) q.push_back(i++);
-        sort(nums.begin(),nums.end());
-        sort(queries.begin(),queries.end(),[](vector<int>& q1, vector<int>& q2){return q1[1]<q2[1];});
-        i=0;
-        for(auto q:queries){
-            while(i<nums.size() && nums[i]<=q[1]) t.insert(nums[i++]);
-            int val=-1;
-            if(i) ans[q[2]]=t.search(q[0]);
+    class Solution {
+    public:
+        vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
+            int q=queries.size();
+            vector<int> ans(q,-1);
+            Trie t;
+            int i=0;
+            for(auto& q:queries) q.push_back(i++);
+            sort(nums.begin(),nums.end());
+            sort(queries.begin(),queries.end(),[](vector<int>& q1, vector<int>& q2){return q1[1]<q2[1];});
+            i=0;
+            for(auto q:queries){
+                while(i<nums.size() && nums[i]<=q[1]) t.insert(nums[i++]);
+                int val=-1;
+                if(i) ans[q[2]]=t.search(q[0]);
+            }
+            return ans;
         }
-        return ans;
-    }
+    };
+

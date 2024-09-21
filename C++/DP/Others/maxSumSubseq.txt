@@ -1,0 +1,34 @@
+Given an array of n positive integers. Find the sum of the maximum sum subsequence of the given array such that the integers in 
+the subsequence are sorted in strictly increasing order i.e. a strictly increasing subsequence. 
+
+
+   int solve(int i, int prev, int arr[], int n){
+        if(i==n) return 0;
+        int p=0;
+        if(prev==-1 || arr[i]>arr[prev]) p=arr[i]+solve(i+1,i,arr,n);
+        int np=solve(i+1,prev,arr,n);
+        return max(p,np);
+    }
+	int maxSumIS(int arr[], int n)  
+	{  
+	   return solve(0,-1,arr,n);
+	}
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+    int maxSumIS(int arr[], int n)  
+	{  
+        vector<int> dp(n);
+        int ans=-1;
+        for(int i=0;i<n;i++){
+            dp[i]=arr[i];
+            for(int j=i-1;j>=0;j--){
+                if(arr[j]<arr[i]){
+                    dp[i]=max(dp[i],arr[i]+dp[j]);
+                }
+            }
+            ans=max(ans,dp[i]);
+        }
+        return ans;
+	}
+

@@ -1,2 +1,35 @@
 Write a function to find the longest common prefix string amongst an array of strings.
 If there is no common prefix, return an empty string "".
+
+    struct Node{
+    Node* link[26];
+    int cnt=0;
+    };
+    class trie{
+        public:
+        Node* root=NULL;
+        trie() root=new Node();
+        int insert(string w){
+            Node* node=root;
+            int len=0;
+            for(auto c:w){
+                if(!node->link[c-'a']){
+                    if(node->cnt) return len;
+                    node->link[c-'a']=new Node();
+                    node->cnt++;
+                }
+                len++;
+                node=node->link[c-'a'];
+            }
+            return len;
+        }
+    };
+    class Solution {
+    public:
+        string longestCommonPrefix(vector<string>& strs) {
+            trie t;
+            int len=INT_MAX;
+            for(auto s:strs) len=min(len,t.insert(s));
+            return strs[0].substr(0,len);
+        }
+    };

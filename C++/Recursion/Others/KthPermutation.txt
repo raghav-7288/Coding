@@ -1,0 +1,92 @@
+The set [1, 2, 3, ..., n] contains a total of n! unique permutations.
+By listing and labeling all of the permutations in order, we get the following sequence for n = 3:
+"123"
+"132"
+"213"
+"231"
+"312"
+"321"
+Given n and k, return the kth permutation sequence.
+
+    int getFact(int n, vector<int>& fact){
+        if(n==0) return 1;
+        return fact[n]=n*getFact(n-1,fact);
+    }
+    void solve(int index, int k, int n, string& res, vector<int>& fact, vector<int>& vis){
+        int curK=0,count=0;
+        for(int i=1;i<=n;i++){
+            if(!vis[i]){
+                curK += fact[n-index-1];
+                count++;
+                if(k <= curK){
+                    res+=to_string(i);
+                    vis[i]=1;
+                    return solve(index+1,k-(count-1)*fact[n-index-1],n,res,fact,vis);
+                }
+            }   
+        }
+    }
+    string getPermutation(int n, int k) {
+        vector<int> fact(n+1,1), vis(n+1);
+        getFact(n,fact);
+        string res="";
+        solve(0,k,n,res,fact,vis);
+        return res;
+    }
+
+----------------------------------------------------------OR--------------------------------------------------------------------------------
+
+    string getPermutation(int n, int k) {
+        vector<int> nums;
+        int fact=1;
+        for(int i=1;i<n;i++){
+            fact*=i;
+            nums.push_back(i);
+        }
+        nums.push_back(n);
+        string ans="";
+        k--;
+        while(1){
+            ans += to_string(nums[k/fact]);
+            nums.erase(nums.begin()+k/fact);
+            if(!nums.size()) break;
+            k%=fact;
+            fact/=nums.size();
+        }
+        return ans;
+    }
+
+----------------------------------------------------------OR--------------------------------------------------------------------------------
+
+    void Permute(int& k, vector<int> &a, vector<int> &currPerm, vector<int> &picked, vector<int>& result){
+        if (!k) return;
+        if (currPerm.size() == a.size()){
+            k--;
+            if (!k){
+                result = currPerm;
+            }
+            return;
+        }
+        for (int i = 0; i < a.size(); i++){
+            if (!picked[i]){
+                picked[i] = 1;
+                currPerm.push_back(a[i]);
+                Permute(k, a, currPerm, picked, result);
+                currPerm.pop_back();
+                picked[i] = 0;
+                if (!k) return;
+            }
+        }
+    }
+
+    string getPermutation(int n, int k){
+        vector<int> nums(n), picked(n), result;
+        for (int i = 0; i < n; i++) nums[i] = i + 1;
+        vector<int> cur;
+        Permute(k, nums, cur, picked, result);
+        string ans = "";
+        for (auto n : result){
+            ans += to_string(n);
+        }
+        return ans;
+    }
