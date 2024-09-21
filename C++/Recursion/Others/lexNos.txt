@@ -1,0 +1,16 @@
+Given an integer n, return all the numbers in the range [1, n] sorted in lexicographical order.
+
+    void solve(int i, int n, vector<int>& ans){
+        ans.push_back(i);
+        for(int k=0;k<=9;k++){
+            int num = i*10 + k;
+            if(num <= n) solve(num,n,ans);
+        }
+    }
+    vector<int> lexicalOrder(int n) {
+        vector<int> ans;
+        for(int i=1;i<=min(n,9);i++){
+            solve(i,n,ans);
+        }
+        return ans;
+    }
