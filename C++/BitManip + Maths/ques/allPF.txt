@@ -2,7 +2,7 @@ Given a number N. Find its unique prime factors in increasing order.
 
 	vector<int>AllPrimeFactors(int N) {
 	    vector<int> pf;
-	    for(int i=2;i<=sqrt(N);i++){
+	    for(int i=2;i*i<=N;i++){
 	        if(!(N%i)) pf.push_back(i);
 	        while(!(N%i)) N/=i;
 	    }

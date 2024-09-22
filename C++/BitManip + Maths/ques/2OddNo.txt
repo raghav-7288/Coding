@@ -1,4 +1,4 @@
-
+All presnt 2 times except 2 nos present 1 time. Find nos.
 
     vector<long long int> twoOddNum(long long int Arr[], long long int N)  
     {
