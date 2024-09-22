@@ -4,7 +4,6 @@ TODO
     // deque
     // string stream + getline
     // havel hakimi
-    // AVL Tree
     // Red Black Tree
     // Segment Tree
     // eucledian cycle
@@ -15,13 +14,11 @@ TODO
     // 201. Bitwise AND of Numbers Range
     // 1609. Even Odd Tree
     // 2997. Minimum Number of Operations to Make Array XOR Equal to K
-    // 260. Single Number III
     // 633. Sum of Square Numbers
     // 1382. Balance a Binary Search Tree
     // 1574. Shortest Subarray to be Removed to Make Array Sorted
     // 1579. Remove Max Number of Edges to Keep Graph Fully Traversable
     // 2045. Second Minimum Time to Reach Destination
-    // gcd
     // 959 - Union Find - Optimized
     // 1278
     // weekly contest 167 remaining 3 ques
