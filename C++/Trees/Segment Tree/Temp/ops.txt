@@ -1,6 +1,5 @@
 //TODO
 
 Subtraction
-Maximum/Minimum
 GCD/LCM
 XOR
