@@ -1,0 +1,24 @@
+You are given a 0-indexed string s and a dictionary of words dictionary. You have to break s into one or more non-overlapping 
+substrings such that each substring is present in dictionary. There may be some extra characters in s which are not present in 
+any of the substrings.
+Return the minimum number of extra characters left over if you break up s optimally.
+
+
+    int solve(int i, string& s, unordered_set<string>& dict, vector<int>& dp){
+        if(i>=s.length()) return 0;
+        if(dp[i]!=-1) return dp[i];
+        string temp="";
+        int ans=INT_MAX;
+        for(int j=i;j<s.length();j++){
+            temp+=s[j];
+            if(dict.find(temp)!=dict.end()) ans=min(ans,solve(j+1,s,dict,dp));
+        }
+        ans=min(ans,1+solve(i+1,s,dict,dp));
+        return dp[i]=ans;
+    }
+    int minExtraChar(string s, vector<string>& d) {
+        unordered_set<string> dict(d.begin(),d.end());
+        int n=s.length();
+        vector<int> dp(n,-1);
+        return solve(0,s,dict,dp);
+    }

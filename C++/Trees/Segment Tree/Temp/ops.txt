@@ -3,4 +3,4 @@
 Subtraction
 Maximum/Minimum
 GCD/LCM
-AND/OR/XOR
+XOR

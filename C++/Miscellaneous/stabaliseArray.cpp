@@ -1,3 +1,13 @@
+/*
+You are given a permutation and want to make it stable.
+A permutation P is stable if P[i]=i for every i from 1 to n, where n is the size of the permutation.
+To do this you can apply an operation multiple times.
+In one operation, for every i in 1 to n, P[i] is replaced by P[P[i]].
+Find the minimum number of operations in which you can make the permutation stable or print -1 if its not possible.
+
+If the length of the cycle is a power of 2 then the permutation can be stabilized, and the minimum number of operations
+required is determined by how many times the cycle needs to be halved. This is computed as the base-2 logarithm of the cycle length.
+*/
 #include <cmath>
 #include <cstdio>
 #include <vector>
