@@ -1,56 +1,14 @@
-#include <cmath>
-#include <cstdio>
-#include <vector>
-#include <iostream>
-#include <algorithm>
 #include <bits/stdc++.h>
-#define int long long
 using namespace std;
-
-signed main()
+int main()
 {
-    int tt;
-    cin >> tt;
-    while (tt--)
-    {
-        int n, ans = 0;
-        cin >> n;
-        vector<int> v(n), vis(n, 0);
-        for (int i = 0; i < n; i++)
-            cin >> v[i];
-        for (auto &it : v)
-            it--;
+    // #ifndef ONLINE_JUDGE
+    // freopen("../input.txt", "r", stdin);
+    // freopen("../output.txt", "w", stdout);
+    // #endif
 
-        bool valid = true;
-        for (int i = 0; i < n; i++)
-        {
-            if (vis[i])
-                continue;
-            int j = i, count = 0;
-            while (!vis[j])
-            {
-                vis[j] = 1;
-                count++;
-                j = v[j];
-            }
-            if (count == 1)
-                continue;
-            if ((count & (count - 1)) == 0)
-            {
-                int x = log2(count);
-                ans = max(ans, x);
-            }
-            else
-            {
-                valid = false;
-                break;
-            }
-        }
-        if (!valid)
-            cout << -1;
-        else
-            cout << ans;
-        cout << endl;
-    }
+    vector<int> a = {1, 2, 3, 4};
+    cout << lower_bound(a.begin(), a.end(), 0) - a.begin();
+
     return 0;
 }
