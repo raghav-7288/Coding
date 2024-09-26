@@ -24,3 +24,33 @@
         }
         return true;
     }
+
+
+-------------------------------------------------------------------
+
+    bool isPalindrome(Node *head) {
+        if(!head || !head->next) return true;
+        Node* f=head,*s=head;
+        while(f->next){
+            f=f->next;
+            if(f->next){
+                s=s->next;
+                f=f->next;
+            }
+        }
+        Node *p=NULL,*c=s->next,*n;
+        s->next=NULL;
+        while(c){
+            n=c->next;
+            c->next=p;
+            p=c;
+            c=n;
+        }
+        f=head;
+        while(f && p){
+            if(f->data != p->data) return false;
+            f=f->next;
+            p=p->next;
+        }
+        return true;
+    }
