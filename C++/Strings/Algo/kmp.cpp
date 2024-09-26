@@ -19,7 +19,7 @@ place to make sure that the whole substring is not considered.
     3.From the above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that
     these characters will anyway match.
 
-                            void kmp(string text, string pat, vector<int>& matches){
+                            vector<int> kmp(string text, string pat){
                                 int n=text.length(), m=pat.length();
                                 vector<int> lps(m);
                                 int i=1,len=0;
@@ -32,6 +32,7 @@ place to make sure that the whole substring is not considered.
                                     }
                                 }
                                 int j=0;i=0;
+                                vector<int>& matches;
                                 while(i<n){
                                     if(text[i]==pat[j]){
                                         i++;j++;
@@ -113,8 +114,8 @@ void KMPSearch(const string &text, const string &pattern, vector<int> &matches)
 
 int main()
 {
-    string text = "abcladhabcdhaabclsfkabc";
-    string pattern = "abc";
+    string text = "geeksforgeeks";
+    string pattern = "geek";
 
     vector<int> matches;
 

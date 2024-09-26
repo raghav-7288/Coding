@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 struct Node
 {
     int val;
@@ -13,9 +12,7 @@ class SGT
 public:
     Node *root = NULL;
     vector<int> arr;
-
     SGT(vector<int> _arr) : arr(_arr) {}
-
     Node *_build(int low, int high)
     {
         if (low == high)
@@ -29,13 +26,11 @@ public:
         node->val = node->left->val + node->right->val;
         return node;
     }
-
     Node *build()
     {
         root = _build(0, arr.size() - 1);
         return root;
     }
-
     void update(Node *pre, Node *cur, int low, int high, int pos, int val)
     {
         if (low == high)

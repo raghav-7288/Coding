@@ -27,6 +27,37 @@ The average and best-case running time of the Rabin-Karp algorithm is O(n+m), bu
 The worst case of the Rabin-Karp algorithm occurs when all characters of pattern and text are the
 same as the hash values of all the substrings of T[] match with the hash value of P[].
 ->Auxiliary Space: O(1)
+
+                                            vector<int> search(string pat, string txt)
+                                                {
+                                                    int n=pat.length(), m=txt.length();
+                                                    int b=256, p=101;
+                                                    long long curHash=0, patHash=0, power=1;
+                                                    for(int i=1;i<n;i++) power = (power*b)%p;
+                                                    for(int i=0;i<n;i++){
+                                                        patHash = (patHash*b + pat[i])%p;
+                                                        curHash = (curHash*b + txt[i])%p;
+                                                    }
+                                                    vector<int> matches;
+                                                    for(int i=0;i<=m-n;i++){
+                                                        if(curHash==patHash){
+                                                            bool match=true;
+                                                            for(int k=0;k<n;k++){
+                                                                if(pat[k]!=txt[i+k]){
+                                                                    match=false;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            if(match) matches.push_back(i+1);
+                                                        }
+                                                        if(i<m-n){
+                                                            curHash = (curHash-txt[i]*power)%p;
+                                                            curHash = (curHash*b + txt[i+n])%p;
+                                                            if(curHash<0) curHash+=p;
+                                                        }
+                                                    }
+                                                    return matches;
+                                                }
 */
 
 #include <bits/stdc++.h>

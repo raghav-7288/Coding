@@ -3,16 +3,14 @@ TODO
     // SW videos
     // SDE
     // 75
-    // deque
     // Red Black Tree
-    // Segment Tree
+    // fenwick trees
     // eucledian cycle
     // hamiltonian cycle
-    // fenwick trees
+    // seg tree gfg
 
     // 1382. Balance a Binary Search Tree
     // 1278
-    // weekly contest 167 remaining 3 ques
     // 2699. Modify Graph Edge Weights
 
     // https://www.geeksforgeeks.org/minimum-cuts-required-to-convert-a-palindromic-string-to-a-different-palindromic-string/?ref=asr1
@@ -21,6 +19,7 @@ TODO
     // https://www.geeksforgeeks.org/problems/transform-to-sum-tree--170645/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
     // https://www.geeksforgeeks.org/problems/k-sum-paths/1
     // https://leetcode.com/problems/diagonal-traverse-ii/description/?envType=daily-question&envId=2023-11-22
+    
     // z->https://www.geeksforgeeks.org/problems/search-pattern-z-algorithm--141631/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
     // kmp->https://www.geeksforgeeks.org/problems/search-pattern0205/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
     // rabin karp->https://www.geeksforgeeks.org/problems/search-pattern-rabin-karp-algorithm--141631/1
