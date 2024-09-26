@@ -1,3 +1,4 @@
+----------------------------------------------------Using Floyd's--------------------------------------------
     ListNode* hasCycle(ListNode *head) {
         if(!head) return NULL;
         ListNode *fast=head, *slow=head;
@@ -18,3 +19,28 @@
         return temp1;
     }
     
+----------------------------------------------------Using brent's--------------------------------------------
+
+    ListNode *detectCycle(ListNode *head) {
+        if(!head) return NULL;
+        ListNode *fast=head->next, *slow=head;
+        int len=1, power=1;
+        while(fast && fast!=slow){
+            if(len==power){
+                slow=fast;
+                len=0;
+                power*=2;
+            }
+            fast=fast->next;
+            len++;
+        }
+        if(!fast) return NULL; // no cycle
+        
+        slow=fast=head;
+        while(len--) fast=fast->next;
+        while(slow!=fast){
+            slow=slow->next;
+            fast=fast->next;
+        }
+        return fast;
+    }

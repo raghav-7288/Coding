@@ -1,0 +1,17 @@
+Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+There is only one repeated number in nums, return this repeated number.
+
+--------------------------------------------slow fast-------------------------------------------------------------
+    int findDuplicate(vector<int>& nums) {
+        int s=nums[0], f=nums[0];
+        do{
+            s=nums[s];
+            f=nums[nums[f]];
+        }while(s != f);
+        f=nums[0];
+        while(f!=s){
+            s=nums[s];
+            f=nums[f];
+        }
+        return s;
+    }

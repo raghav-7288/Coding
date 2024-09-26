@@ -1,4 +1,6 @@
 
+-------------------------------------------------Using Floyd's------------------------------------------------
+
     int countNodesinLoop(struct Node *head) {
         if(!head) return 0;
         Node *f=head,*s=head;
@@ -17,4 +19,23 @@
             f=f->next;
         }
         return ans;
+    }
+
+----------------------------------------------------Easy using brent's--------------------------------------------
+
+    int countNodesinLoop(Node *head) {
+        if(!head) return NULL;
+        Node* slow=head, *fast=head->next;
+        int length=1, power=1;
+        while(fast && fast!=slow){
+            if(length==power){
+                slow=fast;
+                length=0;
+                power*=2;
+            }
+            fast=fast->next;
+            length++;
+        }
+        if(!fast) return 0;
+        return length;
     }
