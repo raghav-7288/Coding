@@ -1,0 +1,16 @@
+Given a string s of length n, find all the possible non-empty subsequences of the string s in lexicographically-sorted order.
+
+	    void solve(int i, string cur, string& s, vector<string>& ans){
+	        if(i==s.length()){
+	            if(cur != "") ans.push_back(cur);
+	            return;
+	        }
+	        solve(i+1,cur+s[i],s,ans);
+	        solve(i+1,cur,s,ans);
+	    }
+		vector<string> AllPossibleStrings(string s){
+		    vector<string> ans;
+		    solve(0,"",s,ans);
+		    sort(ans.begin(),ans.end());
+		    return ans;
+		}   

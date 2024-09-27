@@ -1,0 +1,56 @@
+    struct Node{
+        Node* link[26];
+        bool isEnd=false;
+        int ce=0;
+    };
+    class trie{
+        public:
+        Node* root=NULL;
+        trie(){
+            root=new Node();
+        }
+        void insert(string w){
+            Node* node=root;
+            for(auto c:w){
+                if(!node->link[c-'a']){
+                    node->link[c-'a']=new Node();
+                }
+                node=node->link[c-'a'];
+            }
+            node->isEnd=true;
+            node->ce++;
+        }
+        void dfs(Node* node, string cur, vector<string>& ans){
+            if(!node) return;
+            if(node->isEnd){
+                int c=node->ce;
+                while(c--) ans.push_back(cur);
+            }
+            for(char c='a';c<='z';c++){
+                if(node->link[c-'a']){
+                    cur.push_back(c);
+                    dfs(node->link[c-'a'],cur,ans);
+                    cur.pop_back();
+                }
+            }
+        }
+    };
+
+    class Solution{
+        public:
+        void solve(int i, string cur, string& s, trie& t){
+            if(i==s.length()){
+                if(cur != "") t.insert(cur);
+                return;
+            }
+            solve(i+1,cur+s[i],s,t);
+            solve(i+1,cur,s,t);
+        }
+        vector<string> AllPossibleStrings(string s){
+            trie t;
+            solve(0,"",s,t);
+            vector<string> ans;
+            t.dfs(t.root,"",ans);
+            return ans;
+        }
+    };
