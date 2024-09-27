@@ -1,0 +1,27 @@
+Given a reference of a node in a connected undirected graph. Return a deep copy (clone) of the graph.
+Each node in the graph contains a value (int) and a list (List[Node]) of its neighbors.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+}
+
+
+
+    void dfs(Node* newNode, Node* node,map<Node*, Node*>& created){
+        for(auto it:node->neighbors){
+            if(created.find(it) == created.end()){
+                Node* newAdj = new Node(it->val);
+                newNode->neighbors.push_back(newAdj);
+                created[it]=newAdj;
+                dfs(newAdj, it, created);
+            }else newNode->neighbors.push_back(created[it]);
+        }
+    }
+    Node* cloneGraph(Node* node) {
+        if(!node) return node;
+        map<Node*,Node*> created;
+        Node* newNode = new Node(node->val);
+        created[node]=newNode;
+        dfs(newNode, node, created);
+        return newNode;
+    }

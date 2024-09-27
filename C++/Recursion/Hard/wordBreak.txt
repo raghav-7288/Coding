@@ -17,3 +17,35 @@ Note that the same word in the dictionary may be reused multiple times in the se
         for(auto w:dic) mp[w]++;
         return solve(0,0,n,s,mp,dp);
     }
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+You are given a non-empty string S containing no spaces’ and a dictionary of non-empty strings (say the list of words). 
+You are supposed to construct and return all possible sentences after adding spaces in the originally given string ‘S’, 
+such that each word in a sentence exists in the given dictionary.
+
+
+    void solve(int i, int j, string& s, string cur, map<string,int>& dict, vector<string>& ans){
+        string _s = s.substr(i,j-i+1);
+        if(j==s.length()-1){
+            if(dict[_s]){
+                string temp=cur+_s;
+                ans.push_back(temp);
+            }
+            return;
+        }
+        if(dict[_s]){
+            solve(j+1,j+1,s,cur+_s+" ",dict,ans);
+            solve(i,j+1,s,cur,dict,ans);
+        }else{
+            solve(i,j+1,s,cur,dict,ans);
+        }
+    }
+    vector<string> wordBreak(string &s, vector<string> &dictionary)
+    {
+        map<string,int> dict;
+        for(auto s:dictionary) dict[s]=1;
+        vector<string> ans;
+        solve(0,0,s,"",dict,ans);
+        return ans;
+    }

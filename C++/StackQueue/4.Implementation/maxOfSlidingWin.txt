@@ -15,3 +15,48 @@ right by one position. Return the max sliding window.
         }
         return ans;
     }   
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+You are given an array of ‘N’ integers, you need to find the maximum of minimum for every window size. 
+The size of the window should vary from 1 to ‘N’ only.
+
+    vector<int> maxMinWindow(vector<int> a, int n) {
+        vector<int> ans;
+        int maxi = *max_element(a.begin(),a.end());
+        ans.push_back(maxi);
+        for(int k=2;k<=n;k++){
+            vector<int> temp;
+            deque<int> q;
+            for(int i=0;i<n;i++){
+                if(!q.empty() && i-q.front() >= k) q.pop_front();
+                while(!q.empty() && a[q.back()] >= a[i]) q.pop_back();
+                q.push_back(i);
+                if(i+1 >= k) temp.push_back(a[q.front()]);
+            }
+            int maxi = *max_element(temp.begin(),temp.end());
+            ans.push_back(maxi);
+        }
+        return ans;
+    }
+
+-----------------------------------------------------------OR(no TLE) -- using lrh -------------------------------------------------------------------------
+
+    vector<int> maxMinWindow(vector<int> arr, int n) {
+        vector<int> ans(n,INT_MIN);
+        stack<int> st;
+        for(int i=0;i<=n;i++){
+            while(!st.empty() && (i==n || arr[st.top()] >= arr[i])){
+                int ind=st.top(); st.pop();
+                int nsi = i;
+                int psi = st.empty() ? -1 : st.top();
+                int length = nsi - psi - 1;
+                ans[length - 1] = max(ans[length-1], arr[ind]);
+            }
+            st.push(i);
+        }
+        for (int i = n - 2; i >= 0; i--){
+            ans[i] = max(ans[i], ans[i + 1]);
+        }
+        return ans;
+    }
