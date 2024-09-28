@@ -1,0 +1,41 @@
+You are given the head of a singly linked-list. The list can be represented as:
+L0 → L1 → … → Ln - 1 → Ln
+Reorder the list to be on the following form:
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+    void reorderList(ListNode* head) {
+        if(!head || !head->next || !head->next->next) return;
+        ListNode* fast=head, *slow=head, *temp=head;
+        while(fast->next){
+            fast=fast->next;
+            if(fast->next){
+                fast=fast->next;
+                slow=slow->next;
+            }
+        }
+        ListNode *p=slow,*c=slow->next,*n=NULL;
+        while(c){
+            n=c->next;
+            c->next=p;
+            p=c;
+            c=n;
+        }
+        slow->next->next=NULL;
+        slow->next=NULL;
+        slow=head->next;
+        fast=p;
+        int chance=0;
+        while(slow || fast){
+            if(chance=chance^1){
+                if(fast){
+                    temp->next=fast;
+                    fast=fast->next;
+                }
+            }else if(slow){
+                temp->next=slow;
+                slow=slow->next;
+            }
+            temp=temp->next;
+        }
+    }
