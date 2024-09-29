@@ -1,0 +1,23 @@
+Given the root of a binary search tree, return a balanced binary search tree with the same node values. 
+If there is more than one answer, return any of them.
+A binary search tree is balanced if the depth of the two subtrees of every node never differs by more than 1.
+
+
+    void inorder(TreeNode* root, vector<int>& in){
+        if(!root) return;
+        inorder(root->left,in);
+        in.push_back(root->val);
+        inorder(root->right,in);
+    }
+    TreeNode* build(int l, int r, vector<int>& ino){
+        if(l>r) return NULL;
+        int m=(l+r)/2;
+        TreeNode* left=(l>=m)?NULL:build(l,m-1,ino);
+        TreeNode* right=(r<=m)?NULL:build(m+1,r,ino);
+        return new TreeNode(ino[m],left,right);
+    }
+    TreeNode* balanceBST(TreeNode* root) {
+        vector<int> ino;
+        inorder(root,ino);
+        return build(0,ino.size()-1,ino);
+    }

@@ -1,0 +1,19 @@
+Given a binary tree and an integer k, the task is to count the number of paths in the tree such that the sum of the nodes in each path 
+equals k. A path can start from any node and end at any node and must be downward only.
+
+    int ans=0;
+    void solve(Node* root, int cs, unordered_map<int,int>& mp,int k){
+        if(!root) return;
+        cs+=root->data;
+        if(mp.find(cs-k) != mp.end()) ans+=mp[cs-k];
+        mp[cs]++;
+        solve(root->left,cs,mp,k);
+        solve(root->right,cs,mp,k);
+        mp[cs]--;
+    }
+    int sumK(Node *root, int k) {
+        unordered_map<int,int> mp;
+        mp[0]=1;
+        solve(root,0,mp,k);
+        return ans;
+    }

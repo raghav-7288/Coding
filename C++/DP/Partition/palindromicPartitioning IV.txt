@@ -1,0 +1,21 @@
+Given a string s, return true if it is possible to split the string s into three(k) non-empty palindromic substrings.
+
+     bool isPal(string& s, int i, int j){
+        while(i<j){
+            if(s[i]!=s[j]) return false;
+            i++;j--;
+        }
+        return true;
+    }
+    bool solve(int i, int cr, int n, string& s){
+        if(i==n) return false;
+        if(!cr) return isPal(s,i,n-1);
+        for(int j=i;j<n;j++){
+            if(isPal(s,i,j) && solve(j+1,cr-1,n,s)) return true;
+        }
+        return false;
+    }
+    bool checkPartitioning(string s) {
+        int parts=3;
+        return solve(0,parts-1,s.length(),s);
+    }

@@ -1,0 +1,84 @@
+Given a tree having nodes from 1 to N, and each node having a particular value Vi.
+You need to choose a root j, such that the sum Sj maximizes.
+Sj is defined as:
+Sj = Σ (di * f(Vi)),
+where di is the distance of the i-th node from the root node j, and the function f(x) returns the smallest prime not smaller than x.
+The distance between 2 nodes is the number of edges on the path from a to b.
+Print the root j to be chosen and the value Sj. If multiple such roots exist, print the lowest.
+Input Format:
+- The first line contains t, the number of test cases. Then t test cases follow.
+- The first line of each testcase contains one integer N.
+- The second line has N integers: V1, V2, V3, ..., VN.
+- The following N - 1 lines contain 2 integers a and b separated by a space, denoting an undirected edge from a to b.
+
+
+    vector<int> seive(){
+        int n=1e7+1;
+        vector<int> isPrime(n,1);
+        isPrime[0]=isPrime[1]=0;
+        for(int i=2;i*i<=n;i++){
+            if(isPrime[i]){
+                for(int j=i*i;j<=n;j+=i){
+                    isPrime[j]=0;
+                }
+            }
+        }
+        vector<int> allPrimes;
+        for(int i=2;i<=n;i++){
+            if(isPrime[i]) allPrimes.push_back(i);
+        }
+        return allPrimes;
+    }
+    int dfs_root_1(int node, int par, int dist, vector<int>& val, vector<int> adj[], vector<int>& cost, vector<int>& sumSubTree){
+        int sum=val[node];
+        cost[1] += sum*dist;
+        for(auto it:adj[node]){
+            if(it==par) continue;
+            sum += dfs_root_1(it,node,dist+1,val,adj,cost,sumSubTree);
+        }
+        return sumSubTree[node]=sum;
+    }
+    void dfs_root_shift(int node, int par, vector<int>& val, vector<int> adj[], vector<int>& cost, vector<int>& sumSubTree){
+        for(auto it:adj[node]){
+            if(it==par) continue;
+            cost[it] = cost[node] + sumSubTree[1] - 2*sumSubTree[it];
+            dfs_root_shift(it,node,val,adj,cost,sumSubTree);
+        }
+    }
+    void solve(int n, vector<int>& val, vector<int> adj[], vector<int>& cost){
+        vector<int> sumSubTree(n+1);
+        dfs_root_1(1,0,0,val,adj,cost,sumSubTree);
+        dfs_root_shift(1,0,val,adj,cost,sumSubTree);
+    }
+    signed main(){
+        vector<int> allPrimes=seive();
+        int t;
+        cin>>t;
+        while(t--){
+            int n;
+            cin>>n;
+            vector<int> val(n+1);
+            for(int i=1;i<=n;i++){
+                cin>>val[i];
+                val[i]=*lower_bound(allPrimes.begin(),allPrimes.end(),val[i]);
+            }
+            vector<int> adj[n+1];
+            for(int i=1;i<n;i++){
+                int u,v;
+                cin>>u>>v;
+                adj[u].push_back(v);
+                adj[v].push_back(u);
+            }
+            vector<int> cost(n+1,0);
+            solve(n,val,adj,cost);
+            int maxRoot=0, maxSum=0;
+            for(int i=1;i<=n;i++){
+                if(cost[i]>maxSum){
+                    maxSum=cost[i];
+                    maxRoot=i;
+                }
+            }
+            cout<<maxRoot<<" "<<maxSum<<endl;
+        }
+        return 0;
+    }

@@ -1,0 +1,57 @@
+You are given a permutation and want to make it stable.
+A permutation P is stable if P[i]=i for every i from 1 to n, where n is the size of the permutation.
+To do this you can apply an operation multiple times.
+In one operation, for every i in 1 to n, P[i] is replaced by P[P[i]].
+Find the minimum number of operations in which you can make the permutation stable or print -1 if its not possible.
+
+If the length of the cycle is a power of 2 then the permutation can be stabilized, and the minimum number of operations
+required is determined by how many times the cycle needs to be halved. This is computed as the base-2 logarithm of the cycle length.
+
+
+    int main()
+    {
+        int tt;
+        cin >> tt;
+        while (tt--)
+        {
+            int n, ans = 0;
+            cin >> n;
+            vector<int> v(n), vis(n, 0);
+            for (int i = 0; i < n; i++)
+                cin >> v[i];
+            for (auto &it : v)
+                it--;
+
+            bool valid = true;
+            for (int i = 0; i < n; i++)
+            {
+                if (vis[i])
+                    continue;
+                int j = i, count = 0;
+                while (!vis[j])
+                {
+                    vis[j] = 1;
+                    count++;
+                    j = v[j];
+                }
+                if (count == 1)
+                    continue;
+                if ((count & (count - 1)) == 0)
+                {
+                    int x = log2(count);
+                    ans = max(ans, x);
+                }
+                else
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            if (!valid)
+                cout << -1;
+            else
+                cout << ans;
+            cout << endl;
+        }
+        return 0;
+    }
