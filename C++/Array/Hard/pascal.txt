@@ -14,8 +14,10 @@
             pt.push_back(genRow(i));
         }
         return pt;
-    }  
+    } 
+
 ----------------------------------------------------------------OR------------------------------------------------------------------------
+    
     vector<vector<int>> generate(int n) {
         vector<vector<int>> pt={{1}};
         if(n==1) return pt;

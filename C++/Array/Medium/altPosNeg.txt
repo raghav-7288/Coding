@@ -12,22 +12,20 @@ vector<int> rearrangeArray(vector<int>& nums) {
 
 ------------------------------------------------------W/O extra space------------------------------------------------------------------
 
-    void rearrange(vector<int>& arr) {//TODO
-        int index=-1;
+    void rearrange(vector<int> &arr) {
+        int wrong=-1;
         for(int i=0;i<arr.size();i++){
-            if(index==-1){
-                if((arr[i] >= 0 && i%2) || (arr[i] < 0 && i%2==0)) index=i;
+            if(wrong==-1 && ((arr[i]>=0 && i&1) || (arr[i]<0 && !(i%2)))){
+                wrong=i;
             }
-            if(index!=-1){
-                if((arr[index] >= 0 && arr[i] < 0) || (arr[index] < 0 && arr[i] >= 0)){
-                    int temp = arr[i];
-                    for(int j=i;j>index;j--){
-                        arr[j] = arr[j-1];
-                    }
-                    arr[index] = temp;
-                    if(i - index >= 2) index += 2;
-                    else index=-1;
+            if(wrong!=-1 && ((arr[i]>=0 && arr[wrong]<0) || (arr[i]<0 && arr[wrong]>=0))){
+                int temp=arr[i];
+                for(int j=i;j>wrong;j--){
+                    arr[j] = arr[j-1];
                 }
+                arr[wrong]=temp;
+                if(wrong+2 <= i) wrong+=2;
+                else wrong=-1;
             }
         }
     }
