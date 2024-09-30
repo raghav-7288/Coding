@@ -63,7 +63,7 @@ int lenOfLongSubarr(int A[],  int N, int K)
     return ans;
 } 
 
-----------------------------------------no. of subarraay with sum = k------------------------------------------------------------
+-----------------------------------------------------no. of subarraay with sum = k------------------------------------------------------------
 
     int subarraySum(vector<int>& nums, int k) {
         map<int,int> mp;

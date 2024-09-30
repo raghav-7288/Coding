@@ -12,7 +12,7 @@ vector<int> rearrangeArray(vector<int>& nums) {
 
 ------------------------------------------------------W/O extra space------------------------------------------------------------------
 
-    void rearrange(vector<int>& arr) {
+    void rearrange(vector<int>& arr) {//TODO
         int index=-1;
         for(int i=0;i<arr.size();i++){
             if(index==-1){

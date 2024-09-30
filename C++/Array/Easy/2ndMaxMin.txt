@@ -1,37 +1,40 @@
 
-int secondLargest(vector<int> a)
-{
-    int largest = a[0];
-    int slargest = INT_MIN;
-    for (int i = 1; i < a.size(); i++)
+    int secondLargest(vector<int> a)
     {
-        if (a[i] > largest)
+        int largest = a[0];
+        int slargest = INT_MIN;
+        for (int i = 1; i < a.size(); i++)
         {
-            slargest = largest;
-            largest = a[i];
+            if (a[i] > largest)
+            {
+                slargest = largest;
+                largest = a[i];
+            }
+            else if (a[i] < largest && a[i] > slargest)
+            {
+                slargest = a[i];
+            }
         }
-        else if (a[i] < largest && a[i] > slargest)
-        {
-            slargest = a[i];
-        }
+        return slargest;
     }
-    return slargest;
-}
-int secondSmallest(vector<int> a)
-{
-    int smallest = a[0];
-    int ssmallest = INT_MAX;
-    for (int i = 1; i < a.size(); i++)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+    int secondSmallest(vector<int> a)
     {
-        if (a[i] < smallest)
+        int smallest = a[0];
+        int ssmallest = INT_MAX;
+        for (int i = 1; i < a.size(); i++)
         {
-            ssmallest = smallest;
-            smallest = a[i];
+            if (a[i] < smallest)
+            {
+                ssmallest = smallest;
+                smallest = a[i];
+            }
+            else if (a[i] > smallest && a[i] < ssmallest)
+            {
+                ssmallest = a[i];
+            }
         }
-        else if (a[i] > smallest && a[i] < ssmallest)
-        {
-            ssmallest = a[i];
-        }
+        return ssmallest;
     }
-    return ssmallest;
-}

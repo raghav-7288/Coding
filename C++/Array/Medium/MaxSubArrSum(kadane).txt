@@ -40,7 +40,7 @@ int kadane(int n, vector<int> v)
                 s=0;
             }
         }
-        if(!ans) {int M=*max_element(nums.begin(),nums.end());cout<<M;return M;}
+        if(!ans) return *max_element(nums.begin(),nums.end());
         for(int i=max_left;i<=max_right;i++) cout<<nums[i]<<" ";
         return ans;
     }
