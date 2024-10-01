@@ -3,11 +3,29 @@ Return the kth positive integer that is missing from this array.
 
 
     int findKthPositive(vector<int>& arr, int k) {
-        int l=0,h=arr.size()-1,missing,m;
+        int l=0,h=arr.size()-1;
         while(l<=h){
-            int m=(l+h)/2, missing = arr[m]-1-m;
-            if(missing < k) l=m+1;
+            int m=(l+h)/2, missing=arr[m]-m-1;
+            if(missing<k) l=m+1;
             else h=m-1; 
         }
+
+        // now
+        // h is pointing where less than k are missing
+        // l is pointing where more than k are missing
+        // ans = arr[h] + leftMissings
+        // leftMissings = k - missings @ a[h] = k - (arr[h]-h-1)
+        // ans = arr[h] + (k - (arr[h]-h-1))
+        
         return k+h+1;
+    }
+
+-----------------------------------------------------------linear-----------------------------------------------------------------------
+
+    int findKthPositive(vector<int>& arr, int k) {
+        for(auto a:arr){
+            if(a<=k) k++;
+            else break;
+        }
+        return k;
     }

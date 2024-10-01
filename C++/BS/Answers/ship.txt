@@ -4,6 +4,7 @@ Each day, we load the ship with packages on the conveyor belt (in the order give
 We may not load more weight than the maximum weight capacity of the ship.
 Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within days days.
 
+
     int shipWithinDays(vector<int>& w, int d) {
         int l=*max_element(w.begin(), w.end()),h=accumulate(w.begin(),w.end(),0);
         while(l<=h){

@@ -1,11 +1,13 @@
 
     long long int floorSqrt(long long int n) {
-        // Your code goes here
-        long long int ans;
-        for(long long int i=2;i<n;i++){
-            ans = i*i;
-            if(ans==n) return i;
-            else if(ans > n) return i-1;
+        long long int l=1,h=n, f;
+        while(l<=h){
+            long long int m=l+(h-l)/2;
+            if(m*m == n) return m;
+            if(m*m < n){
+                f=m;
+                l=m+1;
+            }else h=m-1;
         }
-        return 1;
+        return f;
     }

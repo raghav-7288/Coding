@@ -1,2 +1,33 @@
+    bool dfs(int node, int V, int cnt, vector<int> &vis, vector<int> &h_cycle, vector<int> adj[])
+    {
+        vis[node] = 1;
+        h_cycle.push_back(node);
+        if (cnt == V)
+        {
+            for (auto it : adj[0])
+            {
+                if (it == node)
+                {
+                    h_cycle.push_back(0);
+                    return true;
+                }
+            }
+        }
+        for (auto it : adj[node])
+        {
+            if (!vis[it])
+            {
+                if (dfs(it, V, cnt + 1, vis, h_cycle, adj)) return true;
+            }
+        }
+        vis[node] = 0;
+        h_cycle.pop_back();
+        return false;
+    }
 
-https://www.geeksforgeeks.org/hamiltonian-cycle/
+    vector<int> hamCycle(int V, vector<int> adj[])
+    {
+        vector<int> h_cycle, vis(V);
+        if (dfs(0, V, 1, vis, h_cycle, adj)) return h_cycle;
+        return {};
+    }

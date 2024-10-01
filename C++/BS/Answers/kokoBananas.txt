@@ -9,9 +9,9 @@ Return the minimum integer k such that she can eat all the bananas within h hour
     int minEatingSpeed(vector<int>& piles, int hours) {
         int l=1,h=*max_element(piles.begin(),piles.end());
         while(l<=h){
-            long long m=(l+h)/2, th=0;
-            for(auto p:piles) th+=ceil((double)p/(double)m);
-            if(th <= hours) h=m-1;
+            long long m=(l+h)/2, total_hours=0;
+            for(auto p:piles) total_hours+=ceil((double)p/(double)m);
+            if(total_hours <= hours) h=m-1;
             else l=m+1;
         }
         return l;

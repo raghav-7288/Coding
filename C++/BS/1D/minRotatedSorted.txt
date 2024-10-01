@@ -1,3 +1,5 @@
+Find minimum element in a rotated sorted array
+
     int findMin(vector<int>& nums) {
         int l=0,r=nums.size()-1;
         int mini=5001;

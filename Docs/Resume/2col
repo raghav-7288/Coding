@@ -72,13 +72,13 @@
 \cvsection{\Large{WORK EXPERIENCE}}
 \vspace{-0.3cm}
 
-\cvevent{}{SDE Intern, Samsung Research Institute}{June '24 - Jul '24}{Bangalore}
+\cvevent{}{Research Intern, Samsung Research Institute}{June '24 - Jul '24}{Bangalore}
 \vspace{-0.1cm}
 \textbf{Project: Gallery Search: Advanced Result Generation}
 \begin{itemize}[noitemsep]
-\item Implemented various clustering algorithms to enhance data grouping.
-\item Employed various techniques to evaluate and score the performance of a translation model.
-\item Utilized knowledge distillation to compress machine learning models for efficient performance.
+\item Applied clustering algorithms to improve data organization and grouping.
+\item Leveraged multiple techniques to assess and score the translation model's performance.
+\item Utilized knowledge distillation to compress machine learning models for enhanced efficiency.
 \end{itemize}
 \vspace{-0.4cm}
 \divider\\ 
@@ -87,8 +87,8 @@
 \cvevent{}{Verzeo}{June '21 - Jul '21}{Bangalore}
 \vspace{-0.3cm}
 \begin{itemize}[noitemsep]
-\item Gained hands-on experience in web development technologies such as HTML, CSS, and JavaScript.
-\item Completed minor web development projects, including creating personalized websites.
+\item Acquired practical knowledge in web development, focusing on HTML, CSS, and JavaScript.
+\item Completed several minor web development projects, including the creation of personalized websites.
 \end{itemize}
 \vspace{-0.4cm}
 \divider\\ \vspace{-0.45cm}
@@ -100,7 +100,7 @@
 \cvevent{}{Trip - A Complete Tourism Solution \emph{(ISICT-2022)}}{April '22}{Greater Noida}
 \vspace{-0.3cm}
 \begin{itemize}[noitemsep]
-\item Published an article titled 'Trip-A Comprehensive Tourism Solution' detailing the project's structure and methodology.
+\item Published a paper titled 'Trip - A Comprehensive Tourism Solution,' outlining the project's framework and approach.
 \end{itemize}
 \vspace{-0.4cm}
 \divider\\ \vspace{-0.45cm}
@@ -113,13 +113,14 @@
 \cvevent{}{Hardware Accelerated Inference on Real-Time UAV \\ Imagery \emph{(M.Tech Project)}\hfill \textit{\small{Aug '24 - Present}}}{}{}
 {\vspace{-0.28cm} \small \textit{Guide: Prof. Dr. Ayon Chakraborty (CSE, IIT Madras)}}
 \begin{itemize}[noitemsep]
-    \item Evaluated \textbf{performance metrics} and compared \textbf{inference time} of deep neural network (DNN) models across various hardware platforms, including \textbf{TPU}, \textbf{CPU}, \textbf{Raspberry Pi}, and small-sized \textbf{GPU}.
-    \item Utilized a \textbf{TensorFlow-based framework} to optimize and convert models into \textbf{TensorFlow Lite (TFLite)} format for efficient inferencing on TPU.
-    \item Focused on optimizing models for \textbf{real-time applications} such as \textbf{UAV surveillance}, \textbf{intrusion detection}, and \textbf{object recognition}, enhancing overall system performance.
-    \item Planned to implement an optimized \textbf{TensorFlow Lite (TFLite)} model on \textbf{TPU} for improved \textbf{real-time inference capabilities}.
+    \item Analyzed and compared the \textbf{inference times} and \textbf{performance metrics} of deep neural network (DNN) models across hardware platforms such as \textbf{TPU}, \textbf{CPU}, \textbf{Raspberry Pi}, and compact \textbf{GPU}.
+    \item Utilized a \textbf{TensorFlow-based framework} to optimize and convert models into \textbf{TensorFlow Lite (TFLite)} format for efficient TPU-based inferencing.
+    \item Focused on optimizing models for \textbf{real-time applications}, including \textbf{UAV surveillance}, \textbf{intrusion detection}, and \textbf{object recognition}, to boost system performance.
+    \item Targeted deploying an optimized \textbf{TensorFlow Lite (TFLite)} model on \textbf{TPU} to enhance \textbf{real-time inference} efficiency.
 \end{itemize}
 \vspace{-0.4cm}
 \divider\\\vspace{-0.35cm}
+
 
 \cvevent{}{Custom Big Integer Library in C++\hfill\textit{\small{August '23}}}{}{}
 \vspace{-0.30cm} 
@@ -132,8 +133,8 @@
 \cvevent{}{Time Table Generator\hfill\textit{\small{March '22 - April '22}}}{}{}
 {\vspace{-0.28cm} \small \textit{Guide: Prof. Abha Kiran Rajput (CSE, Sharda University)}}
 \begin{itemize}[noitemsep]
-\item Developed a \textbf{Java} based project that automates the \textbf{time table generation process} for educational institutions.
-\item This user-friendly application optimizes \textbf{scheduling} by assigning \textbf{subjects}, \textbf{teachers}, and \textbf{resources} to appropriate time slots while considering constraints.
+\item Developed a \textbf{Java}-based application to automate the \textbf{time table generation process} for educational institutions.
+\item The user-friendly system optimizes \textbf{scheduling} by efficiently allocating \textbf{subjects}, \textbf{teachers}, and \textbf{resources} to time slots, while adhering to constraints.
 \end{itemize}
 
 \vspace{-0.4cm}
@@ -148,8 +149,8 @@
 \cvevent{}{CS6910: Deep Learning\hfill\textit{\small{Jan '24 - April '24}}}{}{}
 {\vspace{-0.28cm} \small \textit{Instructor: Prof. Mitesh Khapra}}
 \begin{itemize}[noitemsep]
-\item \textbf{Feed Forward Neural Network From Scratch}: Constructed a deep neural network from the ground up, incorporating \textbf{back-propagation} and implemented \textbf{optimizers}.
-\item \textbf{Transliteration System}: Implemented a \textbf{Seq2Seq} model using different recurrent cells such as \textbf{RNN}, \textbf{LSTM}, and \textbf{GRU} on the \textbf{Aksharantar} dataset.
+\item \textbf{Feed Forward Neural Network From Scratch}: Built a deep neural network from scratch, implementing \textbf{back-propagation} and various \textbf{optimizers}.
+\item \textbf{Transliteration System}: Developed a \textbf{Seq2Seq} model utilizing recurrent cells such as \textbf{RNN}, \textbf{LSTM}, and \textbf{GRU} on the \textbf{Aksharantar} dataset for transliteration tasks.
 \end{itemize}
 \vspace{-0.4cm}
 \divider\\\vspace{-0.35cm}
@@ -157,8 +158,8 @@
 \cvevent{}{CS6023: GPU Programming\hfill\textit{\small{Jan '24 - April '24}}}{}{}
 {\vspace{-0.28cm} \small \textit{Instructor: Prof. Rupesh Nasre}}
 \begin{itemize}[noitemsep]
-\item \textbf{Parallel Convolution Filter}: Implemented a parallel convolution filter using \textbf{CUDA} and achieved significant speedup over serial implementation.
-\item \textbf{Tank Battle Simulation Project}: Created a real-time \textbf{tank battle simulation} leveraging \textbf{GPU} capabilities.
+\item \textbf{Parallel Convolution Filter}: Developed a parallel convolution filter using \textbf{CUDA}, achieving substantial speedup compared to the serial version.
+\item \textbf{Tank Battle Simulation Project}: Designed a real-time \textbf{tank battle simulation} utilizing \textbf{GPU} processing capabilities for enhanced performance.
 \end{itemize}
 \vspace{-0.4cm}
 \divider\\\vspace{-0.35cm}
@@ -166,7 +167,7 @@
 \cvevent{}{CS1702: Computer Architecture And Organization\hfill\textit{\small{March '21}}}{}{}
 {\vspace{-0.28cm} \small \textit{Instructor: Prof. Shefali Agarwal}}
 \begin{itemize}[noitemsep]
-\item \textbf{Cache and Memory Hierarchy Simulator}: Developed a flexible simulator to analyze \textbf{cache and memory hierarchy performance} using the \textbf{SPEC-2000 benchmark}. Implemented and compared \textbf{L1}, \textbf{L2}, and \textbf{victim cache} configurations with adjustable size, associativity, and block size.
+\item \textbf{Cache and Memory Hierarchy Simulator}: Designed a versatile simulator to evaluate \textbf{cache and memory hierarchy performance} using the \textbf{SPEC-2000 benchmark}, implementing and comparing \textbf{L1}, \textbf{L2}, and \textbf{victim cache} configurations with adjustable size, associativity, and block size.
 \end{itemize}
 \vspace{-0.4cm}
 \divider\\\vspace{-0.35cm}

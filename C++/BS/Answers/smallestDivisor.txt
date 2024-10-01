@@ -3,6 +3,7 @@ divide all the array by it, and sum the division's result. Find the smallest div
 result mentioned above is less than or equal to threshold.
 Each result of the division is rounded to the nearest integer greater than or equal to that element. (For example: 7/3 = 3 and 10/2 = 5).
 
+
     int smallestDivisor(vector<int>& nums, int t) {
         int l=1,h=*max_element(nums.begin(),nums.end());
         while(l<=h){

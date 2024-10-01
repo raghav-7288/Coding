@@ -4,10 +4,10 @@ The garden consists of n flowers, the ith flower will bloom in the bloomDay[i] a
 Return the minimum number of days you need to wait to be able to make m bouquets from the garden. 
 If it is impossible to make m bouquets return -1.
 
+
     int minDays(vector<int>& bd, int n, int k) {
         if((long long)n*k > bd.size()) return -1;
-        int l=*min_element(bd.begin(),bd.end());
-        int h=*max_element(bd.begin(),bd.end());
+        int l=*min_element(bd.begin(),bd.end()) ,h=*max_element(bd.begin(),bd.end());
         while(l<=h){
             int m=(h+l)/2,tb=0,cnt=0;
             for(auto b:bd){

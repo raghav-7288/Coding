@@ -14,7 +14,7 @@
                 }
             }
             bool isPeek = true;
-            if(m-1 >= 0){
+            if(m >= 1){
                 if(mat[maxi][m-1] > maxe) {h=m-1;isPeek=false;}
             }
             if(m+1 < cols){

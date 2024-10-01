@@ -1,7 +1,6 @@
 A Hamiltonian path, is a path in an undirected graph that visits each vertex exactly once. 
 Given an undirected graph, the task is to check if a Hamiltonian path is present in it or not.
 
-//TODO print the path
 
     bool dfs(int node, int count, int n, vector<int>& vis, vector<int> adj[]){
         if(count==n-1) return true;
