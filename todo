@@ -3,9 +3,8 @@
 // SDE
 // 75
 // Red Black Tree
-// fenwick trees
-// eucledian cycle
-// hamiltonian cycle
+// fenwick trees -> https://www.youtube.com/watch?v=Qe8qRhz3lzQ
+// print eucledian cycle -> Hierholzer’s Algorithm and Fleury’s Algorithm
 // seg tree gfg
 // center of graph
 
@@ -16,9 +15,7 @@
 // kmp->https://www.geeksforgeeks.org/problems/search-pattern0205/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // rabin karp->https://www.geeksforgeeks.org/problems/search-pattern-rabin-karp-algorithm--141631/1
 
-// https://www.geeksforgeeks.org/count-of-pairs-in-an-array-whose-sum-is-a-perfect-square/?ref=asr1 
 // https://www.geeksforgeeks.org/count-of-pairs-in-an-array-whose-sum-is-a-perfect-cube/?ref=ml_lbp
 // https://www.geeksforgeeks.org/count-of-pairs-in-an-array-whose-sum-is-prime/?ref=ml_lbp
 // https://www.geeksforgeeks.org/count-pairs-in-a-sorted-array-whose-product-is-less-than-k/?ref=ml_lbp 
 // https://www.geeksforgeeks.org/count-pairs-in-array-whose-product-is-a-kth-power-of-any-positive-integer/?ref=ml_lbp
-// https://www.geeksforgeeks.org/sum-of-the-distances-from-every-node-to-all-other-nodes-is-maximum/?ref=asr2

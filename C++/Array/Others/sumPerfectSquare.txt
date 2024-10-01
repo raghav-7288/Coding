@@ -1,0 +1,38 @@
+// Count of pairs in an array whose sum is a perfect square
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n = 6;
+    vector<int> arr = {1, 3, 6, 10, 15, 0}, perfectSquares;
+    unordered_set<int> st(arr.begin(), arr.end());
+    vector<vector<int>> pairs;
+    sort(arr.begin(), arr.end());
+    int maxSum = arr[n - 1] + arr[n - 2], i = 1;
+
+    while (i * i <= maxSum)
+    {
+        perfectSquares.push_back(i * i);
+        i++;
+    }
+
+    int cnt = 0;
+    for (auto p : perfectSquares)
+    {
+        for (auto e : arr)
+        {
+            int temp = p - e;
+            if (temp > e && st.find(temp) != st.end())
+            {
+                cnt++;
+                pairs.push_back({e, temp});
+            }
+        }
+    }
+    cout << cnt << endl;
+    for (auto p : pairs)
+    {
+        cout << p[0] << "," << p[1] << endl;
+    }
+    return 0;
+}
