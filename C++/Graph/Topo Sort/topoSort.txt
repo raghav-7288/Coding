@@ -1,32 +1,25 @@
 --------------------------------------DFS(only when no cycle)---------------------------------------
-//add node to stack when its exploration ends
-void dfs(int node,vector<int> &vis,stack<int> &st,vector<int> adj[]){
-    vis[node]=1;
-    for(auto x:adj[node]){
-        if(!vis[x]){
-            dfs(x,vis,st,adj);
+    void dfs(int node,vector<int> &vis,vector<int> &ans,vector<int> adj[]){
+        vis[node]=1;
+        for(auto x:adj[node]){
+            if(!vis[x]){
+                dfs(x,vis,ans,adj);
+            }
         }
+        ans.push_back(node);
     }
-    st.push(node);
-}
-vector<int> topoSort(int V, vector<int> adj[]) 
-{
-    vector<int> vis(V,0);
-    stack<int> st;
-    for(int i=0;i<V;i++){
-        if(!vis[i]){
-            dfs(i,vis,st,adj);
+    vector<int> topoSort(int V, vector<int> adj[]){
+        vector<int> vis(V,0), ans;
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                dfs(i,vis,ans,adj);
+            }
         }
+        reverse(ans.begin(),ans.end());
+        return ans;
     }
-    vector<int> ans;
-    while(!st.empty()){
-        ans.push_back(st.top());
-        st.pop();
-    }
-    return ans;
-}
 -------------------------------------KAHN(bfs)-------------------------------------
-vector<int> topoSort(int V, vector<int> adj[]) 
+vector<int> topoSort(int V, vector<int> adj[])
 {
     vector<int> inDeg(V,0);
     vector<int> ans;

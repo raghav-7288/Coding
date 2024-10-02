@@ -3,44 +3,34 @@ return all the shortest transformation sequences from beginWord to endWord,
 or an empty list if no such sequence exists. Each sequence should be returned as a list of the words [beginWord, s1, s2, ..., sk].
 
 
-    vector<vector<string>> findLadders(string beg, string end, vector<string>& list) {
-        vector<vector<string>> ans;
-        unordered_set<string> st(list.begin(),list.end());
+    vector<vector<string>> findLadders(string b, string e, vector<string>& wordList) {
+        unordered_set<string> st(wordList.begin(),wordList.end());
+        vector<vector<string>> res;
         queue<vector<string>> q;
-        vector<string> used;
-        int lvl=1;
-        q.push({beg});
-        used.push_back(beg);
-        st.erase(beg);
+        q.push({b});
         while(!q.empty()){
-            vector<string> cur = q.front();
-            string word=cur.back();
+            vector<string> cur=q.front();
             q.pop();
-
-            if(cur.size()>lvl){
-                lvl++;
-                for(auto w:used) st.erase(w);
+            string cur_w=cur.back();
+            if(cur_w==e){
+                if(res.empty()) res.push_back(cur);
+                else if(cur.size()==res.back().size()) res.push_back(cur);
             }
-
-            if(word==end){
-                if(!ans.size()) ans.push_back(cur);
-                else if(cur.size()==ans[0].size()) ans.push_back(cur);
-            } 
-            for(int i=0;i<word.size();i++){
-                char init=word[i];
+            st.erase(cur_w);
+            for(auto& x:cur_w){
+                char init=x;
                 for(char c='a';c<='z';c++){
-                    word[i]=c;
-                    if(st.find(word)!=st.end()){
-                        cur.push_back(word);
+                    x=c;
+                    if(st.find(cur_w)!=st.end()){
+                        cur.push_back(cur_w);
                         q.push(cur);
                         cur.pop_back();
-                        used.push_back(word);
                     }
-                    word[i]=init;
+                    x=init;
                 }
             }
         }
-        return ans;
+        return res;
     }
 ----------------------------------------------------------------------------------------------------------------------
 //better approach
@@ -63,57 +53,54 @@ Output
     [["hit","hot","dot","dog","cog"],["hit","hot","lot","log","cog"]]
 
 
-    void dfs(string word, string beg, unordered_map<string,int>& mp, vector<string>& cur, vector<vector<string>>& ans){
-        if(word==beg){
+    void dfs(string source, string destination, vector<string>& cur, unordered_map<string,int>& mp, vector<vector<string>>& res){
+        if(source==destination){
             reverse(cur.begin(),cur.end());
-            ans.push_back(cur);
+            res.push_back(cur);
             reverse(cur.begin(),cur.end());
             return;
         }
-        int dis=mp[word];
-        for(int i=0;i<word.size();i++){
-            char init = word[i];
-            for(char z='a';z<='z';z++){
-                word[i]=z;
-                if(mp[word] && mp[word]==dis-1){
-                    cur.push_back(word);
-                    dfs(word,beg,mp,cur,ans);
+        int d=mp[source];
+        for(auto& x:source){
+            char init=x;
+            for(char c='a';c<='z';c++){
+                x=c;
+                if(mp[source]==d-1){
+                    cur.push_back(source);
+                    dfs(source,destination,cur,mp,res);
                     cur.pop_back();
                 }
-                word[i]=init;
+                x=init;
             }
         }
     }
-    vector<vector<string>> findLadders(string beg, string end, vector<string>& wordList) {
-        vector<vector<string>> ans;
-        unordered_map<string,int> mp;
-        queue<string> q;
+    vector<vector<string>> findLadders(string b, string e, vector<string>& wordList) {
         unordered_set<string> st(wordList.begin(),wordList.end());
-        q.push(beg);
-        st.erase(beg);
-        mp[beg]=1;
+        queue<pair<string,int>> q;
+        q.push({b,1});
+        st.erase(b);
+        unordered_map<string,int> mp;
         while(!q.empty()){
-            string word=q.front();
-            int d=mp[word];
+            string cur=q.front().first;
+            int d=q.front().second;
             q.pop();
-            if(word==end) break;
-            for(int i=0;i<word.size();i++){
-                char init = word[i];
-                for(char ch='a';ch<='z';ch++){
-                    word[i]=ch;
-                    if(st.find(word)!=st.end()){
-                        q.push(word);
-                        st.erase(word);
-                        mp[word]=d+1;
+            mp[cur]=d;
+            if(cur==e) break;
+            for(auto& x:cur){
+                char init=x;
+                for(char c='a';c<='z';c++){
+                    x=c;
+                    if(st.find(cur)!=st.end()){
+                        q.push({cur,d+1});
+                        st.erase(cur);
                     }
-                    word[i]=init;
+                    x=init;
                 }
             }
         }
-        if(mp.find(end)!=mp.end()){
-            vector<string> temp;
-            temp.push_back(end);
-            dfs(end,beg,mp,temp,ans);
-        }
-        return ans;
+        if(mp.find(e)==mp.end()) return {};
+        vector<vector<string>> res;
+        vector<string> temp={e};
+        dfs(e,b,temp,mp,res);
+        return res;
     }

@@ -1,4 +1,4 @@
-****************************************************************undirected**************************************************************
+****************************************************************undirected************************************************************
 An Eulerian Path is a path in graph that visits every edge exactly once. An Eulerian Circuit is an Eulerian Path which starts and 
 ends on the same vertex. Given an undirected connected graph with V nodes, and E edges, with adjacency list adj, return 2 if the 
 graph contains an eulerian circuit, else if the graph contains an eulerian path, return 1, otherwise, return 0.
@@ -10,7 +10,7 @@ Eulerian Cycle: An undirected graph has Eulerian cycle if following two conditio
 
 Eulerian Path: An undirected graph has Eulerian Path if following two conditions are true. 
 1.Same as condition (a) for Eulerian Cycle.
-2.If zero or two vertices have odd degree and all other vertices have even degree. Note that only one vertex with odd degree is not possible in an undirected graph (sum of all degrees is always even in an undirected graph)
+2.If zero or two vertices have odd degree and all other vertices have even degree. Ep will start one and end on another.
 
 
     void dfs(int node, vector<int> adj[], vector<int>& vis){
@@ -43,7 +43,8 @@ Eulerian Path: An undirected graph has Eulerian Path if following two conditions
         return 1;
     }
 
-****************************************************************directed*******************************************************************
+****************************************************************directed**************************************************************
+
 Eulerian circuit in directed graphs: a directed graph has an Eulerian circuit if and only if the following conditions are met:
 
 1.All vertices have equal in-degree and out-degree.
@@ -57,3 +58,32 @@ Conclusion:
 If the graph is given to have a single component and equal in-degree and out-degree for every vertex, 
 then the graph must be strongly connected.
 
+
+    void dfs(int node,vector<vector<int>>& adj,vector<int>& vis){
+    	vis[node]=1;
+    	for(auto x:adj[node]){
+    		if(!vis[x]){
+    			dfs(x,adj,vis);
+    		}
+    	}
+    }
+    int isCircle(vector<vector<int>>& adj) {
+        int n=adj.size();
+        vector<int> inDeg(n), outDeg(n), vis(n);
+        for(int i=0;i<n;i++){
+            outDeg[i]=adj[i].size();
+            for(auto it:adj[i]){
+                inDeg[it]++;
+            }
+        }
+        for(int i=0;i<V;i++){
+            if(deg[i]){
+                dfs(i,adj,vis);
+                break;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(inDeg[i]!=outDeg[i] || (inDeg[i] && !vis[i])) return 0;
+        }
+        return 1;
+    }

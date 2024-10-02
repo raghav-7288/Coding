@@ -24,6 +24,6 @@ vector<int> articulationPoints(int V, vector<int>adj[]) {
     vector<int> stepsToReach(V), canReachMin(V), vis(V), isAp(V), APs;
     dfs(0,-1,stepsToReach,canReachMin,vis,isAp,adj);
     for(int i=0;i<V;i++) if(isAp[i]) APs.push_back(i);
-    if(!APs.size()) return {-1};
+    if(APs.empty()) return {-1};
     return APs;
 }

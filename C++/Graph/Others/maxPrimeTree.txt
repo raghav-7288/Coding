@@ -31,7 +31,7 @@ Input Format:
     }
     int dfs_root_1(int node, int par, int dist, vector<int>& val, vector<int> adj[], vector<int>& cost, vector<int>& sumSubTree){
         int sum=val[node];
-        cost[1] += sum*dist;
+        cost[1] += val[node]*dist;
         for(auto it:adj[node]){
             if(it==par) continue;
             sum += dfs_root_1(it,node,dist+1,val,adj,cost,sumSubTree);
@@ -50,7 +50,7 @@ Input Format:
         dfs_root_1(1,0,0,val,adj,cost,sumSubTree);
         dfs_root_shift(1,0,val,adj,cost,sumSubTree);
     }
-    signed main(){
+    int main(){
         vector<int> allPrimes=seive();
         int t;
         cin>>t;

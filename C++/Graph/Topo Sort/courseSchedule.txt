@@ -1,4 +1,4 @@
-----------------------------------preRequisites are give return if complete all course or not-------------------------------------------------
+----------------------------------preRequisites are given return true if can complete all courses-------------------------------------------------
 
     bool canFinish(int n, vector<vector<int>>& prerequisites) {
         vector<int> inDeg(n);
@@ -24,7 +24,6 @@
 
 ---------------------------preRequisites are given give order of courses if can compplete all otherwise {}---------------------------------
 
-
     vector<int> findOrder(int n, vector<vector<int>>& prerequisites) {
         vector<int> inDeg(n);
         vector<int> adj[n];
@@ -44,6 +43,6 @@
                 if(!inDeg[it]) q.push(it);
             }
         }
-        if(ans.size()!=n) return {}; ****************************
+        if(ans.size()!=n) return {};
         return ans;
     }

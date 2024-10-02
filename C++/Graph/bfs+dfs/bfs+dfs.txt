@@ -9,7 +9,7 @@ vector<int> dfsOfGraph(int source,vector<int> adj[],vector<int> &vis,vector<int>
     return dfs;
 }
 
-************************************************find all reachables****************************************************************
+-----------------------------------------------------find all reachables----------------------------------------------------------------
 
 void dfs(int node, vector<int>& vis, vector<int> adj[], vector<unordered_set<int>>& reachable){
     vis[node]=1;

@@ -27,7 +27,6 @@ The answer should be sorted in ascending order.
         }
         vector<int> ans;
         for(int i=0;i<n;i++){
-            cout<<inCycle[i]<<endl;
             if(!inCycle[i]) ans.push_back(i);
         }
         return ans;
@@ -45,12 +44,14 @@ The answer should be sorted in ascending order.
                 inDeg[i]++;
             }
         }
-        for(int i=0;i<n;i++) if(!inDeg[i]) {q.push(i);ans.push_back(i);}
+        for(int i=0;i<n;i++) if(!inDeg[i]) q.push(i);
         while(!q.empty()){
-            int n=q.front();q.pop();
+            int n=q.front();
+            q.pop();
+            ans.push_back(n);
             for(auto it:adj[n]){
                 inDeg[it]--;
-                if(!inDeg[it]) {q.push(it);ans.push_back(it);}
+                if(!inDeg[it]) q.push(it);
             }
         }
         sort(ans.begin(),ans.end());

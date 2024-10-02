@@ -4,9 +4,9 @@
         h_cycle.push_back(node);
         if (cnt == V)
         {
-            for (auto it : adj[0])
+            for (auto it : adj[node])
             {
-                if (it == node)
+                if (!it)
                 {
                     h_cycle.push_back(0);
                     return true;
@@ -15,8 +15,7 @@
         }
         for (auto it : adj[node])
         {
-            if (!vis[it])
-            {
+            if (!vis[it]){
                 if (dfs(it, V, cnt + 1, vis, h_cycle, adj)) return true;
             }
         }
