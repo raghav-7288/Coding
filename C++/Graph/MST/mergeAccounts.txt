@@ -20,32 +20,28 @@ We could return these lists in any order, for example the answer [['Mary', 'mary
 
 
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
-        int n=accounts.size();
-        DSU ds(n);
         map<string,int> mp;
-        for(int a=0;a<n;a++){
-            for(int i=1;i<accounts[a].size();i++){
-                if(mp.find(accounts[a][i]) == mp.end()){
-                    mp[accounts[a][i]]=a;
-                }else{
-                    ds.ubs(mp[accounts[a][i]],a);
-                }
+        int na=accounts.size();
+        DSU ds(na);
+        for(int i=0;i<na;i++){
+            for(int j=1;j<accounts[i].size();j++){
+                if(mp.find(accounts[i][j])==mp.end()) mp[accounts[i][j]]=i;
+                else ds.ubs(i,mp[accounts[i][j]]);
             }
         }
-        vector<string> res[n];
-        for(auto m:mp){
-            string e=m.first;
-            int c=m.second;
-            int ulp = ds.fp(c);
-            res[ulp].push_back(e);
+        vector<set<string>> vec(na);
+        for(int i=0;i<na;i++){
+            int up=ds.fp(i);
+            for(int e=1;e<accounts[i].size();e++){
+                vec[up].insert(accounts[i][e]);
+            }
         }
-        vector<vector<string>> ans;
-        for(int i=0;i<n;i++){
-            if(!res[i].size()) continue;
+        vector<vector<string>> res;
+        for(int i=0;i<na;i++){
+            if(vec[i].empty()) continue;
             vector<string> temp={accounts[i][0]};
-            sort(res[i].begin(),res[i].end());
-            temp.insert(temp.end(),res[i].begin(),res[i].end());
-            ans.push_back(temp);
+            temp.insert(temp.end(),vec[i].begin(),vec[i].end());
+            res.push_back(temp);
         }
-        return ans;
+        return res;
     }

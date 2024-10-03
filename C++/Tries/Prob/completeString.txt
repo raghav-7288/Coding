@@ -3,55 +3,57 @@ Ninja is challenged to find the longest complete string in the array ‘A’.If 
 with the same length, return the lexicographically smallest one and if no string exists, return "None".
 
 
-    #include <bits/stdc++.h>
+    #include <bits/stdc++.h> 
     struct Node{
-        Node* links[26];
+        Node* link[26];
         bool isEnd=false;
     };
     class trie{
-        public: 
-        Node* root;
-        trie(){root= new Node();}
+    public:
+        Node *root=NULL;
+        trie(){
+            root=new Node();
+        }
         void insert(string w){
             Node* node=root;
             for(auto c:w){
-                if(!node->links[c-'a']){
-                    node->links[c-'a']=new Node();
+                if(!node->link[c-'a']){
+                    node->link[c-'a']=new Node();
                 }
-                node=node->links[c-'a'];
-            }        
+                node=node->link[c-'a'];
+            }
             node->isEnd=true;
         }
         bool search(string w){
             Node* node=root;
             for(auto c:w){
-                if(!node->links[c-'a']) return false;
-                node=node->links[c-'a'];
-            }        
+                if(!node->link[c-'a']) return false;
+                node=node->link[c-'a'];
+            }
             return node->isEnd;
         }
     };
     string completeString(int n, vector<string> &a){
         trie t;
-        int max_len = 0;
-        string ans = "";
-        for(auto w:a) t.insert(w);
-        for(auto w:a){
-            bool ok=true;
-            for(int i=0;i<w.length();i++){
-                if(!t.search(w.substr(0,i+1))){
-                    ok=false;
+        for(auto s:a) t.insert(s);
+        int maxLen=0;
+        string res="";
+        for(auto s:a){
+            string temp="";
+            bool isOk=true;
+            for(int i=0;i<s.length();i++){
+                temp+=s[i];
+                if(!t.search(temp)){
+                    isOk=false;
                     break;
                 }
             }
-            if(ok){
-                if(max_len < w.length()){
-                    max_len=w.length();
-                    ans=w;
-                }else if(max_len == w.length() && ans > w){
-                    ans=w;
-                }
+            if(isOk){
+                if(s.length() > maxLen){
+                    res=s;
+                    maxLen=s.length();
+                }else if(s.length() == maxLen && res > s) res=s;
             }
         }
-        return ans==""?"None":ans;
+        return res=="" ? "None" : res;
     }

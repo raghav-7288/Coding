@@ -12,7 +12,7 @@ If there is no such route, return -1.
         vector<int> price(n,INT_MAX);
         // pq->{steps,price,city}
         priority_queue<tuple<int,int,int>,vector<tuple<int,int,int>>,greater<tuple<int,int,int>>> pq;
-        //OR pq will also work
+        //OR q will also work
         queue<tuple<int,int,int>> pq;
 
         pq.push({0,0,src});
