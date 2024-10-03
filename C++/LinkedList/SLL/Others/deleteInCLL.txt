@@ -1,0 +1,14 @@
+
+
+    Node* deleteNode(Node* head, int key) {
+        Node* last = head;
+        while (last->next != head) last = last->next;
+        if(head->data==key){
+            last->next=head->next;
+            return head->next;
+        }
+        Node*temp=head;
+        while(temp->next->data!=key && temp->next!=head) temp=temp->next;
+        if(temp->next->data == key) temp->next=temp->next->next;
+        return head;
+    }
