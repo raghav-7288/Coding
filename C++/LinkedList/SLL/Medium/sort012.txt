@@ -9,7 +9,6 @@
                     zeroHead=temp;
                     zero=zeroHead;
                 }else{zero->next=temp;zero=zero->next;}
-                
             }else if(temp->data == 1){
                 if(!oneHead){
                     oneHead=temp;
@@ -23,9 +22,9 @@
             }
             temp=temp->next;
         }
-        if(zeroHead) zero->next = (oneHead != nullptr) ? oneHead : twoHead;
+        if(zeroHead) zero->next = (oneHead != NULL) ? oneHead : twoHead;
         if(oneHead) one->next = twoHead;
-        if(twoHead) two->next = nullptr;
+        if(twoHead) two->next = NULL;
         if(zeroHead) head = zeroHead;
         else if(oneHead) head = oneHead;
         else head = twoHead;

@@ -8,7 +8,7 @@
     }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         if(!l1) return l2;
-        if(!l1) return l2;
+        if(!l2) return l1;
         ListNode *newHead=NULL, *temp1=l1, *temp2=l2;
         int val=0;
         while(temp1 || temp2){

@@ -5,13 +5,15 @@
 // 75
 // Red Black Tree
 // fenwick trees -> https://www.youtube.com/watch?v=Qe8qRhz3lzQ
-// print eucledian cycle -> Hierholzer’s Algorithm and Fleury’s Algorithm
 // seg tree gfg
 // center of graph
 // Travelling SP
 
 // 1278
 // 2699. Modify Graph Edge Weights
+// 2407. Longest Increasing Subsequence II
+// 2454. Next Greater Element IV
+// 2289. Steps to Make Array Non-decreasing
 
 // z->https://www.geeksforgeeks.org/problems/search-pattern-z-algorithm--141631/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 // kmp->https://www.geeksforgeeks.org/problems/search-pattern0205/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card

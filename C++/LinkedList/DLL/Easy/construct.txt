@@ -1,20 +1,3 @@
-    Node* push(Node* head, int a){
-        Node* newNode = new Node(a);
-        if(!head) return head=newNode;
-        Node *temp=head;
-        while(temp->next) temp=temp->next;
-        temp->next=newNode;
-        newNode->prev=temp;
-        return head;
-    }
-    Node* constructDLL(vector<int>& arr) {
-        Node* head = NULL;
-        for(auto a:arr) head=push(head,a);
-        return head;
-    }
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     Node* constructDLL(vector<int>& arr) {
         Node *head = NULL;
         Node *curr = NULL;
