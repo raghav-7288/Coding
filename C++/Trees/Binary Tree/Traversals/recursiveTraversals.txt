@@ -1,0 +1,21 @@
+
+    void pre(TreeNode *root,vector<int> &preorder){
+        if(!root) return;
+        preorder.push_back(root->val);
+        pre(root->left,preorder);
+        pre(root->right,preorder);
+    }
+
+    void ino(TreeNode *root,vector<int> &inorder){
+        if(!root) return;
+        ino(root->left,inorder);
+        inorder.push_back(root->val);
+        ino(root->right,inorder);
+    }
+
+    void post(TreeNode *root,vector<int> &postorder){
+        if(!root) return;
+        post(root->left,postorder);
+        post(root->right,postorder);
+        postorder.push_back(root->val);
+    }

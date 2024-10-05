@@ -35,15 +35,11 @@
             if(!curr){
                 all.push_back(l);
                 l.clear();
-                if(!q.empty()){
-                    q.push(NULL);
-                }
+                if(!q.empty()) q.push(NULL);
             }else{
                 l.push_back(curr->val);
-                if(curr->left)
-                q.push(curr->left);
-                if(curr->right)
-                q.push(curr->right);
+                if(curr->left) q.push(curr->left);
+                if(curr->right) q.push(curr->right);
             }
         }
         return all;

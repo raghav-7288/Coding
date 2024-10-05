@@ -1,7 +1,5 @@
-//Convert tree to linked list
-//The right child pointer points to the next node in the list 
-//The left child pointer is always null.
-//The linked list should be in the same order as a pre-order traversal of the tree.
+Convert tree to linked list, the right child pointer points to the next node in the list, the left child pointer is always null.
+The linked list should be in the same order as a pre-order traversal of the tree.
 
 //Recursion
 TreeNode* prev=NULL;

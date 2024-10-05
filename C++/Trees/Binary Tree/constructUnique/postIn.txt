@@ -1,20 +1,18 @@
-TreeNode *build(vector<int> &post, int postStart, int postEnd, vector<int> &in, int inStart, int inEnd, map<int, int> &inMap)
-{
 
-    if (postStart > postEnd || inStart > inEnd) return NULL;
-    TreeNode *root = new TreeNode(post[postEnd]);
-    int inRoot = inMap[root->val];
-    int numsLeft = inRoot - inStart;
-    root->left = build(post, postStart, postStart + numsLeft - 1, in, inStart, inRoot - 1, inMap);
-    root->right = build(post, postStart + numsLeft, postEnd - 1, in, inRoot + 1, inEnd, inMap);
-    return root;
-}
-TreeNode *buildTree(vector<int> &in, vector<int> &post)
-{
-    map<int, int> inMap;
-    for (int i = 0; i < in.size(); i++){
-        inMap[in[i]] = i;
+    TreeNode* solve(int is, int ie, vector<int>& in, int ps, int pe, vector<int>& post, unordered_map<int,int>& mp){
+        if(is>ie || ps>pe) return NULL;
+        TreeNode* root=new TreeNode(post[pe]);
+        int rootPos=mp[post[pe]], numsLeft = rootPos - is;
+        root->left = solve(is, rootPos-1, in, ps, ps+numsLeft-1, post, mp);
+        root->right = solve(rootPos+1, ie, in, ps+numsLeft, pe-1, post, mp);
+        return root;
     }
-    TreeNode *root = build(post, 0, post.size() - 1, in, 0, in.size() - 1, inMap);
-    return root;
-}
+    TreeNode* buildTree(vector<int>& in, vector<int>& post) {
+        int n=post.size();
+        unordered_map<int,int> mp;
+        for(int i=0;i<n;i++){
+            mp[in[i]]=i;
+        }
+        TreeNode* root=solve(0,n-1,in,0,n-1,post,mp);
+        return root;
+    }

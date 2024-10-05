@@ -3,15 +3,15 @@ then find max sum-->O(n^2)
 OR 
 can be done during finding height-->O(n)
 
-int diameter=-1;
-int height(TreeNode *root){
-    if(!root) return 0;
-    int hl=height(root->left);
-    int hr=height(root->right);
-    diameter=max(diameter,hl+hr);
-    return 1+max(hl,hr);
-}
-int diameterOfBinaryTree(TreeNode* root) {
-    height(root);
-    return diameter;
-}
+    int diameter=-1;
+    int height(TreeNode *root){
+        if(!root) return 0;
+        int hl=height(root->left);
+        int hr=height(root->right);
+        diameter=max(diameter,hl+hr);
+        return 1+max(hl,hr);
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        height(root);
+        return diameter;
+    }

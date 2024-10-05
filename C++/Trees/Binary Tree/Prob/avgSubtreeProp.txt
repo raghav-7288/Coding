@@ -10,7 +10,7 @@
         int count = left.second.first + 1 + right.second.first;
         int sum = left.second.second + root->val + right.second.second;
         if(root->val == (sum/count)) return {ans+1,{count,sum}};
-        else return {ans,{count,sum}};
+        return {ans,{count,sum}};
     }
     int averageOfSubtree(TreeNode* root) {
         return solve(root).first;

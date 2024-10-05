@@ -5,7 +5,7 @@ left subtree and right subtree. An empty tree is also a Sum Tree as the sum of a
 A leaf node is also considered a Sum Tree.
 
 
------------------------------------------------------------best------------------------------------------------------------------
+--------------------------------------------------------------best--------------------------------------------------------------------
     pair<bool,int> solve(Node* root){
         if(!root) return {true,0};
         if(!root->left && !root->right) return {true,root->data};
@@ -20,39 +20,42 @@ A leaf node is also considered a Sum Tree.
     bool isSumTree(Node* root) {
         return solve(root).first;
     }
--------------------------------------------------------without modifying root data + map----------------------------------------------------------------
-bool solve(Node* root,map<Node*,int> &mp)
-{
-    if(!root) return true;
-    if(!root->left && !root->right) {mp[root]=root->data;return true;}
-    bool left=solve(root->left,mp);
-    bool right=solve(root->right,mp);
-    bool isSum = ((mp[root->left] + mp[root->right])==root->data);
-    if(left && right && isSum){
-        mp[root] = root->data + mp[root->left] + mp[root->right];
-        return true;
+-------------------------------------------------without modifying root data + map----------------------------------------------------
+
+    bool solve(Node* root,map<Node*,int> &mp)
+    {
+        if(!root) return true;
+        if(!root->left && !root->right) {mp[root]=root->data;return true;}
+        bool left=solve(root->left,mp);
+        bool right=solve(root->right,mp);
+        bool isSum = ((mp[root->left] + mp[root->right])==root->data);
+        if(left && right && isSum){
+            mp[root] = root->data + mp[root->left] + mp[root->right];
+            return true;
+        }
+        return false;
     }
-    return false;
-}
     bool isSumTree(Node* root)
-{
-    map<Node*,int> mp;
-    return solve(root,mp);
-}
-----------------------------------------------------modifying root data + map----------------------------------------------------------------
-bool isSumTree(Node* root)
-{
-    if(!root) return true;
-    if(!root->left && !root->right) return true;
-    bool left=isSumTree(root->left);
-    bool right=isSumTree(root->right);
-    int sum=0;
-    if(root->left) sum += root->left->data;
-    if(root->right) sum += root->right->data;
-    bool isSum = (sum==root->data);
-    if(left && right && isSum){
-        root->data += sum;
-        return true;
+    {
+        map<Node*,int> mp;
+        return solve(root,mp);
     }
-    return false;
-}
+    
+------------------------------------------------modifying root data + map-------------------------------------------------------------
+
+    bool isSumTree(Node* root)
+    {
+        if(!root) return true;
+        if(!root->left && !root->right) return true;
+        bool left=isSumTree(root->left);
+        bool right=isSumTree(root->right);
+        int sum=0;
+        if(root->left) sum += root->left->data;
+        if(root->right) sum += root->right->data;
+        bool isSum = (sum==root->data);
+        if(left && right && isSum){
+            root->data += sum;
+            return true;
+        }
+        return false;
+    }

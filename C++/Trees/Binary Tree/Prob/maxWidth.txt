@@ -1,11 +1,11 @@
-//give index to every node and find ->
-//width = max(index(lastNode) - index(firstNode) + 1) -> done for every level
-//lvl order traversal
-//    i
+give index to every node and find ->
+width = max(index(lastNode) - index(firstNode) + 1) -> done for every level
+lvl order traversal
+      i
     /   \
 2*i+1   2*i+2
-//indexing -> overflow more levels
-//->to avoid overflow assume every level start with index 0 and its childre -> 1,2
+indexing -> overflow more levels
+->to avoid overflow assume every level start with index 0 and its childre -> 1,2
 
 int widthOfBinaryTree(TreeNode* root) {
     queue<pair<TreeNode*,int>> q;

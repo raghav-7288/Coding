@@ -1,41 +1,41 @@
-BinaryTreeNode<int>* target;
-void findPar(BinaryTreeNode<int>* root,map<BinaryTreeNode<int>*,BinaryTreeNode<int>*> &parent,int start){
-    if(root->data==start) target=root;
-    if(root->left){
-        parent[root->left]=root;
-        findPar(root->left,parent,start);
-    }
-    if(root->right){
-        parent[root->right]=root;
-        findPar(root->right,parent,start);
-    }
-}
-int timeToBurnTree(BinaryTreeNode<int>* root, int start)
-{
-    map<BinaryTreeNode<int>*,BinaryTreeNode<int>*> parent;
-    findPar(root,parent,start);
-    map<BinaryTreeNode<int>*,int> vis;
-    queue<pair<BinaryTreeNode<int>*,int>> q;
-    int time=-1;
-    q.push({target,0});
-    vis[target]=1;
-    while(!q.empty()){
-        BinaryTreeNode<int>* node=q.front().first;
-        int t=q.front().second;
-        time=max(time,t);
-        q.pop();
-        if(parent.find(node)!=parent.end() && !vis[parent[node]]){
-            q.push({parent[node],t+1});
-            vis[parent[node]]=1;
+    BinaryTreeNode<int>* target;
+    void findPar(BinaryTreeNode<int>* root,map<BinaryTreeNode<int>*,BinaryTreeNode<int>*> &parent,int start){
+        if(root->data==start) target=root;
+        if(root->left){
+            parent[root->left]=root;
+            findPar(root->left,parent,start);
         }
-        if(node->left && !vis[node->left]){
-            q.push({node->left,t+1});
-            vis[node->left]=1;
-        }
-        if(node->right && !vis[node->right]){
-            q.push({node->right,t+1});
-            vis[node->right]=1;
+        if(root->right){
+            parent[root->right]=root;
+            findPar(root->right,parent,start);
         }
     }
-    return time;
-}
+    int timeToBurnTree(BinaryTreeNode<int>* root, int start)
+    {
+        map<BinaryTreeNode<int>*,BinaryTreeNode<int>*> parent;
+        findPar(root,parent,start);
+        map<BinaryTreeNode<int>*,int> vis;
+        queue<pair<BinaryTreeNode<int>*,int>> q;
+        int time=-1;
+        q.push({target,0});
+        vis[target]=1;
+        while(!q.empty()){
+            BinaryTreeNode<int>* node=q.front().first;
+            int t=q.front().second;
+            time=max(time,t);
+            q.pop();
+            if(parent.find(node)!=parent.end() && !vis[parent[node]]){
+                q.push({parent[node],t+1});
+                vis[parent[node]]=1;
+            }
+            if(node->left && !vis[node->left]){
+                q.push({node->left,t+1});
+                vis[node->left]=1;
+            }
+            if(node->right && !vis[node->right]){
+                q.push({node->right,t+1});
+                vis[node->right]=1;
+            }
+        }
+        return time;
+    }

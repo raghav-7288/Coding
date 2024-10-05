@@ -1,8 +1,6 @@
 vector<vector<int>> verticalTraversal(TreeNode* root) {
-    //{line,{lvl,elements}}
-    map<int,map<int,multiset<int>>> mp;
-    //{{line,level},value}
-    queue<pair<pair<int,int>,TreeNode*>> q;
+    map<int,map<int,multiset<int>>> mp; //{line,{lvl,elements}}
+    queue<pair<pair<int,int>,TreeNode*>> q; //{{line,level},node}
     q.push({{0,0},root});
     while(!q.empty()){
         int line=q.front().first.first;

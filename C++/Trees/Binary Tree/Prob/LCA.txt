@@ -1,33 +1,32 @@
 //find both paths and return last common node
 
-bool findPath(TreeNode* root, TreeNode* p,vector<TreeNode*> &path){
-    if(!root) return false;
-    path.push_back(root);
-    if(root==p) return true;
-    if(findPath(root->left,p,path) || findPath(root->right,p,path)) return true;
-    path.pop_back();
-    return false;
-}
-TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-    vector<TreeNode*> path_p,path_q;
-    findPath(root,p,path_p);
-    findPath(root,q,path_q);
-    int i;
-    for(i=0;i<path_p.size() && i<path_q.size();i++){
-        if(path_p[i] != path_q[i]) break;
+    bool findPath(TreeNode* root, TreeNode* p,vector<TreeNode*> &path){
+        if(!root) return false;
+        path.push_back(root);
+        if(root==p) return true;
+        if(findPath(root->left,p,path) || findPath(root->right,p,path)) return true;
+        path.pop_back();
+        return false;
     }
-    return path_p[i-1];
-}
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        vector<TreeNode*> path_p,path_q;
+        findPath(root,p,path_p);
+        findPath(root,q,path_q);
+        int i;
+        for(i=0;i<path_p.size() && i<path_q.size();i++){
+            if(path_p[i] != path_q[i]) break;
+        }
+        return path_p[i-1];
+    }
 
 //OR
-//To reduce space complexity
-//No need to store paths
+To reduce space complexity no need to store paths
 
-TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-    if(!root || root==p || root==q) return root;
-    TreeNode *left=lowestCommonAncestor(root->left,p,q);
-    TreeNode *right=lowestCommonAncestor(root->right,p,q);
-    if(!left) return right;
-    if(!right) return left;
-    return root;
-}
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(!root || root==p || root==q) return root;
+        TreeNode *left=lowestCommonAncestor(root->left,p,q);
+        TreeNode *right=lowestCommonAncestor(root->right,p,q);
+        if(!left) return right;
+        if(!right) return left;
+        return root;
+    }

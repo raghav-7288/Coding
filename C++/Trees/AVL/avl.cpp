@@ -53,8 +53,8 @@ public:
         Node *z = y->left;
         y->left = x;
         x->right = z;
-        x->height = getHeight(x->left) + getHeight(x->right) + 1;
-        y->height = getHeight(y->left) + getHeight(y->right) + 1;
+        x->height = 1 + max(getHeight(x->left), getHeight(x->right));
+        y->height = 1 + max(getHeight(y->left), getHeight(y->right));
         return y;
     }
     Node *rightRotate(Node *x)
@@ -63,8 +63,8 @@ public:
         Node *z = y->right;
         y->right = x;
         x->left = z;
-        x->height = getHeight(x->left) + getHeight(x->right) + 1;
-        y->height = getHeight(y->left) + getHeight(y->right) + 1;
+        x->height = 1 + max(getHeight(x->left), getHeight(x->right));
+        y->height = 1 + max(getHeight(y->left), getHeight(y->right));
         return y;
     }
     Node *insert(Node *root, int key)

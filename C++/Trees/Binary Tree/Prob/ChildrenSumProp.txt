@@ -15,11 +15,8 @@
 
 ************************************************************************************************************************************************
 
-
-//change binary tree such that it follows children sum property
-//can increment(only) any node any no. of times
-//node->val = node->left->val + node->right->val
-
+change binary tree such that it follows children sum property can increment(only) any node any no. of times
+node->val = node->left->val + node->right->val
 
     void convertTree(Node* root)
     {
