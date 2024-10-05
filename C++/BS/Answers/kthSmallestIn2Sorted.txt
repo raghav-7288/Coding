@@ -3,7 +3,7 @@
     int kthElement(int k, vector<int>& nums1, vector<int>& nums2) {
         int n1=nums1.size(), n2=nums2.size();
         if(n1>n2) return kthElement(k,nums2,nums1);
-        int l=max(0,k-n2),h=min(n1,k); // only change here from findMedianSortedArrays
+        int l=max(0,k-n2), h=min(n1,k);
         while(l<=h){
             int mid1=(l+h)/2;
             int mid2=k-mid1;

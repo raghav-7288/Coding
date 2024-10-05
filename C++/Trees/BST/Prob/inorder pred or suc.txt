@@ -12,3 +12,22 @@
         while(root && root->right) root=root->right;
         return root;
     }
+
+*******************************************************************************************************************************************
+
+    void solve(Node* root, Node*& pre, Node*& suc, int key, int& p, int& s){
+        if(!root) return;
+        solve(root->right,pre,suc,key,p,s);
+        if(root->key<key && root->key > p){
+            p=root->key; pre=root;
+        }else if(root->key>key && root->key < s){
+            s=root->key; suc=root;
+        }
+        solve(root->left,pre,suc,key,p,s);
+    }   
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        int p=INT_MIN, s=INT_MAX;
+        pre=NULL; suc=NULL;
+        solve(root,pre,suc,key,p,s);
+    }

@@ -4,7 +4,7 @@
         if (n1 > n2) return findMedianSortedArrays(nums2, nums1);
         int low = 0, high = n1;
         while (low <= high) {
-            int mid1 = (low + high) >> 1; // no. of elements to pick from nums1
+            int mid1 = (low + high) / 2; // no. of elements to pick from nums1
             int mid2 = (n1 + n2 + 1) / 2 - mid1; // no. of elements to pick from nums2
             
             int l1 = (mid1 > 0) ? nums1[mid1 - 1] : INT_MIN;

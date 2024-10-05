@@ -1,0 +1,32 @@
+
+    int solve(int node, int mask, int n, vector<vector<int>> &dis, vector<vector<int>> &dp)
+    {
+        if (mask == ((1 << node) | 3))
+        {
+            return dis[1][node];
+        }
+        if (dp[node][mask] != -1)
+        {
+            return dp[node][mask];
+        }
+        int ans = 1e6;
+        for (int i = 1; i <= n; i++)
+        {
+            if (i != 1 && i != node && (mask & (1 << i)))
+            {
+                ans = min(ans, solve(i, (mask & (~(1 << node))), n, dis, dp) + dis[node][i]);
+            }
+        }
+        return dp[node][mask] = ans;
+    }
+
+    int TSP(int n, vector<vector<int>> &dis)
+    {
+        vector<vector<int>> dp(n + 1, vector<int>(1 << (n + 1), -1));
+        int ans = 1e6;
+        for (int i = 1; i <= n; i++)
+        {
+            ans = min(ans, solve(i, (1 << (n + 1)) - 1, n, dis, dp) + dis[1][i]);
+        }
+        return ans;
+    }
