@@ -1,13 +1,12 @@
-bool isValid(TreeNode *root, long long m, long long M)
-{
-    if (!root)
-        return true;
-    if (root->val > m && root->val < M)
-        return isValid(root->left, m, root->val) && isValid(root->right, root->val, M);
-    return false;
-}
-bool isValidBST(TreeNode *root)
-{
-    long long m = INT_MIN-1, M = INT_MAX+1;
-    return isValid(root, m, M);
-}
+
+    bool isValid(TreeNode *root, long long m, long long M)
+    {
+        if (!root) return true;
+        if (root->val > m && root->val < M) return isValid(root->left, m, root->val) && isValid(root->right, root->val, M);
+        return false;
+    }
+    bool isValidBST(TreeNode *root)
+    {
+        long long m = INT_MIN-1, M = INT_MAX+1;
+        return isValid(root, m, M);
+    }

@@ -1,0 +1,47 @@
+
+    class BSTit{
+        public:
+        stack<Node*> st;
+        BSTit(Node* root){
+            pushNodes(root);
+        }
+        int top(){
+            if(st.empty()) return 0;
+            return st.top()->data;
+        }
+        void next(){
+            Node* temp=st.top();
+            st.pop();
+            pushNodes(temp->right);
+        }
+        void pushNodes(Node* root){
+            while(root){
+                st.push(root);
+                root=root->left;
+            }
+        }
+    };
+    
+    vector<int> merge(Node *root1, Node *root2) {
+        BSTit t1(root1), t2(root2);
+        vector<int> ans;
+        while(t1.top() && t2.top()){
+            int v1=t1.top(), v2=t2.top();
+            if(v1<=v2){
+                ans.push_back(v1);
+                t1.next();
+            }else{
+                ans.push_back(v2);
+                t2.next();
+            }
+        }
+        while(t1.top()){
+            ans.push_back(t1.top());
+            t1.next();
+        }
+        while(t2.top()){
+            ans.push_back(t2.top());
+            t2.next();
+        }
+        return ans;
+    }

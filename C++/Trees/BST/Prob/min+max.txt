@@ -1,10 +1,11 @@
-int minVal(Node* root){
-	if(!root) return -1;
-	if(!root->left) return root->data;
-	return minVal(root->left);	
-}
-int maxVal(Node* root){
-	if(!root) return -1;
-	if(!root->right) return root->data;
-	return minVal(root->right);	
-}
+
+	int minVal(Node* root){
+		if(!root) return -1;
+		if(!root->left) return root->data;
+		return minVal(root->left);	
+	}
+	int maxVal(Node* root){
+		if(!root) return -1;
+		if(!root->right) return root->data;
+		return minVal(root->right);	
+	}

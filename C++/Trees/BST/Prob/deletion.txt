@@ -1,3 +1,4 @@
+    
     TreeNode *pred(TreeNode* node){
         node=node->left;
         while(node && node->right) node=node->right;
@@ -24,7 +25,7 @@
     }
 
 
------------------------------------------replacing with inorder pred or suc--------------------------------------------------------------------
+-----------------------------------------------replacing with inorder pred or suc-----------------------------------------------------
 
     TreeNode* succ(TreeNode* root){
         if(!root) return root;

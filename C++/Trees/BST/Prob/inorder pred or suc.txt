@@ -1,3 +1,4 @@
+
     TreeNode* succ(TreeNode* root){
         if(!root) return root;
         root=root->right;

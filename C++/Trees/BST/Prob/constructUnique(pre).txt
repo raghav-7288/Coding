@@ -1,25 +1,25 @@
-TreeNode* solve(int is, int ie, vector<int>& in, int ps, int pe, vector<int>& pre, map<int,int>& mp){
-    if(is>ie || ps>pe) return NULL;
-    TreeNode* root = new TreeNode(pre[ps]);
-    int rootPos = mp[pre[ps]];
-    int numsLeft = rootPos - is;
-    root->left = solve(is,rootPos-1,in,ps+1,ps+numsLeft,pre,mp);
-    root->right = solve(rootPos+1,ie,in,ps+numsLeft+1,pe,pre,mp);
-    return root;
-}
 
-TreeNode* bstFromPreorder(vector<int>& preorder) {
-    int n=preorder.size();
-    vector<int> inorder(preorder);
-    sort(inorder.begin(),inorder.end());
-    map<int,int> mp;
-    for(int i=0;i<n;i++){
-        mp[inorder[i]]=i;
+    TreeNode* solve(int is, int ie, vector<int>& in, int ps, int pe, vector<int>& pre, map<int,int>& mp){
+        if(is>ie || ps>pe) return NULL;
+        TreeNode* root = new TreeNode(pre[ps]);
+        int rootPos = mp[pre[ps]];
+        int numsLeft = rootPos - is;
+        root->left = solve(is,rootPos-1,in,ps+1,ps+numsLeft,pre,mp);
+        root->right = solve(rootPos+1,ie,in,ps+numsLeft+1,pe,pre,mp);
+        return root;
     }
-    TreeNode* root = solve(0,n-1,inorder,0,n-1,preorder,mp);
-    return root; 
-}
 
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int n=preorder.size();
+        vector<int> inorder(preorder);
+        sort(inorder.begin(),inorder.end());
+        map<int,int> mp;
+        for(int i=0;i<n;i++){
+            mp[inorder[i]]=i;
+        }
+        TreeNode* root = solve(0,n-1,inorder,0,n-1,preorder,mp);
+        return root; 
+    }
 
 ************************************************************better******************************************************************
     
@@ -35,7 +35,7 @@ TreeNode* bstFromPreorder(vector<int>& preorder) {
         return construct(i,preorder,INT_MAX);
     }
 
-----------------------------------------------------using only inorder-----------------------------------------------------------------
+--------------------------------------------------------using only inorder------------------------------------------------------------
 
 
     TreeNode* build(int l, int r, vector<int>& ino){
