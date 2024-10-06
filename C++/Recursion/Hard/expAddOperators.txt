@@ -16,7 +16,7 @@ Note that operands in the returned expressions should not contain leading zeros.
         for(int j=i;j<nums.length();j++){
             if(j>i && nums[i]=='0') return;
             cur += nums[j];
-            num = num*10 + (nums[j]-48);
+            num = num*10 + (nums[j]-'0');
             if(!i) solve(j+1,num,num,t,exp+cur,nums,ans);
             else{
                 solve(j+1, result+num, num, t, exp+'+'+cur, nums, ans);

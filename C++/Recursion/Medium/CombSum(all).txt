@@ -46,9 +46,7 @@
 
     void solve(int num, int cs, int rem, int n,vector<int>& temp,vector<vector<int>>& ans){
         if(!rem){
-            if(cs==n){
-                ans.push_back(temp);
-            }
+            if(cs==n) ans.push_back(temp);
             return;
         }
         if(num>9 || cs>n) return;

@@ -26,7 +26,7 @@
                         {
                             board[i][j] = c; // place the char if isValid
                             if (solve(board)) return true;
-                            else board[i][j] = '.'; // backTrack if after placing the char the board becomes invalid
+                            board[i][j] = '.'; // backTrack if after placing the char the board becomes invalid
                         }
                     } // if at any call we have an empty space but all chars there are invalid
                     return false;

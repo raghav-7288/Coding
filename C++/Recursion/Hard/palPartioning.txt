@@ -1,3 +1,5 @@
+------------------------------------------------------------Pal Part 1--------------------------------------------------------------------------------
+
 Given a string s, partition s such that every substring of the partition is a palindrome. 
 Return all possible palindrome partitioning of s.
 
@@ -30,3 +32,59 @@ Return all possible palindrome partitioning of s.
         solve(0,n,s,temp,ans);
         return ans;
     }   
+
+------------------------------------------------------------Pal Part 2--------------------------------------------------------------------------------
+
+Given a string s, partition s such that every substring of the partition is a palindrome.
+Return the minimum cuts needed for a palindrome partitioning of s.
+
+    bool isPal(int i, int j, string &s) { -> pass by reg to avoid MLE
+        while (i < j) {
+            if (s[i] != s[j]) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+    int solve(int i, int n, string &str, vector<int> &dp) {
+        if (i == n || isPal(i,n,str)) return 0;
+        if (dp[i] != -1) return dp[i];
+        int minCost = INT_MAX;
+        for (int j = i; j < n; j++) {
+            if (isPal(i, j, str)) {
+                minCost = min(minCost, 1 + solve(j + 1, n, str, dp));
+            }
+        }
+        return dp[i] = minCost;
+    }
+    int minCut(string str) {
+        int n = str.size();
+        vector<int> dp(n, -1);
+        return solve(0, n-1, str, dp);
+    }
+
+------------------------------------------------------------Pal Part 3 //TODO--------------------------------------------------------------------------------
+
+------------------------------------------------------------Pal Part 4--------------------------------------------------------------------------------
+
+Given a string s, return true if it is possible to split the string s into three(k) non-empty palindromic substrings.
+
+     bool isPal(string& s, int i, int j){
+        while(i<j){
+            if(s[i]!=s[j]) return false;
+            i++;j--;
+        }
+        return true;
+    }
+    bool solve(int i, int cr, int n, string& s){
+        if(i==n) return false;
+        if(!cr) return isPal(s,i,n-1);
+        for(int j=i;j<n;j++){
+            if(isPal(s,i,j) && solve(j+1,cr-1,n,s)) return true;
+        }
+        return false;
+    }
+    bool checkPartitioning(string s) {
+        int parts=3;
+        return solve(0,parts-1,s.length(),s);
+    }

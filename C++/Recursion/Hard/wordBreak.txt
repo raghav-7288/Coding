@@ -8,7 +8,7 @@ Note that the same word in the dictionary may be reused multiple times in the se
         if(j==n) return mp[str];
         if(dp[i][j]!=-1) return dp[i][j];
         if(!mp[str]) return dp[i][j]=solve(i,j+1,n,s,mp,dp);
-        else return dp[i][j]=solve(j+1,j+1,n,s,mp,dp) || solve(i,j+1,n,s,mp,dp);
+        return dp[i][j]=solve(j+1,j+1,n,s,mp,dp) || solve(i,j+1,n,s,mp,dp);
     }
     bool wordBreak(string s, vector<string>& dic) {
         map<string,int> mp;
@@ -37,9 +37,7 @@ such that each word in a sentence exists in the given dictionary.
         if(dict[_s]){
             solve(j+1,j+1,s,cur+_s+" ",dict,ans);
             solve(i,j+1,s,cur,dict,ans);
-        }else{
-            solve(i,j+1,s,cur,dict,ans);
-        }
+        }else solve(i,j+1,s,cur,dict,ans);
     }
     vector<string> wordBreak(string &s, vector<string> &dictionary)
     {

@@ -11,10 +11,8 @@ possible ways to group numbers and operators. You may return the answer in any o
         vector<int> ans;
         for(int k=i+1;k<j;k++){
             if(exp[k]>='0' && exp[k]<='9') continue;
-            vector<int> left = solve(i,k-1,exp);
-            vector<int> right = solve(k+1,j,exp);
-            for(auto l:left){
-                for(auto r:right){
+            for(auto l:solve(i,k-1,exp)){
+                for(auto r:solve(k+1,j,exp)){
                     if(exp[k]=='*') ans.push_back(l*r);
                     else if(exp[k]=='+') ans.push_back(l+r);
                     else ans.push_back(l-r);

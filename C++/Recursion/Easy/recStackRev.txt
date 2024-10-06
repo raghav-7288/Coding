@@ -1,29 +1,19 @@
 
-void insertBottom(int a, stack<int> &st)
-{
-    if (st.empty())
+    void insertBottom(int a, stack<int> &st)
     {
-        st.push(a);
+        if (st.empty()) st.push(a);
+        else{
+            int top = st.top();
+            st.pop();
+            insertBottom(a, st);
+            st.push(top);
+        }
     }
-    else
+    void reverseStack(stack<int> &st)
     {
-        int top = st.top();
-        st.pop();
-        insertBottom(a, st);
-        st.push(top);
-    }
-}
-void reverseStack(stack<int> &st)
-{
-    if (st.empty())
-    {
-        return;
-    }
-    else
-    {
+        if (st.empty()) return;
         int top = st.top();
         st.pop();
         reverseStack(st);
         insertBottom(top, st);
     }
-}
