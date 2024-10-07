@@ -1,0 +1,17 @@
+You have been given a root node of a binary search tree and a positive integer ‘K’. 
+You need to split the given BST into two BST such that first BST has all nodes with values 
+less than or equal to the given value ‘K’, and second tree has all nodes with values greater 
+than the given value ‘K’.
+
+vector<TreeNode<int>*> splitBST(TreeNode<int>* root, int V) {
+    if (!root) return {NULL, NULL};
+    if (root->val <= V) {
+        auto ans = splitBST(root->right, V);
+        root->right = ans[0];
+        return {root, ans[1]};
+    }else{
+        auto ans = splitBST(root->left, V);
+        root->left = ans[1];
+        return {ans[0], root};
+    }
+}

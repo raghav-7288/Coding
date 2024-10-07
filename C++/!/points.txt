@@ -5,3 +5,7 @@ next_permutation(vec.begin(),vec.end());
 int pos = str.find_first_not_of('0');
 str.erase(0, pos);
 
+------------------------------------------------------
+no of parathesisations for n mats: (1/n) (2n-2) C (n-1)
+------------------------------------------------------
+no of bsts from n nodes : (1/(n+1)) 2n C n
