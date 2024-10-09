@@ -7,11 +7,8 @@ Given a binary array nums and an integer goal, return the number of non-empty su
         int i=0,j=0,cnt=0,sum=0;
         while(j<nums.size()){
             sum+=nums[j];
-            while(sum>goal){
-                sum-=nums[i++];
-            }
-            cnt+=(j-i+1);
-            j++;
+            while(sum>goal) sum-=nums[i++];
+            cnt+=(j++-i+1);
         }
         return cnt;
     }

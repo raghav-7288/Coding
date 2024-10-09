@@ -1,12 +1,11 @@
 Given a string s consisting only of characters a, b and c.
 Return the number of substrings containing at least one occurrence of all these characters a, b and c.
 
-
 -> total - substrings with olny 2 = substrings with all 3
     int numberOfSubstrings(string s) {
         map<char,int> mp;
-        long long i=0,j=0,n=s.length(),cnt=0;
-        long long total = n*(n+1)/2;
+        int i=0,j=0,n=s.length();
+        long long total = n*(n+1)/2, cnt=0;
         while(j<n){
             mp[s[j]]++;
             while(mp.size() > 2){
@@ -24,13 +23,13 @@ Return the number of substrings containing at least one occurrence of all these 
 --------------------------------------------------------------------------------------
 
     int numberOfSubstrings(string s) {
-        int i=0,lastSeen_a=-1,lastSeen_b=-1,lastSeen_c=-1,cnt=0;
+        int i=0,ls_a=-1,ls_b=-1,ls_c=-1,cnt=0;
         while(i<s.length()){
-            if(s[i]=='a') lastSeen_a=i;
-            else if(s[i]=='b') lastSeen_b=i;
-            else lastSeen_c=i;
-            if(lastSeen_a!=-1 && lastSeen_b!=-1 && lastSeen_c!=-1){
-                cnt += min(lastSeen_a,min(lastSeen_b,lastSeen_c)) + 1;
+            if(s[i]=='a') ls_a=i;
+            else if(s[i]=='b') ls_b=i;
+            else ls_c=i;
+            if(ls_a!=-1 && ls_b!=-1 && ls_c!=-1){
+                cnt += min({ls_a,minls_b,ls_c}) + 1;
             }
             i++;
         }
