@@ -16,11 +16,7 @@ struct Queue
             printf("\nQueue is full\n");
             return;
         }
-        else
-        {
-            queue[rear++] = data;
-        }
-        return;
+        queue[rear++] = data;
     }
     void queueDequeue()
     {
@@ -29,11 +25,7 @@ struct Queue
             printf("\nQueue is empty\n");
             return;
         }
-        else
-        {
-            front++;
-        }
-        return;
+        front++;
     }
     void queueDisplay()
     {

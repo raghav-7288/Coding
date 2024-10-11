@@ -1,8 +1,8 @@
 class LFUCache {
     int capacity;
     int minFreq;
-    std::unordered_map<int, std::list<std::pair<int, int>>> freqList; // {freq -> list of {key, value}}
-    std::unordered_map<int, std::pair<int, std::list<std::pair<int, int>>::iterator>> pos; // {key -> {freq, iterator in freqList[freq]}}
+    unordered_map<int, list<pair<int, int>>> freqList; // {freq -> list of {key, value}}
+    unordered_map<int, pair<int, list<pair<int, int>>::iterator>> pos; // {key -> {freq, iterator in freqList[freq]}}
 
 public:
     LFUCache(int capacity) {

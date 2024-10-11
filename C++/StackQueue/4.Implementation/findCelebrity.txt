@@ -22,8 +22,7 @@ if the celebrity does not exist, return -1.
         }
         return t;
     }
-
-
+    
 ------------------------------------------------------using Graph-------------------------------------------------------
     int celebrity(vector<vector<int> >& mat) {
         int n=mat.size();
