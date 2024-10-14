@@ -1,0 +1,56 @@
+We can also find modular inverses through Euclidean division.
+
+Given a prime modulus `m` greater than `a` (that is, `m > a`), we have:
+
+```
+m = k * a + r
+```
+
+where `k` is the floor of `m` divided by `a` (k = floor(m / a)), and `r` is `m` modulo `a` (r = m mod a).
+
+Then:
+
+```
+0 = k * a + r mod m
+```
+
+This implies:
+
+```
+r = -k * a mod m
+```
+
+Multiplying both sides by the modular inverse of `a`, denoted as the inverse of `a`, we get:
+
+```
+r * inverse(a) = -k mod m
+```
+
+Therefore:
+
+```
+inverse(a) = -k * inverse(r) mod m
+```
+
+Here is a short recursive implementation of the above formula in code:
+
+```cpp
+int inv(int x) {
+    return x <= 1 ? x : MOD - (MOD / x) * inv(MOD % x) % MOD;
+}
+```
+
+The advantage of this approach is that we can precompute the modular inverses of numbers in the range from 1 to `MOD` (excluding `MOD`) in `O(MOD)` time.
+
+Here is how you can precompute the inverses:
+
+```cpp
+inv[1] = 1;  // Assume we have already defined this array
+for (int i = 2; i < MOD; i++) {
+    inv[i] = MOD - (MOD / i) * inv[MOD % i] % MOD;
+}
+```
+
+Because it takes `O(log p)` time to compute a modular inverse modulo `p`, frequent use of division inside a loop can significantly increase the running time of a program. If the modular inverse of the same numbers is being used many times, it is a good idea to precalculate it.
+
+Also, one must always ensure that they do not attempt to divide by zero. Be aware that after applying modulo, a nonzero number can become zero, so be very careful when dividing by non-constant values.

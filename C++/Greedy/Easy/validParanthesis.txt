@@ -19,3 +19,20 @@ Given a string s containing only three types of characters: '(', ')' and '*', re
         }
         return mini == 0;
     }
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+    bool checkValidString(string s) {
+        int left_ctr=0,right_ctr=0;
+        for(int i=0;i<s.length();i++){
+            if(s[i]==')'){
+                left_ctr--;
+            }else left_ctr++;
+            if(s[s.length()-1-i]=='('){
+                right_ctr--;
+            }else right_ctr++;
+            if(left_ctr<0 || right_ctr<0) return false;
+        }
+        return true;
+    }

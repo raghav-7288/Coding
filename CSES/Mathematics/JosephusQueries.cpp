@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+// n=2^a+l --- winner = 2*l+1
 map<pair<int, int>, int> mp;
 int solve(int n, int k)
 {

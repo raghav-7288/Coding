@@ -7,7 +7,7 @@ int main()
     //     freopen("./output.txt", "w", stdout);
     // #endif
 
-    cout << "A";
+    cout << -5 % 20;
 
     return 0;
 }

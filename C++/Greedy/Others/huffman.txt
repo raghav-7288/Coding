@@ -16,13 +16,6 @@ There are mainly two major parts in Huffman Coding
             freq = f;
         }
     };
-    struct compare
-    {
-        bool operator()(Node *l, Node *r)
-        {
-            return (l->freq > r->freq);
-        }
-    };
     void printHuffman(Node *top, string code)
     {
         if (!top)
@@ -36,7 +29,7 @@ There are mainly two major parts in Huffman Coding
     }
     void huffman(map<char, int> &freq)
     {
-        priority_queue<Node *, vector<Node *>, compare> minHeap;
+        priority_queue<Node *, vector<Node *>, greater<Node *>> minHeap;
         for (auto m : freq)
         {
             minHeap.push(new Node(m.first, m.second));
