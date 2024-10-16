@@ -16,13 +16,7 @@ int solve(long long k)
     cur += (k % d ? 1 : 0);
     if (k % d == 0)
         return cur % 10;
-    long long pos = d - k + (k / d) * d + 1;
-    while (pos > 1)
-    {
-        cur /= 10;
-        pos--;
-    }
-    return cur % 10;
+    return to_string(cur)[k % d - 1] - '0';
 }
 int main()
 {
