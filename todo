@@ -22,3 +22,4 @@
 // https://www.geeksforgeeks.org/count-pairs-in-array-whose-product-is-a-kth-power-of-any-positive-integer/?ref=ml_lbp
 
 // function<void(int, int, int)> dfs = [&](int col, int cur_state, int next_state)
+// https://www.geeksforgeeks.org/regex-regular-expression-in-c/

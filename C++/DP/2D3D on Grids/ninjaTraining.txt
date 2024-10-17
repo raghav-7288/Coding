@@ -15,32 +15,19 @@ return max merit
     5 100 11
     out-> 110
 --------------------------------------------------------------------------------------------------------------------------------------------
-    int solve(int day, int prev, int n, vector<vector<int>> &points, vector<vector<int>> &dp)
-    {
-        if (day >= n)
-            return 0;
-        if (dp[day][prev] != -1)
-            return dp[day][prev];
-        int run = INT_MIN, fight = INT_MIN, learn = INT_MIN;
-        if (prev != 1)
-        {
-            run = points[day][0] + solve(day + 1, 1, n, points, dp);
-        }
-        if (prev != 2)
-        {
-            fight = points[day][1] + solve(day + 1, 2, n, points, dp);
-        }
-        if (prev != 3)
-        {
-            learn = points[day][2] + solve(day + 1, 3, n, points, dp);
-        }
-        return dp[day][prev] = max(run, max(fight, learn));
-    }
 
-    int ninjaTraining(int n, vector<vector<int>> &points)
-    {
-        vector<vector<int>> dp(n, vector<int>(4, -1));
-        return solve(0, 0, n, points, dp);
+    int solve(int d, int p, int n, vector<vector<int>>& arr, vector<vector<int>>& dp){
+        if(d==n) return 0;
+        if(dp[d][p+1]!=-1) return dp[d][p+1];
+        int one=0, two=0, zero=0;
+        if(p!=0) zero=arr[d][0]+solve(d+1,0,n,arr,dp);
+        if(p!=1) one=arr[d][1]+solve(d+1,1,n,arr,dp);
+        if(p!=2) two=arr[d][2]+solve(d+1,2,n,arr,dp);
+        return dp[d][p+1]=max({zero,one,two});
+    }
+    int maximumPoints(vector<vector<int>>& arr, int n) {
+        vector<vector<int>> dp(n,vector<int>(4,-1));
+        return solve(0,-1,n,arr,dp);
     }
 
 --------------------------------------------------------------------------------------------------------------------------------------------

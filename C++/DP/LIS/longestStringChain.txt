@@ -5,8 +5,6 @@ Return the length of the longest possible word chain with words chosen from the 
 wordA is a predecessor of wordB if and only if we can insert exactly one letter anywhere in wordA 
 without changing the order of the other characters to make it equal to wordB.
 
-
-
     bool compare(string& s1, string& s2){
         if(s1.size() != s2.size() + 1) return false;
         

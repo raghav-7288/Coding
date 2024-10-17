@@ -2,7 +2,7 @@ Given a string s, partition s such that every substring of the partition is a pa
 Return the minimum cuts needed for a palindrome partitioning of s.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
-    bool isPal(int i, int j, string &s) { -> pass by reg to avoid MLE
+    bool isPal(int i, int j, string &s) { -> pass by ref to avoid MLE
         while (i < j) {
             if (s[i] != s[j]) return false;
             i++;

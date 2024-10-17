@@ -16,7 +16,7 @@ Both robots should reach the bottom row in grid.
         if(c1<0 || c1>=m || c2<0 || c2>=m) return INT_MIN;
         if(r==n-1){
             if(c1==c2) return grid[r][c1];
-            else return grid[r][c1]+grid[r][c2];
+            return grid[r][c1]+grid[r][c2];
         }
         if(dp[r][c1][c2]!=-1) return dp[r][c1][c2];
         int ans=INT_MIN;
