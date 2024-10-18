@@ -4,19 +4,18 @@ Given an input string s and a pattern p, implement regular expression matching w
 The matching should cover the entire input string (not partial).
 
 
-    bool solve(int i, int j, int n, int m, string s, string p, vector<vector<int>>& dp) {
-        if(i==n && j==m) return true;
-        if(j==m) return false;
+    bool solve(int i, int j, int n, int m, string& s, string& p, vector<vector<int>>& dp){
+        if(j==m) return i==n;
         if(dp[i][j]!=-1) return dp[i][j];
         if(j+1<m && p[j+1]=='*'){
-            if(i<n && (s[i]==p[j] || p[j]=='.')) return dp[i][j]=solve(i,j+2,n,m,s,p,dp) || solve(i+1,j,n,m,s,p,dp);
-            else return dp[i][j]=solve(i,j+2,n,m,s,p,dp);
+            if(i<n && (s[i]==p[j] || p[j]=='.')) return dp[i][j]=solve(i+1,j,n,m,s,p,dp) || solve(i,j+2,n,m,s,p,dp);
+            return dp[i][j]=solve(i,j+2,n,m,s,p,dp);
         }
         if(i<n && (s[i]==p[j] || p[j]=='.')) return dp[i][j]=solve(i+1,j+1,n,m,s,p,dp);
         return dp[i][j]=false;
     }
     bool isMatch(string s, string p) {
-        int n = s.length(), m = p.length();
+        int n=s.length(), m=p.length();
         vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
         return solve(0,0,n,m,s,p,dp);
     }

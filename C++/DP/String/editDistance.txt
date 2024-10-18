@@ -13,7 +13,7 @@ Replace a character
         int replace = solve(i-1,j-1,s,t,dp);
         int insert = solve(i,j-1,s,t,dp);
         int remove = solve(i-1,j,s,t,dp);
-        return dp[i][j] = 1 + min(replace, min(insert, remove)); //+1 for operation performed
+        return dp[i][j] = 1 + min({replace, insert, remove}); //+1 for operation performed
     }
     int minDistance(string s, string t) {
         int n=s.length();

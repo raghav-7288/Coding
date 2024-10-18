@@ -4,7 +4,6 @@ Given a difference d, count the number of partitions in which S1 is greater than
 and the difference between S1 and S2 is equal to d. Since the answer may be large return it modulo 109 + 7.    
     
 
-
     int mod=1e9+7;
     int solve(int ind, int tar, vector<int>& arr,vector<vector<int>>& dp){
         if(ind==0){

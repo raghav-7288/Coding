@@ -30,7 +30,6 @@ Return the number of different expressions that you can build, which evaluates t
                     ans1 = dp[i-1][j + nums[i]];
                 if(j - nums[i] >= 0)
                     ans2 = dp[i-1][j - nums[i]];
-                cout << i << "  " << j +sum << "  " << ans1 + ans2 << endl;
                 dp[i][j + sum] = ans1 + ans2;
             }
         }
