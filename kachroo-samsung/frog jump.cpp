@@ -3,8 +3,8 @@ https://www.careercup.com/question?id=14989765
 http://ideone.com/oXdBaF
 
 Given a 2 D matrix where 1 represent the places where the frog can jump and 0 represent the empty spaces,
-the frog can move freely in horizontal direction (on 1’s only) without incurring any cost (jump). 
-A vertical jump from a given point of the matrix to other point on the matrix can be taken (on 1’s only) 
+the frog can move freely in horizontal direction (on 1’s only) without incurring any cost (jump).
+A vertical jump from a given point of the matrix to other point on the matrix can be taken (on 1’s only)
 with cost as the number of jumps taken.
 Given a source and destination, the frog has to reach the destination minimizing the cost (jump).
 */
@@ -13,24 +13,27 @@ Given a source and destination, the frog has to reach the destination minimizing
 using namespace std;
 #define QS 1000005
 
-struct Point{
+struct Point
+{
 	int x, y;
 };
 
-int n, sX, sY, tX, tY; 
+int n, sX, sY, tX, tY;
 int mat[105][105], dis[105][105], vis[105][105];
 
 Point queue[QS];
 int front = 0, rear = 0;
 
-int dirX[] = {1,0,-1,0};
-int dirY[] = {0,1,0,-1};
+int dirX[] = {1, 0, -1, 0};
+int dirY[] = {0, 1, 0, -1};
 
-bool isValid(int i, int j){
-	return (i>=0 && i<n && j>=0 && j<n);
+bool isValid(int i, int j)
+{
+	return (i >= 0 && i < n && j >= 0 && j < n);
 }
 
-void calculateFrogJump(){
+void calculateFrogJump()
+{
 	queue[rear].x = sX;
 	queue[rear].y = sY;
 	rear = (rear + 1) % QS;
@@ -38,21 +41,26 @@ void calculateFrogJump(){
 	vis[sX][sY] = 1;
 	dis[sX][sY] = 0;
 
-	while(front != rear){
+	while (front != rear)
+	{
 		int p = queue[front].x;
 		int q = queue[front].y;
 		front = (front + 1) % QS;
 
-		for(int i=0; i<4; i++){
+		for (int i = 0; i < 4; i++)
+		{
 			int newX = p + dirX[i];
 			int newY = q + dirY[i];
 
-			if(isValid(newX, newY) && mat[newX][newY] == 1 && vis[newX][newY] == 0){
+			if (isValid(newX, newY) && mat[newX][newY] == 1 && vis[newX][newY] == 0)
+			{
 				/* Horizontal Cost */
-				if(i == 0 || i == 2){
+				if (i == 0 || i == 2)
+				{
 					dis[newX][newY] = dis[p][q];
- 				}
-				else if(i == 1 || i == 3){
+				}
+				else if (i == 1 || i == 3)
+				{
 					dis[newX][newY] = 1 + dis[p][q];
 				}
 
@@ -60,17 +68,20 @@ void calculateFrogJump(){
 
 				queue[rear].x = newX;
 				queue[rear].y = newY;
-				rear = (rear + 1) % QS;	
+				rear = (rear + 1) % QS;
 			}
 		}
 	}
 	cout << dis[tX][tY];
 }
 
-int main(){
+int main()
+{
 	cin >> n;
-	for(int i=0; i<n; i++){
-		for(int j=0; j<n; j++){
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
 			cin >> mat[i][j];
 			vis[i][j] = 0;
 			dis[i][j] = 0;
@@ -81,4 +92,4 @@ int main(){
 
 	calculateFrogJump();
 	return 0;
-} 
+}

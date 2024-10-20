@@ -3,7 +3,7 @@ https://www.geeksforgeeks.org/samsung-interview-experience-set-40-campus-white-b
 https://www.geeksforgeeks.org/samsung-rd-sri-noida-on-campus-interview-experience/
 https://code.hackerearth.com/01ac52j?key=b462f0a802c8c1faf1d87f2b1353b9ce
 
-Company  A  is discarding product numbers that contain few specific digits a specific number of time or 
+Company  A  is discarding product numbers that contain few specific digits a specific number of time or
 more than that. You are given a range and you need to find product numbers that are possible.
 
 Example-
@@ -25,37 +25,43 @@ Eg: 11223 is not valid, 11222 is valid.
 #include <iostream>
 using namespace std;
 
-int numberOminous(int a, int b, int k, int *delNos, int n){
+int numberOminous(int a, int b, int k, int *delNos, int n)
+{
     int count = 0;
-    for(int i = a; i <= b; i++){
+    for (int i = a; i <= b; i++)
+    {
         int temp = i;
         int digitArray[10] = {0};
 
-        while(temp){
-            digitArray[temp%10]++;
+        while (temp)
+        {
+            digitArray[temp % 10]++;
             temp /= 10;
         }
-        
+
         int rougeK = 0;
-        for(int i=0; i<n; i++){
+        for (int i = 0; i < n; i++)
+        {
             rougeK += digitArray[delNos[i]];
         }
 
-        if(rougeK < k){
+        if (rougeK < k)
+        {
             count++;
         }
-
     }
     return count;
 }
 
-int main() {
+int main()
+{
     int a, b, k;
     cin >> a >> b >> k;
     int n;
     cin >> n;
     int *delNos = new int[n];
-    for(int i=0; i<n; i++){
+    for (int i = 0; i < n; i++)
+    {
         cin >> delNos[i];
     }
 
