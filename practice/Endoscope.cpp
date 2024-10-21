@@ -15,34 +15,6 @@ Print the respective answer for T test cases in total for T lines. The answer is
 using namespace std;
 #define ll long long
 ll mod = 1e9 + 7;
-// void dfs(int &ans, int r, int c, int n, int m, int l, vector<vector<int>> &vis, vector<vector<int>> &grid, map<int, vector<pair<int, int>>> &mp, map<pair<int, int>, pair<int, int>> &opposite)
-// {
-//     if (l <= 0)
-//         return;
-//     vis[r][c] = 1;
-//     for (auto [cx, cy] : mp[grid[r][c]])
-//     {
-//         int nr = r + cx, nc = c + cy;
-//         if (nr >= 0 && nr < n && nc >= 0 && nc < m && !vis[nr][nc] && grid[nr][nc])
-//         {
-//             auto op = opposite[{cx, cy}];
-//             bool connected = false;
-//             for (auto [_cx, _cy] : mp[grid[nr][nc]])
-//             {
-//                 if (_cx == op.first && _cy == op.second)
-//                 {
-//                     connected = true;
-//                     break;
-//                 }
-//             }
-//             if (connected)
-//             {
-//                 ans++;
-//                 dfs(ans, nr, nc, n, m, l - 1, vis, grid, mp, opposite);
-//             }
-//         }
-//     }
-// }
 int bfs(int r, int c, int len, vector<vector<int>> &grid, vector<vector<pair<int, int>>> &mp, map<pair<int, int>, pair<int, int>> opposite)
 {
     int n = grid.size(), m = grid[0].size();
@@ -123,10 +95,6 @@ int main()
             cout << "0" << endl;
             continue;
         }
-        // int ans = 1;
-        // dfs(ans, r, c, n, m, l - 1, vis, grid, mp, opposite);
-        // cout << ans << endl;
-
         cout << bfs(r, c, l, grid, mp, opposite) << endl;
     }
     return 0;

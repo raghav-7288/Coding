@@ -1,4 +1,2 @@
-3
-acct_12345|the the llama   Industries,   Inc.
-acct_12345|and llama   Industries,   Inc.
-acct_12345|an llama   Industries,   Inc.
+2 1 1
+2 1 5
