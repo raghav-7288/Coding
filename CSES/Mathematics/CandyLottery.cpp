@@ -14,54 +14,77 @@ Taking care of rounding off. See my code for that.
 Time complexity is O(nk)
 .
 */
+// #include <bits/stdc++.h>
+// using namespace std;
+// #define ll long long
+// #define ld long double
+// ll mod = 1e9 + 7;
+// int main()
+// {
+// #ifndef ONLINE_JUDGE
+//     freopen("../input.txt", "r", stdin);
+//     freopen("../output.txt", "w", stdout);
+// #endif
+//     // int n, k;
+//     // cin >> n >> k;
+//     // ld ans = 0;
+//     // for (int i = 1; i <= k; i++)
+//     // {
+//     //     ld add = 1, sub = 1;
+//     //     for (int j = 1; j <= n; j++)
+//     //     {
+//     //         add *= (ld)i / (ld)k;
+//     //         sub *= (ld)(i - 1) / (ld)k;
+//     //     }
+//     //     ans += i * (add - sub);
+//     // }
+//     // ans *= 1e6;
+//     // ans = llround(ans);
+//     // ans /= 1e6;
+//     // cout << fixed << setprecision(6) << ans;
+
+//     // ios::sync_with_stdio(0);
+//     // cin.tie(0);
+//     // cout.tie(0);
+//     ll n, k;
+//     cin >> n >> k;
+//     ld ans = 0;
+//     for (int i = 1; i <= k; i++)
+//     {
+//         ld add = 1, sub = 1;
+//         for (int j = 1; j <= n; j++)
+//         {
+//             add *= (ld)i / (ld)k;
+//             sub *= (ld)(i - 1) / (ld)k;
+//         }
+//         ans += (ld)(i) * (ld)(add - sub);
+//     }
+//     ans *= 1e6;
+//     ans = llround(ans);
+//     ans /= 1e6;
+//     cout << fixed << setprecision(6) << ans;
+//     return 0;
+// }
+
 #include <bits/stdc++.h>
+
 using namespace std;
-#define ll long long
-#define ld long double
-ll mod = 1e9 + 7;
+
+int N, K;
+double ans, a, b;
+
 int main()
 {
-#ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
-#endif
-    // int n, k;
-    // cin >> n >> k;
-    // ld ans = 0;
-    // for (int i = 1; i <= k; i++)
-    // {
-    //     ld add = 1, sub = 1;
-    //     for (int j = 1; j <= n; j++)
-    //     {
-    //         add *= (ld)i / (ld)k;
-    //         sub *= (ld)(i - 1) / (ld)k;
-    //     }
-    //     ans += i * (add - sub);
-    // }
-    // ans *= 1e6;
-    // ans = llround(ans);
-    // ans /= 1e6;
-    // cout << fixed << setprecision(6) << ans;
-
-    // ios::sync_with_stdio(0);
-    // cin.tie(0);
-    // cout.tie(0);
-    ll n, k;
-    cin >> n >> k;
-    ld ans = 0;
-    for (int i = 1; i <= k; i++)
+    scanf("%d %d", &N, &K);
+    for (int i = 1; i <= K; i++)
     {
-        ld add = 1, sub = 1;
-        for (int j = 1; j <= n; j++)
+        a = b = 1.0;
+        for (int j = 1; j <= N; j++)
         {
-            add *= (ld)i / (ld)k;
-            sub *= (ld)(i - 1) / (ld)k;
+            a *= (double)i / K;
+            b *= (double)(i - 1) / K;
         }
-        ans += (ld)(i) * (ld)(add - sub);
+        ans += (a - b) * i;
     }
-    ans *= 1e6;
-    ans = llround(ans);
-    ans /= 1e6;
-    cout << fixed << setprecision(6) << ans;
-    return 0;
+    printf("%.6f\n", ans);
 }
