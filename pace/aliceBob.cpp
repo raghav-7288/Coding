@@ -34,10 +34,8 @@ int bfs(vector<vector<int>> &maze, int n, int m, pair<int, int> bobPos, pair<int
     {
         auto [x, y, collected, steps] = q.front();
         q.pop();
-        // If we reached Alice's position with all coins
         if (x == alicePos.first && y == alicePos.second && collected == fullMask)
         {
-            // Reconstruct the path
             // vector<pair<int, int>> path;
             // tuple<int, int, int> current = {x, y, collected};
 
@@ -47,15 +45,13 @@ int bfs(vector<vector<int>> &maze, int n, int m, pair<int, int> bobPos, pair<int
             //     current = parent[current];
             // }
 
-            // path.push_back(bobPos); // Add the starting position
+            // path.push_back(bobPos);
             // reverse(path.begin(), path.end());
 
-            // cout << "Shortest path:" << endl;
             // for (auto pos : path)
             // {
             //     cout << "(" << pos.first << ", " << pos.second << ") \n ";
             // }
-            // cout << "END" << endl;
             return steps;
         }
         for (int i = 0; i < 4; ++i)
@@ -102,21 +98,9 @@ int main()
         {0, 0, 2, 0},
         {0, 0, 0, 0},
         {2, 0, 0, 2}};
-
-    // Bob's and Alice's positions
     pair<int, int> bobPos = {0, 0};
     pair<int, int> alicePos = {0, 1};
-
     int result = bfs(maze, n, m, bobPos, alicePos);
-
-    if (result != -1)
-    {
-        cout << result << " steps." << endl;
-    }
-    else
-    {
-        cout << "It is impossible to collect all coins and reach Alice." << endl;
-    }
-
+    cout << result << " steps." << endl;
     return 0;
 }

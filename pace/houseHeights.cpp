@@ -1,9 +1,10 @@
-// #include <bits/stdc++.h>
-// using namespace std;
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
 // int minCost(vector<int> &heights, vector<int> &cost)
 // {
 //     int n = heights.size();
-//     vector<vector<long long>> dp(n, vector<long long>(3, LONG_LONG_MAX));
+//     vector<vector<ll>> dp(n, vector<ll>(3, LONG_LONG_MAX));
 //     dp[0][0] = 0;
 //     dp[0][1] = cost[0];
 //     dp[0][2] = 2 * cost[0];
@@ -35,48 +36,30 @@
 //     return 0;
 // }
 
-#include <iostream>
-#include <vector>
-#include <map>
-
-using namespace std;
-
-// Memoization map: key is pair of (index, previous adjusted height), value is minimal cost
-map<pair<int, int>, long long> memo;
-
-long long dp(int i, int prev_height, const vector<int> &heights, const vector<int> &cost)
+map<pair<int, int>, ll> memo;
+ll solve(int i, int prev_height, const vector<int> &heights, const vector<int> &cost)
 {
     if (i == heights.size())
     {
         return 0;
     }
-
-    // Memoization check
     auto key = make_pair(i, prev_height);
     if (memo.find(key) != memo.end())
     {
         return memo[key];
     }
-
-    long long min_cost = LLONG_MAX;
-
-    // Try increasing current height by delta = 0, 1, 2
+    ll min_cost = LLONG_MAX;
     for (int delta = 0; delta <= 2; ++delta)
     {
         int adjusted_height = heights[i] + delta;
-
-        // Ensure adjusted height is not equal to previous adjusted height
         if (adjusted_height != prev_height)
         {
-            long long current_cost = delta * cost[i];
-            long long total_cost = current_cost + dp(i + 1, adjusted_height, heights, cost);
+            ll total_cost = delta * cost[i] + solve(i + 1, adjusted_height, heights, cost);
             min_cost = min(min_cost, total_cost);
         }
     }
-    memo[key] = min_cost;
-    return min_cost;
+    return memo[key] = min_cost;
 }
-
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -86,12 +69,7 @@ int main()
     int n = 3;
     vector<int> heights = {2, 2, 2, 3, 3, 3, 4, 5};
     vector<int> cost = {1, 100, 3, 4, 100, 6, 7, 8};
-
-    memo.clear(); // Clear memoization map before computation
-
-    long long result = dp(0, -1, heights, cost);
-
-    cout << "Minimum cost: " << result << endl; // Output should be 2
-
+    memo.clear();
+    cout << solve(0, -1, heights, cost);
     return 0;
 }
