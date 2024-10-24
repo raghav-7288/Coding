@@ -59,3 +59,42 @@ int main()
     }
     return 0;
 }
+
+/*
+For undirected
+
+    stack<int> st;
+    st.push(1);
+    vector<int> circuit, used(m + 1);
+
+    while (!st.empty())
+    {
+        int cur = st.top();
+        if (deg[cur])
+        {
+            int next = adj[cur].back().first;
+            int edge = adj[cur].back().second;
+            adj[cur].pop_back();
+            if (!used[edge])
+            {
+                deg[cur]--;
+                deg[next]--;
+                used[edge] = 1;
+                st.push(next);
+            }
+        }
+        else
+        {
+            circuit.push_back(cur);
+            st.pop();
+        }
+    }
+
+    if ((int)circuit.size() != m + 1)
+        printf("IMPOSSIBLE\n");
+    else
+    {
+        for (int v : circuit)
+            cout << v << " ";
+    }
+*/
