@@ -90,8 +90,8 @@ int find_subsequence_with_modification(const string &A, const string &B)
 int main()
 {
 #ifndef ONLINE_JUDGE
-    freopen("./input.txt", "r", stdin);
-    freopen("./output.txt", "w", stdout);
+    freopen("../input.txt", "r", stdin);
+    freopen("../output.txt", "w", stdout);
 #endif
     ios::sync_with_stdio(false);
     cin.tie(0);
