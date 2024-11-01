@@ -1,19 +1,19 @@
 //max sum of a subarray
-int kadane(int n, vector<int> v)
-{
-    int sum = 0;
-    int maxS = INT_MIN;
-    for (int i = 0; i < n; i++)
+    int kadane(int n, vector<int> v)
     {
-        sum += v[i];
-        maxS = max(sum, maxS);
-        if (sum < 0)
+        int sum = 0;
+        int maxS = INT_MIN;
+        for (int i = 0; i < n; i++)
         {
-            sum = 0;
+            sum += v[i];
+            maxS = max(sum, maxS);
+            if (sum < 0)
+            {
+                sum = 0;
+            }
         }
+        return maxS;
     }
-    return maxS;
-}
 
 
 *********************************************PRINT THE SUBARRAY WITH MAX SUM*********************************************************

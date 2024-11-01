@@ -3,7 +3,7 @@ int longestSubarrayWithSumK(vector<int> a, long long k)
 {
     int r = 0, l = 0;
     int n = a.size();
-    int s = a[0];
+    int s = 0;
     int len = 0;
     while (r < n)
     {
@@ -47,21 +47,22 @@ vector<vector<int>> subarraysWithSumK(vector<int> a, long long k)
 }
 
 --------------------------------------------------for arrays with any kind of elements----------------------------------------------------
-int lenOfLongSubarr(int A[],  int N, int K) 
-{ 
-    map<int,int> mp;
-    int i=0,s=0,ans=0;
-    while(i<N){
-        s+=A[i];
-        if(s==K) ans=max(ans,i+1);
-        if(mp.find(s-K) != mp.end()){
-            ans=max(ans,i-mp[s-K] );
+
+    int lenOfLongestSubarr(vector<int>& arr, int k) {
+        map<int,int> mp;
+        mp[0]=-1;
+        int i=0,s=0,ans=0,n=arr.size();
+        while(i<n){
+            s+=arr[i];
+            // if(s==K) ans=max(ans,i+1);
+            if(mp.find(s-k) != mp.end()){
+                ans=max(ans,i-mp[s-k] );
+            }
+            if(mp.find(s) == mp.end()) mp[s]=i;
+            i++;
         }
-        if(mp.find(s) == mp.end()) mp[s]=i;
-        i++;
+        return ans;
     }
-    return ans;
-} 
 
 -----------------------------------------------------no. of subarraay with sum = k------------------------------------------------------------
 

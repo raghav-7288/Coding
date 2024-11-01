@@ -9,7 +9,6 @@
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> pt;
         pt.push_back({1});
-        if(numRows==1) return pt;
         for(int i=1;i<numRows;i++){
             pt.push_back(genRow(i));
         }
