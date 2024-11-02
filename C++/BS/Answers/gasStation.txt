@@ -35,10 +35,10 @@ We have to find the smallest possible value of d. Find the answer exactly to 2 d
     double findSmallestMaxDist(vector<int> &stations, int k) {
         sort(stations.begin(),stations.end());
         int n=stations.size();
-        vector<int> howMany(ns-1);
+        vector<int> howMany(n-1);
         priority_queue<pair<double,int>> pq;
         for(int j=0;j<n-1;j++){
-            double dis = (double)(stations[j+1]-stations[j])/(howMany[j]+1);
+            double dis = (double)(stations[j+1]-stations[j]);
             pq.push({dis,j});
         }
         for(int i=0;i<k;i++){
