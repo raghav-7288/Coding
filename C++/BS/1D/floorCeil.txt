@@ -1,72 +1,32 @@
-//TODO
-    int findFloor(vector<long long> &v, long long n, long long x) {
-        long long l=0,h=n-1;
+
+    int findFloor(vector<int>& v, int x) {
+        int n=v.size(),l=0,h=n-1;
         int floor = -1;
         while(l<=h){
             int m=l+(h-l)/2;
-            if(v[m]==x) return floor=m;
+            if(v[m]==x) return floor=v[m];
             else if(v[m]>x) h=m-1;
             else{
                 floor=m;
                 l=m+1;
             }
         }
-        return floor;
+        return floor==-1?-1:v[floor];
     }
-
-
-    int findCeil(vector<long long> &v, long long n, long long x) {
-        long long l=0,h=n-1;
+    int findCeil(vector<int>& v, int x) {
+        int n=v.size(),l=0,h=n-1;
         int ceil = -1;
         while(l<=h){
-            m=l+(h-l)/2;
-            if(v[m]==x) return ceil=m;
+            int m=l+(h-l)/2;
+            if(v[m]==x) return ceil=v[m];
             else if(v[m]<x) l=m+1;
             else{
                 ceil=m;
                 h=m-1;
             }
         }
-        return ceil;
-    }
-
-***********************************************************************************************************************************************
-
-    int floor(vector<int> &a, int n, int x) {
-        if(a[0]>x) return -1;
-        int s=0,e=n-1;
-        while(s<=e){
-            int m=(s+e)/2;
-            if(a[m]==x){
-                return a[m];
-            }else if(a[m]<x){
-                
-                if(m==n-1 || a[m+1]>x){
-                    return a[m];
-                }
-                s=m+1;
-            }else{
-                e=m-1;
-            }
-        }
-    }
-    int ceil(vector<int> &a, int n, int x){
-        if(a[n-1]<x) return -1;
-        int s=0,e=n-1;
-        while(s<=e){
-            int m=(s+e)/2;
-            if(a[m]==x){
-                return a[m];
-            }else if(a[m]<x){
-                s=m+1;
-            }else{
-                if(m==0 || a[m-1]<x){
-                    return a[m];
-                }
-                e=m-1;
-            }
-        }
+        return ceil==-1?-1:v[ceil];
     }
     pair<int, int> getFloorAndCeil(vector<int> &a, int n, int x) {
-        return {floor(a,n,x),ceil(a,n,x)};
+        return {findFloor(a,x), findCeil(a,x)};
     }
