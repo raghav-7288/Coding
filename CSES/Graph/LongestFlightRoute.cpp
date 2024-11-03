@@ -81,6 +81,7 @@ int main()
         ans.push_back(n);
         n = parent[n];
     } while (n != 1);
+
     ans.push_back(1);
 
     cout << ans.size() << endl;

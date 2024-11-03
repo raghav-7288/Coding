@@ -3,8 +3,8 @@ using namespace std;
 int main()
 {
 #ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
+    freopen("../../input.txt", "r", stdin);
+    freopen("../../output.txt", "w", stdout);
 #endif
     int n, m;
     cin >> n >> m;
@@ -19,7 +19,7 @@ int main()
         adj[u].push_back(v);
     }
     vector<long long> dis(n + 1, 0);
-    int x = -1;
+    int x;
     for (int i = 0; i < n; i++)
     {
         x = -1;

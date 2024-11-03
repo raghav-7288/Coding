@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-// TODO using floys warshan and check for each edge
 int main()
 {
 #ifndef ONLINE_JUDGE
