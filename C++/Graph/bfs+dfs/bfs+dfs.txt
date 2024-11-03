@@ -11,6 +11,7 @@ vector<int> dfsOfGraph(int source,vector<int> adj[],vector<int> &vis,vector<int>
 
 -----------------------------------------------------find all reachables----------------------------------------------------------------
 
+// call for every node
 void dfs(int node, vector<int>& vis, vector<int> adj[], vector<unordered_set<int>>& reachable){
     vis[node]=1;
     for(auto it:adj[node]){

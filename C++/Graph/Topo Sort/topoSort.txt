@@ -1,4 +1,5 @@
---------------------------------------DFS(only when no cycle)---------------------------------------
+----------------------------------------------DFS(only when no cycle)----------------------------------------
+    
     void dfs(int node,vector<int> &vis,vector<int> &ans,vector<int> adj[]){
         vis[node]=1;
         for(auto x:adj[node]){
@@ -18,62 +19,65 @@
         reverse(ans.begin(),ans.end());
         return ans;
     }
--------------------------------------KAHN(bfs)-------------------------------------
-vector<int> topoSort(int V, vector<int> adj[])
-{
-    vector<int> inDeg(V,0);
-    vector<int> ans;
-    queue<int> q;
-    for(int i=0;i<V;i++){
-        for(auto x:adj[i]){
-            inDeg[x]++;
-        }
-    }
-    for(int i=0;i<V;i++){
-        if(!inDeg[i]){
-            q.push(i);
-        }
-    }
-    while(!q.empty()){
-        int node=q.front();
-        ans.push_back(node);
-        q.pop();
-        for(auto x:adj[node]){
-            inDeg[x]--;
-            if(!inDeg[x]){
-                q.push(x);
+
+--------------------------------------------------KAHN(bfs)----------------------------------------------
+    
+    vector<int> topoSort(int V, vector<int> adj[])
+    {
+        vector<int> inDeg(V,0), ans;
+        queue<int> q;
+        for(int i=0;i<V;i++){
+            for(auto x:adj[i]){
+                inDeg[x]++;
             }
         }
+        for(int i=0;i<V;i++){
+            if(!inDeg[i]){
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            int node=q.front();
+            ans.push_back(node);
+            q.pop();
+            for(auto x:adj[node]){
+                inDeg[x]--;
+                if(!inDeg[x]){
+                    q.push(x);
+                }
+            }
+        }
+        return ans;
     }
-    return ans;
-}
+
 -------------------------------------------------------AllTopoSorts---------------------------------------------------------------------------
-void genAllTopo(int n, vector<int> adj[], vector<int> &indegree, vector<int> &vis, vector<int> &currTopo, vector<vector<int>> &allTopo){
-    bool allVisited = true;
-    for (int i = 0; i < n; i++)
-    {
-        if (!indegree[i] && !vis[i])
+
+    void genAllTopo(int n, vector<int> adj[], vector<int> &indegree, vector<int> &vis, vector<int> &currTopo, vector<vector<int>> &allTopo){
+        bool allVisited = true;
+        for (int i = 0; i < n; i++)
         {
-            vis[i] = 1;
-            currTopo.push_back(i);
-            for (auto x : adj[i]) indegree[x]--;
-            
-            genAllTopo(n, adj, indegree, vis, currTopo, allTopo);
-            
-            for (auto x : adj[i]) indegree[x]++;
-            currTopo.pop_back();
-            vis[i] = 0;
-            
-            allVisited = false;
+            if (!indegree[i] && !vis[i])
+            {
+                vis[i] = 1;
+                currTopo.push_back(i);
+                for (auto x : adj[i]) indegree[x]--;
+                
+                genAllTopo(n, adj, indegree, vis, currTopo, allTopo);
+                
+                for (auto x : adj[i]) indegree[x]++;
+                currTopo.pop_back();
+                vis[i] = 0;
+                
+                allVisited = false;
+            }
+        }
+        if (allVisited)
+        {
+            if (currTopo.size() != n)
+            {
+                cout << "CYCLE EXIST";
+                return;
+            }
+            allTopo.push_back(currTopo);
         }
     }
-    if (allVisited)
-    {
-        if (currTopo.size() != n)
-        {
-            cout << "CYCLE EXIST";
-            return;
-        }
-        allTopo.push_back(currTopo);
-    }
-}

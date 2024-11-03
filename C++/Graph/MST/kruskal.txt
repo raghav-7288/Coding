@@ -1,22 +1,11 @@
 
-
-    bool basedOnwt(vector<int> edge1, vector<int> edge2)
-    {
-        return edge1[2] < edge2[2];
-    }
-    int kruskal(vector<vector<int>> edges, int n)
-    {
-        // if adj given convert to edges;
-        disjointSet ds(n);
+    int kruskal(vector<vector<int>> edges, int n){
+        DSU ds(n);
         int mstWt = 0;
-        sort(edges.begin(), edges.end(), basedOnwt);
-        for (auto x : edges)
-        {
-            int from = x[0];
-            int to = x[1];
-            int ew = x[2];
-            if (ds.findPar(from) != ds.findPar(to))
-            {
+        sort(edges.begin(), edges.end(), [](vector<int>& edge1, vector<int>& edge2){return edge1[2] < edge2[2];});
+        for (auto x : edges){
+            int from = x[0], to = x[1], ew = x[2];
+            if (ds.ubs(from,to)){
                 mstWt += ew;
                 ds.unionBySize(from, to);
             }

@@ -11,8 +11,7 @@ Return the size of the largest island in grid after applying this operation.
             for(int j=0;j<n;j++){
                 if(grid[i][j]){
                     for(int a=0;a<4;a++){
-                        int nr=i+cx[a];
-                        int nc=j+cy[a];
+                        int nr=i+cx[a], nc=j+cy[a];
                         if(nr>=0 && nc>=0 && nr<n && nc<n && grid[nr][nc]){
                             int index=i*n+j;
                             int nindex=nr*n+nc;
@@ -29,8 +28,7 @@ Return the size of the largest island in grid after applying this operation.
                 if(!grid[i][j]){
                     set<int> st;
                     for(int a=0;a<4;a++){
-                        int ni=i+cx[a];
-                        int nj=j+cy[a];
+                        int ni=i+cx[a], nj=j+cy[a];
                         if(ni>=0 && nj>=0 && ni<n && nj<n && grid[ni][nj]){
                             int nindex=ni*n+nj;
                             st.insert(ds.fp(nindex));

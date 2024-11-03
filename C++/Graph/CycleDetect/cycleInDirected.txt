@@ -1,54 +1,51 @@
-------------------------------------------------------------------DFS---------------------------------------------------------------------------
-bool dfs(int source, vector<int> adj[], vector<int> &vis, vector<int> &pathVis){
-  vis[source] = 1;
-  pathVis[source] = 1;
-  for (auto it : adj[source]){
-    if (!vis[it]){
-      if(dfs(it, adj, vis, pathVis)) return true;
-    }
-    else if(pathVis[it]) return true;
-  }
-  pathVis[source] = 0;
-  return false;
-}
-bool isCyclic(int V, vector<int> adj[]){
-  vector<int> vis(V, 0);
-  vector<int> pathVis(V, 0);
-  for (int i = 0; i < V; i++){
-    if(!vis[i]){
-      (dfs(i, adj, vis, pathVis)) return true;
-    }
-  }
-  return false;
-}
--------------------------------------------------------------------BFS---------------------------------------------------------------------------
--->if num of vertices in topo sort != n then cycle exist
+--------------------------------------------------------DFS-----------------------------------------------------------
 
-int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
-  vector<vector<int>> adj(n+1);
-  vector<int> inDeg(n+1,0);
-  queue<int> q;
-  int cnt=0;
-  for(auto x:edges){
-    adj[x.first].push_back(x.second);
-    inDeg[x.second]++;
-  }
-  for(int i=1;i<=n;i++){
-    if(!inDeg[i]){
-      cnt++;
-      q.push(i);
+    bool dfs(int source, vector<vector<int>> adj, vector<int> &vis, vector<int> &pathVis){
+        vis[source] = 1;
+        pathVis[source] = 1;
+        for (auto it : adj[source]){
+            if (!vis[it] && dfs(it, adj, vis, pathVis)) return true;
+            else if(pathVis[it]) return true;
+        }
+        pathVis[source] = 0;
+        return false;
     }
-  }
-  while(!q.empty()){
-    int node=q.front();
-    q.pop();
-    for(auto x:adj[node]){
-      inDeg[x]--;
-      if(!inDeg[x]){
-        cnt++;
-        q.push(x);
-      }
+    bool isCyclic(int V, vector<vector<int>> adj) {
+        vector<int> vis(V, 0);
+        vector<int> pathVis(V, 0);
+        for (int i = 0; i < V; i++){
+            if(!vis[i] && dfs(i, adj, vis, pathVis)) return true;
+        }
+        return false;
     }
-  }
-  return !(cnt==n);
-}
+
+--------------------------------------------------------BFS-----------------------------------------------------------
+
+    int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+        vector<vector<int>> adj(n+1);
+        vector<int> inDeg(n+1,0);
+        queue<int> q;
+        int cnt=0;
+        for(auto x:edges){
+            adj[x.first].push_back(x.second);
+            inDeg[x.second]++;
+        }
+        for(int i=1;i<=n;i++){
+            if(!inDeg[i]){
+                cnt++;
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            for(auto x:adj[node]){
+                inDeg[x]--;
+                if(!inDeg[x]){
+                    cnt++;
+                    q.push(x);
+                }
+            }
+        }
+        return !(cnt==n);
+    }

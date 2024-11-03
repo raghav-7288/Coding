@@ -7,34 +7,30 @@ means that there is a road between intersections ui and vi that takes timei minu
 You want to know in how many ways you can travel from intersection 0 to intersection n - 1 in the shortest amount of time.
 
 
-    int countPaths(int n, vector<vector<int>>& roads) {
+     int countPaths(int n, vector<vector<int>>& roads) {
+        int mod=1e9+7;
         vector<pair<int,int>> adj[n];
         for(auto r:roads){
             adj[r[0]].push_back({r[1],r[2]});
             adj[r[1]].push_back({r[0],r[2]});
         }
-        //{time,count}
-        vector<pair<long long,long long>> time(n,{LONG_LONG_MAX,0});
-        //{time,node}
-        priority_queue<pair<long long,long long>,vector<pair<long long,long long>>,greater<pair<long long,long long>>> pq;
+        vector<pair<long long,long long>> time(n,{LONG_LONG_MAX,0}); //{time,count}
+        priority_queue<pair<long long,long long>,vector<pair<long long,long long>>,greater<pair<long long,long long>>> pq; //{time,node}
         time[0]={0,1};
         pq.push({0,0});
-        int mod=1e9+7;
         while(!pq.empty()){
-            long long t=pq.top().first;
-            int node=pq.top().second;
+            long long cur_time=pq.top().first, node=pq.top().second;
             pq.pop();
             for(auto it:adj[node]){
-                int adjNode=it.first;
-                long long ew=it.second;
-                if(time[adjNode].first>t+ew){
-                    time[adjNode].first=t+ew;
-                    time[adjNode].second=time[node].second;
+                int adjNode=it.first, ew=it.second;
+                if(time[adjNode].first > cur_time+ew){
+                    time[adjNode].first = cur_time+ew;
+                    time[adjNode].second = time[node].second;
                     pq.push({time[adjNode].first,adjNode});
-                }else if(time[adjNode].first==t+ew){
-                    time[adjNode].second=(time[adjNode].second+time[node].second)%mod;
-                } 
-            }
-        } 
+                }else if(time[adjNode].first == cur_time+ew){
+                    (time[adjNode].second += time[node].second) %= mod;
+                }
+            } 
+        }
         return time[n-1].second;
     }

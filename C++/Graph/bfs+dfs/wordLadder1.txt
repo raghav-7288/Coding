@@ -3,26 +3,26 @@ sequence from beginWord to endWord, or 0 if no such sequence exists.
 
 
 
-    int ladderLength(string beg, string end, vector<string>& wordList) {
+    int ladderLength(string b, string e, vector<string>& wordList) {
         unordered_set<string> st(wordList.begin(),wordList.end());
-        if(st.find(end)==st.end()) return 0;
+        if(st.find(e)==st.end()) return 0;
         queue<pair<string,int>> q;
-        q.push({beg,1});
-        st.erase(beg);
+        q.push({b,1});
+        st.erase(b);
         while(!q.empty()){
             string w=q.front().first;
             int d=q.front().second;
             q.pop();
-            if(w==end) return d;
-            for(int i=0;i<w.length();i++){
-                char start = w[i];
+            if(w==e) return d;
+            for(auto& x:w){
+                char init=x;
                 for(char c='a';c<='z';c++){
-                    w[i]=c;
+                    x=c;
                     if(st.find(w)!=st.end()){
                         q.push({w,d+1});
                         st.erase(w);
                     }
-                    w[i]=start;
+                    x=init;
                 }
             }
         }

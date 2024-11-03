@@ -1,18 +1,14 @@
 ***************************************************************DFS*********************************************************************
     bool CycleCheckByDfs(vector<int> adj[],int vis[],int source,int parent){
-            vis[source]=1;
-            for(auto it : adj[source]){
-                if(!vis[it]){
-                    if(CycleCheckByDfs(adj,vis,it,source)){
-                        return true;
-                    }
-                }
-                else if(it!=parent){
-                    return true;
-                }
+        vis[source]=1;
+        for(auto it : adj[source]){
+            if(!vis[it]){
+                if(CycleCheckByDfs(adj,vis,it,source)) return true;
             }
-            return false;
+            else if(it!=parent) return true;
         }
+        return false;
+    }
     bool isCycle(int V, vector<int> adj[]) {
         int vis[V]={0};
         for(int i=0;i<V;i++){
@@ -48,10 +44,7 @@
     bool isCycle(int V, vector<int> adj[]) {
         int vis[V]={0};
         for(int i=0;i<V;i++){
-            if(!vis[i]){
-                if(CycleCheckByBfs(i,adj,vis)==true)
-                    return true;
-            }
+            if(!vis[i] && CycleCheckByBfs(i,adj,vis)) return true;
         }
         return false;
     }
