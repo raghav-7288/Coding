@@ -1,120 +1,97 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+#define ll long long
+#define ld long double
+ll mod = 1e9 + 7;
 int main()
 {
 #ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
+    freopen("../../input.txt", "r", stdin);
+    freopen("../../output.txt", "w", stdout);
 #endif
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int n, m, ai, aj;
     cin >> n >> m;
-    vector<vector<char>> grid(n, vector<char>(m));
-    map<char, pair<int, int>> mp;
-    mp['U'] = {-1, 0};
-    mp['D'] = {1, 0};
-    mp['L'] = {0, -1};
-    mp['R'] = {0, 1};
-
-    vector<vector<int>> distM(n, vector<int>(m, INT_MAX));
-    vector<vector<int>> distA(n, vector<int>(m, INT_MAX));
-    vector<vector<char>> dir(n, vector<char>(m));
-    vector<vector<pair<int, int>>> parent(n, vector<pair<int, int>>(m, {-1, -1}));
+    vector<vector<char>> grid(n + 1, vector<char>(m + 1)), dir(n + 1, vector<char>(m + 1));
+    vector<vector<int>> distM(n + 1, vector<int>(m + 1, 1e9)), distA(n + 1, vector<int>(m + 1, 1e9));
+    vector<vector<pair<int, int>>> parent(n + 1, vector<pair<int, int>>(m + 1));
     queue<pair<int, int>> q;
-
-    for (int i = 0; i < n; i++)
+    vector<char> d = {'U', 'R', 'D', 'L'};
+    int cx[4] = {-1, 0, 1, 0}, cy[4] = {0, 1, 0, -1};
+    for (int i = 1; i <= n; i++)
     {
-        for (int j = 0; j < m; j++)
+        for (int j = 1; j <= m; j++)
         {
             cin >> grid[i][j];
-            if (grid[i][j] == 'A')
-            {
-                ai = i;
-                aj = j;
-            }
             if (grid[i][j] == 'M')
             {
                 q.push({i, j});
                 distM[i][j] = 0;
             }
+            else if (grid[i][j] == 'A')
+            {
+                ai = i;
+                aj = j;
+            }
         }
     }
-
     while (!q.empty())
     {
         auto [r, c] = q.front();
         q.pop();
-        for (auto _m : mp)
+        for (int k = 0; k < 4; k++)
         {
-            int nr = r + _m.second.first, nc = c + _m.second.second;
-            if (nr >= 0 && nr < n && nc >= 0 && nc < m && grid[nr][nc] != '#' && distM[nr][nc] == INT_MAX)
+            int nr = r + cx[k], nc = c + cy[k];
+            if (nr >= 1 && nr <= n && nc >= 1 && nc <= m && grid[nr][nc] != '#' && distM[nr][nc] == 1e9)
             {
-                distM[nr][nc] = distM[r][c] + 1;
+                distM[nr][nc] = 1 + distM[r][c];
                 q.push({nr, nc});
             }
         }
     }
-
     q.push({ai, aj});
     distA[ai][aj] = 0;
     parent[ai][aj] = {-1, -1};
-
     bool found = false;
     int ei, ej;
-
-    if (ai == 0 || aj == 0 || ai == n - 1 || aj == m - 1)
+    while (!q.empty())
     {
-        found = true;
-        ei = ai;
-        ej = aj;
-    }
-    else
-    {
-        while (!q.empty())
+        auto [r, c] = q.front();
+        q.pop();
+        if (r == 1 || r == n || c == 1 || c == m)
         {
-            auto [r, c] = q.front();
-            q.pop();
-
-            if (r == 0 || c == 0 || r == n - 1 || c == m - 1)
+            ei = r;
+            ej = c;
+            found = true;
+            break;
+        }
+        for (int k = 0; k < 4; k++)
+        {
+            int nr = r + cx[k], nc = c + cy[k];
+            if (nr >= 1 && nr <= n && nc >= 1 && nc <= m && grid[nr][nc] != '#' && distA[nr][nc] == 1e9 && distA[r][c] + 1 < distM[nr][nc])
             {
-                ei = r;
-                ej = c;
-                found = true;
-                break;
-            }
-
-            for (auto _m : mp)
-            {
-                int nr = r + _m.second.first, nc = c + _m.second.second;
-                if (nr >= 0 && nr < n && nc >= 0 && nc < m && grid[nr][nc] != '#' && distA[nr][nc] == INT_MAX)
-                {
-                    if (distA[r][c] + 1 < distM[nr][nc])
-                    {
-                        distA[nr][nc] = distA[r][c] + 1;
-                        q.push({nr, nc});
-                        parent[nr][nc] = {r, c};
-                        dir[nr][nc] = _m.first;
-                    }
-                }
+                distA[nr][nc] = 1 + distA[r][c];
+                q.push({nr, nc});
+                parent[nr][nc] = {r, c};
+                dir[nr][nc] = d[k];
             }
         }
     }
-
     if (found)
     {
         string path = "";
-        int r = ei, c = ej;
-        while (!(r == ai && c == aj))
+        while (!(ei == ai && ej == aj))
         {
-            path += dir[r][c];
-            auto [pr, pc] = parent[r][c];
-            r = pr;
-            c = pc;
+            path += dir[ei][ej];
+            auto [ni, nj] = parent[ei][ej];
+            ei = ni;
+            ej = nj;
         }
         reverse(path.begin(), path.end());
-        cout << "YES\n";
-        cout << path.length() << endl;
-        cout << path << endl;
+        cout << "YES\n"
+             << path.size() << "\n"
+             << path;
     }
     else
     {

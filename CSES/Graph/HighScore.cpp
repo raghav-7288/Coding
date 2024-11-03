@@ -1,49 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define ld long double
+ll mod = 1e9 + 7;
 int main()
 {
 #ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
+    freopen("../../input.txt", "r", stdin);
+    freopen("../../output.txt", "w", stdout);
 #endif
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int n, m;
     cin >> n >> m;
-    vector<tuple<int, int, long long>> edges;
-    vector<int> adj[n + 1];
-    for (int i = 0; i < m; i++)
+    vector<ll> dis(n + 1, LONG_LONG_MIN), vis(n + 1), adj[n + 1];
+    vector<tuple<int, int, int>> edges;
+    queue<int> q;
+    while (m--)
     {
-        int u, v, w;
+        ll u, v, w;
         cin >> u >> v >> w;
         edges.push_back(make_tuple(u, v, w));
         adj[u].push_back(v);
     }
-    vector<long long> dis(n + 1, LONG_LONG_MIN);
     dis[1] = 0;
     for (int i = 1; i < n; i++)
     {
         for (auto e : edges)
         {
-            auto [u, v, ew] = e;
-            if (dis[u] != LONG_LONG_MIN && dis[u] + ew > dis[v])
+            auto [f, t, w] = e;
+            if (dis[f] != LONG_LONG_MIN && dis[f] + w > dis[t])
             {
-                dis[v] = dis[u] + ew;
+                dis[t] = dis[f] + w;
             }
         }
     }
-    queue<int> q;
-    vector<int> vis(n + 1);
     for (auto e : edges)
     {
-        auto [u, v, ew] = e;
-        if (dis[u] != LONG_LONG_MIN && dis[u] + ew > dis[v])
+        auto [f, t, w] = e;
+        if (dis[f] != LONG_LONG_MIN && dis[f] + w > dis[t])
         {
-            if (v == n)
+            if (t == n)
             {
-                cout << "-1";
+                cout << -1;
                 return 0;
             }
-            q.push(v);
-            vis[v] = 1;
+            q.push(t);
+            vis[t] = 1;
         }
     }
     while (!q.empty())
@@ -52,7 +55,7 @@ int main()
         q.pop();
         if (node == n)
         {
-            cout << "-1";
+            cout << -1;
             return 0;
         }
         for (auto it : adj[node])

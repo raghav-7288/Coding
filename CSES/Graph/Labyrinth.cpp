@@ -80,9 +80,9 @@ int main()
             c = pc;
         }
         reverse(path.begin(), path.end());
-        cout << "YES\n";
-        cout << path.length() << endl;
-        cout << path;
+        cout << "YES\n"
+             << path.length() << "\n"
+             << path;
     }
     else
     {

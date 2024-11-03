@@ -1,27 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-bool dfs(int node, int p, vector<int> &path, vector<int> &vis, vector<int> adj[], vector<int> &cycle)
+#define ll long long
+#define ld long double
+ll mod = 1e9 + 7;
+bool dfs(int node, int par, vector<int> &vis, vector<int> &cycle, vector<int> &path, vector<int> adj[])
 {
     vis[node] = 1;
     path.push_back(node);
     for (auto it : adj[node])
     {
-        if (it == p)
+        if (it == par)
             continue;
         if (!vis[it])
         {
-            if (dfs(it, node, path, vis, adj, cycle))
+            if (dfs(it, node, vis, cycle, path, adj))
                 return true;
         }
         else
         {
             auto idx = find(path.begin(), path.end(), it);
-            if (idx != path.end())
-            {
-                cycle.assign(idx, path.end());
-                cycle.push_back(it);
-                return true;
-            }
+            cycle.assign(idx, path.end());
+            cycle.push_back(it);
+            return true;
         }
     }
     path.pop_back();
@@ -30,33 +30,29 @@ bool dfs(int node, int p, vector<int> &path, vector<int> &vis, vector<int> adj[]
 int main()
 {
 #ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
+    freopen("../../input.txt", "r", stdin);
+    freopen("../../output.txt", "w", stdout);
 #endif
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int n, m;
     cin >> n >> m;
-    vector<int> adj[n + 1];
-    for (int i = 0; i < m; i++)
+    vector<int> adj[n + 1], vis(n + 1), path, cycle;
+    while (m--)
     {
         int u, v;
         cin >> u >> v;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-    vector<int> path, vis(n + 1), cycle;
-    for (int i = 1; i <= n; ++i)
+    for (int i = 1; i <= n; i++)
     {
-        if (!vis[i])
+        if (!vis[i] && dfs(i, -1, vis, cycle, path, adj))
         {
-            if (dfs(i, -1, path, vis, adj, cycle))
-            {
-                cout << cycle.size() << endl;
-                for (auto p : cycle)
-                {
-                    cout << p << " ";
-                }
-                return 0;
-            }
+            cout << cycle.size() << "\n";
+            for (auto it : cycle)
+                cout << it << " ";
+            return 0;
         }
     }
     cout << "IMPOSSIBLE";

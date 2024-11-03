@@ -23,25 +23,19 @@ public:
         int pu = fp(u), pv = fp(v);
         if (pu == pv)
             return false;
-        if (s[pu] <= s[pv])
-        {
-            p[pu] = pv;
-            s[pv] += s[pu];
-        }
-        else
-        {
-            p[pv] = pu;
-            s[pu] += s[pv];
-        }
+        if (s[pu] > s[pv])
+            swap(pu, pv);
+        p[pu] = pv;
+        s[pv] += s[pu];
         return true;
     }
 };
 int main()
 {
-    // #ifndef ONLINE_JUDGE
-    //     freopen("./input.txt", "r", stdin);
-    //     freopen("./output.txt", "w", stdout);
-    // #endif
+#ifndef ONLINE_JUDGE
+    freopen("../../input.txt", "r", stdin);
+    freopen("../../output.txt", "w", stdout);
+#endif
 
     int n, m;
     cin >> n >> m;
