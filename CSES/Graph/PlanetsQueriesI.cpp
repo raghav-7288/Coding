@@ -22,7 +22,7 @@ int main()
             lift[i][j] = lift[lift[i][j - 1]][j - 1];
         }
     }
-    for (int q = 0; q < nq; q++)
+    while (nq--)
     {
         int start, steps;
         cin >> start >> steps;
