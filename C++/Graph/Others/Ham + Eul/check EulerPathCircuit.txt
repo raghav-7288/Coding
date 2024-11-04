@@ -12,6 +12,7 @@ Eulerian Path: An undirected graph has Eulerian Path if following two conditions
 1.Same as condition (a) for Eulerian Cycle.
 2.If zero or two vertices have odd degree and all other vertices have even degree. Ep will start one and end on another.
 
+------------------------------------check for EP(1) or EC(2) in undirected------------------------------------------------
 
     void dfs(int node, vector<int> adj[], vector<int>& vis){
         vis[node]=1;
@@ -43,12 +44,11 @@ Eulerian Path: An undirected graph has Eulerian Path if following two conditions
         return 1;
     }
 
-    // euler cycle in undirected
-/*
+---------------------------------------print euler cycle in undirected------------------------------------------
+
     stack<int> st;
     st.push(1);
     vector<int> circuit, used(m + 1);
-
     while (!st.empty())
     {
         int cur = st.top();
@@ -72,31 +72,29 @@ Eulerian Path: An undirected graph has Eulerian Path if following two conditions
         }
     }
 
-    if ((int)circuit.size() != m + 1)
-        printf("IMPOSSIBLE\n");
+    if (circuit.size() != m + 1) printf("IMPOSSIBLE\n");
     else
     {
         for (int v : circuit)
             cout << v << " ";
     }
-*/
-
 
 ****************************************************************directed**************************************************************
 
 Eulerian circuit in directed graphs: a directed graph has an Eulerian circuit if and only if the following conditions are met:
 
-1.All vertices have equal in-degree and out-degree.
+1.All vertices have equal in-degree and out-degree(implies they are in a SCC).
 2. all non zero degree vertices are strongly connected -> The graph is strongly connected 
 (or, more generally, has a single strongly connected component).
 
-    If the graph has one component and equal in-degree and out-degree at every vertex, 
-    the conditions are sufficient to imply that the graph is strongly connected.
+If the graph has one component and equal in-degree and out-degree at every vertex, 
+the conditions are sufficient to imply that the graph is strongly connected.
 
 Conclusion:
 If the graph is given to have a single component and equal in-degree and out-degree for every vertex, 
 then the graph must be strongly connected.
 
+----------------------------------EC exist in directed graph----------------------------------------
 
     void dfs(int node,vector<vector<int>>& adj,vector<int>& vis){
     	vis[node]=1;
@@ -127,7 +125,9 @@ then the graph must be strongly connected.
         return 1;
     }
 
-----------------------------------For isEulerPath in directed graph----------------------------------------
+    ------------------------To print EC stack method
+
+----------------------------------------print EP in directed graph---------------------------------------------
 
 An Euler path is a path in a graph that visits every edge exactly once. 
 For a directed graph, the following conditions must be met for an Euler path to exist between any two vertices:
@@ -142,7 +142,7 @@ For a directed graph, the following conditions must be met for an Euler path to 
     -The graph must be weakly connected (i.e., when treating the graph as undirected, there should be a path between every pair of vertices).
     -Every vertex with nonzero in-degree and out-degree should be part of a strongly connected component (you should be able to reach any such vertex starting from any other in this component via directed edges).
 
-    //code EP in directed to check if start is 1 and end is n
+-------------------------check and print EP in directed if start is 1 and end is n----------------------------------------
 
     int main()
     {
@@ -182,8 +182,8 @@ For a directed graph, the following conditions must be met for an Euler path to 
         {
             cout << "IMPOSSIBLE";
             return 0;
-        }
-        stack<int> st;
+        } 
+        stack<int> st;   ---------------------------using same stack method can find EC
         st.push(1);
         while (!st.empty())
         {

@@ -1,5 +1,3 @@
-//TODO
-
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -13,8 +11,7 @@ int bfs(int n, int s, int sink, vector<int> adj[], vector<vector<int>> &cap, vec
     parent[s] = -2;
     while (!q.empty())
     {
-        int node = q.front().first;
-        int f = q.front().second;
+        auto [node,f] = q.front();
         q.pop();
         for (auto it : adj[node])
         {
@@ -22,8 +19,7 @@ int bfs(int n, int s, int sink, vector<int> adj[], vector<vector<int>> &cap, vec
             {
                 parent[it] = node;
                 int aug = min(f, cap[node][it]);
-                if (it == sink)
-                    return aug;
+                if (it == sink) return aug;
                 q.push({it, aug});
             }
         }

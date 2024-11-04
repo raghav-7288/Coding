@@ -4,6 +4,7 @@ Following is Fleury’s Algorithm for printing the Eulerian trail or cycle
 2.If there are 0 odd vertices, start anywhere. If there are 2 odd vertices, start at one of them.
 3.Follow edges one at a time. If you have a choice between a bridge and a non-bridge, always choose the non-bridge.
 4.Stop when you run out of edges.
+TC -> O((V+E)^2)
 */
 
 #include <bits/stdc++.h>
@@ -45,7 +46,7 @@ void getEuler(int node, int n, vector<int> adj[], vector<vector<int>> &edges)
     while (!adj[node].empty())
     {
         int it = adj[node][0];
-        if (adj[node].size() == 1 || !isBridge(node, it, n, adj)) // if only this node in adj or this is not bridge
+        if (adj[node].size() == 1 || !isBridge(node, it, n, adj)) // iff only this node in adj or this is not bridge
         {
             edges.push_back({node, it});
             removeEdge(node, it, adj);
@@ -53,7 +54,8 @@ void getEuler(int node, int n, vector<int> adj[], vector<vector<int>> &edges)
         }
         else
         {
-            adj[node].erase(adj[node].begin()); // push bridge to end
+            // push bridge to end
+            adj[node].erase(adj[node].begin());
             adj[node].push_back(it);
         }
     }

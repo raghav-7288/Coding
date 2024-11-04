@@ -3,27 +3,27 @@ A directed graph has a Eulerian cycle if the following conditions are true
 (1) All vertices with nonzero degrees belong to a single strongly connected component.
 (2) In degree and out-degree of every vertex is the same. The algorithm assumes that the given graph has a Eulerian Circuit.
 */
+
+//---------------------------------------------------Directed------------------------------------------------------------
 #include <bits/stdc++.h>
 using namespace std;
 vector<int> printCircuit(vector<vector<int>> &adj)
 {
     vector<int> circuit;
     stack<int> st;
-    int cur_v = 0;
     st.push(0);
     while (!st.empty())
     {
-        if (!adj[cur_v].empty())
+        int node = st.top();
+        if (!adj[node].empty())
         {
-            st.push(cur_v);
-            int next_v = adj[cur_v].back();
-            adj[cur_v].pop_back();
-            cur_v = next_v;
+            int next = adj[node].back();
+            adj[node].pop_back();
+            st.push(next);
         }
         else
         {
-            circuit.push_back(cur_v);
-            cur_v = st.top();
+            circuit.push_back(node);
             st.pop();
         }
     }
@@ -61,9 +61,8 @@ int main()
 }
 
 /*
-For undirected
-
-    stack<int> st;
+---------------------------------------------------Undirected------------------------------------------------------------
+stack<int> st;
     st.push(1);
     vector<int> circuit, used(m + 1);
 
