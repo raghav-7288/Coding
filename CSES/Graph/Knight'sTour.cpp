@@ -2,9 +2,7 @@
 using namespace std;
 
 int n = 8;
-vector<pair<int, int>> dir = {
-    {-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {1, -2}, {-1, -2}};
-
+vector<pair<int, int>> dir = {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {1, -2}, {-1, -2}};
 int countOnwardMoves(int r, int c, vector<vector<int>> &grid)
 {
     int cnt = 0;
@@ -18,16 +16,13 @@ int countOnwardMoves(int r, int c, vector<vector<int>> &grid)
     }
     return cnt;
 }
-
 bool dfs(int r, int c, int s, vector<vector<int>> &grid)
 {
     grid[r][c] = s;
-
     if (s == n * n)
     {
         return true;
     }
-
     vector<tuple<int, int, int>> moves;
     for (auto [cr, cc] : dir)
     {
@@ -38,21 +33,17 @@ bool dfs(int r, int c, int s, vector<vector<int>> &grid)
             moves.push_back(make_tuple(cnt, nr, nc));
         }
     }
-
     sort(moves.begin(), moves.end());
-
-    for (auto [onwardMoves, nextR, nextC] : moves)
+    for (auto [_, nextR, nextC] : moves)
     {
         if (dfs(nextR, nextC, s + 1, grid))
         {
             return true;
         }
     }
-
     grid[r][c] = 0;
     return false;
 }
-
 int main()
 {
     int r, c;

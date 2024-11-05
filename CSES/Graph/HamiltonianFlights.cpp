@@ -47,15 +47,14 @@ int main()
         int node = q.front().first;
         int mask = q.front().second;
         q.pop();
-        if (node != n - 1)
+        if (node == n - 1)
             continue;
         for (auto it : adj[node])
         {
-            int newMask = mask | (1 << it);
             if ((mask & (1 << it)) == 0)
             {
-                dp[it][newMask] += dp[node][mask];
-                dp[it][newMask] %= mod;
+                int newMask = mask | (1 << it);
+                (dp[it][newMask] += dp[node][mask]) %= mod;
                 if (!vis[it][newMask])
                 {
                     q.push({it, newMask});
