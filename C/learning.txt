@@ -97,6 +97,9 @@ EXTERN
     ->Declares a global variable or function that can be used across multiple files. 
     ->It does not define memory for the variable but indicates that the variable or 
     function exists elsewhere, usually in another file.
+    ->The extern variable says to the compiler  “Go outside my scope and you will find the definition of the variable that I declared.”
+    The compiler believes that whatever that extern variable said is true and produces no error. Linker throws an error when it finds no such variable exists.
+    When an extern variable is initialized, then memory for this is allocated and it will be considered defined.
 
 C Version	Number of Keywords	Description
   C89/C90	              32
@@ -141,7 +144,7 @@ QUALIFIERS
         ->Informs the compiler that the variable's value may change unexpectedly, 
         preventing certain optimizations.	
         use case -> Hardware registers, variables modified by ISR
-    restrict	
+    restrict
         ->Tells the compiler that a pointer is the only reference to the object it points to, 
         enabling optimizations.	
         use case -> Pointer arguments in performance-sensitive code
@@ -160,3 +163,41 @@ C scope rules can be covered under the following two categories:
 1. Global Scope
 2. Local Scope
 
+
+Scope : Scope of an identifier is the part of the program where the identifier may directly be accessible
+Linkage : Linkage describes how names can or can not refer to the same entity throughout the whole program or one single translation unit.
+Translation Unit : A translation unit is a file containing source code, header files and other dependencies. All of these sources are grouped together to form a single translation unit which can then be used by the compiler to produce one single executable object.
+
+->scope is a property handled by compiler, whereas linkage is a property handled by linker.
+->The Linker is a program that takes multiple machine code files as input, and produces an executable object code.
+->scope is a concept that can be used only during compile phase. After the program is compiled there is no such concept as “scope of variable”.
+
+
+There are 2 types of linkage:
+Internal Linkage:
+    ->An identifier implementing internal linkage is not accessible outside the translation unit it is declared in
+    ->It is implemented by the keyword static. 
+    ->An internally linked identifier is stored in initialized or uninitialized segment of RAM.
+    ->Only implemented when the variable has global scope
+    ->All constants are by default internally linked.
+
+External Linkage: 
+    ->An identifier implementing external linkage is visible to every translation unit
+    ->shared between translation units
+    ->default linkage for globally scoped variables and functions.
+    ->It is implemented by the keyword Extern.
+    ->Extern identifiers are generally stored in initialized/uninitialized or text segment of RAM.
+
+
+
+| Types                     |  Description                                    | Examples                                 |
+|---------------------------|-------------------------------------------------|------------------------------------------| 
+| Primitive Data Types      | Basic data types for representing simple values | `int`, `char`, `float`, `double`, `void` |
+| Derived Types             | Data types derived from primitive data types    | `array`, `pointers`, `function`          |
+| User-Defined Data Types   | Data types defined by the user                  | `structure`, `union`, `enum`             |
+
+
+Integer -> Range: -2147483648 to 2147483647
+Float -> Range: 1.2E-38 to 3.4E+38
+short int -> Range: -32,768 to 32,767
+Double -> Range: 1.7E-308 to 1.7E+308
