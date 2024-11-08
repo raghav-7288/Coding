@@ -1,44 +1,29 @@
-/*
-A directed graph has a Eulerian cycle if the following conditions are true
-(1) All vertices with nonzero degrees belong to a single strongly connected component.
-(2) In degree and out-degree of every vertex is the same. The algorithm assumes that the given graph has a Eulerian Circuit.
-*/
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> printCircuit(vector<vector<int>> &adj)
-{
-    vector<int> circuit;
-    stack<int> st;
-    st.push(0);
-    while (!st.empty())
-    {
-        int node = st.top();
-        if (!adj[node].empty())
-        {
-            int next = adj[node].back();
-            adj[node].pop_back();
-            st.push(next);
-        }
-        else
-        {
-            circuit.push_back(node);
-            st.pop();
-        }
-    }
-    reverse(circuit.begin(), circuit.end());
-    return circuit;
-}
+#define ll long long
+#define ld long double
+ll mod = 1e9 + 7;
 int main()
 {
-    vector<vector<int>> adj1, adj2;
-    adj1.resize(3);
-    adj1[0].push_back(1);
-    adj1[1].push_back(2);
-    adj1[2].push_back(0);
-    for (auto v : printCircuit(adj1))
+    // #ifndef ONLINE_JUDGE
+    //     freopen("../../input.txt", "r", stdin);
+    //     freopen("../../output.txt", "w", stdout);
+    // #endif
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    char c = '1';
+    switch (c)
     {
-        cout << v << " ";
+    default:
+        cout << "def" << endl;
+        break;
+    case '4':
+        cout << 1 << endl;
+        break;
+    case '2':
+        cout << 1 << endl;
+        break;
     }
-    cout << endl;
+
     return 0;
 }

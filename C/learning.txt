@@ -1,0 +1,162 @@
+-> C++ supports OOPs paradigm while C only has the procedural concept of programming.
+-> C++ has exception handling capabilities. In C, we have to resolve exceptions manually.
+-> There are no references in C.
+
+-> In a procedural language like C step by step, predefined instructions are carried out
+-> C programming language is a statically typed language. Meaning the type of variable is checked at the time of compilation but not at run time
+
+-> Features
+https://media.geeksforgeeks.org/wp-content/uploads/20200214125122/Features-of-C-Programming-Language.jpg
+
+-> As it is a middle-level language so it has the combined form of both capabilities of assembly language and features of the high-level language.
+-> Using puts() Function
+    #include <stdio.h>
+    int main() {
+        puts("Hello, World!");
+        return 0;
+    }
+
+-> Using write() System Call
+    int main() {
+        write(1, "Hello, World!\n", 14);
+        return 0;
+    }
+    -> Include unistd.h: Since write() is a system call, it requires <unistd.h>.
+    -> Return Value: write() returns the number of bytes written.
+
+-> As C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
+   https://media.geeksforgeeks.org/wp-content/uploads/20230404112946/Compilation-Process-in-C.png
+
+
+-> A compiler converts a C program into an executable. There are four phases for a C program to become an executable: 
+1.Pre-processing(to veiw -> $vi filename.i)
+    ->Removal of Comments
+    ->Expansion of Macros
+    ->Expansion of the included files.
+    ->Conditional compilation
+
+2.Compilation(to veiw -> $nano filename.s)
+    ->produce an intermediate compiled output file filename.s
+
+3.Assembly(to veiw -> $vi filename.0)
+    ->This file contains machine-level instructions. 
+    ->At this phase, only existing code is converted into machine language.
+    ->The function calls like printf() are not resolved.
+
+4.Linking
+    ->All the linking of function calls with their definitions is done.
+    ->It adds some extra code to our program which is required when the program starts and ends.
+    ->The output file increases from an object file to an executable file. 
+    ->This is because of the extra code that Linker adds to our program. 
+
+TOKENS:
+    6 types
+        Keywords
+        Identifiers (It should be up to 31 characters long as only the first 31 characters are significant.)
+        Constants
+        Strings
+        Special Symbols
+        Operators
+
+->  doubles have 15 decimal digits, and floats only have 7.
+-> int -> -32768 to +32767
+
+Here's the information formatted as a table:
+
+| Data Type               | Memory (bytes) | Range                                 | Format Specifier           |
+|-------------------------|----------------|---------------------------------------|----------------------------|
+| `short int`             | 2              | -32,768 to 32,767                     | `%hd`                      |
+| `unsigned short int`    | 2              | 0 to 65,535                           | `%hu`                      |
+| `unsigned int`          | 4              | 0 to 4,294,967,295                    | `%u`                       |
+| `long int`              | 4              | -2,147,483,648 to 2,147,483,647       | `%ld`                      |
+| `unsigned long int`     | 4              | 0 to 4,294,967,295                    | `%lu`                      |
+| `long long int`         | 8              | -(2^63) to (2^63)-1                   | `%lld`                     |
+| `unsigned long long int`| 8              | 0 to 18,446,744,073,709,551,615       | `%llu`                     |
+| `signed char`           | 1              | -128 to 127                           | `%c`                       |
+| `unsigned char`         | 1              | 0 to 255                              | `%c`                       |
+| `long double`           | 16             | 3.4E-4932 to 1.1E+4932                | `%Lf` or `%lf` for double  |
+
+
+AUTO
+    ->The default storage class for local variables within a function. 
+    ->They are stored in stack memory, have local scope, and automatic duration 
+    (created when the function is called and destroyed when it returns).
+
+REGISTER
+    ->Suggests to the compiler to store the variable in a CPU register for faster access
+    ->Typically used for variables that require quick access, like loop counters
+    ->Modern compilers manage this automatically, so register is rarely necessary.
+
+STATIC	
+    ->Used to extend the lifetime of a variable to the entire program's runtime.
+    ->Though its scope remains local. If declared inside a function, 
+    a static variable retains its value across multiple function calls. 
+    ->When used at the global level, it restricts the visibility of the variable or function to the current file (internal linkage).
+
+EXTERN	
+    ->Declares a global variable or function that can be used across multiple files. 
+    ->It does not define memory for the variable but indicates that the variable or 
+    function exists elsewhere, usually in another file.
+
+C Version	Number of Keywords	Description
+  C89/C90	              32
+    C99	                  37
+    C11                   44  
+    C23                   46  
+
+VOLATILE
+    ->used to inform the compiler that a variable's value may change at any time, 
+    without any action being taken by the code itself.
+    ->the variable could be modified by an external factor that the compiler may not anticipate, 
+    such as hardware, an interrupt service routine, or another thread in a concurrent program.
+    ->volatile only prevents optimization of reads and writes to a variable
+    ->It does not provide any protection against concurrent access by multiple threads. 
+    For that, use synchronization mechanisms like mutexes or atomic operations.
+    
+
+C Variable Types
+
+    Local Variables
+    Global Variables
+    Static Variables(default value of static variables is 0)
+    Automatic Variables(default value of automatic variables is garbage)
+    Extern Variables
+    Register Variables(default value of register variables is garbage)
+
+QUALIFIERS
+
+    QUALIFIERS are keywords that are used to modify the behavior or properties of variables. 
+    They provide additional information to the compiler about how a variable should be treated. 
+    There are four primary qualifiers in C:
+
+        const
+        volatile
+        restrict (introduced in C99)
+        _Atomic (introduced in C11)
+
+    const	
+        ->Makes a variable read-only. Its value cannot be modified after initialization.	
+        use case -> Defining constants, protecting data from alteration
+    volatile	
+        ->Informs the compiler that the variable's value may change unexpectedly, 
+        preventing certain optimizations.	
+        use case -> Hardware registers, variables modified by ISR
+    restrict	
+        ->Tells the compiler that a pointer is the only reference to the object it points to, 
+        enabling optimizations.	
+        use case -> Pointer arguments in performance-sensitive code
+    _Atomic	
+        ->Ensures atomic access to a variable, 
+        making it safe to use in concurrent programming without explicit locking mechanisms.	
+        use case -> Multi-threaded applications, shared variables
+
+Scoping is generally divided into two classes: 
+1. Static Scoping 
+    In static scoping the compiler first searches in the current block, then in global variables, then in successively smaller scopes.
+2. Dynamic Scoping
+    In Dynamic scoping the compiler first searches in the current block, then in the bloack from where the current block is called.
+
+C scope rules can be covered under the following two categories:
+1. Global Scope
+2. Local Scope
+
