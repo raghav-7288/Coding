@@ -28,78 +28,113 @@ one of the two arrays. Return the minimum possible absolute difference.
         return mini;
     }
 
---------------------------------------------------better way - Meet in Middle//TODO-----------------------------------------------------
+--------------------------------------------------better way - Meet in Middle-----------------------------------------------------
 
     int minimumDifference(vector<int>& nums) {
-        int N=nums.size(), res=0, sum = accumulate(nums.begin(),nums.end(),0), n = N/2;
-        vector<vector<int>> left(n+1),right(n+1);
-        for(int mask=0;mask<(1<<n);mask++){
-            int sz=0,l=0,r=0;
-            for(int i=0;i<n;i++){
-                if(mask&(1<<i)){
-                    l+=nums[i];
-                    r+=nums[i+n];
+        int N = nums.size(), n = N / 2;
+        long long sum = accumulate(nums.begin(), nums.end(), 0LL);
+        vector<vector<long long>> left(n + 1), right(n + 1);
+        for (int mask = 0; mask < (1 << n); ++mask) {
+            int sz = 0;
+            long long l = 0, r = 0;
+            for (int i = 0; i < n; ++i) {
+                if (mask & (1 << i)) {
+                    l += nums[i];
+                    r += nums[i + n];
                     sz++;
                 }
             }
             left[sz].push_back(l);
             right[sz].push_back(r);
         }
-        res = min(abs(sum-2*left[n][0]),abs(sum-2*right[n][0]));
-        for(int sz=1;sz<n;sz++){
-            sort(right[n-sz].begin(),right[n-sz].end());
-            for(auto &a : left[sz]){
-                int b = (sum-2*a)/2;
-                auto itr = lower_bound(right[n-sz].begin(),right[n-sz].end(),b);
-                if(itr!=right[rsz].end()){
-                    res=min(res,abs(sum-2*(a+(*itr))));
+        int res = INT_MAX;
+        for (int sz = 0; sz <= n; ++sz) {
+            sort(right[n - sz].begin(), right[n - sz].end());
+            for (auto &a : left[sz]) {
+                long long b = (sum / 2) - a;
+                auto itr = lower_bound(right[n - sz].begin(), right[n - sz].end(), b);
+                if (itr != right[n - sz].end()) {
+                    res = min(res, (int)abs(sum - 2 * (a + (*itr))));
                 }
-                if(itr!=right[n-sz].begin()){
-                    auto it = itr;it--;
-                    res = min(res,abs(sum-2*(a+(*it))));
+                if (itr != right[n - sz].begin()) {
+                    --itr;
+                    res = min(res, (int)abs(sum - 2 * (a + (*itr))));
                 }
             }
         }
         return res;
     }
 
-//Explanation   
 
-### **Overview:**
+This segment of code is critical in finding the minimum possible difference between the sums of two subsets split from the array `nums`. The aim is to determine two subsets (one from each half of `nums`) such that the absolute difference between their sums is minimized. Here’s a detailed breakdown of how each line in this code block contributes to this goal:
 
-- You are given an array `nums` of size `2n`, and you need to partition it into two subarrays of size `n` in such a way that the absolute difference between their sums is minimized.
-- Let the total sum of all elements in `nums` be `totalSum`. Let the sum of elements in one subarray be `sum1`, and the sum of elements in the other subarray be `sum2`.
-- We need to minimize the absolute difference `|sum1 - sum2|`. Since `sum1 + sum2 = totalSum`, this can be rewritten as minimizing `totalSum - 2 * sum2` (because `sum1 = totalSum - sum2`).
+### Key Variables
+- `sz`: Represents the current subset size (number of elements) being considered.
+- `left[sz]`: Stores all possible sums of subsets of size `sz` from the left half of `nums`.
+- `right[n - sz]`: Stores all possible sums of subsets of size `n - sz` from the right half of `nums`.
+- `res`: Keeps track of the minimum difference encountered so far.
+- `sum`: Total sum of all elements in `nums`.
 
-### **Approach:**
-The code uses a **meet-in-the-middle** technique, which splits the array into two halves, generates all possible sums for different subset sizes in both halves, and then finds the minimum possible difference by matching subsets of one half with subsets of the other.
+### Step-by-Step Explanation
 
-### **Step-by-Step Breakdown:**
+#### 1. Loop Over Each Possible Subset Size (`sz`)
+```cpp
+for (int sz = 0; sz <= n; ++sz) {
+```
+- The outer loop iterates through all possible subset sizes from `0` up to `n`.
+- For each size `sz`, the code will consider sums of subsets of size `sz` from the left half and size `n - sz` from the right half.
+- This allows combining subsets from both halves such that their total size is `n`.
 
-1. **Initialization:**
-   - The array `nums` has size `N = 2 * n`.
-   - The `sum` is the total sum of the elements in `nums` and is calculated using `accumulate`.
-   - Two vectors `left` and `right` of size `n+1` are created to store all possible sums of subsets of different sizes from the two halves of the array:
-     - `left[k]`: Stores all possible sums formed by choosing `k` elements from the left half of the array.
-     - `right[k]`: Stores all possible sums formed by choosing `k` elements from the right half of the array.
+#### 2. Sort the `right` Subset Sums for Binary Search
+```cpp
+sort(right[n - sz].begin(), right[n - sz].end());
+```
+- Sorting `right[n - sz]` allows efficient binary searching for sums in the right half that are closest to a target value. This is crucial for minimizing the difference.
+- By sorting, we can later use `lower_bound` to quickly find the closest sums in `right[n - sz]` to a target value derived from the left subset sum.
 
-2. **Generating all possible sums for subsets of the two halves:**
-   - For each possible subset (represented as a bitmask `mask`), we iterate through the first half and the second half of the array.
-   - The variable `mask` is used to iterate through all possible subsets, where each bit in `mask` represents whether to include the corresponding element of `nums` in the subset.
-   - For each subset size `sz`, we calculate the sum of the selected elements from both the left half (`l`) and the right half (`r`).
-   - The sums are stored in `left[sz]` and `right[sz]` respectively.
+#### 3. Loop Through Each Sum in `left[sz]`
+```cpp
+for (auto &a : left[sz]) {
+```
+- This loop goes through each sum `a` in `left[sz]`, which represents a possible sum of a subset of size `sz` from the left half of `nums`.
+- For each sum `a`, the code will attempt to find the closest complementary sum from the right half.
 
-3. **Processing the sums to minimize the absolute difference:**
-   - The goal is to minimize `abs(sum - 2 * (sum1))`, where `sum1` is the sum of the elements in one of the subarrays. If we can find such a `sum1` close to `sum/2`, the difference will be minimized.
-   - The variable `res` is initialized to store the current minimum difference. Initially, the absolute difference between `sum` and twice the sum of all elements in `left[n][0]` and `right[n][0]` is computed.
+#### 4. Calculate the Target Complement Sum `b`
+```cpp
+long long b = (sum / 2) - a;
+```
+- Here, `b` is calculated as `(sum / 2) - a`.
+- `b` represents the ideal value for a right subset sum that, when combined with `a`, will make the total as close as possible to half of the total sum (`sum / 2`).
+- By aiming for half of the total sum, we try to create two subsets with nearly equal sums.
 
-4. **Iterating over left part sums and using binary search for right part sums:**
-   - For each possible subset size `sz` (ranging from `1` to `n-1`), we aim to match sums of subsets from the left half with the sums of subsets from the right half such that the total sum comes close to `totalSum/2`.
-   - To efficiently find the best sum from the right half, the sums stored in `right` are sorted.
-   - For each sum `a` in `left[sz]`, the sum we need from the right half to minimize the difference is approximately `(sum - 2*a) / 2`.
-   - Using binary search (`lower_bound`), we find the closest sum from `right[n - sz]` to this target value. This is done to quickly find the sum from the right part that, when added to `a`, minimizes the absolute difference.
-   - After finding the closest sum (or sums, since we check both the nearest larger and smaller sums), the result `res` is updated with the minimum absolute difference.
+#### 5. Binary Search for Closest Sum in `right[n - sz]` Greater Than or Equal to `b`
+```cpp
+auto itr = lower_bound(right[n - sz].begin(), right[n - sz].end(), b);
+```
+- `lower_bound` finds the first element in `right[n - sz]` that is greater than or equal to `b`.
+- This element (if it exists) is a potential candidate for forming a nearly equal-sum split with the current `a`.
 
-5. **Returning the result:**
-   - Once all possible sums from the left half have been matched with sums from the right half, the minimum difference `res` is returned.
+#### 6. Calculate and Update Minimum Difference with `*itr`
+```cpp
+if (itr != right[n - sz].end()) {
+    res = min(res, (int)abs(sum - 2 * (a + (*itr))));
+}
+```
+- If `itr` points to a valid element in `right[n - sz]`, the code calculates the total sum of the current subset pair (`a + *itr`).
+- The absolute difference between this combined sum and `sum / 2` is computed as `abs(sum - 2 * (a + *itr))`.
+- If this difference is smaller than the current `res`, `res` is updated to store this new minimum difference.
 
+#### 7. Check the Previous Element in `right[n - sz]` (if it Exists)
+```cpp
+if (itr != right[n - sz].begin()) {
+    --itr;
+    res = min(res, (int)abs(sum - 2 * (a + (*itr))));
+}
+```
+- After checking the value at `*itr`, the code also considers the element immediately before `*itr` in `right[n - sz]`.
+- This is because the closest value to `b` could be slightly less than `b`, and so we also evaluate `*itr - 1` if it exists.
+- This ensures that we consider both the closest values above and below `b` to find the absolute minimum difference.
+
+### Summary
+
+By looping over each subset size and each sum in `left[sz]`, and using binary search to find the closest sums in `right[n - sz]`, this code efficiently finds the two subsets (one from each half of `nums`) that yield the smallest possible difference between their sums. The minimum difference found is stored in `res`, which is returned as the result of the function.

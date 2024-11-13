@@ -17,8 +17,7 @@ The matching should cover the entire input string (not partial).
         return dp[i][j]=false;
     }
     bool isMatch(string s, string p) {
-        int n=p.length();
-        int m=s.length();
+        int n=p.length(), m=s.length();
         vector<vector<int>> dp(n+1,vector<int>(m+1,-1)); 
         return solve(n,m,p,s,dp);
     }

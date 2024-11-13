@@ -15,23 +15,20 @@ Return the number of different expressions that you can build, which evaluates t
     }
 
 ---------------------------------------------------------------Tabulation------------------------------------------------------------------------
-//TODO
+// -> by making it a subset sum problem of finding no. of positive subsets
+-> p+n=s   p-n=t
+->p=(s+t)/2;
     int findTargetSumWays(vector<int>& nums, int target) {
+        int n = nums.size();
         int sum = accumulate(nums.begin(), nums.end(), 0);
-        vector<vector<int>> dp(nums.size(), vector<int>(2 * sum + 1, 0));
-        dp[0][sum + nums[0]] = 1; 
-        dp[0][sum - nums[0]] = 1; 
-        for(int i = 1; i<nums.size(); i++)
-        {
-            for(int j = 0; j<=sum; j++)
-            {
-                int ans1 = 0, ans2 = 0;
-                if(j + nums[i] < nums.size())
-                    ans1 = dp[i-1][j + nums[i]];
-                if(j - nums[i] >= 0)
-                    ans2 = dp[i-1][j - nums[i]];
-                dp[i][j + sum] = ans1 + ans2;
+        if ((sum + target) % 2 != 0 || abs(target) > sum) return 0;
+        int desiredSum = (sum + target) / 2;
+        vector<int> dp(desiredSum + 1, 0);
+        dp[0] = 1;
+        for (int num : nums) {
+            for (int j = desiredSum; j >= num; j--) {
+                dp[j] += dp[j - num];
             }
         }
-        return dp[nums.size() - 1][target + sum];
+        return dp[desiredSum];
     }

@@ -310,3 +310,100 @@ geeksforgeeks
                geeks
 geeks  
 
+
+printf ->
+    Return Value
+        -> printf() returns the number of characters printed after successful execution.
+        -> If an error occurs, a negative value is returned.
+    
+    Syntax of Format Specifier
+        %[flags][width][.precision][length]specifier
+
+        Width(white space will be used to fill the remaining characters’ places)(no cut offs)
+            printf("%25s", some_string);
+            or
+            printf("%*s", 25, some_string);
+        Precision
+            printf("%.10d", some_integer);(minimum number of digits to be printed -> 0 padding)
+            printf("%.3f", some_float);(number of digits to be printed after the decimal point.)
+            printf("%.25s", some_string);(length of the string to be printed.)
+            or
+            printf("%.*d", 10,  some_integer);
+            printf("%.*f", 3, some_float);
+            printf("%.*s", 25, some_string);
+        Length
+            h: With short int and unsigned short int
+            l: With long int and unsigned long int.
+            L: With long double
+        
+sprintf(string print)->
+    Syntax: 
+        int sprintf(char *str, const char *string,...); 
+    Return: 
+        If successful, it returns the total number of characters written excluding 
+        null-character appended in the string, in case of failure a negative number is returned .
+    ```
+    sprintf(buffer, "Sum of %d and %d is %d", a, b, c);
+    // The string "sum of 10 and 20 is 30" is stored
+    // into buffer instead of printing on stdout
+    printf("%s", buffer);
+    ```
+
+scanf->
+    The scanf in C returns three types of values:
+        >0: The number of values converted and assigned successfully.
+        0: No value was assigned.
+        <0: Read error encountered or end-of-file(EOF) reached before any assignment was made.
+
+sscanf(string scan)->
+    ->reads data from the string or character array instead of the console screen.
+    ```
+    sprintf(str, "a = %d and b = %d", a, b); 
+    // The value of a and b is now in c and d 
+    sscanf(str, "a = %d and b = %d", &c, &d)
+    
+    o/p ->  c = 2 and d = 8
+    ```
+
+Scansets->
+    ->Represented by %[]
+    ->case sensitive
+    ->example: scanf(%s[A-Z,_,a,b,c]s,str);
+    ->read all characters but stops after first occurrence of ‘o’ 
+        scanf("%[^o]s", str);
+    ->gets() -> until either a terminating newline or EOF found.
+        scanf("%[^\n]s", str);
+    
+Unformatted Input/Output functions->
+    getch();(conio.h)
+        ->reads a single character from the keyboard(doesn’t display that character)
+        ->Syntax-> getch(); or variable-name = getch();
+    getche();(conio.h)
+        ->reads a character and displays immediately 
+    getchar();(stdio.h)
+        ->read only a first single character from the keyboard whether multiple characters is typed.
+        ->until and unless the enter key is pressed
+    putchar();(stdio.h)
+        ```
+        // Reads a character 
+        ch = getchar(); 
+        // Displays that character 
+        putchar(ch); 
+        ```
+    gets();(stdio.h)
+        ->write space-separated texts or strings
+        ->reads a group of characters or strings
+    puts();
+        ->display a group of characters or strings which is already stored in a character array
+    
+    
+OPERATORS:
+https://media.geeksforgeeks.org/wp-content/uploads/20231214120748/Operators-in-C.png
+
+Methods of Parameter Passing
+    Pass by Value
+    Pass by Reference
+    1. Pass by Result
+    2. Pass by Value-Result
+    3. Pass by Name
+
