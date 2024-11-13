@@ -1,35 +1,7 @@
 Given the root of a binary tree, return all duplicate subtrees.
 For each kind of duplicate subtrees, you only need to return the root node of any one of them.
 Two trees are duplicate if they have the same structure with the same node values.
-    
-    
-    int solve(TreeNode* root, map<string,int>& stringId,map<int,int>& idCnt, vector<TreeNode*>& ans){
-        if(!root) return 0;
-        int left = solve(root->left, stringId, idCnt, ans);
-        int right = solve(root->right, stringId, idCnt, ans);
-        
-        string str=to_string(left) + to_string(root->val) + to_string(right);
-        
-        if(stringId.find(str) == stringId.end()){
-            stringId[str] = stringId.size()+1;
-        }
 
-        int id = stringId[str];
-        if(++idCnt[id] == 2){
-            ans.push_back(root);
-        }
-        return id;
-    }
-    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
-        map<string,int> stringId;
-        map<int,int> idCnt;
-        vector<TreeNode*> ans;
-        solve(root,stringId,idCnt,ans);
-        return ans;
-    }
-
-
-    ******************************************************* OR ********************************************************
 
     string solve(TreeNode* root, map<string,int>& stringId, vector<TreeNode*>& ans){
         if(!root) return "#";

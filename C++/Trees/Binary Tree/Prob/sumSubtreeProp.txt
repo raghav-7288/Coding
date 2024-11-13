@@ -6,6 +6,7 @@ A leaf node is also considered a Sum Tree.
 
 
 --------------------------------------------------------------best--------------------------------------------------------------------
+    
     pair<bool,int> solve(Node* root){
         if(!root) return {true,0};
         if(!root->left && !root->right) return {true,root->data};
@@ -20,6 +21,7 @@ A leaf node is also considered a Sum Tree.
     bool isSumTree(Node* root) {
         return solve(root).first;
     }
+    
 -------------------------------------------------without modifying root data + map----------------------------------------------------
 
     bool solve(Node* root,map<Node*,int> &mp)

@@ -12,6 +12,5 @@
         for(int i=0;i<inorder.size();i++){
             mp[inorder[i]]=i;
         }
-        TreeNode* root=build(0,preorder.size()-1,0,inorder.size()-1,preorder,inorder,mp);
-        return root;
+        return build(0,preorder.size()-1,0,inorder.size()-1,preorder,inorder,mp);
     }

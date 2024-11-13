@@ -19,12 +19,8 @@ int widthOfBinaryTree(TreeNode* root) {
             TreeNode *node=q.front().first;
             int currIndex=q.front().second - minIndex; //to start index from 0
             q.pop();
-            if(i==0){
-                first=currIndex;
-            }
-            if(i==size-1){
-                last=currIndex;
-            }
+            if(i==0) first=currIndex;
+            if(i==size-1) last=currIndex;
             if(node->left) q.push({node->left,(long long)2*currIndex+1});
             if(node->right) q.push({node->right,(long long)2*currIndex+2});
         }
