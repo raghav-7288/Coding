@@ -9,7 +9,7 @@ Given an integer array nums, find a subarray that has the largest product, and r
             if(!suf) suf=1;
             pre *= nums[i];
             suf *= nums[nums.size()-i-1];
-            ans=max(ans,max(pre,suf));
+            ans=max(ans,pre,suf);
         }
         return ans;
     }

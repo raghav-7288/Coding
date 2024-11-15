@@ -50,3 +50,4 @@ public:
         int mid = (low + high) / 2;
         return query(index * 2 + 1, low, mid, left, right) & query(index * 2 + 2, mid + 1, high, left, right);
     }
+};

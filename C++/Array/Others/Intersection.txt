@@ -11,25 +11,14 @@ vector<int> intersection(vector<int> &a, vector<int> &b)
             if (res.size() != 0)
             {
                 if (res.back() != a[p1])
-                {
                     res.push_back(a[p1]);
-                }
             }
-            else
-            {
-                res.push_back(a[p1]);
-            }
+            else res.push_back(a[p1]);
             p1++;
             p2++;
         }
-        else if (a[p1] < b[p2])
-        {
-            p1++;
-        }
-        else if (a[p1] > b[p2])
-        {
-            p2++;
-        }
+        else if (a[p1] < b[p2]) p1++;
+        else p2++;
     }
     return res;
 }

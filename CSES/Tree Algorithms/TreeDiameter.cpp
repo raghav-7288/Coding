@@ -17,19 +17,6 @@ void dfs(int node, int par, int dis, int &maxDis, int &d1, vector<int> adj[])
         dfs(it, node, dis + 1, maxDis, d1, adj);
     }
 }
-void dfs_d1(int node, int par, int dis, int &maxDis, vector<int> adj[])
-{
-    if (dis >= maxDis)
-    {
-        maxDis = dis;
-    }
-    for (auto it : adj[node])
-    {
-        if (it == par)
-            continue;
-        dfs_d1(it, node, dis + 1, maxDis, adj);
-    }
-}
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -50,7 +37,7 @@ int main()
     int d1, maxDis = 0;
     dfs(1, 0, 0, maxDis, d1, adj);
     maxDis = 0;
-    dfs_d1(d1, 0, 0, maxDis, adj);
+    dfs(d1, 0, 0, maxDis, d1, adj);
     cout << maxDis;
     return 0;
 }

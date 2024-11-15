@@ -1,3 +1,6 @@
+#########################################################################
+C Basics
+#########################################################################
 -> C++ supports OOPs paradigm while C only has the procedural concept of programming.
 -> C++ has exception handling capabilities. In C, we have to resolve exceptions manually.
 -> There are no references in C.
@@ -57,8 +60,10 @@ TOKENS:
         Strings
         Special Symbols
         Operators
-
-->  doubles have 15 decimal digits, and floats only have 7.
+#########################################################################
+C Variables and Constants + C Data Types
+#########################################################################
+-> doubles have 15 decimal digits, and floats only have 7.
 -> int -> -32768 to +32767
 
 Here's the information formatted as a table:
@@ -259,6 +264,11 @@ Dis:
     Overflow or underflow
     Loss of precision
 
+
+#########################################################################
+C Input/Output
+#########################################################################
+
 ->
     printf("\n\nEnter the Sentence: ");
     scanf("%[^\n]s", str);
@@ -395,9 +405,11 @@ Unformatted Input/Output functions->
         ->reads a group of characters or strings
     puts();
         ->display a group of characters or strings which is already stored in a character array
-    
-    
-OPERATORS:
+
+#########################################################################
+C Operators
+#########################################################################
+
 https://media.geeksforgeeks.org/wp-content/uploads/20231214120748/Operators-in-C.png
 
 Methods of Parameter Passing
@@ -406,4 +418,284 @@ Methods of Parameter Passing
     1. Pass by Result
     2. Pass by Value-Result
     3. Pass by Name
+
+
+#########################################################################
+C Functions
+#########################################################################
+
+If we want the function to return multiple values of same data types, we could return the pointer to 
+    1.array of that data types.
+    2.structure
+    3.any user defined datatype
+OR 
+    By using pointers.
+    By using structures.
+    By using Arrays.
+
+Functions:
+    -> The main function is called by OS, not the user.
+    -> Default return type as int.
+
+Callbacks:(Passing code as an argument)
+    A callback is any executable code that is passed as an argument to another code, which is expected to call back (execute) the argument at a given time. In simple language, If a reference of a function is passed to another function as an argument to call it, then it will be called a Callback function.
+
+    ```
+        void A(){ 
+            printf("I am function A\n");
+        }
+        void B(void (*ptr)()){
+            (*ptr)(); // callback to A
+        }
+        int main(){
+            void (*ptr)() = &A;
+            B(ptr);
+            return 0;
+        }
+    ```
+
+    ->In C++ STL, functors are also used for this purpose.
+
+Nested functions in C:
+    ->defining a function inside an another function is NOT “nested function” -> (it is treated as lexical scoping)
+    ->Lexical scoping is not valid in C because the compiler cant reach/find the correct memory location of the inner function.
+    ->Nested function is not supported by C because we cannot define a function within another function in C. We can declare a function inside a function, but it’s not a nested function.
+
+    ** -> An extension of the GNU C Compiler allows the declarations of nested functions. The declarations of nested functions under GCC’s extension need to be prefix/start with the auto keyword.
+
+    ```
+        #include <stdio.h> 
+        int main(void) 
+        { 
+            auto int view(); // declare function with auto keyword 
+            view(); // calling function 
+            printf("Main\n"); 
+        
+            int view() 
+            { 
+                printf("View\n"); 
+                return 1; 
+            } 
+        
+            printf("GEEKS"); 
+            return 0; 
+        } 
+    ```
+
+Variadic functions:(#include <stdarg.h>)
+    ->Variadic functions are functions that can take a variable number of arguments
+    ->It takes one fixed argument and then any number of arguments can be passed
+    ->The variadic function consists of at least one fixed variable and then an ellipsis(…) as the last parameter.
+
+    Methods in (stdarg.h):
+        -> va_start(va_list ap, argN)
+            ->This enables access to variadic function arguments.
+            *va_list* -> pointer to the last fixed argument in the variadic function
+            *argN* -> last fixed argument in the variadic function.
+        
+        ->va_arg(va_list ap, type)
+            ->This one accesses the next variadic function argument.
+            *va_list ap* is the same as above i.e a pointer to argN
+            *type* indicates the data type  the *va_list ap* should expect (double, float, int etc.)    
+
+        ->va_copy(va_list dest, va_list src)	
+            ->This makes a copy of the variadic function arguments.
+
+        ->va_end(va_list ap)	
+            ->This ends the traversal of the variadic function arguments.
+
+    ->va_list holds the information needed by va_start, va_arg, va_end, and va_copy.
+
+    ```
+        int AddNumbers(int n, ...)
+        {
+            int Sum = 0;
+            va_list ptr; // Declaring pointer to the argument list
+            va_start(ptr, n); // Initializing argument to the list pointer
+            for (int i = 0; i < n; i++)
+                Sum += va_arg(ptr, int); // Accessing current variable and pointing to next one
+            va_end(ptr); // Ending argument list traversal
+            return Sum;
+        }
+    ```
+
+_Noreturn function specifier:
+    ->The _Noreturn keyword appears in a function declaration and specifies that the function does not return by executing the return statement or by reaching the end of the function body
+    ->If the function declared _Noreturn returns, the behavior is undefined.
+    ->_Noreturn specifier may appear more than once in the same function declaration, the behavior is the same as if it appeared once
+
+    ```
+        _Noreturn void view()
+        {
+            return 10; // will give compiler error after printing (Ready to begin...)
+        }
+        int main(void)
+        {
+            printf("Ready to begin...\n");
+            view();
+        
+            printf("NOT over till now\n");
+            return 0;
+        }
+    ```
+
+    if insted of return -> 
+        _
+        Noreturn void show()
+        {
+            printf("BYE BYE");
+        }
+    O/P -> 
+        Ready to begin...
+        BYE BYE
+        (printf("NOT over till now\n"); will not execute)
+
+Predefined Identifier __func__ :
+    -> C compiler implicitly adds __func__ in every function so that it can be used in that function to get the function name. 
+
+    Other Predefined Identifiers:
+        ```
+            printf("In file:%s, function:%s() and line:%d",__FILE__, __func__, __LINE__);
+        ```
+        OP : 
+            In file:main.c, function:main() and line:14
+
+C Library math.h Functions:
+    1. double ceil (double x)
+    2. double floor(double x)
+    3. double fabs(double x)    
+    4. double log(double x) -> (default base-e logarithm)
+    5. double log10(double x)
+    6. double fmod(double x, double y) -> (x%y)
+    7. double sqrt(double x)
+    8. double pow(double x, double y)
+    9. double modf(double x, double *integer)
+        ```
+            double x, fractpart, intpart; 
+            x = 8.123456; 
+            fractpart = modf(x, &intpart); 
+            printf("Integral part = %lf ", intpart); 
+            printf("Fraction Part = %lf", fractpart); 
+        ```
+        OP :  Integral part = 8.000000 Fraction Part = 0.123456 
+    10. double exp(double x) -> (e^x)
+    11. double cos(double x) -> (cosine of a radian angle x)
+    12. double acos(double x) -> (arc cosine of x in radians)
+    13. double tanh(double x) -> (hyperbolic tangent of x.)
+
+
+#####################################################################
+User Defined Data Types
+#####################################################################
+Structures:
+    ->struct keyword
+    ->items -> members
+    ->values of a struct are stored in contiguous memory locations.
+    ->Structure members cannot be initialized with the declaration
+    ->When a datatype is declared, no memory is allocated for it. Memory is allocated only when variables are created.
+    ->By default, structure members are NOT automatically initialized to 0 or NULL
+    ->Uninitialized structure members will contain garbage values. ->When a structure variable is declared with an initializer, all members not explicitly initialized are zero-initialized.
+        struct Point
+        {    
+            int x;    
+            int y;
+        };
+        struct Point p = {0}; // Both x and y are init to 0
+    
+    ->initialize structure members in 3 ways which are as follows:
+        1.Using Assignment Operator.
+        2.Using Initializer List. (struct structure_name str = { value1, value2, value3 };)
+        3.Using Designated Initializer List. (struct structure_name str = { .member1 = value1, .member2 = value2, .member3 = value3 };)
+    
+    ->typedef for Structures
+        ->We can use the typedef to define some new shorter name for the structure.
+            ```
+                typedef struct {
+                    int a;
+                } str1;
+                int main()
+                {
+                    str1 var1 = { 20 };
+                    printf("var1.a = %d\n", var1.a);
+                    return 0;
+                }
+            ```
+    
+    ->Nested Structures 
+        ->C language allows us to insert one structure into another as a member.
+            1. Embedded Structure Nesting
+            2. Separate Structure Nesting
+                ->the declaration of the structure should always be present before its definition as a structure member.
+
+    ->Structure Pointer
+        ->access the members of the structure pointed by the structure pointer using the ( -> ) arrow operator.
+
+    ->Self-Referential Structures
+        ```
+            struct structure_name {
+                data_type member1;
+                data_type member2;
+                struct structure_name* str;
+            }
+        ```
+
+    ->C Structure Padding and Packing
+        ->Structure padding is the concept of adding multiple empty bytes in the structure to naturally align the data members in the memory. 
+            ->It is done to minimize the CPU read cycles to retrieve different data members in the structure.
+        
+        ->There are some situations where we need to pack the structure tightly by removing the empty bytes. 
+            In such cases, we use Structure Packing. C language provides two ways for structure packing:
+                1.Using #pragma pack(1)
+                2.Using __attribute((packed))__
+            Rules for padding:
+                1. structure size is multiple of largest data type size
+                2. a data type can start from a byte position if that byte pos is divisible by size of data type
+
+    ->The dot (.) operator has the highest operator precedence in C Language and its associativity is from left to right.
+
+    C typedef vs #define:
+        1.#define is capable of defining aliases for values as well, for instance, you can define 1 as ONE, 3.14 as PI, etc. Typedef is limited to giving symbolic names to types only.
+        2.Preprocessors interpret #define statements, while the compiler interprets typedef statements.
+        3.There should be no semicolon at the end of #define, but a semicolon at the end of typedef.
+        4.In contrast with #define, typedef will actually define a new type by copying and pasting the definition values.
+
+    Flexible Array Members in a structure in C:
+        ->we can declare an array without a dimension and whose size is flexible in nature.
+        ->preferably be declared as the last member of the structure and its size is variable
+        ```
+            struct student {
+                int stud_id;
+                int name_len;
+                int struct_size;
+                char stud_name[];
+            };
+        ```
+        The memory allocation using flexible array members can be done as:
+            struct student *s = malloc( sizeof(*s) + sizeof(char [strlen(stud_name)]));
+
+Unions:
+    ->The Union is a user-defined data type in C language that can contain elements of the different data types just like structure. But unlike structures, all the members in the C union are stored in the same memory location. Due to this, only one member can store data at the given instance.
+    -> There are two methods using which we can define a union variable.
+        1.With Union Declaration
+            union union_name {
+                datatype member1;
+                datatype member2;
+                ...
+            } var1, var2, ...;
+        2.After Union Declaration
+            union union_name var1, var2, var3...;
+    -> union members are accessed using (.) -> (also for nested unions)
+    ->The size of the union will always be equal to the size of the largest member of the array.
+
+-> Bit Fields
+    ->The idea of bit-field is to use memory efficiently when we know that the value of a field or group of fields will never exceed a limit or is within a small range.
+        struct
+        {
+            data_type member_name : width_of_bit-field;
+        };
+    1. A special unnamed bit field of size 0 is used to force alignment on the next boundary.
+    2. We cannot have pointers to bit field members as they may not start at a byte boundary.
+    3. It is implementation-defined to assign an out-of-range value to a bit field member.
+    4. Array of bit fields is not allowed.
+    
 

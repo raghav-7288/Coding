@@ -37,11 +37,8 @@
                     while(nums[j]==nums[j-1] && j<k) j++;
                     k--;
                     while(nums[k]==nums[k+1] && j<k) k--;
-                }else if(sum<0){
-                    j++;
-                }else{
-                    k--;
-                }
+                }else if(sum<0) j++;
+                else k--;
             }
         }
         return ans;

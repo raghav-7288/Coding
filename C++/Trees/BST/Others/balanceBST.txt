@@ -12,8 +12,8 @@ A binary search tree is balanced if the depth of the two subtrees of every node 
     TreeNode* build(int l, int r, vector<int>& ino){
         if(l>r) return NULL;
         int m=(l+r)/2;
-        TreeNode* left=(l>=m)?NULL:build(l,m-1,ino);
-        TreeNode* right=(r<=m)?NULL:build(m+1,r,ino);
+        TreeNode* left = (l < m) ? build(l,m-1,ino) : NULL;
+        TreeNode* right = (m < r) ? build(m+1,r,ino) : NULL;
         return new TreeNode(ino[m],left,right);
     }
     TreeNode* balanceBST(TreeNode* root) {

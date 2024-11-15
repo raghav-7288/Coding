@@ -1,10 +1,4 @@
-Yes
-Yes
-Yes
-Yes
-No
-No
-No
-No
-No
-No
+White
+Green
+White
+Ambiguous

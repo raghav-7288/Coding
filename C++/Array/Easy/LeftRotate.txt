@@ -1,5 +1,4 @@
 
-
     // to right rotate
     // d = n - d;
     d %= n;

@@ -9,12 +9,9 @@ int longestSubarrayWithSumK(vector<int> a, long long k)
     {
         s += a[r];
         while (l <= r && s > k){
-            s -= a[l];
-            l++;
+            s -= a[l++];
         }
-        if (s == k){
-            l = max(l, r - l + 1);
-        }
+        if (s == k) len = max(len, r - l + 1);
         r++;
     }
 }
