@@ -1,12 +1,21 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define ll long long
-#define ld long double
-ll mod = 1e9 + 7;
+#include <stdio.h>
+
+int m = 25;
+
 int main()
 {
-    vector<int> arr = {0, 0, 2, 3};
-    cout << lower_bound(arr.begin(), arr.end(), 1) - arr.begin();
+    int *q = &m;
+    int ***f(int **);
+    int ***p;
+    p = f(&q);
 
+    printf("%d", ***p);
     return 0;
+}
+
+int ***f(int **q)
+{
+    **q *= **q;
+    m += 1;
+    return (&q);
 }

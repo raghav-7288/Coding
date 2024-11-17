@@ -29,7 +29,7 @@ Return the number of substrings containing at least one occurrence of all these 
             else if(s[i]=='b') ls_b=i;
             else ls_c=i;
             if(ls_a!=-1 && ls_b!=-1 && ls_c!=-1){
-                cnt += min({ls_a,minls_b,ls_c}) + 1;
+                cnt += min({ls_a,ls_b,ls_c}) + 1;
             }
             i++;
         }
