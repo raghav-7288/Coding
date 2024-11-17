@@ -1,4 +1,4 @@
---------------------------------------------------------NGE 1------------------------------------------------------------------------
+
 Given an array arr[ ] of n elements, the task is to find the next greater element for each element of the array in 
 order of their appearance in the array
 
@@ -11,6 +11,28 @@ order of their appearance in the array
             st.push(arr[i]);
         }
         return nge;
+    }
+
+--------------------------------------------------------NGE 1------------------------------------------------------------------------
+
+The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.
+You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.
+For each 0 <= i < nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. 
+If there is no next greater element, then the answer for this query is -1.
+Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.
+
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        int n1=nums1.size(), n2=nums2.size();
+        vector<int> ans(n1,-1);
+        map<int,int> mp;
+        stack<int> st;
+        for(int i=1;i<=n1;i++) mp[nums1[i-1]]=i;
+        for(int i=n2-1;i>=0;i--){
+            while(!st.empty() && nums2[st.top()] <= nums2[i]) st.pop();
+            if(!st.empty() && mp[nums2[i]]) ans[mp[nums2[i]]-1]=nums2[st.top()];
+            st.push(i);
+        }
+        return ans;
     }
 
 --------------------------------------------------------NGE 2------------------------------------------------------------------------
@@ -34,14 +56,13 @@ return the next greater number for every element in nums.
     }
 
 ----------------------------------------------------------PGE------------------------------------------------------------------------
-    vector<int> prevGreater(vector<int> &A) {
-        int n=A.size();
-        vector<int> pge(n, -1);
-        stack<int> st;
+    vector<long long> prevLargerElement(vector<long long> arr, int n){
+        stack<long long> st;
+        vector<long long> pge(n, -1);
         for(int i=0;i<n;i++){
-            while(!st.empty() && st.top() <= A[i]) st.pop();
+            while(!st.empty() && st.top() >= arr[i]) st.pop();
             if(!st.empty()) pge[i]=st.top();
-            st.push(A[i]);
+            st.push(arr[i]);
         }
         return pge;
     }
