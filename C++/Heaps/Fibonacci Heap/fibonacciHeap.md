@@ -7,7 +7,7 @@ A **Fibonacci heap** is a data structure used for implementing priority queues. 
 The key advantage of a Fibonacci heap is its **fast amortized running time** for operations like **insert**, **merge**, and **extract-min**, making it one of the most efficient data structures for these operations. The running times for key operations are:
 
 - **Insert**: \( O(1) \)
-- **Extract-min**: \( O(\log n) \)
+- **Extract-min**: \( O(log n) \)
 - **Merge**: \( O(1) \) amortized
 
 ## Structure
