@@ -1,4 +1,1 @@
-White
-Green
-White
-Ambiguous
+Hi

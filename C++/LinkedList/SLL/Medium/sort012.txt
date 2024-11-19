@@ -1,3 +1,4 @@
+    
     Node* segregate(Node* head) {
         Node *zero=head, *zeroHead=NULL;
         Node *one=head, *oneHead=NULL;

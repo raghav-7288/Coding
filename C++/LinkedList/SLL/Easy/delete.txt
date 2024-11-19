@@ -9,7 +9,7 @@
     void deleteNode(ListNode* head, int pos) {
         if(pos==1) return head->next;
         ListNode* temp=head; pos-=2;
-        while(pos>0) {temp=temp->head;pos--;}
+        while(pos--) temp=temp->head;
         temp->next=temp->next->next;
         return head;
     }

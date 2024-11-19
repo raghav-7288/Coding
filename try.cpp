@@ -1,21 +1,28 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define ld long double
+ll mod = 1e9 + 7;
+class abc
+{
+private:
+    int x, y;
 
-int m = 25;
-
+public:
+    abc()
+    {
+        x = 10;
+        y = 20;
+    }
+    void display()
+    {
+        cout << "x=" << x << " y=" << y;
+    }
+};
 int main()
 {
-    int *q = &m;
-    int ***f(int **);
-    int ***p;
-    p = f(&q);
-
-    printf("%d", ***p);
+    // abc a;
+    // a.display();
+    cout << "Hi";
     return 0;
-}
-
-int ***f(int **q)
-{
-    **q *= **q;
-    m += 1;
-    return (&q);
 }
