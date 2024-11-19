@@ -710,4 +710,68 @@ ENUM:
     ->We can assign values to some name in any order. All unassigned names get value as value of previous name plus one. 
     ->The value assigned to enum names must be some integral constant, i.e., the value must be in range from minimum possible integer value to maximum possible integer value.
     ->All enum constants must be unique in their scope
+
+
+#####################################################################
+Storage Classes in C(scope, visibility, and lifetime of a variable)
+#####################################################################
+
+| Storage Specifier | Storage     | Initial value | Scope                   | Life                        |
+|-------------------|-------------|---------------|-------------------------|-----------------------------|
+| auto              | stack       | Garbage       | Within block            | End of block                |
+| extern            | Data segment| Zero          | global, Multiple files  | Till end of program         |
+| static            | Data segment| Zero          | Within block            | Till end of program         |
+| register          | CPU Register| Garbage       | Within block            | End of block                |
+
+    Extern:
+        ->The extern variable is used when a particular files need to access a variable from another file.
+        ->No memory is allocated. Only the property of the variable is announced.
+        ->Multiple declarations of extern variable allowed.
+        ->When an extern variable is initialized, then memory for this is allocated and it will be considered defined.
+
+        When we write.
+            int foo(int arg1, char arg2);
+        The compiler treats it as:
+            extern int foo(int arg1, char arg2);
+
+        ->When we declared/defined a function, we saw that the extern keyword was present implicitly. But this isn’t the case with variables. If it were, memory would never be allocated for them. 
+
+    Static:
+        ->Static int variable remains in memory while the program is running.
+        ->Static variables are allocated memory in the data segment, not the stack segment.
+        ->static variables can only be initialized using constant literals.(All objects with static storage duration must be initialized (set to their initial values) before execution of main() starts.)
+        ->Static variables should not be declared inside a structure
+        
+        ->Access to static functions is restricted to the file where they are declared.
+        ->Another reason for making functions static can be the reuse of the same function name in other files.
+
+        Volatile:
+            ->to prevent the compiler from applying any optimizations on objects that can change in ways that cannot be determined by the compiler.(values can be changed by code outside the scope of current code at any time)
+            e.g. -> Global variables modified by an interrupt service routine outside the scope: 
+
+            If we do not use volatile qualifier, the following problems may arise: 
+                1->Code may not work as expected when optimization is turned on. 
+                2->Code may not work as expected when interrupts are enabled and used.
+
+                ```
+                    const int local = 10;
+                    int *ptr = (int*) &local;
+                    printf("Initial value of local : %d \n", local);
+                    *ptr = 100;
+                    printf("Modified value of local: %d \n", local);
+
+                    if no optimization -> 10 100
+                    with optimization -> 10 10(ignores the instructions which try to change the value of the const object.)
+
+                    If used ->  const volatile int local = 10;
+                    op -> 10 100
+                ```
+
+    Register:
+        ->use & with register var is invalid
+        ->register keyword can be used with pointer variables
+        ->register can not be used with static
+        ->can not be used in the global scope (outside main).
+        
     
+

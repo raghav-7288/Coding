@@ -1,8 +1,6 @@
 
-There are mainly two major parts in Huffman Coding
-    Build a Huffman Tree from input characters.
-    Traverse the Huffman Tree and assign codes to characters.
-
+    #include <bits/stdc++.h>
+    using namespace std;
     struct Node
     {
         char data;
@@ -14,6 +12,13 @@ There are mainly two major parts in Huffman Coding
             right = NULL;
             data = val;
             freq = f;
+        }
+    };
+    struct Compare
+    {
+        bool operator()(Node *l, Node *r)
+        {
+            return l->freq > r->freq;
         }
     };
     void printHuffman(Node *top, string code)
@@ -29,7 +34,7 @@ There are mainly two major parts in Huffman Coding
     }
     void huffman(map<char, int> &freq)
     {
-        priority_queue<Node *, vector<Node *>, greater<Node *>> minHeap;
+        priority_queue<Node *, vector<Node *>, Compare> minHeap;
         for (auto m : freq)
         {
             minHeap.push(new Node(m.first, m.second));
@@ -47,14 +52,15 @@ There are mainly two major parts in Huffman Coding
         }
         printHuffman(minHeap.top(), "");
     }
-    
----------------------------------
-    map<char, int> freq;
-    freq['a'] = 5;
-    freq['b'] = 9;
-    freq['c'] = 12;
-    freq['d'] = 13;
-    freq['e'] = 16;
-    freq['f'] = 45;
-    huffman(freq);
----------------------------------
+    int main()
+    {
+        map<char, int> freq;
+        freq['a'] = 5;
+        freq['b'] = 9;
+        freq['c'] = 12;
+        freq['d'] = 13;
+        freq['e'] = 16;
+        freq['f'] = 45;
+        huffman(freq);
+        return 0;
+    }

@@ -1,7 +1,7 @@
 Given a string s containing only three types of characters: '(', ')' and '*', return true if s is valid.
 '*' -> "(" or ")" or ""
 
-    bool checkValidString(string s) {
+    bool checkValidString(string s) {    
         int mini=0,maxi=0;
         for(auto c:s){
             if(c=='('){
@@ -21,7 +21,7 @@ Given a string s containing only three types of characters: '(', ')' and '*', re
     }
 
 
---------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------OR------------------------------------------------------
 
     bool checkValidString(string s) {
         int left_ctr=0,right_ctr=0;
