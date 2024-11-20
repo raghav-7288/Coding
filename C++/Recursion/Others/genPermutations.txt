@@ -1,37 +1,43 @@
 
-  void Permute(vector<int> &a, vector<vector<int>> &allPerm, vector<int> &currPerm, vector<int> &picked)
-  {
-    if (currPerm.size() == a.size())
-    {
-      allPerm.push_back(currPerm);
-      return;
+    void solve(vector<int>& nums, vector<int>& cur, vector<int>& picked, vector<vector<int>>& ans){
+        if(cur.size()==nums.size()){
+            ans.push_back(cur);
+            return;
+        }
+        for(int i=0;i<nums.size();i++){
+            if(!picked[i]){
+                picked[i]=1;
+                cur.push_back(nums[i]);
+                solve(nums,cur,picked,ans);
+                cur.pop_back();
+                picked[i]=0;
+            }
+        }
     }
-    for (int i = 0; i < a.size(); i++)
-    {
-      if (!picked[i])
-      {
-        picked[i] = 1;
-        currPerm.push_back(a[i]);
-        Permute(a, allPerm, currPerm, picked);
-        currPerm.pop_back();
-        picked[i] = 0;
-      }
+    vector<vector<int>> permute(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> cur,picked(n);
+        vector<vector<int>> ans;
+        solve(nums,cur,picked,ans);
+        return ans;
     }
-  }
 
 ----------------------------------------------------------------OR--------------------------------------------------------------------------------------------------------------
 
-  void Permute(vector<int> &a, int index, int n, vector<vector<int>> &allPerm)
-  {
-    if (index == n - 1)
-    {
-      allPerm.push_back(a);
-      return;
+    void solve(int index, int n, vector<int>& nums, vector<vector<int>>& ans){
+        if(index==n-1){
+            ans.push_back(nums);
+            return;
+        }
+        for(int i=index;i<n;i++){
+            swap(nums[index],nums[i]);
+            solve(index+1,n,nums,ans);
+            swap(nums[index],nums[i]);
+        }
     }
-    for (int i = index; i < n; i++)
-    {
-      swap(a[index], a[i]);
-      Permute(a, index + 1, n, allPerm);
-      swap(a[index], a[i]);
+    vector<vector<int>> permute(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>> ans;
+        solve(0,n,nums,ans);
+        return ans;
     }
-  }

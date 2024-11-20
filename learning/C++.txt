@@ -213,3 +213,115 @@ Here's the concise version:
 | **Purpose**                | Behavior by parameters            | Different job in derived class    |
 | **Multiplicity**           | Multiple overloads                | Single override                   |
 | **Inheritance Requirement**| No inheritance needed             | Requires inheritance              |
+
+
+#########################################################################
+C++ Operator Overloading
+#########################################################################
+
+->compile-time polymorphism
+->name of an operator function is always the operator keyword followed by the symbol of the operator
+
+Following is the list of operators that cannot be overloaded. 
+    sizeof
+    typeid
+    Scope resolution (::)
+    Class member access operators (.(dot), .* (pointer to member operator))
+    Ternary or conditional (?:)
+    Operators that can be Overloaded in C++
+
+We can overload
+    Unary operators
+    Binary operators
+    Special operators ( [ ], (), etc)   
+
+Operators that can be overloaded	            Examples
+    Binary Arithmetic	                        +, -, *, /, %
+    Unary Arithmetic 	                        + , -, ++, —
+    Assignment	                                =, +=,*=, /=,-=, %=
+    Bitwise	                                    & , | , << , >> , ~ , ^
+    De-referencing	                            (->)
+    Dynamic memory allocation, De-allocation	New, delete 
+    Subscript	                                [ ]
+    Function call 	                            ()
+    Logical 	                                &,  | |, !
+    Relational	                                >, < , = =, <=, >=
+
+-> ComplexNumber c3 = c1 + c2; -> ComplexNumber c3 = c1.operator+ (c2);
+
+    // Prefix ++
+    Counter &operator++()
+    {
+        ++value;      // Increment value
+        return *this; // Return the updated object
+    }
+    // Postfix ++
+    Counter &operator++(int)
+    {
+        ++value;      // Increment value
+        return *this; // Return the updated object
+    }
+
+    1->For operator overloading to work, at least one of the operands must be a user-defined class object.
+    2->Conversion Operator: We can also write conversion operators that can be used to convert one type to another type. 
+        operator float() const
+        {
+            return float(num) / float(den);
+        }
+        Fraction f(2, 5);
+        float val = f;
+    3->Any constructor that can be called with a single argument works as a conversion constructor
+
+
+->Operator Overloading can be done by using two approaches, i.e.
+    Overloading Unary Operator.
+        ->no arguments should be passed
+        ->works only with one class object
+    Overloading Binary Operator.
+        ->there should be one argument to be passed. 
+        ->It is the overloading of an operator operating on two operands
+
+Criteria/Rules to Define the Operator Function
+    ->In the case of a non-static member function, the binary operator should have only one argument and the unary should not have an argument.
+    ->In the case of a friend function, the binary operator should have only two arguments and the unary should have only one argument.
+    ->Operators that cannot be overloaded are  .* :: ?:
+    ->Operators that cannot be overloaded when declaring that function as friend function are = () [] ->.
+    ->The operator function must be either a non-static (member function), global free function or a friend function.
+
+
+Functors:
+    ->C++ class that acts like a function.
+    ->To create a functor, we create a object that overloads the operator().
+
+        The line,
+        MyFunctor(10);
+
+        Is same as
+        MyFunctor.operator()(10);
+        ```
+            class increment
+            {
+            private:
+                int num;
+            public:
+                increment(int n) : num(n) {  }
+                // This operator overloading enables calling operator   function () on objects of increment
+                int operator () (int arr_num) const {
+                    return num + arr_num;
+                }
+            };
+
+            transform(arr, arr+n, arr, increment(to_add));
+        ```
+
+List of operators that cannot be overloaded
+    1) Scope Resolution Operator  (::)    
+    2) Ternary or Conditional Operator (?:)   
+    3) Member Access or Dot operator  (.)    
+    4) Pointer-to-member Operator (.*)  
+    5) Object size Operator (sizeof) 
+    6) Object type Operator(typeid) 
+    7) static_cast (casting operator)
+    8) const_cast (casting operator)
+    9) reinterpret_cast (casting operator)
+    10) dynamic_cast (casting operator)
