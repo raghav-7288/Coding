@@ -1,8 +1,5 @@
-You are given a string s. You can convert s to a 
-palindrome by adding characters in front of it.
+You are given a string s. You can convert s to a palindrome by adding characters in front of it.
 Return the shortest palindrome you can find by performing this transformation.
-
-
 
 We try to simulate the hash for the reverse of s without explicitly reversing the string. 
 To achieve this, we can accumulate the hash value for each character in reverse order by:
@@ -24,4 +21,37 @@ base_pow starts as 1 (representing the first character from the end) and is mult
         string temp=s.substr(max_len);
         reverse(temp.begin(),temp.end());
         return temp+s;
+    }
+
+------------------------------------------------------------------using kmp------------------------------------------------------------
+
+        vector<int> get_lps(string pat){
+        int n=pat.length();
+        vector<int> lps(n);
+        int i=1,j=0;
+        while(i<n){
+            if(pat[i]==pat[j]){
+                lps[i]=j+1;
+                j++;
+            }else{
+                while(j>0 && pat[j]!=pat[i]){
+                    j=lps[j-1];
+                }
+                if(pat[j]==pat[i]){
+                    lps[i]=j+1;
+                    j++;
+                }
+            }
+            i++;
+        }
+        return lps;
+    }
+    string shortestPalindrome(string s) {
+        string t=s;
+        reverse(t.begin(),t.end());
+        string res = s+"$"+t;
+        vector<int> lps=get_lps(res);
+        int rem = s.length() - lps.back();
+        string _res = t.substr(0,rem);
+        return _res+s;
     }

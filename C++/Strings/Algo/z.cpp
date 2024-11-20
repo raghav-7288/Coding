@@ -37,26 +37,35 @@ Example:
 
 
 */
-// TODO taking less time to calculate z array
-//  vector<int> Z(string s)
-//  {
-//      int N = s.length();
-//      vector<int> Z(N, 0);
-//      int left = 0, right = 0;
-//      for (int i = 1; i < N; ++i)
-//      {
-//          if (i < right)
-//              Z[i] = min(right - i, Z[i - left]);
-//          while ((i + Z[i] < N) and (s[Z[i]] == s[i + Z[i]]))
-//              Z[i]++;
-//          if (i + Z[i] > right)
-//          {
-//              left = i;
-//              right = i + Z[i];
-//          }
-//      }
-//      return Z;
-//  }
+
+/*
+Optimal for calculating Z array
+
+    vector<int> get_Z(string s)
+    {
+        int N = s.length();
+        vector<int> Z(N, 0);
+        int left = 0, right = 0;
+        for (int i = 1; i < N; ++i)
+        {
+            if(i>right){
+                left=right=i;
+                while ((s[Z[i]] == s[i + Z[i]])) Z[i]++;
+                right = i + Z[i] - 1;
+            }else{
+                if(i+Z[i-left] <= right) Z[i]=Z[i-left];
+                else{
+                    left=i;
+                    Z[i] = right-i+1;
+                    while ((i + Z[i] < N) and (s[Z[i]] == s[i + Z[i]])) Z[i]++;
+                    right = i + Z[i] - 1;
+                }
+            }
+        }
+        return Z;
+    }
+
+*/
 
 #include <bits/stdc++.h>
 using namespace std;

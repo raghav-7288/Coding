@@ -29,35 +29,35 @@ same as the hash values of all the substrings of T[] match with the hash value o
 ->Auxiliary Space: O(1)
 
                                             vector<int> search(string pat, string txt)
-                                                {
-                                                    int n=pat.length(), m=txt.length();
-                                                    int b=256, p=101;
-                                                    long long curHash=0, patHash=0, power=1;
-                                                    for(int i=1;i<n;i++) power = (power*b)%p;
-                                                    for(int i=0;i<n;i++){
-                                                        patHash = (patHash*b + pat[i])%p;
-                                                        curHash = (curHash*b + txt[i])%p;
-                                                    }
-                                                    vector<int> matches;
-                                                    for(int i=0;i<=m-n;i++){
-                                                        if(curHash==patHash){
-                                                            bool match=true;
-                                                            for(int k=0;k<n;k++){
-                                                                if(pat[k]!=txt[i+k]){
-                                                                    match=false;
-                                                                    break;
-                                                                }
-                                                            }
-                                                            if(match) matches.push_back(i+1);
-                                                        }
-                                                        if(i<m-n){
-                                                            curHash = (curHash-txt[i]*power)%p;
-                                                            curHash = (curHash*b + txt[i+n])%p;
-                                                            if(curHash<0) curHash+=p;
-                                                        }
-                                                    }
-                                                    return matches;
+                                            {
+                                                int n=pat.length(), m=txt.length();
+                                                int b=256, p=101;
+                                                long long curHash=0, patHash=0, power=1;
+                                                for(int i=1;i<n;i++) power = (power*b)%p;
+                                                for(int i=0;i<n;i++){
+                                                    patHash = (patHash*b + pat[i])%p;
+                                                    curHash = (curHash*b + txt[i])%p;
                                                 }
+                                                vector<int> matches;
+                                                for(int i=0;i<=m-n;i++){
+                                                    if(curHash==patHash){
+                                                        bool match=true;
+                                                        for(int k=0;k<n;k++){
+                                                            if(pat[k]!=txt[i+k]){
+                                                                match=false;
+                                                                break;
+                                                            }
+                                                        }
+                                                        if(match) matches.push_back(i+1);
+                                                    }
+                                                    if(i<m-n){
+                                                        curHash = (curHash-txt[i]*power)%p;
+                                                        curHash = (curHash*b + txt[i+n])%p;
+                                                        if(curHash<0) curHash+=p;
+                                                    }
+                                                }
+                                                return matches;
+                                            }
 */
 
 #include <bits/stdc++.h>
@@ -144,3 +144,33 @@ int main()
 
     return 0;
 }
+
+/*
+
+    vector<int> search(string pat, string txt) {
+        int n = pat.length();
+        int m = txt.length();
+        int p = 7, mod = 101;
+        int hashPat = 0, hashText = 0;
+        int pRight = 1, pLeft = 1;
+        for(int i=0; i < n; i++) {
+            hashPat += ((pat[i]-'a'+1) * pRight) % mod;
+            hashText += ((txt[i]-'a'+1) * pRight) % mod;
+            pRight = (pRight * p) % mod;
+        }
+        vector<int> ans;
+        for(int i=0; i <= m-n; i++) {
+            if(hashPat == hashText) {
+                if(txt.substr(i, n) == pat) ans.push_back(i+1);
+            }
+            hashText = (hashText - ((txt[i] - 'a'+1) * pLeft) % mod + mod) % mod;
+            hashText = (hashText + ((txt[i+n] - 'a'+1) * pRight) % mod) % mod;
+            hashPat = (hashPat * p) % mod;
+
+            pLeft = (pLeft * p) % mod;
+            pRight = (pRight * p) % mod;
+        }
+        return ans;
+    }
+
+*/

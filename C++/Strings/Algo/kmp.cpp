@@ -47,6 +47,30 @@ place to make sure that the whole substring is not considered.
                                 }
                             }
 */
+/*
+    vector<int> get_lps(string pat){
+        int n=pat.length();
+        vector<int> lps(n);
+        int i=1,j=0;
+        while(i<n){
+            if(pat[i]==pat[j]){
+                lps[i]=j+1;
+                j++;
+            }else{
+                while(j>0 && pat[j]!=pat[i]){
+                    j=lps[j-1];
+                }
+                if(pat[j]==pat[i]){ 
+                    lps[i]=j+1;
+                    j++;
+                }
+            }
+            i++;
+        }
+        return lps;
+    }
+
+*/
 
 #include <bits/stdc++.h>
 using namespace std;

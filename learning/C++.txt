@@ -30,3 +30,186 @@ Abstraction:(hide the information)
 5.	In abstraction, implementation complexities are hidden using abstract classes and interfaces.	While in encapsulation, the data is hidden using methods of getters and setters.
 6.	The objects that help to perform abstraction are encapsulated.	                                Whereas the objects that result in encapsulation need not be abstracted.
  
+#########################################################################
+C++ Polymorphism
+#########################################################################
+
+->ability of a message to be displayed in more than one form.
+Types of Polymorphism:
+    1->Compile-time Polymorphism
+        A->Function Overloading:
+            ->multiple functions with the same name but different parameters
+            ->changing the number of arguments or/and changing the type of arguments
+        B->Operator Overloading
+            ```
+                Complex operator+(Complex const& obj)
+                {
+                    Complex res;
+                    res.real = real + obj.real;
+                    res.imag = imag + obj.imag;
+                    return res;
+                }
+            ```
+    2->Runtime Polymorphism(Late binding OR dynamic polymorphism)
+        A->Function Overriding
+            ->when a derived class has a definition for one of the member functions of the base class. That base function is said to be overridden.
+            ->Runtime Polymorphism cannot be achieved by data members in C++.
+            ->the parent class reference will always refer to the data member of the parent class.
+        B->Virtual Function(w/o virtual -> Compile time)
+            ->member function that is declared in the base class using the keyword virtual and is re-defined (Overridden) in the derived class.   
+            Some Key Points About Virtual Functions:
+                ->Dynamic in nature. 
+                ->defined by inserting the keyword “virtual” 
+                ->declared with a base class and overridden in a child class
+                ->called during Runtime
+            
+Function Overriding in C++
+    ->redefine the member function of a class which it inherited from its base class.
+    ->when we call the function using its name for the parent object, the parent class function is executed. But when we call the function using the child object, the child class version will be executed.
+    ->It can only be done in derived class.
+
+    2 types in c++(in java only Compile time):
+        ->Compile Time Overriding(early binding or static binding.)
+            ->the function call and the definition is binded at the compilation of the program
+
+        ->Runtime Function Overriding(late binding or dynamic binding)
+            ->with the help of virtual functions.
+            ```
+                class Base {
+                public:
+                    virtual void display(){
+                        cout << "Display method of Base class" << endl;
+                    }
+                    virtual ~Base() {}
+                };
+                class Derived : public Base {
+                public:
+                    void display() override{ ------------------------------->override keyword is used
+                        cout << "Display method of Derived class" << endl;
+                    }
+                };
+                int main()
+                {
+                    Base* basePtr;
+                    Derived derivedObj;
+                    basePtr = &derivedObj;
+                    basePtr->display();---------------------->o/p -> Display method of Derived class
+                    return 0;
+                }
+            ```
+
+| Aspect                          | Function Overloading                                | Function Overriding                                                |
+|---------------------------------|-----------------------------------------------------|-------------------------------------------------------------------------|
+| Polymorphism Type               | Falls under Compile-Time polymorphism               | Can be both Compile-Time or Runtime Polymorphism                       |
+| Resolution Time                 | Resolved at Compile time                            | Resolved at Run time                                                   |
+| Inheritance Requirement         | Can be executed without inheritance                 | Requires inheritance to execute                                        |
+| Scope                           | Functions are in the same scope                     | Functions are in different scopes (base class and derived class)       |
+| Multiplicity                    | A function can be overloaded multiple times         | A function cannot be overridden multiple times for the same class hierarchy |
+| Definition                      | Same function name with different parameter lists   | Same function name and parameter list, but in base and derived classes |
+
+
+->The compiler maintains two things to serve this purpose:
+    vtable: A table of function pointers, maintained per class. 
+    vptr: A pointer to vtable, maintained per object instance (see this for an example).
+
+
+#########################################################################
+C++ Function Overloading
+#########################################################################
+
+->where two or more functions can have the same name but different parameters
+->How does Function Overloading work?
+    Exact match:- (Function name and Parameter)
+    If a not exact match is found:–
+        ->Char, Unsigned char, and short are promoted to an int.
+        ->Float is promoted to double
+    If no match is found:
+        ->C++ tries to find a match through the standard conversion.
+    ELSE ERROR
+
+->We can have more than one constructor in a class with same name, as long as each has a different list of arguments.This concept is known as Constructor Overloading and is quite similar to function overloading. 
+ 
+->In C++, following function declarations cannot be overloaded. 
+    1->Function declarations that differ only in the return type.(Function overloading comes under the compile-time polymorphism. During compilation, the function signature is checked. So, functions can be overloaded, if the signatures are not the same. The return type of a function has no effect on function overloading, therefore the same function signature with different return type will not be overloaded. )
+    2->Member function declarations with the same name and the name parameter-type-list cannot be overloaded if any of them is a static member function declaration
+        static void fun(int i) {} ----> error
+        void fun(int i) {}
+    3-> int fun(int *ptr);
+        int fun(int ptr[]); ->equivalent
+    4-> void h(int ());
+        void h(int (*)()); ->equivalent
+    5-> Parameter declarations that differ only in the presence or absence of const and/or volatile are equivalent
+
+with const keyword:(if const in parameter then cant differentiate)
+    ```
+        void fun() const
+        {
+            cout << "fun() const called " << endl;
+        }
+        void fun() { cout << "fun() called " << endl; }
+
+        Test t1(10);
+        const Test t2(20);
+        t1.fun();
+        t2.fun();
+
+        o/p:
+            fun() called 
+            fun() const called 
+    ```
+    ```
+        void fun(const int i) 
+        { 
+            cout << "fun(const int) called "; 
+        } 
+        void fun(int i) 
+        { 
+            cout << "fun(int ) called " ; 
+        }
+
+        Compiler Error: redefinition of 'void fun(int)'
+    ```
+    ```
+        void fun(const int* i) 
+        { 
+            cout << "fun(const int) called "; 
+        } 
+        void fun(int* i) 
+        { 
+            cout << "fun(int ) called " ; 
+        }
+
+        No Error
+        ->C++ allows functions to be overloaded on the basis of the const-ness of parameters only if the const parameter is a reference or a pointer
+    ```
+
+Function Overloading and float:
+    void test(float s,float t)
+    {
+        cout << "Function with float called ";
+    }
+    void test(int s, int t)
+    {
+        cout << "Function with int called ";
+    }
+    call->test(3.5, 5.6); -> treated as double
+    ERROR -> "Ambiguity in Function Overloading”(could not find a function with double argument)
+    ->To resolve -> test(3.5f, 5.6f);
+
+Overloading wiht main():
+    ->can be done by using main as a member function in a class
+    ->w/o class gives error
+    ->main is not reserved word in programming languages like C, C++, Java and C#.
+
+
+Here's the concise version:
+
+| **Aspect**                 | **Function Overloading**          | **Function Overriding**           |
+|----------------------------|-----------------------------------|-----------------------------------|
+| **Definition**             | Multiple definitions              | Redefines in derived class        |
+| **Polymorphism Type**      | Compile-time                      | Runtime                           |
+| **Function Signature**     | Different signatures              | Same signature                    |
+| **Scope**                  | Same scope                        | Different scopes                  |
+| **Purpose**                | Behavior by parameters            | Different job in derived class    |
+| **Multiplicity**           | Multiple overloads                | Single override                   |
+| **Inheritance Requirement**| No inheritance needed             | Requires inheritance              |
