@@ -27,7 +27,7 @@ Example:
                                                     j++;k++;
                                                 }else break;
                                             }
-                                            Z[i]=k-i;
+                                            Z[i]=k-i;      ->>>> gives TLE
                                         }
                                         for(int i=1;i<n;i++){
                                             if(Z[i]==pat.length()) matches.push_back(i-pat.length()-1);
@@ -41,91 +41,38 @@ Example:
 /*
 Optimal for calculating Z array
 
-    vector<int> get_Z(string s)
-    {
-        int N = s.length();
-        vector<int> Z(N, 0);
-        int left = 0, right = 0;
-        for (int i = 1; i < N; ++i)
+        vector<int> get_z(string s)
         {
-            if(i>right){
-                left=right=i;
-                while ((s[Z[i]] == s[i + Z[i]])) Z[i]++;
-                right = i + Z[i] - 1;
-            }else{
-                if(i+Z[i-left] <= right) Z[i]=Z[i-left];
-                else{
-                    left=i;
-                    Z[i] = right-i+1;
-                    while ((i + Z[i] < N) and (s[Z[i]] == s[i + Z[i]])) Z[i]++;
+            int N = s.length();
+            vector<int> Z(N, 0);
+            int left = 0, right = 0;
+            for (int i = 1; i < N; ++i)
+            {
+                if(i>right){
+                    left=right=i;
+                    while ((s[Z[i]] == s[i + Z[i]])) Z[i]++;
                     right = i + Z[i] - 1;
+                }else{
+                    if(i+Z[i-left] <= right) Z[i]=Z[i-left];
+                    else{
+                        left=i;
+                        Z[i] = right-i+1;
+                        while ((i + Z[i] < N) and (s[Z[i]] == s[i + Z[i]])) Z[i]++;
+                        right = i + Z[i] - 1;
+                    }
                 }
             }
+            return Z;
         }
-        return Z;
-    }
+        vector<int> search(string pat, string txt)
+        {
+            int n=pat.length();
+            string concat = pat+"&"+txt;
+            vector<int> z=get_z(concat), matches;
+            for(int i=n+1;i<concat.length();i++){
+                if(z[i]==n) matches.push_back(i-n);
+            }
+            return matches;
+        }
 
 */
-
-#include <bits/stdc++.h>
-using namespace std;
-
-// Function to search for pattern in text using Z algorithm
-void ZSearch(string text, string pattern, vector<int> &matches)
-{
-    // Create concatenated string "P$T"
-    string concat = pattern + "$" + text;
-    int l = concat.length();
-
-    vector<int> Z(l);
-    for (int i = 1; i < l; i++)
-    {
-        int j = 0, k = i;
-        while (k < l)
-        {
-            if (concat[j] == concat[k])
-            {
-                j++;
-                k++;
-            }
-            else
-                break;
-        }
-        Z[i] = k - i;
-    }
-
-    // Loop through Z array to find matches
-    for (int i = 0; i < l; i++)
-    {
-        // If Z[i] is equal to length of pattern, we found a match
-        if (Z[i] == pattern.length())
-        {
-            matches.push_back(i - pattern.length() - 1);
-        }
-    }
-}
-
-int main()
-{
-    string text = "abcaldfbabcaldkjhaabcaldabc";
-    string pattern = "abc";
-
-    vector<int> matches;
-    ZSearch(text, pattern, matches);
-
-    if (matches.empty())
-    {
-        cout << "No match found!" << endl;
-    }
-    else
-    {
-        cout << "Pattern found at positions: ";
-        for (int i : matches)
-        {
-            cout << i << " ";
-        }
-        cout << endl;
-    }
-
-    return 0;
-}

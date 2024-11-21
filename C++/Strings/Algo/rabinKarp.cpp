@@ -91,19 +91,8 @@ vector<int> rabinKarp(string text, string pattern, int b = 256, int p = 101)
         // If the current window hash matches the pattern hash, check character by character
         if (patternHash == currentHash)
         {
-            bool match = true;
-            for (int j = 0; j < m; j++)
-            {
-                if (text[i + j] != pattern[j])
-                {
-                    match = false;
-                    break;
-                }
-            }
-            if (match)
-            {
+            if (text.substr(i, m) == pattern)
                 result.push_back(i);
-            }
         }
         // Slide the pattern to the right (if possible)
         if (i < n - m)
@@ -146,31 +135,27 @@ int main()
 }
 
 /*
-
-    vector<int> search(string pat, string txt) {
-        int n = pat.length();
-        int m = txt.length();
-        int p = 7, mod = 101;
-        int hashPat = 0, hashText = 0;
-        int pRight = 1, pLeft = 1;
-        for(int i=0; i < n; i++) {
-            hashPat += ((pat[i]-'a'+1) * pRight) % mod;
-            hashText += ((txt[i]-'a'+1) * pRight) % mod;
-            pRight = (pRight * p) % mod;
+    vector<int> search(string pattern, string text)
+    {
+        int n=pattern.length(), m=text.length();
+        int b=256, p=101;
+        long long patHash=0, curHash=0, power=1;
+        for(int i=1;i<n;i++) power=(power*b)%p;
+        for(int i=0;i<n;i++){
+            curHash=(curHash*b+text[i])%p;
+            patHash=(patHash*b+pattern[i])%p;
         }
-        vector<int> ans;
-        for(int i=0; i <= m-n; i++) {
-            if(hashPat == hashText) {
-                if(txt.substr(i, n) == pat) ans.push_back(i+1);
+        vector<int> matches;
+        for(int i=0;i<=m-n;i++){
+            if(curHash==patHash && text.substr(i,n)==pattern){
+                matches.push_back(i+1);
             }
-            hashText = (hashText - ((txt[i] - 'a'+1) * pLeft) % mod + mod) % mod;
-            hashText = (hashText + ((txt[i+n] - 'a'+1) * pRight) % mod) % mod;
-            hashPat = (hashPat * p) % mod;
-
-            pLeft = (pLeft * p) % mod;
-            pRight = (pRight * p) % mod;
+            if(i<m-n){
+                curHash=(curHash-text[i]*power)%p;
+                curHash=(curHash*b+text[i+n])%p;
+                if(curHash<0) curHash+=p;
+            }
         }
-        return ans;
+        return matches;
     }
-
 */

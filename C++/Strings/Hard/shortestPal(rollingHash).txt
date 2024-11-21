@@ -25,7 +25,7 @@ base_pow starts as 1 (representing the first character from the end) and is mult
 
 ------------------------------------------------------------------using kmp------------------------------------------------------------
 
-        vector<int> get_lps(string pat){
+    vector<int> get_lps(string pat){
         int n=pat.length();
         vector<int> lps(n);
         int i=1,j=0;

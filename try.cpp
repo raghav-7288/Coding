@@ -1,30 +1,36 @@
-// C++ Program to Demonstrate the working
-// of conversion operator
+// C++ program to illustrate
+// concept of Virtual Functions
+
 #include <iostream>
 using namespace std;
-class Fraction
+
+class base
 {
-private:
-    int num, den;
-
 public:
-    Fraction(int n, int d)
-    {
-        num = n;
-        den = d;
-    }
+    virtual void print() { cout << "print base class\n"; }
 
-    // Conversion operator: return float value of fraction
-    operator float() const
-    {
-        return float(num) / float(den);
-    }
+    void show() { cout << "show base class\n"; }
+};
+
+class derived : public base
+{
+public:
+    void print() { cout << "print derived class\n"; }
+
+    void show() { cout << "show derived class\n"; }
 };
 
 int main()
 {
-    Fraction f(2, 5);
-    float val = f;
-    cout << val << '\n';
+    base *bptr;
+    derived d;
+    bptr = &d;
+
+    // Virtual function, binded at runtime
+    bptr->print();
+
+    // Non-virtual function, binded at compile time
+    bptr->show();
+
     return 0;
 }

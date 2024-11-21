@@ -325,3 +325,122 @@ List of operators that cannot be overloaded
     8) const_cast (casting operator)
     9) reinterpret_cast (casting operator)
     10) dynamic_cast (casting operator)
+
+
+
+#########################################################################
+C++ Inheritance
+#########################################################################
+
+->The capability of a class to derive properties and characteristics from another class
+->class  derived_class_name : access-specifier  base_class_name{//};
+    ->access-specifier By Default: private
+->A derived class doesn’t inherit access to private data members. However, it does inherit a full parent object, which contains any private members which that class declares.
+
+Modes of Inheritance in C++
+    Public Mode:
+        public(base) -> public(derived)
+        protected(base) -> protected(derived)
+    Protected Mode:
+        public(base) -> protected(derived)
+        protected(base) -> protected(derived)
+    Private Mode(default mode):
+        public(base) -> private(derived)
+        protected(base) -> private(derived)
+
+->To access or update the private members of the base class in derived class, we have to use the corresponding getter and setter functions of the base class or declare the derived class as friend class.
+
+
+Types Of Inheritance in C++
+    Single inheritance:
+        ->a class is allowed to inherit from only one class. i.e. one base class is inherited by one derived class only.
+
+    Multiple inheritance
+        ->a class can inherit from more than one class. i.e one subclass is inherited from more than one base class.
+
+    Multilevel inheritance:
+        ->a derived class is created from another derived class and that derived class can be derived from a base class or any other derived class. There can be any number of levels.
+    
+    Hierarchical inheritance:
+        ->more than one subclass is inherited from a single base class. i.e. more than one derived class is created from a single base class.
+
+    Hybrid inheritance:
+        ->implemented by combining more than one type of inheritance.
+        ->A Special Case of Hybrid Inheritance: 
+            Multipath Inheritance(diamond):
+                ->a class is derived from two base classes and these two base classes in turn are derived from one common base class. 
+                ->An ambiguity can arise in this type of inheritance in the most derived class. 
+                ->This problem is also called diamond problem due to the diamond shape formed in the UML inheritance diagram.
+                ->Constructor of the most superclass is called twice
+                                 Person
+                                /       \
+                              faculty  student
+                                \       /
+                                    TA
+                ->So object ‘ta1’ has two copies of all members of ‘Person’, this causes ambiguities.
+                ->The solution to this problem is ‘virtual’ keyword. We make the classes ‘Faculty’ and ‘Student’ as virtual base classes to avoid two copies of ‘Person’ in ‘TA’ class.
+                ->When we use ‘virtual’ keyword, the default constructor of grandparent class is called by default even if the parent classes explicitly call parameterized constructor.
+
+
+->The constructors will be called by the complier in the order in which they are inherited. It means that base class constructors will be called first, then derived class constructors will be called.
+->The destructors will be called in reverse order in which the compiler is declared.
+->We can also call the constructors and destructors manually in the derived class.
+
+Polymorphism in Inheritance:
+    ->redefine the base class member function in the derived class called Function Overriding
+    ->we can do it at both runtime and complile time. For runtime polymorphism, we have to use the virtual functions.
+
+
+Difference between Inheritance and Friendship in C++: 
+    ->In C++, friendship is not inherited. If a base class has a friend function, then the function doesn’t become a friend of the derived class(es). 
+
+
+
+#########################################################################
+C++ Virtual Functions
+#########################################################################
+
+->function that is declared within a base class and is re-defined (overridden) by a derived class
+->They are mainly used to achieve Runtime polymorphism.
+->Functions are declared with a virtual keyword in a base class.
+->The resolving of a function call is done at runtime.
+
+
+->Virtual functions cannot be static.
+->A virtual function can be a friend function of another class.
+->Virtual functions should be accessed using a pointer or reference of base class type to achieve runtime polymorphism.
+->The prototype of virtual functions should be the same in the base as well as the derived class.
+->They are always defined in the base class and overridden in a derived class. It is not mandatory for the derived class to override (or re-define the virtual function), in that case, the base class version of the function is used.
+->A class may have a virtual destructor but it cannot have a virtual constructor.
+
+Working of Virtual Functions (concept of VTABLE and VPTR)
+
+    ->If an object of that class is created then a virtual pointer (VPTR) is inserted as a data member of the class to point to the VTABLE of that class. For each new object created, a new virtual pointer is inserted as a data member of that class.
+    ->Irrespective of whether the object is created or not, the class contains as a member a static array of function pointers called VTABLE. Cells of this table store the address of each virtual function contained in that class.
+
+Limitations of Virtual Functions:
+    ->Slower
+    ->Difficult to Debug
+
+->Never call a virtual function from a CONSTRUCTOR or DESTRUCTOR
+
+->By default, all the functions defined inside the class are implicitly or automatically considered as inline except virtual functions. 
+
+Virtual Destructor:
+    ->Making base class destructor virtual guarantees that the object of derived class is destructed properly, i.e., both base class and derived class destructors are called
+
+Virtual Constructor:
+    ->If we attempt to make a constructor virtual, the compiler will flag an error. In fact, apart from the inline keyword, no other keyword can be used in the constructor declaration.
+
+Pure Virtual Functions and Abstract Classes in C++:
+    ->A class is abstract if it has at least one pure virtual function.
+    ->We can have pointers and references of abstract class type.
+    ->If we do not override the pure virtual function in the derived class, then the derived class also becomes an abstract class.
+    ->An abstract class can have constructors. 
+
+->for a pure virtual destructor, you must specify a destructor body.
+
+Can Static Functions Be Virtual in C++:
+    ->Virtual functions are invoked when you have a pointer or reference to an instance of a class. 
+    ->Static functions aren’t tied to the instance of a class but they are tied to the class. 
+    ->C++ doesn’t have pointers-to-class, so there is no scenario in which you could invoke a static function virtually.
