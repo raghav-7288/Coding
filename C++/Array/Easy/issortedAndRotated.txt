@@ -5,7 +5,7 @@
         {
             if(a[i] < a[i-1]) count++;
         }
-        if(count == 0 || (count == 1 && nums[0] >= nums[nums.size() - 1]))
+        if(count == 0 || (count == 1 && nums[0] >= nums.back()))
             return true;
         return false;
     }

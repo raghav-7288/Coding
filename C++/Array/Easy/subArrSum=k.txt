@@ -17,31 +17,33 @@ int longestSubarrayWithSumK(vector<int> a, long long k)
 }
 
 -----------------------------------------------generate all subarraay with sum=k------------------------------------------------------
-vector<vector<int>> subarraysWithSumK(vector<int> a, long long k)
-{
-    vector<vector<int>> all;
-    map<int, int> mp;
-    int n = a.size();
-    int sum = 0;
-    for (int i = 0; i < n; i++)
+
+    vector<vector<int>> subarraysWithSumK(vector<int> a, long long k)
     {
-        sum += a[i];
-        if (sum == k)
+        vector<vector<int>> all;
+        map<int, vector<int>> mp;
+        int n = a.size();
+        int sum = 0;
+        for (int i = 0; i < n; i++)
         {
-            vector<int> temp(a.begin(), a.begin() + i + 1);
-            all.push_back(temp);
+            sum += a[i];
+            if (sum == k)
+            {
+                vector<int> temp(a.begin(), a.begin() + i + 1);
+                all.push_back(temp);
+            }
+            if (mp.find(sum - k) != mp.end())
+            {
+                for (auto x : mp[sum - k])
+                {
+                    vector<int> temp(a.begin() + x + 1, a.begin() + i + 1);
+                    all.push_back(temp);
+                }
+            }
+            mp[sum].push_back(i);
         }
-        if (mp.find(sum - k) != mp.end())
-        {
-            vector<int> temp(a.begin() + mp[sum - k]+1, a.begin() + i + 1);
-            all.push_back(temp);
-        }
-        if (mp.find(sum) == mp.end()) {
-            mp[sum] = i;
-        }
+        return all;
     }
-    return all;
-}
 
 --------------------------------------------------for arrays with any kind of elements----------------------------------------------------
 
@@ -70,12 +72,8 @@ vector<vector<int>> subarraysWithSumK(vector<int> a, long long k)
         int ans=0;
         for(int i=0;i<nums.size();i++){
             s+=nums[i];
-            if(mp.find(s-k)!=mp.end()){
-                ans+=mp[s-k];
-            }
-            if(mp.find(s)==mp.end()){
-                mp[s]=1;
-            }else mp[s]++;
+            ans+=mp[s-k];
+            mp[s]++;
         }
         return ans;
     }
