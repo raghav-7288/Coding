@@ -55,9 +55,7 @@ Output
 
     void dfs(string source, string destination, vector<string>& cur, unordered_map<string,int>& mp, vector<vector<string>>& res){
         if(source==destination){
-            reverse(cur.begin(),cur.end());
             res.push_back(cur);
-            reverse(cur.begin(),cur.end());
             return;
         }
         int d=mp[source];
@@ -102,5 +100,6 @@ Output
         vector<vector<string>> res;
         vector<string> temp={e};
         dfs(e,b,temp,mp,res);
+        for(auto& s:res) reverse(s.begin(),s.end());
         return res;
     }
