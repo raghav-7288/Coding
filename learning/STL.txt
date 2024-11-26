@@ -1,0 +1,42 @@
+Components of STL
+The components of STL are the features provided by Standard Template Library (STL) in C++ that can be classified into 4 types:
+
+##############################################################
+Containers
+##############################################################
+Containers can be further classified into 4 types:
+    Sequence Containers
+        Array
+        Vector
+        Deque
+        Lists
+        Forward Lists
+    Container Adaptors
+        Stack
+        Q
+        PQ
+    Associative Containers
+        Sets
+        Maps
+        Multisets
+        Multimaps
+    Unordered Associated Containers
+        Unordered Sets
+        Unordered Multimap
+        Unordered Multisets
+        Unordered Map
+
+##############################################################
+Algorithms
+##############################################################
+Manipulative Algorithms
+Non-Manipulative Algorithms
+
+##############################################################
+Iterators
+##############################################################
+
+
+Functors
+
+
